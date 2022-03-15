@@ -1,0 +1,20 @@
+#ifndef _DTFECHA_HH_
+#define _DTFECHA_HH_
+
+class DTFecha
+{
+private:
+    int dia;
+    int mes;
+    int anio;
+
+public:
+    void Imprimir();
+
+    int getDia();
+    int getMes();
+    int getAnio();
+    DTFecha(int, int, int);
+};
+
+#endif

@@ -3,12 +3,12 @@ exec: build
 
 build: menu
 	g++ -Wall -o executable \
-	main.cpp \
+	Ejercicio_1/main.cpp \
 	*.o
 
 menu:
-	g++ -Wall -c menus/header/*.hpp
-	g++ -Wall -c menus/*.cpp
+	g++ -Wall -c Ejercicio_1/Presentacion/header/*.hpp
+	g++ -Wall -c Ejercicio_1/Presentacion/*.cpp
 
 clean:
 	find . -type f -name '*.o' -exec rm {} \;

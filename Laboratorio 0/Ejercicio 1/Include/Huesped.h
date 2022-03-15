@@ -1,7 +1,6 @@
 #ifndef _HUESPED_HH_
 #define _HUESPED_HH_
 
-#include "Constantes.h"
 #include <string>
 
 class Huesped
@@ -12,7 +11,7 @@ private:
     bool esFinger;
 
 public:
-    void Imprimir();
+    void imprimir();
 
     std::string getNombre();
     std::string getEmail();

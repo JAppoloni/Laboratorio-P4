@@ -10,7 +10,7 @@ private:
     bool pagado;
 
 public:
-    virtual void Imprimir();
+    virtual void imprimir();
     virtual float calcularCosto();
 
     bool getPagado();

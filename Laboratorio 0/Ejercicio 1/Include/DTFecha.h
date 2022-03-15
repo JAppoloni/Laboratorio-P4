@@ -9,7 +9,7 @@ private:
     int anio;
 
 public:
-    void Imprimir();
+    void imprimir();
 
     int getDia();
     int getMes();

@@ -1,8 +1,6 @@
 #ifndef _HABITACION_HH_
 #define _HABITACION_HH_
 
-#include "Constantes.h"
-
 class Habitacion
 {
 private:

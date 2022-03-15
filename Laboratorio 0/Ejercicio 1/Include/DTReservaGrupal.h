@@ -4,7 +4,7 @@
 //#define MAX_HUESPEDES 100 // MAX_HUESPEDES = ? Val También está en Reserva.h
 
 #include "DTReserva.h"
-#include "DTHUesped.h"
+#include "DTHuesped.h"
 #include "Constantes.h"
 
 class DTReservaGrupal : public DTReserva

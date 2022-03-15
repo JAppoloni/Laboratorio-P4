@@ -9,7 +9,7 @@ private:
     int capacidad;
 
 public:
-    void Imprimir();
+    void imprimir();
 
     int getnumero();
     float getprecio();

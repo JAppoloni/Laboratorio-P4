@@ -1,5 +1,5 @@
-#ifndef _DTRESERVAGRUPAL_HH_
-#define _DTRESERVAGRUPAL_HH_
+#ifndef _RESERVAGRUPAL_HH_
+#define _RESERVAGRUPAL_HH_
 
 #include "Reserva.h"
 
@@ -7,7 +7,7 @@ class ReservaGrupal : public Reserva
 {
 
 public:
-    virtual void Imprimir();
+    virtual void imprimir();
     virtual float calcularCosto();
 
 

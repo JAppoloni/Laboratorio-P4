@@ -11,7 +11,7 @@ private:
     bool esFinger;
 
 public:
-    void Imprimir();
+    void imprimir();
 
     std::string getNombre();
     std::string getEmail();

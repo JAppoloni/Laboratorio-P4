@@ -6,7 +6,6 @@
 #include "EsadoReserva.h"
 #include "Habitacion.h"
 #include "Huesped.h"
-#include <string>
 
 class Reserva
 {
@@ -19,8 +18,7 @@ private:
     Huesped listaHuesped[MAX_HUESPEDES];
 
 public:
-    virtual void
-    Imprimir();
+    virtual void imprimir();
 
     int getCodigo();
     DTFecha getCheckIn();
@@ -31,7 +29,7 @@ public:
     int getCodigo();
     int getCodigo();
     Habitacion getListaHabitaciones();
-    Huesped* getlistaHuesped();
+    Huesped *getlistaHuesped();
 
     void setCodigo(int codigo);
     void setCheckIn(DTFecha checkIn);

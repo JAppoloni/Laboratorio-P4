@@ -1,5 +1,5 @@
-#ifndef _DTRESERVAGRUPAL_HH_
-#define _DTRESERVAGRUPAL_HH_
+#ifndef _DTRESERVAINDIVIDUAL_HH_
+#define _DTRESERVAINDIVIDUAL_HH_
 
 #include "DTReserva.h"
 

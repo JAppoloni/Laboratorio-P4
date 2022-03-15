@@ -1,9 +1,11 @@
 #ifndef _DTRESERVA_HH_
 #define _DTRESERVA_HH_
 
-#include <string>
 #include "DTFecha.h"
 #include "EsadoReserva.h"
+#include <iostream>
+
+
 class DTReserva
 {
 private:

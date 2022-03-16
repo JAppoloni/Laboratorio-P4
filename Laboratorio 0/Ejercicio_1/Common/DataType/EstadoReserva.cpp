@@ -1,8 +1,7 @@
 // #ifndef _ESTADORESERVA_HH_
 // #define _ESTADORESERVA_HH_
 
-// class EstadoReserva
-// {
+// class EstadoReserva {
 
 // private:
 

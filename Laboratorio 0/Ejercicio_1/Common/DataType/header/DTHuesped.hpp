@@ -3,8 +3,7 @@
 
 #include <string>
 
-class DTHuesped
-{
+class DTHuesped {
 private:
     std::string nombre;
     std::string email;

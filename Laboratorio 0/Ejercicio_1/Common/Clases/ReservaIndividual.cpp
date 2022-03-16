@@ -1,12 +1,10 @@
-#include "../../include/ReservaIndividual.h"
-#include "../../include/Habitacion.h"
-#include "../../include/Reserva.h"
-#include "../../include/DTFecha.h"
+#include "header/ReservaIndividual.hpp"
+#include "header/Habitacion.hpp"
+#include "header/Reserva.hpp"
+#include "../datatype/header/DTFecha.hpp"
 #include <iostream>
 
-
-void ReservaIndividual::imprimir()
-{
+void ReservaIndividual::imprimir() {
     std::cout << " La reserva Individual " << this->getCodigo() << " es para el periodo ";
     this->getCheckIn().imprimir();
     std::cout << "-";
@@ -16,8 +14,7 @@ void ReservaIndividual::imprimir()
     std::cout << " Y su estado es " << this->getEstado().getEstado();
 }
 
-ReservaIndividual::ReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, Habitacion habitacionReservada, Huesped Huesped, bool pagado)
-{
+ReservaIndividual::ReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, Habitacion habitacionReservada, Huesped Huesped, bool pagado) {
     this->setCodigo(codigo);
     this->setCheckIn(checkIn);
     this->setCheckOut(checkOut);

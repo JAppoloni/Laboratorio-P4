@@ -1,11 +1,9 @@
 #ifndef _RESERVAINDIVIDUAL_HH_
 #define _RESERVAINDIVIDUAL_HH_
 
-#include "Reserva.h"
+#include "Reserva.hpp"
 
-class ReservaIndividual : public Reserva
-{
-
+class ReservaIndividual : public Reserva {
 private:
     bool pagado;
 

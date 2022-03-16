@@ -24,7 +24,7 @@ public:
     DTFecha getCheckOut();
     EstadoReserva getEstado();
     float getCosto();
-    int geHabitacion();
+    int getHabitacion();
     int getCodigo();
     int getCodigo();
 

@@ -14,7 +14,7 @@ protected:
     DTFecha checkOut;
     EstadoReserva estado;
     Habitacion habitacionReservada;
-    Huesped listaHuesped[MAX_HUESPEDES];
+    Huesped* listaHuesped;
 
 public:
     virtual void imprimir();
@@ -31,12 +31,9 @@ public:
     void setCheckOut(DTFecha checkOut);
     void setEstado(EstadoReserva estado);
     void setHabitacionReservada(Habitacion habitacionReservada);
-    void setlistaHuesped(Huesped listaHuesped[]);
+    void setlistaHuesped(Huesped* listaHuesped);
 
     Reserva();
-    Reserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, Habitacion habitacionReservada, Huesped *Huesped);
-    ~Reserva();
-
     virtual float calcularCosto() = 0;
 };
 

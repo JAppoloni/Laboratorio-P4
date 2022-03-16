@@ -13,6 +13,7 @@ public:
     int getDia();
     int getMes();
     int getAnio();
+    int calcularDias(DTFecha fchAComparar);
     DTFecha(int, int, int);
     DTFecha();
 };

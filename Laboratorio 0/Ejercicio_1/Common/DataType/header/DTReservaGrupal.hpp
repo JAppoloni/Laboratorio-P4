@@ -1,8 +1,6 @@
 #ifndef _DTRESERVAGRUPAL_HH_
 #define _DTRESERVAGRUPAL_HH_
 
-//#define MAX_HUESPEDES 100 // MAX_HUESPEDES = ? Val También está en Reserva.h
-
 #include "DTReserva.hpp"
 #include "DTHuesped.hpp"
 #include "Constantes.hpp"

@@ -35,4 +35,9 @@ Huesped::Huesped(std::string nombre, std::string correo, bool esFing) {
     this->esFinger=esFing;
 }
 
+Huesped Huesped::NULL_Huesped() {    return Huesped(" -1 -> NULL_HUESPED", " -1 -> NULL_HUESPED", NULL);}
+
+bool Huesped::operator==(const Huesped &c) const { return ((this->email  == c.email) && (this->nombre == c.nombre) && (this->esFinger == c.esFinger)); }
+bool Huesped::operator!=(const Huesped &c) const { return !(*this==c); }
+
 //~Huesped();

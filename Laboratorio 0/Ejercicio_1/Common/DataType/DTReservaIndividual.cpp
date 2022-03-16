@@ -1,10 +1,9 @@
 // #ifndef _DTRESERVAINDIVIDUAL_HH_
 // #define _DTRESERVAINDIVIDUAL_HH_
 
-// #include "DTReserva.h"
+// #include "DTReserva.hpp"
 
-// class DTReservaIndividual : public DTReserva
-// {
+// class DTReservaIndividual : public DTReserva {
 
 // private:
 //     bool pagado;

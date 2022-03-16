@@ -1,8 +1,7 @@
 #ifndef _HABITACION_HH_
 #define _HABITACION_HH_
 
-class Habitacion
-{
+class Habitacion {
 private:
     int numero;
 
@@ -12,7 +11,6 @@ private:
 
 public:
     void imprimir();
-
 
     int getNumero();
     float getPrecio();
@@ -26,4 +24,5 @@ public:
     Habitacion(int numero, float precio, int capacidad);
     ~Habitacion();
 };
+
 #endif

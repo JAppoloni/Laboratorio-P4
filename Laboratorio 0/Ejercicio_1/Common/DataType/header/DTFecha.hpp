@@ -1,8 +1,7 @@
 #ifndef _DTFECHA_HH_
 #define _DTFECHA_HH_
 
-class DTFecha
-{
+class DTFecha {
 private:
     int dia;
     int mes;

@@ -1,12 +1,9 @@
 #ifndef _ESTADORESERVA_HH_
 #define _ESTADORESERVA_HH_
 
-class EstadoReserva
-{
-
+class EstadoReserva {
 private:
-
-enum { Abierta, Cerrada, Cancelada} estado;
+    enum { Abierta, Cerrada, Cancelada} estado;
 
 public:
     int getEstado();

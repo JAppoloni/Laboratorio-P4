@@ -1,13 +1,12 @@
 // #ifndef _DTRESERVA_HH_
 // #define _DTRESERVA_HH_
 
-// #include "DTFecha.h"
-// #include "EsadoReserva.h"
+// #include "DTFecha.hpp"
+// #include "EsadoReserva.hpp"
 // #include <iostream>
 
 
-// class DTReserva
-// {
+// class DTReserva {
 // private:
 //     int codigo;
 //     DTFecha checkIn;

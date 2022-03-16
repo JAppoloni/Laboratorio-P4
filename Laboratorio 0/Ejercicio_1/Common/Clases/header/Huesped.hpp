@@ -3,8 +3,7 @@
 
 #include <string>
 
-class Huesped
-{
+class Huesped {
 private:
     std::string nombre;
     std::string email;

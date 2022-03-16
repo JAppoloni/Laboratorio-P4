@@ -19,3 +19,22 @@
 // };
 
 // #endif
+
+#include "../../include/DTHabitacion.h"
+#include <iostream>
+
+
+void DTHabitacion::imprimir(){
+//imprimir
+}
+
+int DTHabitacion::getnumero(){ return this->numero; }
+float DTHabitacion::getprecio(){ return this->precio; }
+int DTHabitacion::getcapacidad(){ return this->capacidad; }
+
+DTHabitacion::DTHabitacion(int numero,float precio,int capacidad){
+    this->numero = numero;
+    this->precio = precio;
+    this->capacidad = capacidad;
+   
+}

@@ -25,7 +25,11 @@
 
 
 void DTHabitacion::imprimir(){
-//imprimir
+
+std::cout << " Habitacion: " << this->numero << "\n";
+std::cout << " Costo: $" << this->precio  << "\n";
+std::cout << " Capacidad: " << this->capacidad  << "\n";
+
 }
 
 int DTHabitacion::getnumero(){ return this->numero; }

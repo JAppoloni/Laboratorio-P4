@@ -9,9 +9,12 @@ void DTFecha::imprimir() { std::cout << this->dia << "//" << this->mes << "//" <
 
 DTFecha::DTFecha(int dia, int mes, int anio)
 {
-    // !!! VALIDAR DATOS ANTES;
-
+    
+    if ((dia > 31) || (dia < 1) || (mes > 12) || (mes < 1) || (anio < 1900) )
+      throw std::invalid_argument;
+    else {
     this->anio = anio;
     this->dia = dia;
     this->mes = mes;
+    }
 }

@@ -10,8 +10,7 @@ public:
     virtual void imprimir();
     virtual float calcularCosto();
 
-
-    ReservaGrupal(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, Habitacion habitacionReservada, Huesped Huesped[], bool pagado);
+    ReservaGrupal(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, Habitacion habitacionReservada, Huesped *Huesped);
     ~ReservaGrupal();
 };
 

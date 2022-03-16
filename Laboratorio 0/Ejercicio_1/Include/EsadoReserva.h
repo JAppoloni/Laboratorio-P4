@@ -11,6 +11,7 @@ enum { Abierta, Cerrada, Cancelada} estado;
 public:
     int getEstado();
     EstadoReserva(int);
+    EstadoReserva();
     ~EstadoReserva();
 };
 

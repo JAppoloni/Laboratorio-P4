@@ -11,6 +11,9 @@ private:
     int capacidad;
 
 public:
+    void imprimir();
+
+
     int getNumero();
     float getPrecio();
     int getCapacidad();

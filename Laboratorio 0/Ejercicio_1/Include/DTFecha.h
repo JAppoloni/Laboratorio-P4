@@ -15,6 +15,7 @@ public:
     int getMes();
     int getAnio();
     DTFecha(int, int, int);
+    DTFecha();
 };
 
 #endif

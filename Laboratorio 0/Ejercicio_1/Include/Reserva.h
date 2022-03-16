@@ -9,7 +9,7 @@
 
 class Reserva
 {
-private:
+protected:
     int codigo;
     DTFecha checkIn;
     DTFecha checkOut;
@@ -24,23 +24,18 @@ public:
     DTFecha getCheckIn();
     DTFecha getCheckOut();
     EstadoReserva getEstado();
-    float getCosto();
-    int geHabitacion();
-    int getCodigo();
-    int getCodigo();
-    Habitacion getListaHabitaciones();
+    Habitacion getHabitacionReservada();
     Huesped *getlistaHuesped();
 
     void setCodigo(int codigo);
     void setCheckIn(DTFecha checkIn);
     void setCheckOut(DTFecha checkOut);
     void setEstado(EstadoReserva estado);
-    void setCosto(float costo);
-    void setListaHabitaciones(Habitacion habitacionReservada);
+    void setHabitacionReservada(Habitacion habitacionReservada);
     void setlistaHuesped(Huesped listaHuesped[]);
 
     Reserva();
-    Reserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, Habitacion habitacionReservada, Huesped *Huesped);
+    Reserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, Habitacion habitacionReservada, Huesped *Huesped);
     ~Reserva();
 
     virtual float calcularCosto() = 0;

@@ -1,13 +1,11 @@
 #ifndef _DTRESERVA_HH_
 #define _DTRESERVA_HH_
 
-#include "DTFecha.h"
-#include "EsadoReserva.h"
+#include "DTFecha.hpp"
+#include "../../clases/header/EstadoReserva.hpp"
 #include <iostream>
 
-
-class DTReserva
-{
+class DTReserva {
 private:
     int codigo;
     DTFecha checkIn;
@@ -25,8 +23,6 @@ public:
     EstadoReserva getEstado();
     float getCosto();
     int getHabitacion();
-    int getCodigo();
-    int getCodigo();
 
     DTReserva(int, DTFecha, DTFecha, EstadoReserva, float, int);
 };

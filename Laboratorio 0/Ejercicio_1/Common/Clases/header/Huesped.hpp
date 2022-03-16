@@ -24,6 +24,10 @@ public:
     Huesped(std::string, std::string, bool);
     Huesped();
     ~Huesped();
+
+    Huesped NULL_Huesped();
+    bool operator==(const Huesped &c) const;
+    bool operator!=(const Huesped &c) const;
 };
 
 #endif

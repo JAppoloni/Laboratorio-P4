@@ -1,8 +1,7 @@
 #ifndef _DTFECHA_HH_
 #define _DTFECHA_HH_
 
-class DTFecha
-{
+class DTFecha {
 private:
     int dia;
     int mes;
@@ -14,6 +13,7 @@ public:
     int getDia();
     int getMes();
     int getAnio();
+    int calcularDias(DTFecha fchAComparar);
     DTFecha(int, int, int);
     DTFecha();
 };

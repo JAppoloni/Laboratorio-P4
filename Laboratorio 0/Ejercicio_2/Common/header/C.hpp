@@ -14,7 +14,7 @@ class ClassC{
         void printInt();
 };
 
-#include "A.h"
-#include "B.h"
+#include "A.hpp"
+#include "B.hpp"
 
 #endif

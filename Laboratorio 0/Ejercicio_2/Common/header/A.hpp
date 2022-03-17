@@ -1,7 +1,7 @@
 #ifndef CLASS_A
 #define CLASS_A
 
-#include "C.h"
+#include "C.hpp"
 
 class ClassB;
 
@@ -15,6 +15,6 @@ class ClassA{
         void printInt();
 };
 
-#include "B.h"
+#include "B.hpp"
 
 #endif

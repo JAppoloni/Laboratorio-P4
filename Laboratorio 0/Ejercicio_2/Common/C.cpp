@@ -1,4 +1,4 @@
-#include "header/C.h"
+#include "header/C.hpp"
 #include<iostream>
 using namespace std;
 

@@ -1,8 +1,8 @@
 #ifndef CLASS_B
 #define CLASS_B
 
-#include "A.h"
-#include "C.h"
+#include "A.hpp"
+#include "C.hpp"
 
 class ClassB{
     private:

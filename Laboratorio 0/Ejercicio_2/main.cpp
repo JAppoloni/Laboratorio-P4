@@ -1,9 +1,9 @@
 #include<iostream>
 using namespace std;
 
-#include "Common/header/A.h"
-#include "Common/header/B.h"
-#include "Common/header/C.h"
+#include "Common/header/A.hpp"
+#include "Common/header/B.hpp"
+#include "Common/header/C.hpp"
 
 int main(){
     int a, b, c;

@@ -1,4 +1,4 @@
-#include "header/B.h"
+#include "header/B.hpp"
 #include<iostream>
 using namespace std;
 

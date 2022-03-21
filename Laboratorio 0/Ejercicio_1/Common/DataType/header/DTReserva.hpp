@@ -2,7 +2,7 @@
 #define _DTRESERVA_HH_
 
 #include "DTFecha.hpp"
-#include "../../clases/header/EstadoReserva.hpp"
+#include "../../Clases/header/EstadoReserva.hpp"
 #include <iostream>
 
 class DTReserva {
@@ -15,16 +15,17 @@ private:
     int habitacion;
 
 public:
-    std::ostream virtual operator<<(std::ostream &out);
 
     int getCodigo();
     DTFecha getCheckIn();
     DTFecha getCheckOut();
     EstadoReserva getEstado();
-    float getCosto();
+    virtual float getCosto();
     int getHabitacion();
-
-    DTReserva(int, DTFecha, DTFecha, EstadoReserva, float, int);
+    DTReserva (int, DTFecha, DTFecha, EstadoReserva, float, int); 
+    virtual  std::ostream&  operator<< (std::ostream &o) = 0;
+  
 };
 
 #endif
+

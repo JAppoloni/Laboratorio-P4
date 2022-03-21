@@ -1,19 +1,30 @@
-// #ifndef _DTRESERVAINDIVIDUAL_HH_
-// #define _DTRESERVAINDIVIDUAL_HH_
 
-// #include "DTReserva.hpp"
+#include "header/DTReservaIndividual.hpp"
+#include <iostream>
 
-// class DTReservaIndividual : public DTReserva {
 
-// private:
-//     bool pagado;
+ DTReservaIndividual::DTReservaIndividual(int codigo, DTFecha CheckIn, DTFecha CheckOut, EstadoReserva estado, float costo, int habitacion, bool pagado):DTReserva(codigo, CheckIn,CheckOut, estado, costo, habitacion) { 
+  this->pagado = pagado;
 
-// public:
-//     std::ostream virtual operator<<(std::ostream &out);
+ }
 
-//     bool getPagado();
+ bool DTReservaIndividual::getPagado() {
+    return this->pagado;
+ }
 
-//     DTReservaIndividual(int, DTFecha, DTFecha, EstadoReserva, float, int, bool);
-// };
+ std::ostream& DTReservaIndividual::operator<<(std::ostream&o) {
 
-// #endif
+  o << "TipoReserva: Individual \n";
+  o << "FechaCheckIn:" << this->getCheckIn().getDia() << "/" << this->getCheckIn().getMes() << "/" << this->getCheckIn().getAnio() << "\n" ;
+  o << "FechaCheckIn:" << this->getCheckOut().getDia() << "/" << this->getCheckOut().getMes() << "/" << this->getCheckOut().getAnio() << "\n" ;
+  o << "Habitacion:"<< this->getHabitacion() << "/n" ;
+  o << "Costo: $" << this->getCosto() << "/n" ;
+  if ( this->getPagado() )
+    o << "Pagado:" << "Si" << "/n" ;
+  else 
+     o << "Pagado:" << "No" << "/n" ;
+
+  return o;
+}
+
+ 

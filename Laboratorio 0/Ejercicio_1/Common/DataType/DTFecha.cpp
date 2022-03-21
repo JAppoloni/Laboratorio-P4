@@ -38,3 +38,19 @@ DTFecha::DTFecha(int dia, int mes, int anio)
         this->mes = mes;
     }
 }
+
+DTFecha& DTFecha::operator = (const DTFecha &fecha)
+{
+    if (this!=&fecha) { 
+         this->anio = fecha.anio;
+         this->mes = fecha.mes;
+         this->dia = fecha.dia;
+    }
+    return *this;
+
+}
+
+bool DTFecha::operator == (const DTFecha &fecha) const 
+{
+    return this->mes == fecha.mes && this->anio == fecha.anio && this->dia==fecha.dia;
+}

@@ -13,34 +13,32 @@ bool DTHuesped::getEsFinger() {
     return this->esFinger; 
 }
 
+bool DTHuesped::esVacia(){
+    return (this->email == "") && (this->nombre =="") && (!this->esFinger);
+}
+
 DTHuesped::DTHuesped(std::string nombre, std::string email, bool esFinger) {
     this->nombre = nombre;
     this->email = email;
     this->esFinger = esFinger;
 }
 
-// #ifndef _DTHUESPED_HH_
-// #define _DTHUESPED_HH_
+DTHuesped::DTHuesped(){
+    this->email = "";
+    this->email = "";
+    this->esFinger = false;
 
-// #include <string>
+}
 
-// class DTHuesped
-// {
-// private:
-//     std::string nombre;
-//     std::string email;
-//     bool esFinger;
+DTHuesped& DTHuesped::operator = (const DTHuesped &huesped){
+     if(this!= &huesped){ 
+         this->nombre = huesped.nombre;
+         this->email = huesped.email;
+         this->esFinger = huesped.esFinger;
+    }
+    return *this;
+}
 
-// public:
-//     void imprimir();
 
-//     std::string getNombre();
-//     std::string getEmail();
-//     bool getEsFinger();
-
-//     DTHuesped(std::string, std::string, bool);
-// };
-
-// #endif
 
 

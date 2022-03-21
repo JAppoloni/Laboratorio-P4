@@ -8,11 +8,13 @@ private:
     bool pagado;
 
 public:
-    std::ostream virtual operator<<(std::ostream &out);
-
+   
     bool getPagado();
-
-    DTReservaIndividual(int, DTFecha, DTFecha, EstadoReserva, float, int, bool);
+    DTReservaIndividual(const DTReservaIndividual& );
+    DTReservaIndividual (int, DTFecha, DTFecha, EstadoReserva, float, int, bool);
+    virtual std::ostream&  operator<<(std::ostream &o);
 };
+
+
 
 #endif

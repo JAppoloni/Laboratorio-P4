@@ -8,13 +8,13 @@
 class DTReservaGrupal : public DTReserva {
 private:
     DTHuesped huespedes[MAX_HUESPEDES];
-
+    
 public:
-    std::ostream virtual operator<<(std::ostream &out);
-
-    DTHuesped* gethuespedes();
-
-    DTReservaGrupal(int, DTFecha, DTFecha, EstadoReserva, float, int, DTHuesped[]);
+    
+  DTHuesped* gethuespedes();
+  DTReservaGrupal(int, DTFecha, DTFecha, EstadoReserva, float, int,int, DTHuesped[]);
+  virtual std::ostream&  operator<<(std::ostream &o);
+  
 };
 
 #endif

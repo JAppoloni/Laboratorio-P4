@@ -32,6 +32,7 @@ std::ostream& DTReservaGrupal::operator<<(std::ostream&o) {
     if (this->gethuespedes()[i].getEsFinger())
       o << "Es finger," << "/n" ;
     else o << ", /n";
+    i++;
   }
 
   return o;

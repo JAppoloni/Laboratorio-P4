@@ -13,6 +13,10 @@ bool DTHuesped::getEsFinger() {
     return this->esFinger; 
 }
 
+bool DTHuesped::esVacia(){
+    return (this->email == "") && (this->nombre =="") && (!this->esFinger);
+}
+
 DTHuesped::DTHuesped(std::string nombre, std::string email, bool esFinger) {
     this->nombre = nombre;
     this->email = email;

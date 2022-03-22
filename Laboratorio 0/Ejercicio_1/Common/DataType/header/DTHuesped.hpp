@@ -16,6 +16,7 @@ public:
     std::string getNombre();
     std::string getEmail();
     bool getEsFinger();
+    bool esVacia();
 
     DTHuesped(std::string, std::string, bool);
     DTHuesped(Huesped*);

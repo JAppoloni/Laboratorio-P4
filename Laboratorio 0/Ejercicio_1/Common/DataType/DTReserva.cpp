@@ -1,33 +1,41 @@
-// #ifndef _DTRESERVA_HH_
-// #define _DTRESERVA_HH_
-
-// #include "DTFecha.hpp"
-// #include "EsadoReserva.hpp"
-// #include <iostream>
 
 
-// class DTReserva {
-// private:
-//     int codigo;
-//     DTFecha checkIn;
-//     DTFecha checkOut;
-//     EstadoReserva estado;
-//     float costo;
-//     int habitacion;
+#include "header/DTReserva.hpp"
+#include <iostream>
 
-// public:
-//     std::ostream virtual operator<<(std::ostream &out);
+int DTReserva::getCodigo(){
+    return this->codigo;
+}
 
-//     int getCodigo();
-//     DTFecha getCheckIn();
-//     DTFecha getCheckOut();
-//     EstadoReserva getEstado();
-//     float getCosto();
-//     int geHabitacion();
-//     int getCodigo();
-//     int getCodigo();
+DTFecha DTReserva::getCheckIn(){
+    return this->checkIn;
+}
 
-//     DTReserva(int, DTFecha, DTFecha, EstadoReserva, float, int);
-// };
+DTFecha DTReserva::getCheckOut(){
+    return this->checkOut;
+}
 
-// #endif
+EstadoReserva DTReserva::getEstado(){
+    return this->estado;
+}
+
+float DTReserva::getCosto(){
+    return this->costo;
+}
+
+DTReserva::DTReserva(int codigo, DTFecha CheckIn, DTFecha CheckOut, EstadoReserva estado, float costo, int habitacion) {
+  this->codigo = codigo; 
+  this->checkIn = CheckIn;
+  this->checkOut = CheckOut;
+  this->estado = estado;
+  this->habitacion = habitacion;
+  this->costo = costo;
+  
+}
+
+
+
+
+
+
+

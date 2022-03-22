@@ -1,0 +1,21 @@
+A) 
+Las dependencias circulares estan dadas entre cada par de clases, pues para la definicion de cada una de 
+estas se compone de referencias a las otras 2, de esta forma la clase C necesita de las clases
+A y B para ser compilada, la clase B depende de la A y C, y la B de la A y C.
+Esto se soluciono relaizando una declaracion en avanzada (forward declarations)de A y B en C.hpp 
+(modulo de definicion de la clase C), quedando C definido. Luego una declaracion avanzada de B en 
+A.hpp, quedando A definido, pues A necesita de C, que ya esta definido, y de B, que es declarado avanzadamente. Y por
+ultimo se nota que no es necesario realizar ninguna declaracion avanzada en B.hpp, ya que tanto la clase A como la cada
+quedaron definidas.
+
+B)
+Una forward declaration (declaracion hacia adelante) no es mas que una declaracion adelantada de una clase, antes de
+importar el modulo de definicion de esta, de esta forma puedo hacer referencia a elementos de dicha clase sin importar 
+la definicion de esta, pues su declaracion es referenciada mas adelante.
+En C++ esto se realiza segun el siguiente esquema:
+
+Class Eje; //forward decalration de la clase Eje
+.
+. 
+.
+#include "Eje.hpp" se hace referencia al modulo de definicion de la clase Eje 

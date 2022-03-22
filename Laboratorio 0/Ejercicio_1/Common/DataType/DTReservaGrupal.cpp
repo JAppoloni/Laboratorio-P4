@@ -2,31 +2,8 @@
 #include <iostream>
 
 DTHuesped** DTReservaGrupal::getHuespedes() {
-    // DTHuesped (*h) [MAX_HUESPEDES]; 
-
-    // for(int i=0; i < MAX_HUESPEDES; i++){
-    //     (*h)[i] = this->huespedes[i];
-    // } 
-
-    // return *h;
     return *this->huespedes;
 }
-
-// DTReservaGrupal::DTReservaGrupal(
-//     int codigo, 
-//     DTFecha checkIn, 
-//     DTFecha checkOut, 
-//     EstadoReserva estado, 
-//     float costo, 
-//     int habitacion,
-//     int cantHuespedes,  
-//     DTHuesped* huespedes
-// ): DTReserva(codigo, checkIn, checkOut, estado, costo, habitacion) {
-//     // this->huespedes = new DTHuesped*[MAX_HUESPEDES];
-//     for (int i = 0; i < MAX_HABITACIONES ; i++) {
-//         this->huespedes[i] = huespedes[i];
-//     }
-// }
 
 std::ostream& DTReservaGrupal::operator<<(std::ostream &o) {
     o << "TipoReserva: Grupal \n";

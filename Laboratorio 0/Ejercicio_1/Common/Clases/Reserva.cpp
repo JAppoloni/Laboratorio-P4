@@ -54,21 +54,3 @@ Habitacion* Reserva::getHabitacionReservada() {
 void Reserva::setHabitacionReservada(Habitacion *habitacionReservada) { 
     this->habitacionReservada = habitacionReservada; 
 }
-
-// void Reserva::imprimir()
-// {
-//     std::cout << " La reserva " << this->codigo << " es para el periodo ";
-//     this->checkIn.imprimir();
-//     std::cout << "-";
-//     this->checkOut.imprimir();
-//     std::cout << " y se reservó ";
-//     this->habitacionReservada.imprimir();
-//     std::cout << " Y su estado es " << this->estado;
-//     std::cout << ". \n ";
-//     Huesped Null = Huesped().NULL_Huesped();
-
-//     for (int i = 0; i < MAX_HUESPEDES && this->listaHuesped[i] != Null; i++)
-//     {
-//        this->listaHuesped[i].imprimir();
-//     }
-// }

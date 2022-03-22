@@ -2,12 +2,12 @@
 #include<iostream>
 using namespace std;
 
-ClassB::ClassB(int b, ClassA * A, ClassC * C){
+B::B(int b, A * A, C * C){
     this->b = b; 
     myA = A;
     myC = C;
 }
 
-void ClassB::printInt(){
+void B::printInt(){
     cout << b;
 }

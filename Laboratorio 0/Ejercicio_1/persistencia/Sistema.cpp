@@ -11,6 +11,9 @@ void Sistema::agregarHuesped(std::string nombre, std::string email, bool esFinge
 {
     Huesped *huesped = new Huesped(nombre, email, esFinger);
 
+    if (ObtenerHuespedXEmail(email) != nullptr)
+        throw "El Huesped ya exsite";
+
     huespedes.add(huesped);
 }
 
@@ -42,6 +45,9 @@ Sistema *Sistema::GetInstance()
 void Sistema::agregarHabitacion(int numero, float precio, int capacidad)
 {
     Habitacion *habitacion = new Habitacion(numero, precio, capacidad);
+    if (ObtenerHabitacionXID(numero) != nullptr)
+        throw "La habitación ya exsite";
+
     habitaciones.add(habitacion);
 }
 

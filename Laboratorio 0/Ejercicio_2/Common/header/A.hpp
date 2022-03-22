@@ -3,15 +3,15 @@
 
 #include "C.hpp"
 
-class ClassB;
+class B;
 
-class ClassA{
+class A{
     private:
         int a;
-        ClassB * myB;
-        ClassC * myC;
+        B * myB;
+        C * myC;
     public:
-        ClassA(int, ClassB*, ClassC*);
+        A(int, B*, C*);
         void printInt();
 };
 

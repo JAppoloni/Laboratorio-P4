@@ -7,10 +7,10 @@ build: source
 	*.o
 
 source:
-	g++ -Wall -c Presentacion/header/*.hpp
-	g++ -Wall -c Presentacion/*.cpp
-	g++ -Wall -c Persistencia/header/*.hpp
-	g++ -Wall -c Persistencia/*.cpp
+	g++ -Wall -c presentacion/header/*.hpp
+	g++ -Wall -c presentacion/*.cpp
+	g++ -Wall -c persistencia/header/*.hpp
+	g++ -Wall -c persistencia/*.cpp
 	g++ -Wall -c common/clases/header/*.hpp
 	g++ -Wall -c common/datatype/header/*.hpp
 	g++ -Wall -c common/clases/*.cpp

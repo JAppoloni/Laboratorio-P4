@@ -4,13 +4,13 @@
 #include "A.hpp"
 #include "C.hpp"
 
-class ClassB{
+class B{
     private:
         int b;
-        ClassA * myA;
-        ClassC * myC;
+        A * myA;
+        C * myC;
     public:
-        ClassB(int, ClassA*, ClassC*);
+        B(int, A*, C*);
         void printInt();
 };
 

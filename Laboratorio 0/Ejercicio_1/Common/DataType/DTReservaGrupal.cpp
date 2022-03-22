@@ -1,14 +1,15 @@
 #include "header/DTReservaGrupal.hpp"
 #include <iostream>
 
-DTHuesped* DTReservaGrupal::getHuespedes() {
-    DTHuesped (*h) [MAX_HUESPEDES]; 
+DTHuesped** DTReservaGrupal::getHuespedes() {
+    // DTHuesped (*h) [MAX_HUESPEDES]; 
 
-    for(int i=0; i < MAX_HUESPEDES; i++){
-        (*h)[i] = this->huespedes[i];
-    } 
+    // for(int i=0; i < MAX_HUESPEDES; i++){
+    //     (*h)[i] = this->huespedes[i];
+    // } 
 
-    return *h;
+    // return *h;
+    return *this->huespedes;
 }
 
 // DTReservaGrupal::DTReservaGrupal(
@@ -35,10 +36,10 @@ std::ostream& DTReservaGrupal::operator<<(std::ostream &o) {
     o << "Costo: $" << this->getCosto() << "/n" ;
     
     int i = 0;
-    while (!(this->getHuespedes()[i].esVacia()) && i < MAX_HUESPEDES) {
-        o << this->getHuespedes()[i].getNombre() << "-" << this->getHuespedes()[i].getEmail() << "-" ;
+    while (!(this->getHuespedes()[i]->esVacia()) && i < MAX_HUESPEDES) {
+        o << this->getHuespedes()[i]->getNombre() << "-" << this->getHuespedes()[i]->getEmail() << "-" ;
 
-        if (this->getHuespedes()[i].getEsFinger()) {
+        if (this->getHuespedes()[i]->getEsFinger()) {
             o << "Es finger," << "/n" ;
         } else {
             o << ", /n";

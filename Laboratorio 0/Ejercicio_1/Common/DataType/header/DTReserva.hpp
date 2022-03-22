@@ -2,7 +2,7 @@
 #define _DTRESERVA_HH_
 
 #include "DTFecha.hpp"
-#include "../../clases/header/EstadoReserva.hpp"
+#include "EstadoReserva.hpp"
 #include <iostream>
 
 class DTReserva {

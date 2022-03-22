@@ -6,7 +6,7 @@ Reserva::Reserva(
     DTFecha checkIn,
     DTFecha checkOut,
     EstadoReserva estado,
-    Habitacion habitacionReservada
+    Habitacion *habitacionReservada
 ): checkIn(checkIn), checkOut(checkOut), habitacionReservada(habitacionReservada) {
     this->codigo = codigo;
     this->checkIn = checkIn;
@@ -47,11 +47,11 @@ void Reserva::setEstado(EstadoReserva estado) {
     this->estado = estado; 
 }
 
-Habitacion Reserva::getHabitacionReservada() { 
+Habitacion* Reserva::getHabitacionReservada() { 
     return this->habitacionReservada; 
 }
 
-void Reserva::setHabitacionReservada(Habitacion habitacionReservada) { 
+void Reserva::setHabitacionReservada(Habitacion *habitacionReservada) { 
     this->habitacionReservada = habitacionReservada; 
 }
 

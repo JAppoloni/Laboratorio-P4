@@ -9,3 +9,6 @@ clean:
 	find . -type f -name 'executable' -exec rm {} \;
 	@[ -f ./22_lab0.zip ] && rm 22_lab0.zip || true
 
+install:
+	make -C Ejercicio_1/
+	make -C Ejercicio_2/

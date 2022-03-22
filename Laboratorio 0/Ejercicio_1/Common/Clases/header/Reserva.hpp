@@ -3,7 +3,7 @@
 
 #include "../../datatype/header/Constantes.hpp"
 #include "../../datatype/header/DTFecha.hpp"
-#include "EstadoReserva.hpp"
+#include "../../datatype/header/EstadoReserva.hpp"
 #include "Habitacion.hpp"
 #include "Huesped.hpp"
 
@@ -13,7 +13,7 @@ protected:
     DTFecha checkIn;
     DTFecha checkOut;
     EstadoReserva estado;
-    Habitacion habitacionReservada;
+    Habitacion *habitacionReservada;
     
 public:
     Reserva(
@@ -21,7 +21,7 @@ public:
         DTFecha checkIn,
         DTFecha checkOut,
         EstadoReserva estado,
-        Habitacion habitacionReservada);
+        Habitacion *habitacionReservada);
 
     virtual float calcularCosto() = 0;  
 
@@ -29,13 +29,13 @@ public:
     DTFecha getCheckIn();
     DTFecha getCheckOut();
     EstadoReserva getEstado();
-    Habitacion getHabitacionReservada();
+    Habitacion *getHabitacionReservada();
 
     void setCodigo(int codigo);
     void setCheckIn(DTFecha checkIn);
     void setCheckOut(DTFecha checkOut);
     void setEstado(EstadoReserva estado);
-    void setHabitacionReservada(Habitacion habitacionReservada);
+    void setHabitacionReservada(Habitacion *habitacionReservada);
 };
 
 #endif

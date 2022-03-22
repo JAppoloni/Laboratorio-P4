@@ -24,8 +24,8 @@ ReservaGrupal::ReservaGrupal(
     DTFecha checkIn, 
     DTFecha checkOut, 
     EstadoReserva estado, 
-    Habitacion habitacionReservada, 
-    Huesped* huesped
+    Habitacion* habitacionReservada, 
+    Huesped** huesped
 ): Reserva(codigo, checkIn, checkOut, estado, habitacionReservada) {
     this->listaHuesped = huesped;
 }
@@ -34,22 +34,22 @@ float ReservaGrupal::calcularCosto() {
     int cantFingers = 0;
 
     // Broken
-    for (int i = 0; (i < MAX_HUESPEDES) && (cantFingers < 2) && (true); i++) {
-        if (this->listaHuesped[i].getEsFinger() == true) {
+    for (int i = 0; (i < MAX_HUESPEDES) && (cantFingers < 2) && (this->listaHuesped[i]!=NULL); i++) {
+        if ((this->listaHuesped[i])->getEsFinger() == true) {
             cantFingers++;
         }
     }
 
-    int rtn = this->habitacionReservada.getPrecio() * this->checkIn.calcularDias(this->checkOut);
+    int rtn = this->habitacionReservada->getPrecio() * this->checkIn.calcularDias(this->checkOut);
 
     return (cantFingers == 2) ? rtn * 0.7 : rtn;
 }
 
-Huesped* ReservaGrupal::getListaHuesped() { 
+Huesped** ReservaGrupal::getListaHuesped() { 
     return this->listaHuesped; 
 }
 
-void ReservaGrupal::setListaHuesped(Huesped* listaHuesped) {
+void ReservaGrupal::setListaHuesped(Huesped** listaHuesped) {
     delete[] this->listaHuesped;
     this->listaHuesped = listaHuesped;
 }

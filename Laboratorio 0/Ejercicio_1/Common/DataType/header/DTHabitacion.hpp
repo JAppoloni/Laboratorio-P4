@@ -15,7 +15,6 @@ public:
     float getprecio();
     int getcapacidad();
 
-      
     DTHabitacion(int, float, int);
 };
 

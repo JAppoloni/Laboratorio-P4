@@ -10,9 +10,9 @@ class Collection {
 
     T* array;
     int top;
-    
+
     public:
-    
+
     Collection() {
         array = new T[MAX_HUESPEDES];
         top = -1;
@@ -72,6 +72,5 @@ class Collection {
         return out;
     }
 };
-
 
 #endif

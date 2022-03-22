@@ -23,8 +23,6 @@ public:
     int getHabitacion();
     DTReserva (int, DTFecha, DTFecha, EstadoReserva, float, int); 
     virtual  std::ostream&  operator<< (std::ostream &o) = 0;
-  
 };
 
 #endif
-

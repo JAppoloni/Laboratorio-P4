@@ -2,7 +2,7 @@
 #define _DTRESERVA_HH_
 
 #include "DTFecha.hpp"
-#include "../../clases/header/EstadoReserva.hpp"
+#include "EstadoReserva.hpp"
 #include <iostream>
 
 class DTReserva {
@@ -23,6 +23,8 @@ public:
     int getHabitacion();
     DTReserva (int, DTFecha, DTFecha, EstadoReserva, float, int); 
     virtual  std::ostream&  operator<< (std::ostream &o) = 0;
+  
 };
 
 #endif
+

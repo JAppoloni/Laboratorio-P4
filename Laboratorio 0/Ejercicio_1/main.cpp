@@ -1,8 +1,8 @@
 #include "presentacion/header/menu.hpp"
-#include "persistencia/header/Collection.hpp"
+#include "Persistencia/header/Collection.hpp"
 
 int main() {
-    Sistema* systemData = new Sistema();
+    Sistema* systemData = systemData->GetInstance();
 
     systemData->agregarHuesped("Renzo Tissoni", "renzo.tissoni@fing.edu.uy", true);
     systemData->agregarHuesped("John Doe", "john.doe@gmail.com", false);

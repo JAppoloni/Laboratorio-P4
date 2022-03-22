@@ -29,28 +29,16 @@ void DTFecha::imprimir()
 
 DTFecha::DTFecha(int dia, int mes, int anio)
 {
-    if ((dia > 31) || (dia < 1) || (mes > 12) || (mes < 1) || (anio < 1900))
+    if ((dia > 31) || (dia < 1) || (mes > 12) || (mes < 1) || (anio < 1900)) {
         throw std::invalid_argument("Fecha invalida");
-    else
-    {
+    } else {
         this->anio = anio;
         this->dia = dia;
         this->mes = mes;
     }
 }
 
-DTFecha& DTFecha::operator = (const DTFecha &fecha)
-{
-    if (this!=&fecha) { 
-         this->anio = fecha.anio;
-         this->mes = fecha.mes;
-         this->dia = fecha.dia;
-    }
-    return *this;
-
-}
-
-bool DTFecha::operator == (const DTFecha &fecha) const 
-{
-    return this->mes == fecha.mes && this->anio == fecha.anio && this->dia==fecha.dia;
-}
+// bool DTFecha::operator==(const DTFecha &fecha) const 
+// {
+//     return this->mes == fecha.mes && this->anio == fecha.anio && this->dia==fecha.dia;
+// }

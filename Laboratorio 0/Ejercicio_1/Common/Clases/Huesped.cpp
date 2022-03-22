@@ -26,18 +26,23 @@ void Huesped::setEsFinger(bool esFinger) {
 }
 
 void Huesped::imprimir() { 
-    std::cout << " El huesped " << this->nombre << " posee el correo " << this->email << " y " << (this->esFinger == true) ? "es Finger." : "no es Finger."; 
+    std::cout << " El huesped " << this->nombre << " posee el correo " << this->email << " y " << (this->esFinger == true ? "es Finger." : "no es Finger."); 
 }
 
 Huesped::Huesped(std::string nombre, std::string correo, bool esFing) {
-    this->email=correo;
-    this->nombre=nombre;
-    this->esFinger=esFing;
+    this->email = correo;
+    this->nombre = nombre;
+    this->esFinger = esFing;
 }
 
-Huesped Huesped::NULL_Huesped() {    return Huesped(" -1 -> NULL_HUESPED", " -1 -> NULL_HUESPED", NULL);}
+Huesped Huesped::NULL_Huesped() {
+    return Huesped(" -1 -> NULL_HUESPED", " -1 -> NULL_HUESPED", false);
+}
 
-bool Huesped::operator==(const Huesped &c) const { return ((this->email  == c.email) && (this->nombre == c.nombre) && (this->esFinger == c.esFinger)); }
-bool Huesped::operator!=(const Huesped &c) const { return !(*this==c); }
+bool Huesped::operator==(const Huesped &c) const { 
+    return ((this->email == c.email) && (this->nombre == c.nombre) && (this->esFinger == c.esFinger)); 
+}
 
-//~Huesped();
+bool Huesped::operator!=(const Huesped &c) const { 
+    return !(*this == c); 
+}

@@ -1,8 +1,19 @@
-#include "header/Habitacion.hpp"
 #include "header/Reserva.hpp"
-#include "../datatype/header/DTFecha.hpp"
 #include <iostream>
 
+Reserva::Reserva(
+    int codigo,
+    DTFecha checkIn,
+    DTFecha checkOut,
+    EstadoReserva estado,
+    Habitacion habitacionReservada
+): checkIn(checkIn), checkOut(checkOut), habitacionReservada(habitacionReservada) {
+    this->codigo = codigo;
+    this->checkIn = checkIn;
+    this->checkOut = checkOut;
+    this->estado = estado;
+    this->habitacionReservada = habitacionReservada;
+}
 
 int Reserva::getCodigo() { 
     return this->codigo; 
@@ -42,38 +53,22 @@ Habitacion Reserva::getHabitacionReservada() {
 
 void Reserva::setHabitacionReservada(Habitacion habitacionReservada) { 
     this->habitacionReservada = habitacionReservada; 
-    }
-
-Huesped *Reserva::getlistaHuesped() { 
-    return this->listaHuesped; 
 }
 
-void Reserva::setlistaHuesped(Huesped listaHuesped[]) {
-    for (int i = 0; i < MAX_HUESPEDES; i++) {
-        this->listaHuesped[i] = listaHuesped[i];
-    }
-}
+// void Reserva::imprimir()
+// {
+//     std::cout << " La reserva " << this->codigo << " es para el periodo ";
+//     this->checkIn.imprimir();
+//     std::cout << "-";
+//     this->checkOut.imprimir();
+//     std::cout << " y se reservó ";
+//     this->habitacionReservada.imprimir();
+//     std::cout << " Y su estado es " << this->estado;
+//     std::cout << ". \n ";
+//     Huesped Null = Huesped().NULL_Huesped();
 
-void Reserva::setlistaHuesped(Huesped *listaHuesped)
-{
-    delete[] this->listaHuesped;
-    this->listaHuesped = listaHuesped;
-}
-
-void Reserva::imprimir()
-{
-    std::cout << " La reserva " << this->codigo << " es para el periodo ";
-    this->checkIn.imprimir();
-    std::cout << "-";
-    this->checkOut.imprimir();
-    std::cout << " y se reservó ";
-    this->habitacionReservada.imprimir();
-    std::cout << " Y su estado es " << this->estado;
-    std::cout << ". \n ";
-    Huesped Null = Huesped().NULL_Huesped();
-
-    for (int i = 0; i < MAX_HUESPEDES && this->listaHuesped[i] != Null; i++)
-    {
-       this->listaHuesped[i].imprimir();
-    }
-}
+//     for (int i = 0; i < MAX_HUESPEDES && this->listaHuesped[i] != Null; i++)
+//     {
+//        this->listaHuesped[i].imprimir();
+//     }
+// }

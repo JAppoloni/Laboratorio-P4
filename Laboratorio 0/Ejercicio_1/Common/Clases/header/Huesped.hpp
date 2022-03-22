@@ -22,8 +22,6 @@ public:
     void setEsFinger(bool esFinger);
 
     Huesped(std::string, std::string, bool);
-    Huesped();
-    ~Huesped();
 
     Huesped NULL_Huesped();
     bool operator==(const Huesped &c) const;

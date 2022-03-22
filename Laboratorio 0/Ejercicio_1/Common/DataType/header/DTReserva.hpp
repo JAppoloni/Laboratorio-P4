@@ -2,7 +2,7 @@
 #define _DTRESERVA_HH_
 
 #include "DTFecha.hpp"
-#include "../../Clases/header/EstadoReserva.hpp"
+#include "../../clases/header/EstadoReserva.hpp"
 #include <iostream>
 
 class DTReserva {
@@ -15,7 +15,6 @@ private:
     int habitacion;
 
 public:
-
     int getCodigo();
     DTFecha getCheckIn();
     DTFecha getCheckOut();

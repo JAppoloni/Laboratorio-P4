@@ -5,10 +5,20 @@
 
 class ReservaGrupal : public Reserva {
 public:
-    virtual void imprimir();
-    virtual float calcularCosto();
+    float calcularCosto();
+    Huesped* listaHuesped;
 
-    ReservaGrupal(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, Habitacion habitacionReservada, Huesped *Huesped);
+    ReservaGrupal(
+        int codigo, 
+        DTFecha checkIn,
+        DTFecha checkOut, 
+        EstadoReserva estado,
+        Habitacion habitacionReservada,
+        Huesped *Huesped);
+
+    Huesped* getListaHuesped();
+    void setListaHuesped(Huesped* listaHuesped);
+
     ~ReservaGrupal();
 };
 

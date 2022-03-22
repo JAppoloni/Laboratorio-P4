@@ -19,28 +19,17 @@ DTHuesped::DTHuesped(std::string nombre, std::string email, bool esFinger) {
     this->esFinger = esFinger;
 }
 
-// #ifndef _DTHUESPED_HH_
-// #define _DTHUESPED_HH_
+DTHuesped::DTHuesped(Huesped* huesped) {
+    this->nombre = huesped->getNombre();
+    this->email = huesped->getEmail();
+    this->esFinger = huesped->getEsFinger();
+}
 
-// #include <string>
+std::ostream& operator<<(std::ostream& out, DTHuesped &huesped) {
+    out << "Nombre: " << huesped.getNombre() << std::endl;   
+    out << "Email: " << huesped.getEmail() << std::endl;
+    out << "Es FInger: " << (huesped.getEsFinger() ? "SI" : "NO") << std::endl;
+    out << "-----------------------" << std::endl;
 
-// class DTHuesped
-// {
-// private:
-//     std::string nombre;
-//     std::string email;
-//     bool esFinger;
-
-// public:
-//     void imprimir();
-
-//     std::string getNombre();
-//     std::string getEmail();
-//     bool getEsFinger();
-
-//     DTHuesped(std::string, std::string, bool);
-// };
-
-// #endif
-
-
+    return out;
+}

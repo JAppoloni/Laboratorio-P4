@@ -6,15 +6,23 @@
 class ReservaIndividual : public Reserva {
 private:
     bool pagado;
+    Huesped* huesped;
 
 public:
-    virtual void imprimir();
-    virtual float calcularCosto();
+    float calcularCosto();
 
     bool getPagado();
     void setPagado(bool pagado);
 
-    ReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, Habitacion habitacionReservada, Huesped Huesped, bool pagado);
+    ReservaIndividual(
+        int codigo, 
+        DTFecha checkIn, 
+        DTFecha checkOut,
+        EstadoReserva estado, 
+        float costo, 
+        Habitacion habitacionReservada, 
+        Huesped* huesped, 
+        bool pagado);
     ~ReservaIndividual();
 };
 

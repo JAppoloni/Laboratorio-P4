@@ -1,4 +1,7 @@
+#include "header/menu.hpp"
+#include "header/menuHuesped.hpp"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -30,7 +33,7 @@ void notImplementedMessage() {
     cin.ignore(1000, '\n');
 }
 
-void mainMenu() {
+void mainMenu(Sistema* systemData) {
     bool exit = false;
 
     while(!exit) {
@@ -38,13 +41,13 @@ void mainMenu() {
 
         switch (option) {
             case '1':
-                notImplementedMessage();
+                agregarHuesped(systemData);
                 break;
             case '2':
                 notImplementedMessage();
                 break;
             case '3':
-                notImplementedMessage();
+                obtenerHuespedes(systemData);
                 break;
             case '4':
                 notImplementedMessage();

@@ -1,14 +1,16 @@
 exec: build
 	make clean
 
-build: some
+build: source
 	g++ -Wall -o executable \
 	main.cpp \
 	*.o
 
-some:
+source:
 	g++ -Wall -c presentacion/header/*.hpp
 	g++ -Wall -c presentacion/*.cpp
+	g++ -Wall -c persistencia/header/*.hpp
+	g++ -Wall -c persistencia/*.cpp
 	g++ -Wall -c common/clases/header/*.hpp
 	g++ -Wall -c common/datatype/header/*.hpp
 	g++ -Wall -c common/clases/*.cpp

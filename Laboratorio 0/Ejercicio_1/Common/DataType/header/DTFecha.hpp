@@ -15,7 +15,6 @@ public:
     int getAnio();
     int calcularDias(DTFecha fchAComparar);
     DTFecha(int, int, int);
-    DTFecha();
 };
 
 #endif

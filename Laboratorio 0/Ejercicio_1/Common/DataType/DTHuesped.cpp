@@ -23,22 +23,17 @@ DTHuesped::DTHuesped(std::string nombre, std::string email, bool esFinger) {
     this->esFinger = esFinger;
 }
 
-DTHuesped::DTHuesped(){
-    this->email = "";
-    this->email = "";
-    this->esFinger = false;
-
+DTHuesped::DTHuesped(Huesped* huesped) {
+    this->nombre = huesped->getNombre();
+    this->email = huesped->getEmail();
+    this->esFinger = huesped->getEsFinger();
 }
 
-DTHuesped& DTHuesped::operator = (const DTHuesped &huesped){
-     if(this!= &huesped){ 
-         this->nombre = huesped.nombre;
-         this->email = huesped.email;
-         this->esFinger = huesped.esFinger;
-    }
-    return *this;
+std::ostream& operator<<(std::ostream& out, DTHuesped &huesped) {
+    out << "Nombre: " << huesped.getNombre() << std::endl;   
+    out << "Email: " << huesped.getEmail() << std::endl;
+    out << "Es FInger: " << (huesped.getEsFinger() ? "SI" : "NO") << std::endl;
+    out << "-----------------------" << std::endl;
+
+    return out;
 }
-
-
-
-

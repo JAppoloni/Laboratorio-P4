@@ -31,27 +31,14 @@ void Habitacion::setCapacidad(int capacidad)
     this->capacidad = capacidad;
 }
 
-Reserva *Habitacion::getListaReservas()
-{
-    return this->listaReservas;
-}
-void Habitacion::setListaReservas(Reserva *listaReservas)
-{
-    delete[] this->listaReservas;
-    this->listaReservas = listaReservas;
-}
-
-Habitacion::Habitacion(int numero, float precio, int capacidad, Reserva *listaReservas)
+Habitacion::Habitacion(int numero, float precio, int capacidad)
 {
     this->numero = numero;
     this->capacidad = capacidad;
     this->precio = precio;
-    this->listaReservas = listaReservas;
 }
 
 void Habitacion::imprimir()
 {
     std::cout << " La habitación número" << this->numero << " cuenta con una capacidad de " << this->capacidad << " a un precio de  $ " << this->precio << ".";
 }
-
-// Habitacion::~Habitacion();

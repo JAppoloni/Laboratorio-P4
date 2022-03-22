@@ -15,10 +15,6 @@ public:
     int getAnio();
     int calcularDias(DTFecha fchAComparar);
     DTFecha(int, int, int);
-    DTFecha();
-     bool operator ==(const DTFecha &fecha) const;
-     DTFecha& operator = (const DTFecha &fecha);
-
 };
 
 #endif

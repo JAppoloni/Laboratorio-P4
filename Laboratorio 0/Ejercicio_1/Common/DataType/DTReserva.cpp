@@ -3,39 +3,42 @@
 #include "header/DTReserva.hpp"
 #include <iostream>
 
-int DTReserva::getCodigo(){
+int DTReserva::getCodigo() {
     return this->codigo;
 }
 
-DTFecha DTReserva::getCheckIn(){
+int DTReserva::getHabitacion() {
+    return this->habitacion;
+}
+
+DTFecha DTReserva::getCheckIn() {
     return this->checkIn;
 }
 
-DTFecha DTReserva::getCheckOut(){
+DTFecha DTReserva::getCheckOut() {
     return this->checkOut;
 }
 
-EstadoReserva DTReserva::getEstado(){
+EstadoReserva DTReserva::getEstado() {
     return this->estado;
 }
 
-float DTReserva::getCosto(){
+float DTReserva::getCosto() {
     return this->costo;
 }
 
-DTReserva::DTReserva(int codigo, DTFecha CheckIn, DTFecha CheckOut, EstadoReserva estado, float costo, int habitacion) {
-  this->codigo = codigo; 
-  this->checkIn = CheckIn;
-  this->checkOut = CheckOut;
-  this->estado = estado;
-  this->habitacion = habitacion;
-  this->costo = costo;
-  
+DTReserva::DTReserva(
+    int codigo, 
+    DTFecha checkIn, 
+    DTFecha checkOut, 
+    EstadoReserva estado,
+    float costo, 
+    int habitacion
+): checkIn(checkIn), checkOut(checkOut), estado(estado) {
+    this->codigo = codigo; 
+    this->checkIn = checkIn;
+    this->checkOut = checkOut;
+    this->estado = estado;
+    this->habitacion = habitacion;
+    this->costo = costo;
 }
-
-
-
-
-
-
-

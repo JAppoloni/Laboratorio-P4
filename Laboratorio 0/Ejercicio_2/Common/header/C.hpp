@@ -1,16 +1,16 @@
 #ifndef CLASS_C
 #define CLASS_C
 
-class ClassA;
-class ClassB;
+class A;
+class B;
 
-class ClassC{
+class C{
     private:
         int c;
-        ClassA * myA;
-        ClassB * myB;
+        A * myA;
+        B * myB;
     public:
-        ClassC(int, ClassA*, ClassB*);
+        C(int, A*, B*);
         void printInt();
 };
 

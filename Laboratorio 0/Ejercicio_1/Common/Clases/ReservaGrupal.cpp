@@ -16,7 +16,7 @@ float ReservaGrupal::calcularCosto() {
     int cantFingers = 0;
 
     // Broken   --//Puede romper???
-    for (int i = 0; (i < MAX_HUESPEDES) && (cantFingers < 2) && (this->listaHuesped[i]!=NULL); i++) {
+    for (int i = 0; (i < MAX_HUESPEDES) && (cantFingers < 2) && (this->listaHuesped[i]!=nullptr); i++) {
         if ((this->listaHuesped[i])->getEsFinger() == true) {
             cantFingers++;
         }

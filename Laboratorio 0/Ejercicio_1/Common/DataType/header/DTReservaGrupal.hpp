@@ -11,7 +11,7 @@ private:
     
 public:
    
-    DTReservaGrupal(int, DTFecha, DTFecha, EstadoReserva, float, int,int, DTHuesped**);
+    DTReservaGrupal(int, DTFecha, DTFecha, EstadoReserva, float, int, DTHuesped**);
     virtual std::ostream&  operator<<(std::ostream &o);
     DTHuesped** getHuespedes();
 };

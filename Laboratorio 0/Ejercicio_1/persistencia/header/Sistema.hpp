@@ -18,7 +18,6 @@ private:
     Collection<Huesped*> huespedes;
     Collection<Reserva*> reservas;
     Collection<Habitacion*> habitaciones;
-    Collection<DTReserva*> dtreservas;
 
 public:
     Sistema();
@@ -85,7 +84,7 @@ public:
      * @param ID
      * @return DTHabitacion*
      */
-    Habitacion *obtenerHabitacionXID(int ID);
+    Habitacion *obtenerHabitacionPorID(int ID);
 
     /**
      * @brief Dado el DT de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
@@ -93,7 +92,7 @@ public:
      * @param ID
      * @return Habitacion*
      */
-    Huesped *obtenerHuespedXDT(DTHuesped *pDTHuesped);
+    Huesped *obtenerHuespedPorDT(DTHuesped *pDTHuesped);
 
     /**
      * @brief Dado el email de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
@@ -101,7 +100,7 @@ public:
      * @param pDTHuesped
      * @return Huesped*
      */
-    Huesped *obtenerHuespedXEmail(std::string email);
+    Huesped *obtenerHuespedPorEmail(std::string email);
 };
 
 #endif

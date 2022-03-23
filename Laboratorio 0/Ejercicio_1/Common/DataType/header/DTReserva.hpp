@@ -6,7 +6,7 @@
 #include <iostream>
 
 class DTReserva {
-private:
+protected:
     int codigo;
     DTFecha checkIn;
     DTFecha checkOut;
@@ -21,6 +21,7 @@ public:
     EstadoReserva getEstado();
     virtual float getCosto();
     int getHabitacion();
+    DTReserva();
     DTReserva (int, DTFecha, DTFecha, EstadoReserva, float, int); 
     virtual  std::ostream&  operator<< (std::ostream &o) = 0;
   

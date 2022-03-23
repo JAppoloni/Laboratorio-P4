@@ -101,7 +101,7 @@ void Sistema::registrarReserva(std::string email, DTReserva *reserva) {
         listaHuesped[0] = pHuesped;
         for (int i = 0; i < huespedes.size() && aux_reserva->getHuespedes()[i] != nullptr; i++)
         {
-            listaHuesped[i + 1] = ObtenerHuespedXDT(aux_reserva->getHuespedes()[i]);
+            listaHuesped[i + 1] = obtenerHuespedXDT(aux_reserva->getHuespedes()[i]);
         }
 
         ReservaGrupal *myReserva = new ReservaGrupal(

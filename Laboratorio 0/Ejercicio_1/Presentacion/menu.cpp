@@ -1,5 +1,6 @@
 #include "header/menu.hpp"
 #include "header/menuHuesped.hpp"
+#include "header/menuHabitacion.hpp"
 #include <iostream>
 #include <string>
 
@@ -44,13 +45,13 @@ void mainMenu(Sistema* systemData) {
                 agregarHuesped(systemData);
                 break;
             case '2':
-                notImplementedMessage();
+                agregarHabitacion(systemData);
                 break;
             case '3':
                 obtenerHuespedes(systemData);
                 break;
             case '4':
-                notImplementedMessage();
+                obtenerHabitaciones(systemData);
                 break;
             case '5':
                 notImplementedMessage();

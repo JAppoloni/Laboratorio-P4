@@ -13,22 +13,16 @@
 #include "Collection.hpp"
 #include <string>
 
-class Sistema
-{
-    static Sistema *_sistema;
-
-protected:
-    Sistema();
-
+class Sistema {
 private:
-    Collection<Huesped *> huespedes;
-    Collection<Reserva *> reservas;
-    Collection<Habitacion *> habitaciones;
-    Collection<DTReserva *> dtreservas;
-
-    
+    Collection<Huesped*> huespedes;
+    Collection<Reserva*> reservas;
+    Collection<Habitacion*> habitaciones;
+    Collection<DTReserva*> dtreservas;
 
 public:
+    Sistema();
+
     /**
      * @brief Registra un nuevo huésped en el sistema. Si ya existe un huésped registrado con el mismo email, se
     lanza una excepción de tipo std::invalid_argument
@@ -84,34 +78,30 @@ public:
      void registrarReserva(std::string email, DTReserva *reserva);
 
     ~Sistema();
-
-    // SINGLETON
-    static Sistema *GetInstance();
-
     /**
 
-     * @brief  Dado el ID de una Habitación se retorna el obj de la Habitación, si !E se retorna NULL
+     * @brief  Dado el ID de una Habitación se retorna el obj de la Habitación, si !E se retorna nullptr
      *
      * @param ID
      * @return DTHabitacion*
      */
-    Habitacion *ObtenerHabitacionXID(int ID);
+    Habitacion *obtenerHabitacionXID(int ID);
 
     /**
-     * @brief Dado el DT de una Huesped se retorna el obj de la Huesped, si !E se retorna NULL
+     * @brief Dado el DT de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
      *
      * @param ID
      * @return Habitacion*
      */
-    Huesped *ObtenerHuespedXDT(DTHuesped *pDTHuesped);
+    Huesped *obtenerHuespedXDT(DTHuesped *pDTHuesped);
 
     /**
-     * @brief Dado el email de una Huesped se retorna el obj de la Huesped, si !E se retorna NULL
+     * @brief Dado el email de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
      *
      * @param pDTHuesped
      * @return Huesped*
      */
-    Huesped *ObtenerHuespedXEmail(std::string email);
+    Huesped *obtenerHuespedXEmail(std::string email);
 };
 
 #endif

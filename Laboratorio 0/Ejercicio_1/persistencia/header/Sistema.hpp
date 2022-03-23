@@ -90,7 +90,7 @@ public:
 
     /**
 
-     * @brief  Dado el ID de una Habitación se retorna el obj de la Habitación, si !E se retorna NULL
+     * @brief  Dado el ID de una Habitación se retorna el obj de la Habitación, si !E se retorna nullptr
      *
      * @param ID
      * @return DTHabitacion*
@@ -98,7 +98,7 @@ public:
     Habitacion *ObtenerHabitacionXID(int ID);
 
     /**
-     * @brief Dado el DT de una Huesped se retorna el obj de la Huesped, si !E se retorna NULL
+     * @brief Dado el DT de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
      *
      * @param ID
      * @return Habitacion*
@@ -106,7 +106,7 @@ public:
     Huesped *ObtenerHuespedXDT(DTHuesped *pDTHuesped);
 
     /**
-     * @brief Dado el email de una Huesped se retorna el obj de la Huesped, si !E se retorna NULL
+     * @brief Dado el email de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
      *
      * @param pDTHuesped
      * @return Huesped*

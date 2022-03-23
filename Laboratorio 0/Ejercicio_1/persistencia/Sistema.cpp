@@ -35,7 +35,7 @@ DTHuesped **Sistema::obtenerHuespedes(int &cantidad)
 
 Sistema *Sistema::GetInstance()
 {
-    if (_sistema == NULL)
+    if (_sistema == nullptr)
     {
         _sistema = new Sistema();
     }
@@ -45,6 +45,7 @@ Sistema *Sistema::GetInstance()
 void Sistema::agregarHabitacion(int numero, float precio, int capacidad)
 {
     Habitacion *habitacion = new Habitacion(numero, precio, capacidad);
+
     if (ObtenerHabitacionXID(numero) != nullptr)
         throw "La habitación ya exsite";
 
@@ -69,18 +70,21 @@ DTHabitacion **Sistema::obtenerHabitaciones(int &cantHabitaciones)
 
 DTReserva **Sistema::obtenerReservas(DTFecha fecha, int &cantReservas)
 {
-    cantReservas = reservas.size();
-    DTReserva **result = new DTReserva *[cantReservas];
+    int tope = reservas.size();
+    DTReserva **result = new DTReserva *[tope];
     int index = 0;
     int elems_add = 0;
-    while (index < cantReservas)
+    while (index < tope)
     {
-        if (dtreservas.values()[index]->getCheckIn() >= fecha || fecha <= dtreservas.values()[index]->getCheckOut())
+        if (dtreservas.values()[index]->getCheckIn() >= fecha && fecha <= dtreservas.values()[index]->getCheckOut())
         {
             result[elems_add] = dtreservas.values()[elems_add];
             elems_add++;
         }
-    }
+        index++;
+    };
+    cantReservas = elems_add;
+    
     return result;
 }
 
@@ -92,23 +96,22 @@ void Sistema::registrarReserva(std::string email, DTReserva *reserva)
     if (reserva->getCheckOut() < reserva->getCheckIn())
         throw "La fecha de Ingreso es mayor a la de salida";
     Habitacion *hab = ObtenerHabitacionXID(reserva->getHabitacion());
-    if (hab == NULL)
+    if (hab == nullptr)
         throw "La Habitación no existe";
-
     Huesped *pHuesped = ObtenerHuespedXEmail(email);
-    if (pHuesped == NULL)
+    if (pHuesped == nullptr)
         throw "No Existe ningún Cliente con ese E-mail";
 
-    if (dynamic_cast</*const*/ DTReservaGrupal *>(reserva)) // More Info at: https://stackoverflow.com/a/56977583
+    if (dynamic_cast</*const*/ DTReservaGrupal *>(reserva) != nullptr) // More Info at: https://stackoverflow.com/a/56977583
     {
         DTReservaGrupal *aux_reserva = dynamic_cast<DTReservaGrupal *>(reserva);
 
         Huesped **listaHuesped = new Huesped *[huespedes.size()];
 
         listaHuesped[0] = pHuesped;
-        for (int i = 1; i < huespedes.size() && aux_reserva->getHuespedes() != NULL; i++)
+        for (int i = 0; i < huespedes.size() && aux_reserva->getHuespedes()[i] != nullptr; i++)
         {
-            listaHuesped[i] = ObtenerHuespedXDT(aux_reserva->getHuespedes()[i]);
+            listaHuesped[i + 1] = ObtenerHuespedXDT(aux_reserva->getHuespedes()[i]);
         }
 
         ReservaGrupal *myReserva = new ReservaGrupal(aux_reserva->getCodigo(),
@@ -119,7 +122,7 @@ void Sistema::registrarReserva(std::string email, DTReserva *reserva)
                                                      listaHuesped);
         reservas.add(myReserva);
     }
-    else
+    else //El tipo dinamico de reserva es ReservaIndividual
     {
         DTReservaIndividual *aux_reserva = dynamic_cast<DTReservaIndividual *>(reserva);
 
@@ -139,7 +142,7 @@ void Sistema::registrarReserva(std::string email, DTReserva *reserva)
 
 Habitacion *Sistema::ObtenerHabitacionXID(int ID)
 {
-    Habitacion *rtn = NULL;
+    Habitacion *rtn = nullptr;
     for (int i = 0; i < habitaciones.size(); i++)
     {
         if (habitaciones.values()[i]->getNumero() == ID)
@@ -153,7 +156,7 @@ Habitacion *Sistema::ObtenerHabitacionXID(int ID)
 
 Huesped *Sistema::ObtenerHuespedXDT(DTHuesped *pDTHuesped)
 {
-    Huesped *rtn = NULL;
+    Huesped *rtn = nullptr;
     for (int i = 0; i < huespedes.size(); i++)
     {
         if (huespedes.values()[i]->getEmail() == pDTHuesped->getEmail() && huespedes.values()[i]->getNombre() == pDTHuesped->getNombre() && huespedes.values()[i]->getEsFinger() == pDTHuesped->getEsFinger())
@@ -167,7 +170,7 @@ Huesped *Sistema::ObtenerHuespedXDT(DTHuesped *pDTHuesped)
 
 Huesped *Sistema::ObtenerHuespedXEmail(std::string email)
 {
-    Huesped *rtn = NULL;
+    Huesped *rtn = nullptr;
     for (int i = 0; i < huespedes.size(); i++)
     {
         if (huespedes.values()[i]->getEmail() == email)

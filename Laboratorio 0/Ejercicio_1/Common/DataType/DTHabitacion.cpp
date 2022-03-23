@@ -1,27 +1,29 @@
 
 #include "header/DTHabitacion.hpp"
-#include <iostream>
 
-void DTHabitacion::imprimir(){
-    std::cout << " Habitacion: " << this->numero << "\n";
-    std::cout << " Costo: $" << this->precio  << "\n";
-    std::cout << " Capacidad: " << this->capacidad  << "\n";
-}
-
-int DTHabitacion::getnumero() { 
+int DTHabitacion::getNumero() { 
     return this->numero; 
 }
 
-float DTHabitacion::getprecio() { 
+float DTHabitacion::getPrecio() { 
     return this->precio; 
 }
 
-int DTHabitacion::getcapacidad() { 
+int DTHabitacion::getCapacidad() { 
     return this->capacidad; 
 }
 
-DTHabitacion::DTHabitacion(int numero,float precio,int capacidad) {
+DTHabitacion::DTHabitacion(int numero, float precio,int capacidad) {
     this->numero = numero;
     this->precio = precio;
     this->capacidad = capacidad;
+}
+
+std::ostream& operator<<(std::ostream& out, DTHabitacion &habitacion) {
+    out << "Numero: " << habitacion.getNumero() << std::endl;   
+    out << "Costo: " << habitacion.getPrecio() << std::endl;
+    out << "Capacidad: " << habitacion.getCapacidad() << " personas." << std::endl;
+    out << "-----------------------" << std::endl;
+
+    return out;
 }

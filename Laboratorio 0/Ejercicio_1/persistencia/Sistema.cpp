@@ -1,31 +1,27 @@
 #include "header/Sistema.hpp"
 #include <iostream>
 
-Sistema *Sistema::_sistema = nullptr;
-
 Sistema::Sistema() {}
 
 Sistema::~Sistema() {}
 
-void Sistema::agregarHuesped(std::string nombre, std::string email, bool esFinger)
-{
-    Huesped *huesped = new Huesped(nombre, email, esFinger);
+void Sistema::agregarHuesped(std::string nombre, std::string email, bool esFinger) {
+    Huesped* huesped = new Huesped(nombre, email, esFinger);
 
-    if (ObtenerHuespedXEmail(email) != nullptr)
+    if (obtenerHuespedXEmail(email) != nullptr) {
         throw "El Huesped ya exsite";
+    }
 
     huespedes.add(huesped);
 }
 
-DTHuesped **Sistema::obtenerHuespedes(int &cantidad)
-{
+DTHuesped** Sistema::obtenerHuespedes(int &cantidad) {
     cantidad = huespedes.size();
 
-    DTHuesped **result = new DTHuesped *[cantidad];
+    DTHuesped** result = new DTHuesped *[cantidad];
 
     int index = 0;
-    while (index < cantidad)
-    {
+    while (index < cantidad) {
         result[index] = new DTHuesped(huespedes.values()[index]);
         index++;
     }
@@ -33,34 +29,21 @@ DTHuesped **Sistema::obtenerHuespedes(int &cantidad)
     return result;
 }
 
-Sistema *Sistema::GetInstance()
-{
-    if (_sistema == nullptr)
-    {
-        _sistema = new Sistema();
-    }
-    return _sistema;
-}
-
-void Sistema::agregarHabitacion(int numero, float precio, int capacidad)
-{
+void Sistema::agregarHabitacion(int numero, float precio, int capacidad) {
     Habitacion *habitacion = new Habitacion(numero, precio, capacidad);
-
-    if (ObtenerHabitacionXID(numero) != nullptr)
-        throw "La habitación ya exsite";
+    if (obtenerHabitacionXID(numero) != nullptr)
+        throw "La habitación ya existe";
 
     habitaciones.add(habitacion);
 }
 
-DTHabitacion **Sistema::obtenerHabitaciones(int &cantHabitaciones)
-{
+DTHabitacion **Sistema::obtenerHabitaciones(int &cantHabitaciones) {
     cantHabitaciones = habitaciones.size();
 
-    DTHabitacion **result = new DTHabitacion *[cantHabitaciones];
+    DTHabitacion** result = new DTHabitacion* [cantHabitaciones];
 
     int index = 0;
-    while (index < cantHabitaciones)
-    {
+    while (index < cantHabitaciones) {
         result[index] = new DTHabitacion(habitaciones.values()[index]->getNumero(), habitaciones.values()[index]->getPrecio(), habitaciones.values()[index]->getCapacidad());
         index++;
     }
@@ -88,25 +71,32 @@ DTReserva **Sistema::obtenerReservas(DTFecha fecha, int &cantReservas)
     return result;
 }
 
-void Sistema::registrarReserva(std::string email, DTReserva *reserva)
-{
+void Sistema::registrarReserva(std::string email, DTReserva *reserva) {
     // Validar Reserva
-    if (reserva->getCodigo() < 0)
+    if (reserva->getCodigo() < 0) {
         throw "Codigo Invalido";
-    if (reserva->getCheckOut() < reserva->getCheckIn())
+    }
+
+    if (reserva->getCheckOut() < reserva->getCheckIn()) {
         throw "La fecha de Ingreso es mayor a la de salida";
-    Habitacion *hab = ObtenerHabitacionXID(reserva->getHabitacion());
-    if (hab == nullptr)
+    }
+
+    Habitacion* habitacion = obtenerHabitacionXID(reserva->getHabitacion());
+
+    if (habitacion == nullptr) {
         throw "La Habitación no existe";
-    Huesped *pHuesped = ObtenerHuespedXEmail(email);
-    if (pHuesped == nullptr)
+    }
+
+    Huesped* pHuesped = obtenerHuespedXEmail(email);
+    if (pHuesped == nullptr) {
         throw "No Existe ningún Cliente con ese E-mail";
+    }
 
-    if (dynamic_cast</*const*/ DTReservaGrupal *>(reserva) != nullptr) // More Info at: https://stackoverflow.com/a/56977583
-    {
-        DTReservaGrupal *aux_reserva = dynamic_cast<DTReservaGrupal *>(reserva);
+    // More Info at: https://stackoverflow.com/a/56977583
+    if (dynamic_cast<DTReservaGrupal*>(reserva)) {
+        DTReservaGrupal *aux_reserva = dynamic_cast<DTReservaGrupal*>(reserva);
 
-        Huesped **listaHuesped = new Huesped *[huespedes.size()];
+        Huesped** listaHuesped = new Huesped*[huespedes.size()];
 
         listaHuesped[0] = pHuesped;
         for (int i = 0; i < huespedes.size() && aux_reserva->getHuespedes()[i] != nullptr; i++)
@@ -114,39 +104,37 @@ void Sistema::registrarReserva(std::string email, DTReserva *reserva)
             listaHuesped[i + 1] = ObtenerHuespedXDT(aux_reserva->getHuespedes()[i]);
         }
 
-        ReservaGrupal *myReserva = new ReservaGrupal(aux_reserva->getCodigo(),
-                                                     aux_reserva->getCheckIn(),
-                                                     aux_reserva->getCheckOut(),
-                                                     aux_reserva->getEstado(),
-                                                     hab,
-                                                     listaHuesped);
+        ReservaGrupal *myReserva = new ReservaGrupal(
+            aux_reserva->getCodigo(),
+            aux_reserva->getCheckIn(),
+            aux_reserva->getCheckOut(),
+            aux_reserva->getEstado(),
+            habitacion,
+            listaHuesped);
+        reservas.add(myReserva);
+    } else {
+        DTReservaIndividual *aux_reserva = dynamic_cast<DTReservaIndividual*>(reserva);
+
+        ReservaIndividual *myReserva = new ReservaIndividual(
+            aux_reserva->getCodigo(),
+            aux_reserva->getCheckIn(),
+            aux_reserva->getCheckOut(),
+            aux_reserva->getEstado(),
+            aux_reserva->getCosto(),
+            habitacion,
+            pHuesped,
+            aux_reserva->getEstado());
+
         reservas.add(myReserva);
     }
-    else //El tipo dinamico de reserva es ReservaIndividual
-    {
-        DTReservaIndividual *aux_reserva = dynamic_cast<DTReservaIndividual *>(reserva);
 
-        ReservaIndividual *myReserva = new ReservaIndividual(aux_reserva->getCodigo(),
-                                                             aux_reserva->getCheckIn(),
-                                                             aux_reserva->getCheckOut(),
-                                                             aux_reserva->getEstado(),
-                                                             aux_reserva->getCosto(),
-                                                             hab,
-                                                             pHuesped,
-                                                             aux_reserva->getEstado());
-
-        reservas.add(myReserva);
-    }
     dtreservas.add(reserva);
 }
 
-Habitacion *Sistema::ObtenerHabitacionXID(int ID)
-{
-    Habitacion *rtn = nullptr;
-    for (int i = 0; i < habitaciones.size(); i++)
-    {
-        if (habitaciones.values()[i]->getNumero() == ID)
-        {
+Habitacion* Sistema::obtenerHabitacionXID(int numero) {
+    Habitacion* rtn = nullptr;
+    for (int i = 0; i < habitaciones.size(); i++) {
+        if (habitaciones.values()[i]->getNumero() == numero) {
             rtn = habitaciones.values()[i];
             break;
         }
@@ -154,13 +142,10 @@ Habitacion *Sistema::ObtenerHabitacionXID(int ID)
     return rtn;
 }
 
-Huesped *Sistema::ObtenerHuespedXDT(DTHuesped *pDTHuesped)
-{
-    Huesped *rtn = nullptr;
-    for (int i = 0; i < huespedes.size(); i++)
-    {
-        if (huespedes.values()[i]->getEmail() == pDTHuesped->getEmail() && huespedes.values()[i]->getNombre() == pDTHuesped->getNombre() && huespedes.values()[i]->getEsFinger() == pDTHuesped->getEsFinger())
-        {
+Huesped* Sistema::obtenerHuespedXDT(DTHuesped* pDTHuesped) {
+    Huesped* rtn = nullptr;
+    for (int i = 0; i < huespedes.size(); i++) {
+        if (huespedes.values()[i]->getEmail() == pDTHuesped->getEmail() && huespedes.values()[i]->getNombre() == pDTHuesped->getNombre() && huespedes.values()[i]->getEsFinger() == pDTHuesped->getEsFinger()) {
             rtn = huespedes.values()[i];
             break;
         }
@@ -168,13 +153,10 @@ Huesped *Sistema::ObtenerHuespedXDT(DTHuesped *pDTHuesped)
     return rtn;
 }
 
-Huesped *Sistema::ObtenerHuespedXEmail(std::string email)
-{
-    Huesped *rtn = nullptr;
-    for (int i = 0; i < huespedes.size(); i++)
-    {
-        if (huespedes.values()[i]->getEmail() == email)
-        {
+Huesped* Sistema::obtenerHuespedXEmail(std::string email) {
+    Huesped* rtn = nullptr;
+    for (int i = 0; i < huespedes.size(); i++) {
+        if (huespedes.values()[i]->getEmail() == email) {
             rtn = huespedes.values()[i];
             break;
         }

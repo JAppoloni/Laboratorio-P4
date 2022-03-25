@@ -104,7 +104,7 @@ DTReserva **Sistema::obtenerReservas(DTFecha fecha, int &cantReservas)
                 DTHuesped **listaHuesped = new DTHuesped *[MAX_HUESPEDES];
 
                 // for (int i = 0; i < huespedes.size() && aux_reserva->getListaHuesped()[i] != nullptr; i++)
-                for (int i = 0; i < cant_Huespedes && aux_reserva->getListaHuesped()[i] != nullptr; i++)
+                for (int i = 0; i < MAX_HUESPEDES && aux_reserva->getListaHuesped()[i] != nullptr; i++)
                 {
                     listaHuesped[i] = new DTHuesped(aux_reserva->getListaHuesped()[i]->getNombre(),
                                                     aux_reserva->getListaHuesped()[i]->getEmail(),

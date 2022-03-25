@@ -26,10 +26,6 @@ std::ostream &DTReservaGrupal::operator<<(std::ostream &o)
     {
         o << " - Es finger";
     }
-    else
-    {
-        o << ",";
-    }
     i++;
 
     while ((this->getHuespedes()[i] != nullptr) && !(this->getHuespedes()[i]->esVacia()) && i < MAX_HUESPEDES)

@@ -15,9 +15,16 @@
 
 class Sistema {
 private:
-    Collection<Huesped*> huespedes;
-    Collection<Reserva*> reservas;
-    Collection<Habitacion*> habitaciones;
+    // Collection<Huesped*> huespedes;
+    // Collection<Reserva*> reservas;
+    // Collection<Habitacion*> habitaciones;
+
+    Huesped** lstHuespedes;
+    Reserva** lstReservas;
+    Habitacion** lstHabitaciones;
+    int cant_Huespedes;
+    int cant_Reservas;
+    int cant_Habitaciones;
 
 public:
     Sistema();
@@ -101,6 +108,14 @@ public:
      * @return Huesped*
      */
     Huesped *obtenerHuespedPorEmail(std::string email);
+
+/**
+ * @brief Dado un ID debuelve una reserva.
+ * 
+ * @param ID 
+ * @return DTReserva* 
+ */
+    Reserva* obtenerReservaPorID(int ID);
 };
 
 #endif

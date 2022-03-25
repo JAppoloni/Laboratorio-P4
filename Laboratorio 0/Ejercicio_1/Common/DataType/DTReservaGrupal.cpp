@@ -16,25 +16,32 @@ std::ostream &DTReservaGrupal::operator<<(std::ostream &o)
     o << "TipoReserva: Grupal \n";
     o << "FechaCheckIn:" << this->getCheckIn().getDia() << "/" << this->getCheckIn().getMes() << "/" << this->getCheckIn().getAnio() << "\n";
     o << "FechaCheckIn:" << this->getCheckOut().getDia() << "/" << this->getCheckOut().getMes() << "/" << this->getCheckOut().getAnio() << "\n";
-    o << "Habitacion:" << this->getHabitacion() << "/n";
-    o << "Costo: $" << this->getCosto() << "/n";
+    o << "Habitacion:" << this->getHabitacion() << "\n";
+    o << "Costo: $" << this->getCosto() << "\n";
 
     int i = 0;
-    while (!(this->getHuespedes()[i]->esVacia()) && i < MAX_HUESPEDES)
+    o << "Huéspedes: " << this->getHuespedes()[i]->getNombre() << " - " << this->getHuespedes()[i]->getEmail();
+
+    if (this->getHuespedes()[i]->getEsFinger())
     {
-        o << this->getHuespedes()[i]->getNombre() << "-" << this->getHuespedes()[i]->getEmail() << "-";
+        o << " - Es finger";
+    }
+    else
+    {
+        o << ",";
+    }
+    i++;
+
+    while ((this->getHuespedes()[i] != nullptr) && !(this->getHuespedes()[i]->esVacia()) && i < MAX_HUESPEDES)
+    {
+        o << ", \n           " << this->getHuespedes()[i]->getNombre() << " - " << this->getHuespedes()[i]->getEmail();
 
         if (this->getHuespedes()[i]->getEsFinger())
         {
-            o << "Es finger,"
-              << "/n";
+            o << " - Es finger";
         }
-        else
-        {
-            o << ", /n";
-        }
-
         i++;
     }
+    o << "\n-----------------------" << std::endl;
     return o;
 }

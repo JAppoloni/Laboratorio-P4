@@ -24,8 +24,7 @@ ReservaIndividual();
         DTFecha checkIn,
         DTFecha checkOut,
         EstadoReserva estado,
-        float costo,
-        Habitacion *habitacionReservada,
+                Habitacion *habitacionReservada,
         Huesped *huesped,
         bool pagado);
     ~ReservaIndividual();

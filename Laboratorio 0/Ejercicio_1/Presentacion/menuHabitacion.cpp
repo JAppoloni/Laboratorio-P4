@@ -1,6 +1,7 @@
 #include "header/menuHabitacion.hpp"
 
-void agregarHabitacion(Sistema* systemData) {
+void agregarHabitacion(Sistema *systemData)
+{
     int numero;
     float precio;
     int capacidad;
@@ -14,26 +15,40 @@ void agregarHabitacion(Sistema* systemData) {
 
     cin.ignore();
 
-    systemData->agregarHabitacion(numero, precio, capacidad);
-
-    cout << endl << endl << "Habitacion agregada satisfactoriamente" << endl;
+    try
+    {
+        systemData->agregarHabitacion(numero, precio, capacidad);
+    }
+    catch (const std::exception &e)
+    {
+        cout << "\n Se produjo el siguiente error: \t";
+        std::cerr << e.what() << '\n';
+    }
+    
+    cout << endl
+         << endl
+         << "Habitacion agregada satisfactoriamente" << endl;
     cout << "Presione enter para continuar...";
     cin.ignore(1000, '\n');
 }
 
-void obtenerHabitaciones(Sistema* systemData) {
+void obtenerHabitaciones(Sistema *systemData)
+{
     int size;
-    DTHabitacion** habitaciones = systemData->obtenerHabitaciones(size);
-    
+    DTHabitacion **habitaciones = systemData->obtenerHabitaciones(size);
+
     system("clear");
 
     string singular = " habitacion registrada.";
     string plural = " habitaciones registradas.";
 
-    cout << "--------Listado de habitaciones--------" << endl << endl;
-    cout << size << (size == 1 ? singular : plural) << endl << endl;
+    cout << "--------Listado de habitaciones--------" << endl
+         << endl;
+    cout << size << (size == 1 ? singular : plural) << endl
+         << endl;
 
-    for (int index = 0; index < size; index++) {
+    for (int index = 0; index < size; index++)
+    {
         cout << *habitaciones[index];
     }
 

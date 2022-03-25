@@ -68,6 +68,7 @@ bool DTFecha::operator>=(const DTFecha &c) const
 
 bool DTFecha::operator<=(const DTFecha &c) const
 {
+    
     return (c >= *this);
 }
 
@@ -88,5 +89,5 @@ bool DTFecha::operator>(const DTFecha &c) const
 
 bool DTFecha::operator<(const DTFecha &c) const
 {
-    return (*this < c);
+    return (c > *this );
 }

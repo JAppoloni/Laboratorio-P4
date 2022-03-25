@@ -6,7 +6,6 @@ ReservaIndividual::ReservaIndividual(
     DTFecha checkIn,
     DTFecha checkOut,
     EstadoReserva estado,
-    float costo,
     Habitacion *habitacionReservada,
     Huesped *huesped,
     bool pagado) : Reserva(codigo, checkIn, checkOut, estado, habitacionReservada)

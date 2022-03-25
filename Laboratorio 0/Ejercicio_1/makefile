@@ -1,5 +1,5 @@
 exec: build
-	make clean
+	 make clean
 
 build: source
 	g++ -Wall -o executable \
@@ -19,3 +19,14 @@ source:
 clean:
 	find . -type f -name '*.o' -exec rm {} \;
 	find . -type f -name '*.hpp.gch' -exec rm {} \;
+
+debug:
+	g++ -Wall -c -g presentacion/header/*.hpp  
+	g++ -Wall -c -g presentacion/*.cpp  
+	g++ -Wall -c -g persistencia/header/*.hpp 
+	g++ -Wall -c -g persistencia/*.cpp  
+	g++ -Wall -c -g common/clases/header/*.hpp 
+	g++ -Wall -c -g common/datatype/header/*.hpp 
+	g++ -Wall -c -g common/clases/*.cpp 
+	g++ -Wall -c -g common/datatype/*.cpp 
+	g++ -Wall -g -g -o executable main.cpp *.o

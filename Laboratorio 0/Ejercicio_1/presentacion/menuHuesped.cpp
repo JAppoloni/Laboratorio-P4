@@ -37,6 +37,8 @@ void agregarHuesped(Sistema *systemData)
         cout << "\n Se produjo el siguiente error: \t";
         std::cerr << e.what() << '\n';
     }
+    cout<< std::endl;
+    cin.ignore();
     cout << endl
          << endl
          << "Huesped agregado satisfactoriamente" << endl;

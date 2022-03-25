@@ -29,8 +29,8 @@ DTFecha ingresarFecha(int tipoMensaje)
             mes = stoi(str_fecha.substr(3, 2));
             anio = stoi(str_fecha.substr(6));
 
-            validInput = true;
             rtn = DTFecha(dia, mes, anio);
+            validInput = true;
         }
         catch (const std::exception &e)
         {
@@ -73,11 +73,29 @@ void registrarReserva(Sistema *systemData)
         }
     }
 
-    cout << "Ingrese el número de la habitación de la nueva Reserva: ";
-    cin >> habitacion;
+    // cout << "Ingrese el número de la habitación de la nueva Reserva: ";
+    // cin >> habitacion;
+
+    validInput = false;
+    while (!validInput)
+    {
+        cin.ignore();
+        cout << "Ingrese el número de la habitación de la nueva Reserva: ";
+        cin >> habitacion;
+        Habitacion *aux = systemData->obtenerHabitacionPorID(habitacion);
+        if (aux == NULL)
+        {
+            cout << endl
+                 << "La habitación no existe" << endl;
+        }
+        else
+        {
+            validInput = true;
+            break;
+        }
+    }
 
     string tipoEstado;
-
     while (!validInput)
     {
         cout << "Ingrese el estado de la reserva A (Abierta)/C (Cerrada)/X (Cancelada):";
@@ -158,25 +176,32 @@ void registrarReserva(Sistema *systemData)
     {
         DTHuesped **listaHuespedes = new DTHuesped *[MAX_HUESPEDES];
 
-        int contador_DT;
+        int contador_DT = 0;
         string email_Huesped;
+        validInput = false;
         while (!validInput && contador_DT < MAX_HUESPEDES)
         {
             cout << "Ingrese el email del Huésped (Escriba FIN para terminar): ";
             cin >> email_Huesped;
-            Huesped *aux = systemData->obtenerHuespedPorEmail(email_Huesped);
-            if (aux == NULL)
+            if (email_Huesped == "FIN")
             {
-                cout << endl
-                     << "El huésped no existe" << endl;
+                validInput = true;
             }
             else
             {
-                listaHuespedes[contador_DT] = new DTHuesped(aux);
-                contador_DT++;
-            }
+                Huesped *aux = systemData->obtenerHuespedPorEmail(email_Huesped);
 
-            validInput = email_Huesped == "FIN";
+                if (aux == NULL)
+                {
+                    cout << endl
+                         << "El huésped no existe" << endl;
+                }
+                else
+                {
+                    listaHuespedes[contador_DT] = new DTHuesped(aux);
+                    contador_DT++;
+                }
+            }
         }
         try
         {
@@ -192,6 +217,8 @@ void registrarReserva(Sistema *systemData)
             std::cerr << e.what() << '\n';
         }
     }
+    cout << std::endl;
+    cin.ignore();
     cout << endl
          << endl
          << "Reserva agregada satisfactoriamente" << endl;
@@ -228,7 +255,7 @@ void obtenerReservas(Sistema *systemData)
                                                     aux_reserva->getHabitacion(),
                                                     aux_reserva->getHuespedes());
             print << cout;
-            delete[]  aux_reserva->getHuespedes();
+            delete[] aux_reserva->getHuespedes();
         }
         else
         {
@@ -243,7 +270,7 @@ void obtenerReservas(Sistema *systemData)
             print << cout;
         }
     }
-    cout<< std::endl;
+    cout << std::endl;
     cin.ignore();
     cout << "Presione enter para continuar...";
     cin.ignore(1000, '\n');

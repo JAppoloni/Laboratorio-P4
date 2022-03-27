@@ -50,7 +50,6 @@ void registrarReserva(Sistema *systemData)
     string email;
     DTFecha checkIn = DTFecha(1, 1, 1900);
     DTFecha checkOut = DTFecha(1, 1, 1900);
-    EstadoReserva estado;
 
     cout << "Ingrese el código de la nueva Reserva: ";
     cin >> codigo;
@@ -61,7 +60,7 @@ void registrarReserva(Sistema *systemData)
         cout << "Ingrese el email de la nueva Reserva: ";
         cin >> email;
         Huesped *aux = systemData->obtenerHuespedPorEmail(email);
-        if (aux == NULL)
+        if (aux == nullptr)
         {
             cout << endl
                  << "El huésped no existe" << endl;
@@ -73,9 +72,6 @@ void registrarReserva(Sistema *systemData)
         }
     }
 
-    // cout << "Ingrese el número de la habitación de la nueva Reserva: ";
-    // cin >> habitacion;
-
     validInput = false;
     while (!validInput)
     {
@@ -83,7 +79,7 @@ void registrarReserva(Sistema *systemData)
         cout << "Ingrese el número de la habitación de la nueva Reserva: ";
         cin >> habitacion;
         Habitacion *aux = systemData->obtenerHabitacionPorID(habitacion);
-        if (aux == NULL)
+        if (aux == nullptr)
         {
             cout << endl
                  << "La habitación no existe" << endl;
@@ -93,33 +89,6 @@ void registrarReserva(Sistema *systemData)
             validInput = true;
             break;
         }
-    }
-
-    string tipoEstado;
-    while (!validInput)
-    {
-        cout << "Ingrese el estado de la reserva A (Abierta)/C (Cerrada)/X (Cancelada):";
-        cin >> tipoEstado;
-
-        validInput = tipoEstado == "A" || tipoEstado == "C" || tipoEstado == "X";
-
-        if (!validInput)
-        {
-            cout << endl
-                 << "Ingrese 'A' o 'C' o 'X':" << endl;
-        }
-    }
-    if (tipoEstado == "A")
-    {
-        estado = Abierta;
-    }
-    if (tipoEstado == "C")
-    {
-        estado = Cerrada;
-    }
-    if (tipoEstado == "X")
-    {
-        estado = Cancelada;
     }
 
     checkIn = ingresarFecha(true);
@@ -162,8 +131,10 @@ void registrarReserva(Sistema *systemData)
         }
         try
         {
-            DTReservaIndividual *reserva = new DTReservaIndividual(codigo, checkIn, checkOut, estado, 0, habitacion, pago);
+            DTReservaIndividual *reserva = new DTReservaIndividual(codigo, checkIn, checkOut, Abierta, 0, habitacion, pago);
             systemData->registrarReserva(email, reserva);
+
+            delete reserva;
         }
         catch (const std::exception &e)
         {
@@ -174,7 +145,7 @@ void registrarReserva(Sistema *systemData)
     }
     else
     {
-        DTHuesped **listaHuespedes = new DTHuesped *[MAX_HUESPEDES];
+        DTHuesped **listaHuespedes = new DTHuesped *[MAX_HUESPEDES + 1];
 
         int contador_DT = 0;
         string email_Huesped;
@@ -191,7 +162,7 @@ void registrarReserva(Sistema *systemData)
             {
                 Huesped *aux = systemData->obtenerHuespedPorEmail(email_Huesped);
 
-                if (aux == NULL)
+                if (aux == nullptr)
                 {
                     cout << endl
                          << "El huésped no existe" << endl;
@@ -202,13 +173,19 @@ void registrarReserva(Sistema *systemData)
                     contador_DT++;
                 }
             }
+            listaHuespedes[contador_DT] = nullptr;
         }
         try
         {
-            DTReservaGrupal *reserva = new DTReservaGrupal(codigo, checkIn, checkOut, estado, 0, habitacion, listaHuespedes);
+            DTReservaGrupal *reserva = new DTReservaGrupal(codigo, checkIn, checkOut, Abierta, 0, habitacion, listaHuespedes);
             systemData->registrarReserva(email, reserva);
 
+            for (int i = 0; i < MAX_HUESPEDES && listaHuespedes[i] != nullptr; i++)
+            {
+                delete listaHuespedes[i];
+            };
             delete[] listaHuespedes;
+            delete reserva;
         }
         catch (const std::exception &e)
         {
@@ -229,7 +206,7 @@ void registrarReserva(Sistema *systemData)
 void obtenerReservas(Sistema *systemData)
 {
     int size;
-    DTFecha fecha = ingresarFecha(-4);
+    DTFecha fecha = ingresarFecha(2);
     DTReserva **Reservas = systemData->obtenerReservas(fecha, size);
 
     system("clear");
@@ -255,6 +232,11 @@ void obtenerReservas(Sistema *systemData)
                                                     aux_reserva->getHabitacion(),
                                                     aux_reserva->getHuespedes());
             print << cout;
+
+            for (int i = 0; i < MAX_HUESPEDES && aux_reserva->getHuespedes()[i] != nullptr; i++)
+            {
+                delete aux_reserva->getHuespedes()[i];
+            };
             delete[] aux_reserva->getHuespedes();
         }
         else
@@ -274,5 +256,10 @@ void obtenerReservas(Sistema *systemData)
     cin.ignore();
     cout << "Presione enter para continuar...";
     cin.ignore(1000, '\n');
+
+    for (int i = 0; i < size; i++)
+    {
+        delete Reservas[i];
+    }
     delete[] Reservas;
 }

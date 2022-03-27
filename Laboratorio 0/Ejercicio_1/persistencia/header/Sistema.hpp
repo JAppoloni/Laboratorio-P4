@@ -10,14 +10,10 @@
 #include "../../common/datatype/header/DTReservaIndividual.hpp"
 #include "../../common/datatype/header/DTHuesped.hpp"
 #include "../../common/datatype/header/DTHabitacion.hpp"
-#include "Collection.hpp"
 #include <string>
 
 class Sistema {
 private:
-    // Collection<Huesped*> huespedes;
-    // Collection<Reserva*> reservas;
-    // Collection<Habitacion*> habitaciones;
 
     Huesped** lstHuespedes;
     Reserva** lstReservas;
@@ -94,14 +90,6 @@ public:
     Habitacion *obtenerHabitacionPorID(int ID);
 
     /**
-     * @brief Dado el DT de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
-     *
-     * @param ID
-     * @return Habitacion*
-     */
-    Huesped *obtenerHuespedPorDT(DTHuesped *pDTHuesped);
-
-    /**
      * @brief Dado el email de una Huesped se retorna el obj de la Huesped, si !E se retorna nullptr
      *
      * @param pDTHuesped
@@ -109,13 +97,6 @@ public:
      */
     Huesped *obtenerHuespedPorEmail(std::string email);
 
-/**
- * @brief Dado un ID debuelve una reserva.
- * 
- * @param ID 
- * @return DTReserva* 
- */
-    Reserva* obtenerReservaPorID(int ID);
 };
 
 #endif

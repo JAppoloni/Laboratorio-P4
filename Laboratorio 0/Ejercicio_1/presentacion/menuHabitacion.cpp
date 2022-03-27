@@ -13,8 +13,6 @@ void agregarHabitacion(Sistema *systemData)
     cout << "Ingrese la capacidad de la nueva habitacion: ";
     cin >> capacidad;
 
-    cin.ignore();
-
     try
     {
         systemData->agregarHabitacion(numero, precio, capacidad);
@@ -53,6 +51,10 @@ void obtenerHabitaciones(Sistema *systemData)
         cout << *habitaciones[index];
     }
 
+    for (int i = 0; i < size; i++)
+    {
+        delete habitaciones[i];
+    };
     delete[] habitaciones;
 
     cout << "Presione enter para continuar...";

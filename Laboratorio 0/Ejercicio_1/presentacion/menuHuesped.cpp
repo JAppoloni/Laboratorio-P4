@@ -66,6 +66,10 @@ void obtenerHuespedes(Sistema *systemData)
         cout << *huespedes[index];
     }
 
+    for (int i = 0; i < size; i++)
+    {
+        delete huespedes[i];
+    };
     delete[] huespedes;
 
     cout << "Presione enter para continuar...";

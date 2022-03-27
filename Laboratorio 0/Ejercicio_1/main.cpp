@@ -7,19 +7,36 @@ int main()
 {
     Sistema *systemData = new Sistema();
 
-    systemData->agregarHuesped("Renzo Tissoni", "renzo.tissoni@fing.edu.uy", true);
-    systemData->agregarHuesped("John Doe", "john.doe@gmail.com", false);
-    systemData->agregarHabitacion(101, 10.5, 2);
-    systemData->agregarHabitacion(102, 15.0, 3);
+    //DATOS DE PRUEBA
+
+    systemData->agregarHuesped("p1", "p1", true);
+    systemData->agregarHuesped("p2", "p2", false);
+    systemData->agregarHuesped("p3", "p3", true);
+    systemData->agregarHuesped("p4", "p4", false);
+    systemData->agregarHuesped("p5", "p5", true);
+
+    systemData->agregarHabitacion(0, 567, 8);
+    systemData->agregarHabitacion(1, 7576, 7);
+    systemData->agregarHabitacion(2, 67, 9);
+    systemData->agregarHabitacion(101, 10.5, 5);
+    systemData->agregarHabitacion(102, 15.0, 6);
 
     DTReservaIndividual *individual = new DTReservaIndividual(1, DTFecha(12, 12, 2052), DTFecha(12, 12, 2053), Abierta, 0, 101, true);
-    systemData->registrarReserva("renzo.tissoni@fing.edu.uy", individual);
+    systemData->registrarReserva("p1", individual);
+    DTReservaIndividual *individual2 = new DTReservaIndividual(22, DTFecha(31, 3, 2002), DTFecha(1, 4, 2002), Abierta, 3456, 0, false);
+    systemData->registrarReserva("p2", individual2);
 
     DTHuesped **listaHuespedes = new DTHuesped *[2];
-    listaHuespedes[0] = new DTHuesped("John Doe", "john.doe@gmail.com", false);
-    listaHuespedes[1] = NULL;
+    listaHuespedes[0] = new DTHuesped("p2", "p2", false);
+    listaHuespedes[1] = nullptr;
     DTReservaGrupal *grupal = new DTReservaGrupal(2, DTFecha(6, 6, 2022), DTFecha(1, 12, 2022), Abierta, 0, 102, listaHuespedes);
-    systemData->registrarReserva("renzo.tissoni@fing.edu.uy", grupal);
+    systemData->registrarReserva("p1", grupal);
+    DTHuesped **listaHuespedes2 = new DTHuesped *[3];
+    listaHuespedes2[0] = new DTHuesped("p3", "p3", true);
+    listaHuespedes2[1] = new DTHuesped("p4", "p4", false);
+    listaHuespedes2[2] = nullptr;
+    DTReserva *gurpal2 = new DTReservaGrupal(33, DTFecha(26, 3, 2022), DTFecha(27, 3, 2022), Cancelada, 567, 0, listaHuespedes2);
+    systemData->registrarReserva("p1", gurpal2);
 
     mainMenu(systemData);
 

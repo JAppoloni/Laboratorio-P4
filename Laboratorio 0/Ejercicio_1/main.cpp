@@ -1,5 +1,4 @@
 #include "presentacion/header/menu.hpp"
-#include "persistencia/header/Collection.hpp"
 #include "common/datatype/header/DTReservaIndividual.hpp"
 #include "common/datatype/header/DTReservaGrupal.hpp"
 

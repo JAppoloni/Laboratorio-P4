@@ -11,6 +11,8 @@ private:
     bool esFinger;
 
 public:
+    Huesped(std::string, std::string, bool);
+    Huesped();
     void imprimir();
 
     std::string getNombre();
@@ -20,9 +22,6 @@ public:
     void setNombre(std::string nombre);
     void setEmail(std::string email);
     void setEsFinger(bool esFinger);
-
-    Huesped(std::string, std::string, bool);
-    Huesped();
 
     bool operator==(const Huesped &c) const;
     bool operator!=(const Huesped &c) const;

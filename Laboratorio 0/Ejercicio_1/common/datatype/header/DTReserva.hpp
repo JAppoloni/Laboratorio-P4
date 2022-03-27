@@ -16,15 +16,15 @@ protected:
     int habitacion;
 
 public:
+    DTReserva();
+    DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, int habitacion);
     int getCodigo();
     DTFecha getCheckIn();
     DTFecha getCheckOut();
     EstadoReserva getEstado();
     float getCosto();
     int getHabitacion();
-    DTReserva();
-    DTReserva(int, DTFecha, DTFecha, EstadoReserva, float, int);
-    virtual std::ostream &operator<<(std::ostream &o)=0;
+    virtual std::ostream &operator<<(std::ostream &o) = 0;
 };
 
 #endif

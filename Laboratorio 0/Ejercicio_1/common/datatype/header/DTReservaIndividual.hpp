@@ -2,17 +2,16 @@
 #define _DTRESERVAINDIVIDUAL_HH_
 
 #include "DTReserva.hpp"
-
-class DTReservaIndividual : public DTReserva {
+class DTReservaIndividual : public DTReserva
+{
 private:
-    bool pagado;
+    bool pago;
 
 public:
-   
-    bool getPagado();
-    DTReservaIndividual(const DTReservaIndividual& );
-    DTReservaIndividual (int, DTFecha, DTFecha, EstadoReserva, float, int, bool);
-    virtual std::ostream&  operator<<(std::ostream &o);
+    bool getPago();
+    DTReservaIndividual(const DTReservaIndividual &);
+    DTReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, int habitacion, bool pago);
+    virtual std::ostream &operator<<(std::ostream &o);
 };
 
 #endif

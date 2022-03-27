@@ -248,7 +248,7 @@ void obtenerReservas(Sistema *systemData)
                                                             aux_reserva->getEstado(),
                                                             aux_reserva->getCosto(),
                                                             aux_reserva->getHabitacion(),
-                                                            aux_reserva->getPagado());
+                                                            aux_reserva->getPago());
             print << cout;
         }
     }

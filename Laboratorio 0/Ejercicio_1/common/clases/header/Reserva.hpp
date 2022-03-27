@@ -7,14 +7,15 @@
 #include "Habitacion.hpp"
 #include "Huesped.hpp"
 
-class Reserva {
+class Reserva
+{
 protected:
     int codigo;
     DTFecha checkIn;
     DTFecha checkOut;
     EstadoReserva estado;
     Habitacion *habitacionReservada;
-    
+
 public:
     Reserva(
         int codigo,
@@ -23,7 +24,7 @@ public:
         EstadoReserva estado,
         Habitacion *habitacionReservada);
 
-    virtual float calcularCosto() = 0;  
+    virtual float calcularCosto() = 0;
 
     int getCodigo();
     DTFecha getCheckIn();

@@ -91,3 +91,8 @@ bool DTFecha::operator<(const DTFecha &c) const
 {
     return (c > *this );
 }
+
+std::ostream& operator<<(std::ostream& out, DTFecha fecha)
+{
+    return out << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio();
+}

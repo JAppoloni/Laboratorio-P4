@@ -5,15 +5,15 @@
 #include "DTHuesped.hpp"
 #include "Constantes.hpp"
 
-class DTReservaGrupal : public DTReserva {
+class DTReservaGrupal : public DTReserva
+{
 private:
-    DTHuesped** huespedes[MAX_HUESPEDES];
-    
+    DTHuesped **huespedes[MAX_HUESPEDES];
+
 public:
-   
-    DTReservaGrupal(int, DTFecha, DTFecha, EstadoReserva,float, int, DTHuesped**);
-    virtual std::ostream&  operator<<(std::ostream &o);
-    DTHuesped** getHuespedes();
+    DTReservaGrupal(int, DTFecha, DTFecha, EstadoReserva, float, int, DTHuesped **);
+    virtual std::ostream &operator<<(std::ostream &o);
+    DTHuesped **getHuespedes();
 };
 
 #endif

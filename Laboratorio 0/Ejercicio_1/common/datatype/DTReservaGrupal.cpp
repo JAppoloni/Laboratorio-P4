@@ -6,38 +6,37 @@ DTHuesped **DTReservaGrupal::getHuespedes()
     return *this->huespedes;
 }
 
-DTReservaGrupal::DTReservaGrupal(int codigo, DTFecha CheckIn, DTFecha CheckOut, EstadoReserva estado, float costo, int habitacion, DTHuesped **listaHuespedes) : DTReserva(codigo, CheckIn, CheckOut, estado, costo, habitacion)
+DTReservaGrupal::DTReservaGrupal(
+    int codigo,
+    DTFecha CheckIn,
+    DTFecha CheckOut,
+    EstadoReserva estado,
+    float costo,
+    int habitacion,
+    DTHuesped **listaHuespedes) : DTReserva(codigo, CheckIn, CheckOut, estado, costo, habitacion)
 {
     *this->huespedes = listaHuespedes;
 }
 
-std::ostream &DTReservaGrupal::operator<<(std::ostream &o)
+std::ostream &DTReservaGrupal::operator<<(std::ostream &out)
 {
-    o << "TipoReserva: Grupal \n";
-    o << "FechaCheckIn:" << this->getCheckIn().getDia() << "/" << this->getCheckIn().getMes() << "/" << this->getCheckIn().getAnio() << "\n";
-    o << "FechaCheckIn:" << this->getCheckOut().getDia() << "/" << this->getCheckOut().getMes() << "/" << this->getCheckOut().getAnio() << "\n";
-    o << "Habitacion:" << this->getHabitacion() << "\n";
-    o << "Costo: $" << this->getCosto() << "\n";
+    out << "Reserva Grupal" << std::endl;
+    out << "Codigo: " << this->getCodigo() << std::endl;
+    out << "Check in: " << this->getCheckIn() << std::endl;
+    out << "Check out: " << this->getCheckOut() << std::endl;
+    out << "Habitacion: " << this->getHabitacion() << std::endl;
+    out << "Costo: $" << this->getCosto() << std::endl;
 
     int i = 0;
-    o << "Huéspedes: " << this->getHuespedes()[i]->getNombre() << " - " << this->getHuespedes()[i]->getEmail();
-
-    if (this->getHuespedes()[i]->getEsFinger())
-    {
-        o << " - Es finger";
-    }
-    i++;
+    out << "Huéspedes: " << std::endl;
 
     while ((this->getHuespedes()[i] != nullptr) && !(this->getHuespedes()[i]->esVacia()) && i < MAX_HUESPEDES)
     {
-        o << ", \n           " << this->getHuespedes()[i]->getNombre() << " - " << this->getHuespedes()[i]->getEmail();
-
-        if (this->getHuespedes()[i]->getEsFinger())
-        {
-            o << " - Es finger";
-        }
+        DTHuesped *huesped = this->getHuespedes()[i];
+        std::string esFinger = huesped->getEsFinger() ? " (FInger)" : "";
+        out << "    " << huesped->getNombre() << " - " << huesped->getEmail() << esFinger << std::endl;
         i++;
     }
-    o << "\n-----------------------" << std::endl;
-    return o;
+    out << "-----------------------" << std::endl;
+    return out;
 }

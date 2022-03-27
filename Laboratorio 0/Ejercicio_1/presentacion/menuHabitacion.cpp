@@ -20,7 +20,7 @@ void agregarHabitacion(Sistema *systemData)
     catch (const std::exception &e)
     {
         cout << "\n Se produjo el siguiente error: \t";
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << endl;
     }
     cout<< std::endl;
     cin.ignore();

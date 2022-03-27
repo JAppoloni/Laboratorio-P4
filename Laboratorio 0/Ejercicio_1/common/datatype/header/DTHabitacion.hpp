@@ -3,20 +3,21 @@
 
 #include <iostream>
 
-class DTHabitacion {
+class DTHabitacion
+{
 private:
     int numero;
     float precio;
     int capacidad;
 
 public:
-    DTHabitacion(int, float, int);
+    DTHabitacion(int numero, float precio, int capacidad);
 
     int getNumero();
     float getPrecio();
     int getCapacidad();
 };
 
-std::ostream& operator<<(std::ostream& out, DTHabitacion &habitacion);
+std::ostream &operator<<(std::ostream &out, DTHabitacion &habitacion);
 
 #endif

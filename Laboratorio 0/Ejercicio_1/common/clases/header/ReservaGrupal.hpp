@@ -3,21 +3,22 @@
 
 #include "Reserva.hpp"
 
-class ReservaGrupal : public Reserva {
+class ReservaGrupal : public Reserva
+{
 public:
-    float calcularCosto();
-    Huesped** listaHuesped;
 
     ReservaGrupal(
-        int codigo, 
+        int codigo,
         DTFecha checkIn,
-        DTFecha checkOut, 
+        DTFecha checkOut,
         EstadoReserva estado,
-        Habitacion* habitacionReservada,
+        Habitacion *habitacionReservada,
         Huesped **Huesped);
 
-    Huesped** getListaHuesped();
-    void setListaHuesped(Huesped**listaHuesped);
+    float calcularCosto();
+    Huesped **listaHuesped;
+    Huesped **getListaHuesped();
+    void setListaHuesped(Huesped **listaHuesped);
 
     ~ReservaGrupal();
 };

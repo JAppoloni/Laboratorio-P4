@@ -16,23 +16,23 @@ Sistema::Sistema()
 
 Sistema::~Sistema() 
 {
-    int i = 0;
-    while (i < cant_Huespedes){
-        delete lstHuespedes[i];
-    };
-    delete lstHuespedes;
+    // int i = 0;
+    // while (i < cant_Huespedes){
+    //     delete lstHuespedes[i];
+    // };
+    // delete lstHuespedes;
 
-    i = 0; 
-    while (i < cant_Habitaciones){
-        delete lstHabitaciones[i];
-    };
-    delete lstHabitaciones;
+    // i = 0; 
+    // while (i < cant_Habitaciones){
+    //     delete lstHabitaciones[i];
+    // };
+    // delete lstHabitaciones;
 
-    i = 0; 
-    while (i < cant_Reservas){
-        delete lstReservas;
-    };
-    delete lstReservas;
+    // i = 0; 
+    // while (i < cant_Reservas){
+    //     delete lstReservas;
+    // };
+    // delete lstReservas;
 }
 
 void Sistema::agregarHuesped(std::string nombre, std::string email, bool esFinger)

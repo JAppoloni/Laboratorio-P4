@@ -24,7 +24,7 @@ float ReservaGrupal::calcularCosto() {
 
     int rtn = this->habitacionReservada->getPrecio() * this->checkIn.calcularDias(this->checkOut);
 
-    return (cantFingers == 2) ? rtn * 0.7 : rtn;
+    return (cantFingers >= 2) ? rtn * 0.7 : rtn;
 }
 
 Huesped** ReservaGrupal::getListaHuesped() { 

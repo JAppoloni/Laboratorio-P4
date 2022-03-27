@@ -51,9 +51,6 @@ void registrarReserva(Sistema *systemData)
     DTFecha checkIn = DTFecha(1, 1, 1900);
     DTFecha checkOut = DTFecha(1, 1, 1900);
 
-    cout << "Ingrese el código de la nueva Reserva: ";
-    cin >> codigo;
-
     bool validInput = false;
     while (!validInput)
     {

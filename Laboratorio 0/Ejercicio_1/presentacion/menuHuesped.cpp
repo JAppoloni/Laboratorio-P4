@@ -7,7 +7,7 @@ void agregarHuesped(Sistema *systemData) {
     bool isFinger;
 
     cout << "Ingrese el nombre del huesped: ";
-    cin >> name;
+    getline(cin, name);
     cout << "Ingrese el email del huesped: ";
     cin >> email;
 

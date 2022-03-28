@@ -6,13 +6,12 @@ ReservaIndividual::ReservaIndividual(
     DTFecha checkIn,
     DTFecha checkOut,
     EstadoReserva estado,
-    float costo,
     Habitacion *habitacionReservada,
     Huesped *huesped,
-    bool pagado) : Reserva(codigo, checkIn, checkOut, estado, habitacionReservada)
+    bool pago) : Reserva(codigo, checkIn, checkOut, estado, habitacionReservada)
 {
     this->huesped = huesped;
-    this->pagado = pagado;
+    this->pago = pago;
     this->habitacionReservada = habitacionReservada;
 }
 
@@ -30,14 +29,14 @@ void ReservaIndividual::setHuesped(Huesped *huesped)
     this->huesped = huesped;
 }
 
-bool ReservaIndividual::getPagado()
+bool ReservaIndividual::getPago()
 {
-    return this->pagado;
+    return this->pago;
 }
 
-void ReservaIndividual::setPagado(bool pagado)
+void ReservaIndividual::setPago(bool pago)
 {
-    this->pagado = pagado;
+    this->pago = pago;
 }
 
 ReservaIndividual::~ReservaIndividual() {}

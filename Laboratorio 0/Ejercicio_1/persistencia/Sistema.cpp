@@ -1,157 +1,258 @@
 #include "header/Sistema.hpp"
 #include <iostream>
+Sistema::Sistema()
+{
+    cant_Habitaciones = 0;
+    cant_Huespedes = 0;
+    cant_Reservas = 0;
+    proximoCodigoReserva = 1;
+    lstHuespedes = new Huesped *[MAX_HUESPEDES];
+    lstReservas = new Reserva *[MAX_RESERVAS];
+    lstHabitaciones = new Habitacion *[MAX_HABITACIONES];
+    for (int i = 0; i < MAX_RESERVAS; i++)
+    {
+        lstHuespedes[i] = nullptr;
+        lstHabitaciones[i] = nullptr;
+        lstReservas[i] = nullptr;
+    }
+}
 
-Sistema::Sistema() {}
+Sistema::~Sistema()
+{
+    // int i = 0;
+    // while (i < cant_Huespedes){
+    //     delete lstHuespedes[i];
+    // };
+    // delete lstHuespedes;
 
-Sistema::~Sistema() {}
+    // i = 0;
+    // while (i < cant_Habitaciones){
+    //     delete lstHabitaciones[i];
+    // };
+    // delete lstHabitaciones;
 
-void Sistema::agregarHuesped(std::string nombre, std::string email, bool esFinger) {
-    Huesped* huesped = new Huesped(nombre, email, esFinger);
+    // i = 0;
+    // while (i < cant_Reservas){
+    //     delete lstReservas;
+    // };
+    // delete lstReservas;
+}
 
-    if (obtenerHuespedXEmail(email) != nullptr) {
-        throw "El Huesped ya exsite";
+void Sistema::setProximoCodigoReserva(int nuevoCodigo) {
+    if (nuevoCodigo < proximoCodigoReserva) {
+        throw std::invalid_argument("El codigo debe ser mayor o igual al proximo codigo de reserva");
     }
 
-    huespedes.add(huesped);
-}
-
-DTHuesped** Sistema::obtenerHuespedes(int &cantidad) {
-    cantidad = huespedes.size();
-
-    DTHuesped** result = new DTHuesped *[cantidad];
-
-    int index = 0;
-    while (index < cantidad) {
-        result[index] = new DTHuesped(huespedes.values()[index]);
-        index++;
-    }
-
-    return result;
-}
-
-void Sistema::agregarHabitacion(int numero, float precio, int capacidad) {
-    Habitacion *habitacion = new Habitacion(numero, precio, capacidad);
-    if (obtenerHabitacionXID(numero) != nullptr)
-        throw "La habitación ya existe";
-
-    habitaciones.add(habitacion);
-}
-
-DTHabitacion **Sistema::obtenerHabitaciones(int &cantHabitaciones) {
-    cantHabitaciones = habitaciones.size();
-
-    DTHabitacion** result = new DTHabitacion* [cantHabitaciones];
-
-    int index = 0;
-    while (index < cantHabitaciones) {
-        result[index] = new DTHabitacion(habitaciones.values()[index]->getNumero(), habitaciones.values()[index]->getPrecio(), habitaciones.values()[index]->getCapacidad());
-        index++;
-    }
-
-    return result;
-}
-
-DTReserva **Sistema::obtenerReservas(DTFecha fecha, int &cantReservas) {
-    cantReservas = reservas.size();
-    DTReserva** result = new DTReserva*[cantReservas];
-    int index = 0;
-    int elems_add = 0;
-    while (index < cantReservas) {
-        if (dtreservas.values()[index]->getCheckIn() >= fecha || fecha <= dtreservas.values()[index]->getCheckOut()) {
-            result[elems_add] = dtreservas.values()[elems_add];
-            elems_add++;
+    for (int index = 0; index < cant_Reservas; index++) {
+        if (nuevoCodigo < lstReservas[index]->getCodigo()) {
+            throw std::invalid_argument("Existe una reserva con el codigo menor al provisto");
         }
     }
 
+    proximoCodigoReserva = nuevoCodigo;
+}
+
+void Sistema::agregarHuesped(std::string nombre, std::string email, bool esFinger)
+{
+    Huesped *huesped = new Huesped(nombre, email, esFinger);
+
+    if (obtenerHuespedPorEmail(email) != nullptr)
+    {
+        throw std::invalid_argument("El Huesped ya exsite");
+    }
+
+    lstHuespedes[cant_Huespedes] = huesped;
+    cant_Huespedes++;
+}
+
+DTHuesped **Sistema::obtenerHuespedes(int &cantidad)
+{
+    cantidad = cant_Huespedes;
+    DTHuesped **result = new DTHuesped *[cantidad];
+
+    int index = 0;
+    while (index < cantidad)
+    {
+        result[index] = new DTHuesped(lstHuespedes[index]);
+        index++;
+    }
+
     return result;
 }
 
-void Sistema::registrarReserva(std::string email, DTReserva *reserva) {
-    // Validar Reserva
-    if (reserva->getCodigo() < 0) {
-        throw "Codigo Invalido";
+void Sistema::agregarHabitacion(int numero, float precio, int capacidad)
+{
+    Habitacion *habitacion = new Habitacion(numero, precio, capacidad);
+    if (obtenerHabitacionPorID(numero) != nullptr)
+        throw std::invalid_argument("La habitación ya existe");
+
+    lstHabitaciones[cant_Habitaciones] = habitacion;
+    cant_Habitaciones++;
+}
+
+DTHabitacion **Sistema::obtenerHabitaciones(int &cantHabitaciones)
+{
+    cantHabitaciones = cant_Habitaciones;
+    DTHabitacion **result = new DTHabitacion *[cantHabitaciones];
+
+    int index = 0;
+    while (index < cantHabitaciones)
+    {
+        result[index] = new DTHabitacion(lstHabitaciones[index]->getNumero(), lstHabitaciones[index]->getPrecio(), lstHabitaciones[index]->getCapacidad());
+        index++;
     }
 
-    if (reserva->getCheckOut() < reserva->getCheckIn()) {
-        throw "La fecha de Ingreso es mayor a la de salida";
+    return result;
+}
+
+DTReserva **Sistema::obtenerReservas(DTFecha fecha, int &cantReservas)
+{
+    DTReserva **result = new DTReserva *[cant_Reservas + 1];
+    cantReservas = 0;
+
+    for (int index = 0; (index < cant_Reservas) && lstReservas[index] != nullptr; index++)
+    {
+        if (lstReservas[index]->getCheckIn() >= fecha || fecha <= lstReservas[index]->getCheckOut())
+        {
+            // More Info at: https://stackoverflow.com/a/56977583
+            if (dynamic_cast<ReservaGrupal *>(lstReservas[index]))
+            {
+                ReservaGrupal *aux_reserva = dynamic_cast<ReservaGrupal *>(lstReservas[index]);
+
+                DTHuesped **listaHuesped = new DTHuesped *[MAX_HUESPEDES];
+                int i = 0;
+                while (i < MAX_HUESPEDES && aux_reserva->getListaHuesped()[i] != nullptr)
+                {
+                    listaHuesped[i] = new DTHuesped(aux_reserva->getListaHuesped()[i]->getNombre(),
+                                                    aux_reserva->getListaHuesped()[i]->getEmail(),
+                                                    aux_reserva->getListaHuesped()[i]->getEsFinger());
+                    i++;
+                };
+                listaHuesped[i] = nullptr;
+
+                DTReservaGrupal *myReserva = new DTReservaGrupal(
+                    aux_reserva->getCodigo(),
+                    aux_reserva->getCheckIn(),
+                    aux_reserva->getCheckOut(),
+                    aux_reserva->getEstado(),
+                    aux_reserva->calcularCosto(),
+                    aux_reserva->getHabitacionReservada()->getNumero(),
+                    listaHuesped);
+
+                result[cantReservas] = myReserva;
+            }
+            else
+            {
+                ReservaIndividual *aux_reserva = dynamic_cast<ReservaIndividual *>(lstReservas[index]);
+
+                DTReservaIndividual *myReserva = new DTReservaIndividual(
+                    aux_reserva->getCodigo(),
+                    aux_reserva->getCheckIn(),
+                    aux_reserva->getCheckOut(),
+                    aux_reserva->getEstado(),
+                    aux_reserva->calcularCosto(),
+                    aux_reserva->getHabitacionReservada()->getNumero(),
+                    aux_reserva->getPago());
+
+                result[cantReservas] = myReserva;
+            };
+            cantReservas++;
+        };
+    };
+    result[cantReservas] = nullptr;
+
+    return result;
+}
+
+void Sistema::registrarReserva(std::string email, DTReserva *reserva)
+{
+    // Validar Reserva && SI EXISTE
+
+    if (reserva->getCheckOut() < reserva->getCheckIn())
+    {
+        throw std::invalid_argument("La fecha de ingreso es mayor a la de salida");
     }
 
-    Habitacion* habitacion = obtenerHabitacionXID(reserva->getHabitacion());
+    Habitacion *habitacion = obtenerHabitacionPorID(reserva->getHabitacion());
 
-    if (habitacion == nullptr) {
-        throw "La Habitación no existe";
+    if (habitacion == nullptr)
+    {
+        throw std::invalid_argument("La habitación no existe");
     }
 
-    Huesped* pHuesped = obtenerHuespedXEmail(email);
-    if (pHuesped == nullptr) {
-        throw "No Existe ningún Cliente con ese E-mail";
+    Huesped *pHuesped = obtenerHuespedPorEmail(email);
+    if (pHuesped == nullptr)
+    {
+        throw std::invalid_argument("No existe ningún cliente con ese e-mail");
     }
 
     // More Info at: https://stackoverflow.com/a/56977583
-    if (dynamic_cast<DTReservaGrupal*>(reserva)) {
-        DTReservaGrupal *aux_reserva = dynamic_cast<DTReservaGrupal*>(reserva);
+    if (dynamic_cast<DTReservaGrupal *>(reserva))
+    {
+        DTReservaGrupal *aux_reserva = dynamic_cast<DTReservaGrupal *>(reserva);
 
-        Huesped** listaHuesped = new Huesped*[huespedes.size()];
+        Huesped **listaHuesped = new Huesped *[MAX_HUESPEDES];
 
         listaHuesped[0] = pHuesped;
-        for (int i = 1; i < huespedes.size() && aux_reserva->getHuespedes() != nullptr; i++) {
-            listaHuesped[i] = obtenerHuespedXDT(aux_reserva->getHuespedes()[i]);
-        }
+        int i = 0;
+        while ((i < MAX_HUESPEDES) && (aux_reserva->getHuespedes()[i] != nullptr))
+        {
+            listaHuesped[i + 1] = obtenerHuespedPorEmail(aux_reserva->getHuespedes()[i]->getEmail());
+            i++;
+        };
+        listaHuesped[i + 1] = nullptr;
 
         ReservaGrupal *myReserva = new ReservaGrupal(
-            aux_reserva->getCodigo(),
+            proximoCodigoReserva,
             aux_reserva->getCheckIn(),
             aux_reserva->getCheckOut(),
             aux_reserva->getEstado(),
             habitacion,
             listaHuesped);
-        reservas.add(myReserva);
-    } else {
-        DTReservaIndividual *aux_reserva = dynamic_cast<DTReservaIndividual*>(reserva);
+
+        lstReservas[cant_Reservas] = myReserva;
+    }
+    else
+    {
+        DTReservaIndividual *aux_reserva = dynamic_cast<DTReservaIndividual *>(reserva);
 
         ReservaIndividual *myReserva = new ReservaIndividual(
-            aux_reserva->getCodigo(),
+            proximoCodigoReserva,
             aux_reserva->getCheckIn(),
             aux_reserva->getCheckOut(),
             aux_reserva->getEstado(),
-            aux_reserva->getCosto(),
             habitacion,
             pHuesped,
-            aux_reserva->getEstado());
+            aux_reserva->getPago());
 
-        reservas.add(myReserva);
+        lstReservas[cant_Reservas] = myReserva;
     }
-
-    dtreservas.add(reserva);
+    cant_Reservas++;
+    proximoCodigoReserva++;
 }
 
-Habitacion* Sistema::obtenerHabitacionXID(int numero) {
-    Habitacion* rtn = nullptr;
-    for (int i = 0; i < habitaciones.size(); i++) {
-        if (habitaciones.values()[i]->getNumero() == numero) {
-            rtn = habitaciones.values()[i];
+Habitacion *Sistema::obtenerHabitacionPorID(int numero)
+{
+    Habitacion *rtn = nullptr;
+    for (int i = 0; i < cant_Habitaciones; i++)
+    {
+        if (lstHabitaciones[i]->getNumero() == numero)
+        {
+            rtn = lstHabitaciones[i];
             break;
         }
     }
     return rtn;
 }
 
-Huesped* Sistema::obtenerHuespedXDT(DTHuesped* pDTHuesped) {
-    Huesped* rtn = nullptr;
-    for (int i = 0; i < huespedes.size(); i++) {
-        if (huespedes.values()[i]->getEmail() == pDTHuesped->getEmail() && huespedes.values()[i]->getNombre() == pDTHuesped->getNombre() && huespedes.values()[i]->getEsFinger() == pDTHuesped->getEsFinger()) {
-            rtn = huespedes.values()[i];
-            break;
-        }
-    }
-    return rtn;
-}
-
-Huesped* Sistema::obtenerHuespedXEmail(std::string email) {
-    Huesped* rtn = nullptr;
-    for (int i = 0; i < huespedes.size(); i++) {
-        if (huespedes.values()[i]->getEmail() == email) {
-            rtn = huespedes.values()[i];
+Huesped *Sistema::obtenerHuespedPorEmail(std::string email)
+{
+    Huesped *rtn = nullptr;
+    for (int i = 0; i < cant_Huespedes; i++)
+    {
+        if (lstHuespedes[i]->getEmail() == email)
+        {
+            rtn = lstHuespedes[i];
             break;
         }
     }

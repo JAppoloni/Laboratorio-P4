@@ -19,7 +19,7 @@ int DTFecha::getAnio()
 
 int DTFecha::calcularDias(DTFecha fchAComparar)
 {
-    return ((fchAComparar.anio - this->anio) * 12 * 30 + (fchAComparar.mes - this->mes) * 30 + (fchAComparar.dia - this->dia));
+    return ((fchAComparar.anio - this->anio) * 12 * 31 + (fchAComparar.mes - this->mes) * 31 + (fchAComparar.dia - this->dia));
 }
 
 void DTFecha::imprimir()
@@ -68,6 +68,7 @@ bool DTFecha::operator>=(const DTFecha &c) const
 
 bool DTFecha::operator<=(const DTFecha &c) const
 {
+    
     return (c >= *this);
 }
 
@@ -88,5 +89,10 @@ bool DTFecha::operator>(const DTFecha &c) const
 
 bool DTFecha::operator<(const DTFecha &c) const
 {
-    return (*this < c);
+    return (c > *this );
+}
+
+std::ostream& operator<<(std::ostream& out, DTFecha fecha)
+{
+    return out << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio();
 }

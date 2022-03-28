@@ -9,6 +9,7 @@ private:
     int capacidad;
 
 public:
+    Habitacion(int numero, float precio, int capacidad);
     void imprimir();
 
     int getNumero();
@@ -18,8 +19,6 @@ public:
     void setNumero(int numero);
     void setPrecio(float precio);
     void setCapacidad(int capacidad);
-
-    Habitacion(int numero, float precio, int capacidad);
 };
 
 #endif

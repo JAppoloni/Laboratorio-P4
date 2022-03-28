@@ -1,6 +1,6 @@
 exec: 
 	make clean
-	zip -r 22_lab0.zip Ejercicio_1 Ejercicio_2 integrantes.txt
+	zip -r 22_lab0.zip Ejercicio_1 Ejercicio_2 integrantes.txt makefile
 
 clean:
 	find . -type f -name '*.o' -exec rm {} \;

@@ -1,0 +1,22 @@
+Una Reserva puede tener muchas estadias ( x Cada persona se crea una estadia si esta es grupla ) => Se divide en Grupal (list) e individual (* porque puede estar vacia -es decir no se realizo) por lo tanto agregar reserva es una operación virtual.
+Cerrar reserva es canclear reserva??? sii es así se cambia cerrarReserva x cancelarReserva.
+
+
+
+
+
+
+
+
+
+
+------------
+Por agregar
+            Calificacion agregar fecha del sistema.
+            VER Operaciones de Reserva
+            Ver Destructores
+            CALCULAR COSTO !!!!!! PREGUNTAR A DANIEL x LISTA.
+
+
+
+---------- No compila ESTADIA, RESERVA (GRUPAL y INDIVIDUAL)

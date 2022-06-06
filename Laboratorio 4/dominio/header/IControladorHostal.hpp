@@ -1,0 +1,4 @@
+#ifndef I_CONTROLADOR_HOSTAL
+#define I_CONTROLADOR_HOSTAL
+
+#endif

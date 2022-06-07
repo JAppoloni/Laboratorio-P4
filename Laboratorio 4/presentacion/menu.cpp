@@ -13,22 +13,23 @@ string outputMenu()
     cout << "Bienvenido a FingVMB, elija una opcion" << endl
          << endl;
 
-    cout << "1. Alta de Usuario" << endl;
-    cout << "2. Alta de Hostal" << endl;
-    cout << "3. Alta de Habitacion" << endl;
-    cout << "4. Asignar empleado a hostal" << endl;
-    cout << "5. Realizar Reserva" << endl;
-    cout << "6. Consultar top 3 de hostales" << endl;
-    cout << "7. Registrar Estadia" << endl;
-    cout << "8. Finalizar Estadia" << endl;
-    cout << "9. Calificar Estadia" << endl;
+    cout << "0.  Cargar datos de prueba" << endl;
+    cout << "1.  Alta de Usuario" << endl;
+    cout << "2.  Alta de Hostal" << endl;
+    cout << "3.  Alta de Habitacion" << endl;
+    cout << "4.  Asignar empleado a hostal" << endl;
+    cout << "5.  Realizar Reserva" << endl;
+    cout << "6.  Consultar top 3 de hostales" << endl;
+    cout << "7.  Registrar Estadia" << endl;
+    cout << "8.  Finalizar Estadia" << endl;
+    cout << "9.  Calificar Estadia" << endl;
     cout << "10. Comentar Calificacion" << endl;
     cout << "11. Consulta de Usuario" << endl;
     cout << "12. Consulta de Hostal" << endl;
     cout << "13. Consulta de Reserva" << endl;
     cout << "13. Consulta de Estadia" << endl;
     cout << "14. Baja de reserva" << endl;
-    cout << "0. Salir" << endl
+    cout << "S.  Salir" << endl
          << endl;
 
     cin >> input;
@@ -54,14 +55,28 @@ void mainMenu()
         string option = outputMenu();
         int intOption;
         
-        try {
+        try 
+        {
             intOption = stoi(option);
-        } catch (exception error) {
-            intOption = -1;
+        } 
+        catch (exception error) 
+        {
+            if (option == "S")
+            {
+                exit = true;
+                break;
+            } 
+            else 
+            {
+                intOption = -1;
+            }
         }
 
         switch (intOption)
         {
+        case 0:
+            notImplementedMessage();
+            break;
         case 1:
             notImplementedMessage();
             break;
@@ -104,12 +119,6 @@ void mainMenu()
         case 14:
             notImplementedMessage();
             break;
-        case 0:
-            system("clear");
-            cout << "Hasta luego!" << endl
-                 << endl;
-            exit = true;
-            break;
         default:
             system("clear");
             cout << "Seleccione una de las opciones disponibles." << endl
@@ -119,4 +128,8 @@ void mainMenu()
             break;
         }
     }
+
+    system("clear");
+            cout << "Hasta luego!" << endl
+                 << endl;
 }

@@ -1,5 +1,6 @@
 #ifndef DTComentario_HPP
 # define DTComentario_HPP
+#include "../../clases/header/Comentario.hpp"
 
 # include <iostream>
 # include <string>
@@ -8,7 +9,7 @@ class DTComentario
 {
 	public:
 		// Constructors
-		DTComentario();
+		DTComentario(Comentario* comentario);
 		DTComentario(const DTComentario &copy);
 		
 		// Destructor

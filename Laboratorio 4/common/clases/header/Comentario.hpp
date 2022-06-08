@@ -13,30 +13,24 @@ class Comentario
 	public:
 		
 		// Constructors
-		Comentario(const Comentario &copy);
+		Comentario(const Comentario* &copy);
 		Comentario(std::string Comentario, Calificacion* CalificacionComentario);
-		
-		// Destructor
-		~Comentario();
-		
-		// Operators
-		Comentario & operator=(const Comentario &assign);
-		bool operator==(const Comentario & assign);
-
-		
-		// Getters / Setters
-		std::string getComentario() const;
+        ~Comentario();
+        std::string getComentario() const;
 		void setComentario(std::string Comentario);
 		Calificacion* getCalificacionComentario() const;
 
 		// Methods
 		DTComentario getDataType();
 		int obtenerID();
-		
-	private:
+
+
+
+    private:
 		std::string _Comentario;
 		Calificacion* _CalificacionComentario;
-		
+
 };
 
 #endif
+

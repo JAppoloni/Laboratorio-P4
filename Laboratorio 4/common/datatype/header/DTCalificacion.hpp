@@ -3,12 +3,12 @@
 
 # include <iostream>
 # include <string>
-
+#include "../../clases/header/Calificacion.hpp"
 class DTCalificacion
 {
 	public:
 		// Constructors
-		DTCalificacion();
+		DTCalificacion(Calificacion* c);
 		DTCalificacion(const DTCalificacion &copy);
 		
 		// Destructor

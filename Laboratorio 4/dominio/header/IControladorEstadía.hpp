@@ -1,4 +1,0 @@
-#ifndef I_CONTROLADOR_ESTADÍA
-#define I_CONTROLADOR_ESTADÍA
-
-#endif

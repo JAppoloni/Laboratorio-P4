@@ -2,10 +2,11 @@
 #define CONTROLADOR_ESTADIA
 
     #include <string>
+    #include "IControladorEstadia.hpp"
 
     using namespace std;
 
-    class ControladorEstadia{
+    class ControladorEstadia: public IControladorEstadia{ 
         private:
             static ControladorEstadia * instancia;
             ControladorEstadia();

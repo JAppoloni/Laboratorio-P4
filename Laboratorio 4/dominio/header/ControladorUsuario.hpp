@@ -2,10 +2,11 @@
 #define CONTROLADOR_USUARIO
 
     #include <string>
+    #include "IControladorUsuario.hpp"
 
     using namespace std;
 
-    class ControladorUsuario{
+    class ControladorUsuario: public IControladorUsuario{
         private:
             static ControladorUsuario * instancia;
             ControladorUsuario();

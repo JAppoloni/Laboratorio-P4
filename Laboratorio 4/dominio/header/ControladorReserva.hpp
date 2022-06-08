@@ -2,10 +2,10 @@
 #define CONTROLADOR_RESERVA
 
     #include <string>
-
+    #include "IControladorReserva.hpp"
     using namespace std;
 
-    class ControladorReserva{
+    class ControladorReserva: public IControladorReserva{
         private:
             static ControladorReserva * instancia;
             ControladorReserva();

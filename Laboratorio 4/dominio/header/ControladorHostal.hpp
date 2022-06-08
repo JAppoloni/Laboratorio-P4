@@ -2,10 +2,10 @@
 #define CONTROLADOR_HOSTAL
 
     #include <string>
-
+    #include "IControladorHostal.hpp"
     using namespace std;
 
-    class ControladorHostal{
+    class ControladorHostal: public IControladorHostal{
         private:
             static ControladorHostal * instancia;
             ControladorHostal();

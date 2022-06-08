@@ -5,14 +5,16 @@
 #include "ControladorHostal.hpp"
 #include "ControladorReserva.hpp"
 #include "ControladorUsuario.hpp"
+#include "FechaSistema.hpp"
 
 class Fabrica{
     public:
         Fabrica();
-        ControladorEstadia * getControladorEstadia();
-        ControladorHostal * getControladorHostal();
-        ControladorReserva * getControladorReserva();
-        ControladorUsuario * getControladorUsuario();
-}
+        IControladorEstadia * getControladorEstadia();
+        IControladorHostal * getControladorHostal();
+        IControladorReserva * getControladorReserva();
+        IControladorUsuario * getControladorUsuario();
+        IFechaSistema * getFechaSistema();
+};
 
 #endif

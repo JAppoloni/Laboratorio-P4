@@ -2,18 +2,22 @@
 
     Fabrica::Fabrica(){}
 
-    ControladorEstadia *Fabrica::getControladorEstadia(){
+    IControladorEstadia *Fabrica::getControladorEstadia(){
         return ControladorEstadia::getInstancia();
     }
 
-    ControladorHostal * Fabrica::getControladorHostal(){
+    IControladorHostal * Fabrica::getControladorHostal(){
         return ControladorHostal::getInstancia();
     }
 
-    ControladorReserva * Fabrica::getControladorReserva(){
+    IControladorReserva * Fabrica::getControladorReserva(){
         return ControladorReserva::getInstancia();
     }
 
-    ControladorUsuario * Fabrica::getControladorUsuario(){
+    IControladorUsuario * Fabrica::getControladorUsuario(){
         return ControladorUsuario::getInstancia();
+    }
+
+    IFechaSistema * Fabrica::getFechaSistema(){
+        return FechaSistema::getInstancia();
     }

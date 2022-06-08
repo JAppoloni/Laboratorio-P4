@@ -25,7 +25,7 @@ public:
     void setEmail(std::string email);
     void setContrasena(std::string contrasena);
 
-    bool operator==(const Usuario &c) const;
-    bool operator==(const Usuario *&c) const;
+    bool operator==(const Usuario &c) ;
+    bool operator==(const Usuario *&c) ;
 };
 #endif

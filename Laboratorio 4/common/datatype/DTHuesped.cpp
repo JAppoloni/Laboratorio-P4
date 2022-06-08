@@ -14,6 +14,16 @@ DTHuesped::DTHuesped(const DTHuesped &copy)
 }
 
 
+DTHuesped::DTHuesped(const Huesped &copy)
+{
+	(void) copy;
+}
+
+DTHuesped::DTHuesped(const Huesped* &copy)
+{
+	(void) copy;
+}
+
 // Destructor
 DTHuesped::~DTHuesped()
 {

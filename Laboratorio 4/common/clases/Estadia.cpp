@@ -1,4 +1,6 @@
 #include "header/Estadia.hpp"
+#include "header/ReservaIndividual.hpp"
+#include "header/ReservaGrupal.hpp"
 
 void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *huesped)
 {
@@ -23,7 +25,7 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 						break;
 					}
 				}
-				
+
 				if (existe == false)
 					throw HuesedNoExiste();
 			}
@@ -78,6 +80,9 @@ Estadia::Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Hu
 // Destructor
 Estadia::~Estadia()
 {
+	_reservaEstadia = nullptr;
+	_huespedEstadia = nullptr;
+
 	delete _chechOut;
 	delete _reservaEstadia;
 	delete _huespedEstadia;
@@ -165,6 +170,12 @@ const char *Estadia::HuesedNoExiste::what() const throw()
 {
 	return "El Huésped no aparece asociado a la Reserva.";
 }
+
+const char *Estadia::CalificacionNoExiste::what() const throw()
+{
+	return "No hay una calificación asociada a la Reserva.";
+}
+
 
 // Methods
 DTCalificacion Estadia::getCalificacionDataType()

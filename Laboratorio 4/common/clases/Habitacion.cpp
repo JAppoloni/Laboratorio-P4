@@ -38,6 +38,8 @@ Habitacion::Habitacion(int numero, float precio, int capacidad)
     this->precio = precio;
 }
 
+Habitacion::~Habitacion(){}
+
 void Habitacion::imprimir()
 {
     std::cout << " La habitación número" << this->numero << " cuenta con una capacidad de " << this->capacidad << " a un precio de  $ " << this->precio << ".";

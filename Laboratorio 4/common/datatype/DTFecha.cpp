@@ -24,3 +24,10 @@ DTFecha & DTFecha::operator=(const DTFecha &assign)
 	return *this;
 }
 
+
+bool  DTFecha::operator>=(const DTFecha &assign)
+{
+	return false;
+}
+
+

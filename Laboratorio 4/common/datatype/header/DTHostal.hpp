@@ -10,7 +10,9 @@ class DTHostal
 {
 	public:
 		// Constructors
+		DTHostal();
 		DTHostal(const Hostal* &hostal);
+		DTHostal(const Hostal &hostal);
 		DTHostal(const DTHostal &copy);
 		
 		// Destructor

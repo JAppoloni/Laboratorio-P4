@@ -7,20 +7,19 @@
 #include <list>
 #include <string>
 
-class Notificacion{
-  private: 
+class DTNotificacion;
+
+class Notificacion
+{
+private:
   std::string autor;
-	std::string comentario;
-	int puntaje;
+  std::string comentario;
+  int puntaje;
 
-  public:
-
-  Notificacion(std::string autor,	std::string comentario,int puntaje);
+public:
+  Notificacion(std::string autor, std::string comentario, int puntaje);
   void set(std::string autor);
   DTNotificacion getDatatype();
-
-
-
 };
 
 #endif

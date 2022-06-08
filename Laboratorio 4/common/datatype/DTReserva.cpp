@@ -5,14 +5,19 @@ DTReserva::DTReserva()
 {
 }
 
-DTReserva::DTReserva(const DTReserva &copy)
+DTReserva::DTReserva(const Reserva &copy)
 {
-	(void) copy;
+	(void)copy;
 }
 
-DTReserva::DTReserva(const DTReserva* &copy)
+DTReserva::DTReserva(const Reserva *&copy)
 {
-		(void) copy;
+	(void)copy;
+}
+
+DTReserva::DTReserva(const DTReserva &copy)
+{
+	(void)copy;
 }
 
 // Destructor
@@ -20,11 +25,9 @@ DTReserva::~DTReserva()
 {
 }
 
-
 // Operators
-DTReserva & DTReserva::operator=(const DTReserva &assign)
+DTReserva &DTReserva::operator=(const DTReserva &assign)
 {
-	(void) assign;
+	(void)assign;
 	return *this;
 }
-

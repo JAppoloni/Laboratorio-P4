@@ -1,11 +1,18 @@
 #include "header/DTCalificacion.hpp"
 
 // Constructors
-DTCalificacion::DTCalificacion()
-{
-}
 
 DTCalificacion::DTCalificacion(const DTCalificacion &copy)
+{
+	(void) copy;
+}
+
+DTCalificacion::DTCalificacion(const Calificacion &copy)
+{
+	(void) copy;
+}
+
+DTCalificacion::DTCalificacion(const Calificacion* &copy)
 {
 	(void) copy;
 }

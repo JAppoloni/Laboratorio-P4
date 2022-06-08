@@ -4,6 +4,7 @@
 #include "Reserva.hpp"
 
 class Huesped;
+class Estadia;
 
 class ReservaGrupal : public Reserva
 {

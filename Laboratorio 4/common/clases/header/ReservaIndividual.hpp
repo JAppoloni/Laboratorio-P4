@@ -3,6 +3,7 @@
 
 #include "Reserva.hpp"
 class Huesped;
+class Estadia;
 
 class ReservaIndividual : public Reserva
 {

@@ -8,6 +8,7 @@
 #include <string>
 
 class Estadia;
+class DTHuesped;
 
 class Huesped : public Usuario
 {

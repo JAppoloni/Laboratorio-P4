@@ -12,6 +12,7 @@ class DTComentario
 {
 	public:
 		// Constructors
+		DTComentario(const Comentario &comentario);
 		DTComentario(const Comentario* &comentario);
 		DTComentario(const DTComentario &copy);
 		

@@ -1,4 +1,4 @@
-#include "Calificacion.hpp"
+#include "header/Calificacion.hpp"
 
 
 void Calificacion::ValidarPuntaje(int puntaje)
@@ -42,6 +42,8 @@ Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, E
 // Destructor
 Calificacion::~Calificacion()
 {
+	_estadiaComentario = nullptr;
+	
 	delete _estadiaComentario;
 	delete _respuestaComentario;
 }
@@ -117,12 +119,12 @@ const char *Calificacion::OutOfRange::what() const throw()
 // Methods
 DTCalificacion Calificacion::getDataType()
 {
-	return DTCalificacion(this);
+	return DTCalificacion(*this);
 }
 
 int Calificacion::obtenerID()
 {
-	return this->getEstadiaComentario()->getID();
+	return this->getEstadiaComentario()->obtenerID();
 }
 
 bool Calificacion::estaResponida()

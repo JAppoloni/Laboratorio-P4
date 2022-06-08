@@ -94,7 +94,7 @@ std::list<int> Hostal::obtenerComentariosSinResponder()
     std::list<Calificacion*>::iterator it;
     for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it) {
            Calificacion* c = *it;
-        if (!(c->estaRespondida())) {
+        if (!(c->estaResponida())) {
             int id = c->obtenerID();
             idComentarios.insert(idComentarios.begin(), id);
         }
@@ -107,7 +107,7 @@ std::list<DTCalificacion> Hostal::obtenerCalificaciones(){
    std::list<Calificacion*>::iterator it;
   for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it) {
     Calificacion* c = *it;
-    calificaciones.insert(calificaciones.end(), c->getDatatype());
+    calificaciones.insert(calificaciones.end(), c->getDataType());
   }
   return calificaciones;
 }
@@ -115,5 +115,5 @@ std::list<DTCalificacion> Hostal::obtenerCalificaciones(){
 
 DTHostal Hostal::getDatatype()
 {
-    return DTHostal(this);
+    return DTHostal(*this);
 }

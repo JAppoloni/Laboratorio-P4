@@ -12,6 +12,7 @@ class DTEmpleado
 {
 	public:
 		// Constructors
+		DTEmpleado();
 		DTEmpleado(const Empleado* &empleado);
 		DTEmpleado(const Empleado &empleado);
 		DTEmpleado(const DTEmpleado &copy);

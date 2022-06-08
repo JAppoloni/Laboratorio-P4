@@ -10,6 +10,7 @@
 
 #include <set>
 #include <string>
+class DTEmpleado;
 
 class Empleado : public Usuario
 {

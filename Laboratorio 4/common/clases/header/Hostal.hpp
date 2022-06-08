@@ -8,6 +8,8 @@
 #include "../../datatype/header/DTCalificacion.hpp"
 #include <list> 
 
+class DTHostal;
+
 class Hostal
 {
 private:

@@ -1,4 +1,4 @@
-#include "Comentario.hpp"
+#include "header/Comentario.hpp"
 
 
 Comentario::Comentario(const Comentario &copy)
@@ -17,6 +17,7 @@ Comentario::Comentario(std::string Comentario, Calificacion* CalificacionComenta
 // Destructor
 Comentario::~Comentario()
 {
+	_CalificacionComentario = nullptr;
 	delete _CalificacionComentario;
 }
 
@@ -53,10 +54,10 @@ Calificacion* Comentario::getCalificacionComentario() const
 // Methods
 DTComentario Comentario::getDataType()
 {
-	return DTComentario(this);
+	return DTComentario(*this);
 }
 
-int Comentario::ObtenerID()
+int Comentario::obtenerID()
 {
-	return _CalificacionComentario->getID();
+	return _CalificacionComentario->obtenerID();
 }

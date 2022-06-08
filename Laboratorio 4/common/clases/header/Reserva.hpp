@@ -12,6 +12,7 @@
 
 class Estadia;
 class Huesped;
+class DTReserva;
 
 class Reserva
 {
@@ -55,7 +56,7 @@ public:
 	DTReserva getDataReserva();
 
 	virtual float calcularCosto() = 0;
-	virtual void agregarEstadia(Estadia estadia);
+	virtual void agregarEstadia(Estadia estadia) = 0;
 	virtual bool esReservaHostalHuesped(std::string email, std::string nombre) = 0;
 	// virtual void darBaja(); // DEPENDE DEL TIPO DE RESERVA
 

@@ -1,15 +1,21 @@
 #include "header/DTComentario.hpp"
 
 // Constructors
-DTComentario::DTComentario()
-{
-}
 
 DTComentario::DTComentario(const DTComentario &copy)
 {
 	(void) copy;
 }
 
+DTComentario::DTComentario(const Comentario &copy)
+{
+	(void) copy;
+}
+
+DTComentario::DTComentario(const Comentario* &copy)
+{
+	(void) copy;
+}
 
 // Destructor
 DTComentario::~DTComentario()

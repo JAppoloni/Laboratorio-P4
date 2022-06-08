@@ -3,17 +3,20 @@
 // Constructors
 Reserva::Reserva() {}
 
-
 // Destructor
-// Reserva::~Reserva() {}
-
-
-// Operators
-bool Reserva::operator==(const Reserva & assign)
+Reserva::~Reserva()
 {
-    return (_codigo==assign._codigo);
+	_huespedReserva = nullptr;
+	_habitacionReserva = nullptr;
+	delete _huespedReserva;
+	delete _habitacionReserva;
 }
 
+// Operators
+bool Reserva::operator==(const Reserva &assign)
+{
+	return (_codigo == assign._codigo);
+}
 
 // Getters / Setters
 int Reserva::getCodigo() const
@@ -43,11 +46,11 @@ void Reserva::setCheckOut(DTFecha checkOut)
 	_checkOut = checkOut;
 }
 
-Huesped* Reserva::getHuespedReserva() const
+Huesped *Reserva::getHuespedReserva() const
 {
 	return _huespedReserva;
 }
-void Reserva::setHuespedReserva(Huesped* huespedReserva)
+void Reserva::setHuespedReserva(Huesped *huespedReserva)
 {
 	_huespedReserva = huespedReserva;
 }
@@ -61,28 +64,27 @@ void Reserva::setEstado(EstadoReserva estado)
 	_estado = estado;
 }
 
-Habitacion* Reserva::getHabitacionReserva() const
+Habitacion *Reserva::getHabitacionReserva() const
 {
 	return _habitacionReserva;
 }
 
-void Reserva::setHabitacionReserva(Habitacion* habitacionReserva)
+void Reserva::setHabitacionReserva(Habitacion *habitacionReserva)
 {
 	_habitacionReserva = habitacionReserva;
 }
 
-
 // Exceptions
-const char * Reserva::NOEXISTEHUESPED::what() const throw()
+const char *Reserva::NOEXISTEHUESPED::what() const throw()
 {
 	return "Ese Huésped no está relacionado con la reserva";
 }
 
-const char * Reserva::YAEXISTEESTADIA::what() const throw()
+const char *Reserva::YAEXISTEESTADIA::what() const throw()
 {
 	return "Ya existe una estadía asignada a esa Reserva.";
 }
-		
+
 // Methods
 void Reserva::cancelarReserva()
 {
@@ -92,4 +94,3 @@ DTReserva Reserva::getDataReserva()
 {
 	return DTReserva((*this));
 }
-

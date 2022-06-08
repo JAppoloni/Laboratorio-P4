@@ -11,10 +11,10 @@ protected:
     std::string contrasena;
 
 public:
-    Usuario(std::string, std::string, std::string); 
-    Usuario(); 
+    Usuario(std::string, std::string, std::string);
+    Usuario();
 
-    virtual ~Usuario();  
+    virtual ~Usuario();
     void imprimir();
 
     std::string getNombre();
@@ -24,9 +24,8 @@ public:
     void setNombre(std::string nombre);
     void setEmail(std::string email);
     void setContrasena(std::string contrasena);
-    
 
-    bool operator==(const Usuario &c);
-}; 
-
-#endif;
+    bool operator==(const Usuario &c) const;
+    bool operator==(const Usuario *&c) const;
+};
+#endif

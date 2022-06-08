@@ -5,11 +5,15 @@
 #include <string>
 #include "../../clases/header/Huesped.hpp"
 
+class Huesped;
+
 class DTHuesped
 {
 	public:
 		// Constructors
-		DTHuesped(Huesped* h);
+		DTHuesped();
+		DTHuesped(const Huesped &h);
+		DTHuesped(const Huesped* &h);
 		DTHuesped(const DTHuesped &copy);
 		
 		// Destructor

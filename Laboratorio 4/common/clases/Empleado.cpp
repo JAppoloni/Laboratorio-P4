@@ -60,7 +60,7 @@ Empleado &Empleado::operator=(const Empleado &assign)
 }
 
 DTEmpleado Empleado::getDatatype(){
- return DTEmpleado(this);
+ return DTEmpleado(*this);
 }
 
 void Empleado::agregarNotificacion( Calificacion c){
@@ -70,8 +70,8 @@ void Empleado::agregarNotificacion( Calificacion c){
 }
 
 void Empleado::agregarComentario(std::string comentario, Calificacion* c){
-  Comentario com = Comentario(comentario, c);
-  Comentarios.insert(Comentarios.begin(), *com  ) ;
+  Comentario* com = new Comentario(comentario, c);
+  Comentarios.insert(Comentarios.begin(), com  ) ;
 }
 
 std::list<DTNotificacion> Empleado::listarNotificaciones(){
@@ -89,7 +89,7 @@ std::set<int> Empleado::obtenerComentariosSinResponder(){
   std::list<Comentario*>::iterator it;
   for (it = Comentarios.begin(); it != Comentarios.end(); ++it) {
     Comentario* com = *it;
-    if (!com->getCalificacionComentario()->estaRespondida())
+    if (!com->getCalificacionComentario()->estaResponida())
       idComentarios.insert(com->getCalificacionComentario()->obtenerID());
   }
   return idComentarios;

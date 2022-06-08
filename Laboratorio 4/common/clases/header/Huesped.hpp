@@ -7,34 +7,31 @@
 #include <list>
 #include <string>
 
+class Estadia;
+
 class Huesped : public Usuario
 {
 private:
-    
     bool esFinger;
-    std::list<Estadia*> estadias;
-    
+    std::list<Estadia *> estadias;
 
 public:
-    Huesped(std::string, std::string, std::string,  bool, std::list<Estadia*>);
-    Huesped(const Huesped &copy); 
+    Huesped(std::string, std::string, std::string, bool, std::list<Estadia *>);
+    Huesped(const Huesped &copy);
 
-    ~Huesped(); 
-    Huesped & operator=(const Huesped &assign); 
-   // bool operator==(const Huesped &c) const; 
+    ~Huesped();
+    Huesped &operator=(const Huesped &assign);
+
 
     bool getEsFinger();
-    std::list<Estadia*> getEstadias();
-  
+    std::list<Estadia *> getEstadias();
+
     void setEsFinger(bool esFinger);
-    void setEstadias(std::list<Estadia*> estadias);
-    
-    //Metodos
-    void agregarEstadia(Estadia* e); 
+    void setEstadias(std::list<Estadia *> estadias);
+
+    // Metodos
+    void agregarEstadia(Estadia *e);
     DTHuesped getDatatype();
-
-
-    
 };
 
 #endif

@@ -48,6 +48,6 @@ void Huesped::agregarEstadia(Estadia* e){
 }
 
 DTHuesped Huesped::getDatatype(){
-  return DTHuesped(this);
+  return DTHuesped(*this);
 }
 

@@ -1,5 +1,5 @@
-#ifndef _HUESPED_HH_
-#define _HUESPED_HH_
+#ifndef _NOTIFICACION_HH_
+#define _NOTIFICACION_HH_
 
 #include "Usuario.hpp"
 #include "Estadia.hpp"

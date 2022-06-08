@@ -102,6 +102,3 @@ bool ReservaIndividual::esReservaHostalHuesped(std::string email, std::string no
 	return _huespedReserva->getNombre() == nombre && _huespedReserva->getEmail()==email;
 }
 
-void ReservaIndividual::darBaja(){
-//HACER
-} 

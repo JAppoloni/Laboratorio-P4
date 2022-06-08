@@ -16,7 +16,8 @@ class DTFecha
 		
 		// Operators
 		DTFecha & operator=(const DTFecha &assign);
-		
+		inline bool operator>=(const DTFecha& compare);
+
 	private:
 		
 };

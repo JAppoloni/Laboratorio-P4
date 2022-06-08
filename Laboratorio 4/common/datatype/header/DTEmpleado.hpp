@@ -6,11 +6,14 @@
 # include <iostream>
 # include <string>
 
+class Empleado;
+
 class DTEmpleado
 {
 	public:
 		// Constructors
-		DTEmpleado(Empleado* empleado);
+		DTEmpleado(const Empleado* &empleado);
+		DTEmpleado(const Empleado &empleado);
 		DTEmpleado(const DTEmpleado &copy);
 		
 		// Destructor

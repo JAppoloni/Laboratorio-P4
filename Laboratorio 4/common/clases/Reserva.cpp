@@ -90,5 +90,6 @@ void Reserva::cancelarReserva()
 }
 DTReserva Reserva::getDataReserva()
 {
-	return DTReserva(this);
+	return DTReserva((*this));
 }
+

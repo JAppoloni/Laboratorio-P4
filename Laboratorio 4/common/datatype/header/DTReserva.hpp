@@ -3,6 +3,9 @@
 
 # include <iostream>
 # include <string>
+# include "../../clases/header/Reserva.hpp"
+
+class Reserva;
 
 class DTReserva
 {
@@ -10,6 +13,9 @@ class DTReserva
 		// Constructors
 		DTReserva();
 		DTReserva(const DTReserva &copy);
+		DTReserva(const Reserva* &copy);
+		DTReserva(const Reserva &copy);
+
 		
 		// Destructor
 		~DTReserva();

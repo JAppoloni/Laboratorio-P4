@@ -104,7 +104,3 @@ bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre
 	return _huespedReserva->getNombre() == nombre && _huespedReserva->getEmail() == email;
 }
 
-void ReservaGrupal::darBaja()
-{ // No es destructor???
-  // HACER
-}

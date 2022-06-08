@@ -9,22 +9,21 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 			bool existe = false;
 			ReservaGrupal *reserva = dynamic_cast<ReservaGrupal *>(reservaEstadia);
 
-			if (reserva->getHuespedReserva() == huesped || (reserva->getListaHuesped())->end() == huesped)
+			if ((reserva->getHuespedReserva() == huesped) || (*reserva->getListaHuesped().end()) == huesped)
 				existe = true;
 
 			if (existe == false)
 			{
-				std::list<Huesped *>::iterator it = reserva->getListaHuesped()->begin();
-				while (it != reserva->getListaHuesped()->end())
+
+				for (std::list<Huesped *>::iterator it = reserva->getListaHuesped().begin(); it != reserva->getListaHuesped().end(); it++)
 				{
-					Huesped aux = *(*it);
-					if (aux == huesped)
+					if ((*it) == huesped)
 					{
 						existe = true;
 						break;
 					}
-					it++;
 				}
+				
 				if (existe == false)
 					throw HuesedNoExiste();
 			}
@@ -83,7 +82,6 @@ Estadia::~Estadia()
 	delete _reservaEstadia;
 	delete _huespedEstadia;
 	delete _calificacionEstadia;
-	
 }
 
 // Operators
@@ -173,7 +171,7 @@ DTCalificacion Estadia::getCalificacionDataType()
 {
 
 	if (_calificacionEstadia != nullptr)
-		return DTCalificacion(_calificacionEstadia);
+		return DTCalificacion(*_calificacionEstadia);
 	else
 		throw CalificacionNoExiste();
 }
@@ -196,15 +194,6 @@ std::string Estadia::obtenerAutor()
 void Estadia::notificarEstadia()
 {
 }
-
-// void Estadia::desvincular() // No sería delete
-// {
-// 	delete _huespedEstadia;
-// 	delete _reservaEstadia;
-// 	delete _calificacionEstadia;
-// 	delete _chechOut;
-// 	delete this;
-// }
 
 int Estadia::obtenerID()
 {

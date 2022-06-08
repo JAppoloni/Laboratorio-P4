@@ -8,64 +8,63 @@
 #include "EstadoReserva.hpp"
 #include "Habitacion.hpp"
 #include "Huesped.hpp"
-// #include "Estadia.hpp"
+#include "Estadia.hpp"
 
 class Estadia;
+class Huesped;
 
 class Reserva
 {
-	public:
-		// Constructors
-		Reserva();
+public:
+	// Constructors
+	Reserva();
 
-		// Destructor
-		virtual ~Reserva();
-		
-		// Operators
-		bool operator==(const Reserva & assign);
+	// Destructor
+	virtual ~Reserva();
 
-		
-		// Getters / Setters
-		int getCodigo() const;
-		void setCodigo(int codigo);
-		DTFecha getCheckIn() const;
-		void setCheckIn(DTFecha CheckIn);
-		DTFecha getCheckOut() const;
-		void setCheckOut(DTFecha checkOut);
-		Huesped* getHuespedReserva() const;
-		void setHuespedReserva(Huesped* huespedReserva);
-		EstadoReserva getEstado() const;
-		void setEstado(EstadoReserva estado);
-		Habitacion* getHabitacionReserva() const;
-		void setHabitacionReserva(Habitacion* habitacionReserva);
+	// Operators
+	bool operator==(const Reserva &assign);
 
+	// Getters / Setters
+	int getCodigo() const;
+	void setCodigo(int codigo);
+	DTFecha getCheckIn() const;
+	void setCheckIn(DTFecha CheckIn);
+	DTFecha getCheckOut() const;
+	void setCheckOut(DTFecha checkOut);
+	Huesped *getHuespedReserva() const;
+	void setHuespedReserva(Huesped *huespedReserva);
+	EstadoReserva getEstado() const;
+	void setEstado(EstadoReserva estado);
+	Habitacion *getHabitacionReserva() const;
+	void setHabitacionReserva(Habitacion *habitacionReserva);
 
-		// Exceptions
-		class NOEXISTEHUESPED : public std::exception {
-			virtual const char* what() const throw();
-		};
-		
-		class YAEXISTEESTADIA : public std::exception {
-			virtual const char* what() const throw();
-		};
+	// Exceptions
+	class NOEXISTEHUESPED : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
 
+	class YAEXISTEESTADIA : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
 
-		//Methods
-		void cancelarReserva();
-		DTReserva getDataReserva();
+	// Methods
+	void cancelarReserva();
+	DTReserva getDataReserva();
 
-   	virtual float calcularCosto() = 0;
-		virtual void agregarEstadia(Estadia estadia);
-		virtual bool esReservaHostalHuesped(std::string email, std::string nombre) = 0;
-		virtual void darBaja(); // DEPENDE DEL TIPO DE RESERVA
+	virtual float calcularCosto() = 0;
+	virtual void agregarEstadia(Estadia estadia);
+	virtual bool esReservaHostalHuesped(std::string email, std::string nombre) = 0;
+	// virtual void darBaja(); // DEPENDE DEL TIPO DE RESERVA
 
-			
-	protected:
-		int _codigo;
-		DTFecha _checkIn;
-		DTFecha _checkOut;
-		Huesped* _huespedReserva;
-		EstadoReserva _estado;
-		Habitacion* _habitacionReserva; 
+protected:
+	int _codigo;
+	DTFecha _checkIn;
+	DTFecha _checkOut;
+	Huesped *_huespedReserva;
+	EstadoReserva _estado;
+	Habitacion *_habitacionReserva;
 };
 #endif

@@ -2,7 +2,7 @@
 #define RESERVAINDIVIDUAL_HPP
 
 #include "Reserva.hpp"
-#include "Estadia.hpp"
+class Huesped;
 
 class ReservaIndividual : public Reserva
 {

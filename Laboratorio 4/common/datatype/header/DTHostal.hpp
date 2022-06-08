@@ -4,11 +4,13 @@
 # include <iostream>
 # include <string>
 
+class Hostal;
+
 class DTHostal
 {
 	public:
 		// Constructors
-		DTHostal(Hostal* hostal);
+		DTHostal(const Hostal* &hostal);
 		DTHostal(const DTHostal &copy);
 		
 		// Destructor

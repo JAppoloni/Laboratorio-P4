@@ -10,6 +10,10 @@ DTReserva::DTReserva(const DTReserva &copy)
 	(void) copy;
 }
 
+DTReserva::DTReserva(const DTReserva* &copy)
+{
+		(void) copy;
+}
 
 // Destructor
 DTReserva::~DTReserva()

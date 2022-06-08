@@ -28,7 +28,7 @@ public:
   void setCargo(Cargo cargo); 
   std::list<Notificacion*> getNotificaciones();
   void setNotificaciones(std::list<Notificacion*> notificaciones );
-  std::list<Comentario*> Empleado::getComentarios();
+  std::list<Comentario*> getComentarios();
   void setComentarios(std::list<Comentario*> comentarios);
 
   ~Empleado();

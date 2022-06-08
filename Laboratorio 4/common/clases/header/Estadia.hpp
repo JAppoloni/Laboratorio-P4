@@ -12,8 +12,9 @@
 #include "Calificacion.hpp"
 #include "EstadoReserva.hpp"
 
-class Calificacion;
-class Reserva;
+ class Calificacion;
+ class Reserva;
+ class Huesped;
 
 class Estadia
 {

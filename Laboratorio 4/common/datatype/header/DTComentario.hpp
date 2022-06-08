@@ -5,11 +5,14 @@
 # include <iostream>
 # include <string>
 
+class Comentario;
+
+
 class DTComentario
 {
 	public:
 		// Constructors
-		DTComentario(Comentario* comentario);
+		DTComentario(const Comentario* &comentario);
 		DTComentario(const DTComentario &copy);
 		
 		// Destructor

@@ -1,5 +1,5 @@
 #ifndef DTEstadia_HPP
-# define DTEstadia_HPP
+#define DTEstadia_HPP
 
 # include <iostream>
 # include <string>

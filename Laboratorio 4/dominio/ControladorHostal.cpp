@@ -11,3 +11,7 @@ ControladorHostal * ControladorHostal::getInstancia(){
     };
     return res;
 }
+
+void ControladorHostal::agregarHostal(DTHostal hostal){
+    
+}

@@ -5,13 +5,12 @@
 #include <string>
 
 using namespace std;
-//falta incluir Data Types
+//falta incluir Data Types y clases
 
 class IControladorHostal{
     public:
-        virtual void agregarHostal(DTHostal hostal);
-        virtual set<DTHostal> obtenerHostales();
-        virtual void buscarHostal(string nombre); 
+        virtual void agregarHostal(DTHostal hostal) = 0;
+
 };
 
 #endif

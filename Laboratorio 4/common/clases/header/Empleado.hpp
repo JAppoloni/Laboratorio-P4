@@ -40,7 +40,7 @@ public:
   ~Empleado();
   Empleado & operator=(const Empleado &assign);
 
-  void agregarNotificacion( Calificacion c);
+  void agregarNotificacion( Calificacion* c);
   void agregarComentario(std::string comentario, Calificacion* c);
   std::list<DTNotificacion> listarNotificaciones();
   std::set<int> obtenerComentariosSinResponder(); //ids

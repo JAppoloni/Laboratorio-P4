@@ -77,11 +77,11 @@ DTEmpleado Empleado::getDatatype(){
   return data;
 }
 
-void Empleado::agregarNotificacion( Calificacion c){
+void Empleado::agregarNotificacion( Calificacion* c){
   //terminar: c->estadia->huesped->nombre?
    
- std::string autor = c.getEstadiaComentario()->obtenerAutor();
-  Notificacion n = Notificacion(autor,c.getComentario(), c.getPuntaje());
+ std::string autor = c->getEstadiaComentario()->obtenerAutor();
+  Notificacion n = Notificacion(autor,c->getComentario(), c->getPuntaje());
   Notificacion* notif;
   notif = &n;
   Notificaciones.insert(Notificaciones.begin(),notif);

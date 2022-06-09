@@ -59,6 +59,11 @@ public:
 	{
 		virtual const char *what() const throw();
 	};
+	class NOEXISTECHECKOUT : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+
 
 	// Methods
 	DTCalificacion getCalificacionDataType();
@@ -66,8 +71,8 @@ public:
 	bool getFinalizacion();
 	std::string obtenerAutor();
 	void notificarEstadia();
-	void desvincular();
 	int obtenerID();
+	float calcularCosto();
 
 private:
 	DTFecha _checkIn;

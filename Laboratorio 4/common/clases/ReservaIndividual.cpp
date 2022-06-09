@@ -87,15 +87,16 @@ float ReservaIndividual::calcularCosto()
 		return 0;
 	else
 	{
+		//Hagregar la Operación de diferencia de fechas cuando esten los DT
 		return 1;
 	}
 }
 
-void ReservaIndividual::agregarEstadia(Estadia estadia)
+void ReservaIndividual::agregarEstadia(Estadia* estadia)
 {
-	// if(_estadiaReserva!=NULL)
-	// 	YAEXISTEESTADIA;
-	// _estadiaReserva=estadia;
+	if(_estadiaReserva!=NULL)
+		throw YAEXISTEESTADIA();
+	_estadiaReserva=estadia;
 }
 
 bool ReservaIndividual::esReservaHostalHuesped(std::string email, std::string nombre)

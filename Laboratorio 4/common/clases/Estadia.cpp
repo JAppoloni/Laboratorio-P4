@@ -176,6 +176,11 @@ const char *Estadia::CalificacionNoExiste::what() const throw()
 	return "No hay una calificación asociada a la Reserva.";
 }
 
+const char *Estadia::NOEXISTECHECKOUT::what() const throw()
+{
+	return "No hay una fecha de finalización asociada a la Reserva.";
+}
+
 
 // Methods
 DTCalificacion Estadia::getCalificacionDataType()
@@ -209,4 +214,18 @@ void Estadia::notificarEstadia()
 int Estadia::obtenerID()
 {
 	return _reservaEstadia->getCodigo();
+}
+
+
+float Estadia::calcularCosto()
+{
+	if (_chechOut == NULL)
+		{
+			throw NOEXISTECHECKOUT();
+			return 0;}
+	else
+	{
+		//Hagregar la Operación de diferencia de fechas cuando esten los DT
+		return 1;
+	}
 }

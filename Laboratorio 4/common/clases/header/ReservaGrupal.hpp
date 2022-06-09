@@ -27,9 +27,15 @@ public:
 	std::list<Huesped *> getListaHuesped() const;
 	void setListaHuesped(std::list<Huesped *> listaHuesped);
 
+	//Exception
+	class YAEXISTEHUESPED : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+
 	// Methods
 	float calcularCosto();
-	void agregarEstadia(Estadia estadia);
+	void agregarEstadia(Estadia* estadia);
 	bool esReservaHostalHuesped(std::string email, std::string nombre);
 	void darBaja();
 

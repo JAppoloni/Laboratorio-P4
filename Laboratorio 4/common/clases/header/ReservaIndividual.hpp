@@ -27,7 +27,7 @@ public:
 
 	// Methods
 	float calcularCosto();
-	void agregarEstadia(Estadia estadia);
+	void agregarEstadia(Estadia* estadia);
 	bool esReservaHostalHuesped(std::string email, std::string nombre);
 	void darBaja();
 

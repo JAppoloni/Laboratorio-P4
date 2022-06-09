@@ -85,6 +85,12 @@ void ReservaGrupal::setListaHuesped(std::list<Huesped *> listaHuesped)
 	_listaHuesped = listaHuesped;
 }
 
+// Exception
+const char *ReservaGrupal::YAEXISTEHUESPED::what() const throw()
+{
+	return "Este huesped ya ha sido asignado.";
+}
+
 // Methods
 float ReservaGrupal::calcularCosto() // VER.
 {
@@ -97,11 +103,41 @@ float ReservaGrupal::calcularCosto() // VER.
 	return 0;
 }
 
-void ReservaGrupal::agregarEstadia(Estadia estadia)
-{ // iterar si existe y si esta en la lista
-  // if (_listaEstadia != NULL)
-  // throw YAEXISTEESTADIA();
-  // _listaEstadia = estadia;
+void ReservaGrupal::agregarEstadia(Estadia *estadia)
+{
+	Huesped *huesped = estadia->getHuespedEstadia();
+
+	// iter _listaEstadia
+
+	if (_listaEstadia.begin() == _listaEstadia.end() && _listaEstadia.empty() != true && huesped == (*_listaEstadia.end())->getHuespedEstadia())
+		throw YAEXISTEHUESPED();
+	else
+	{
+		for (std::list<Estadia *>::iterator it = _listaEstadia.begin(); it != _listaEstadia.end(); ++it)
+		{
+			if ((*it)->getHuespedEstadia() == huesped)
+			{
+				throw YAEXISTEHUESPED();
+				break;
+			}
+		}
+	}
+
+	bool existeHuesped = false;
+
+	// La lista de Huespedes no tener nombres repetidos y debe tener al menos dos elementos
+	for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+	{
+		if ((*it) == huesped)
+		{
+			existeHuesped = true;
+			break;
+		}
+	}
+	if (existeHuesped == false)
+		throw NOEXISTEHUESPED();
+	else
+		_listaEstadia.push_back(estadia);
 }
 
 bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre)

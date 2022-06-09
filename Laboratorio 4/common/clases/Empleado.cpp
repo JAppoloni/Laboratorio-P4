@@ -1,5 +1,6 @@
 #include "header/Empleado.hpp"
 #include "header/Estadia.hpp"
+#include "header/Huesped.hpp"
 #include <iostream>
 #include <string>
 
@@ -72,16 +73,15 @@ Empleado &Empleado::operator=(const Empleado &assign)
 
 
 DTEmpleado Empleado::getDatatype(){
-  DTEmpleado* data = new DTEmpleado(nombre,email,contrasena,cargo,Notificaciones,Comentarios, hostal);
- return *data;
- 
- 
+  DTEmpleado data = DTEmpleado(nombre,email,contrasena,cargo,Notificaciones,Comentarios, hostal);
+  return data;
 }
 
 void Empleado::agregarNotificacion( Calificacion c){
   //terminar: c->estadia->huesped->nombre?
- //std::string autor = c.getEstadia().getHuesped().getNombre();
-  Notificacion n = Notificacion("",c.getComentario(), c.getPuntaje());
+   
+ std::string autor = c.getEstadiaComentario()->obtenerAutor();
+  Notificacion n = Notificacion(autor,c.getComentario(), c.getPuntaje());
   Notificacion* notif;
   notif = &n;
   Notificaciones.insert(Notificaciones.begin(),notif);
@@ -119,8 +119,8 @@ std::set<int> Empleado::obtenerComentariosSinResponder(){
 
 DTHostal Empleado::obtenerHostal(){
   Hostal* h = this->getHostal();
-   DTHostal* data = new DTHostal(h->getNombre(),h->getDireccion(), h->getTelefono(),h->getHabitaciones(),h->getCalificaciones());
- return *data;
+  DTHostal data =  DTHostal(h->getNombre(),h->getDireccion(), h->getTelefono(),h->getHabitaciones(),h->getCalificaciones());
+ return data;
   
 }
 

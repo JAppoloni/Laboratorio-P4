@@ -19,6 +19,7 @@ private:
 	DTFecha _fecha;
 	Estadia* _estadiaComentario;
 	Comentario* _respuestaComentario;
+	
 
 
  
@@ -34,6 +35,7 @@ public:
  DTCalificacion getDatatype();
  std::string getComentario() const;
 int getPuntaje() const;
+Estadia* getEstadiaComentario() const;
 
 
 };

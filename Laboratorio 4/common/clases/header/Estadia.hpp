@@ -6,6 +6,7 @@ private:
  int i;
 public:
  int j();
+ std::string obtenerAutor();
 
 };
 

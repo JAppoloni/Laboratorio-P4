@@ -35,7 +35,7 @@ public:
  DTCalificacion getDatatype();
  std::string getComentario() const;
 int getPuntaje() const;
-Estadia* getEstadiaComentario() const;
+Estadia* getEstadiaComentario() ;
 
 
 };

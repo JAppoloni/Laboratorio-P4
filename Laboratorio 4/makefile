@@ -7,10 +7,10 @@ build: source
 	*.o
 
 source:
-	# g++ -Wall -c presentacion/header/*.hpp
-	# g++ -Wall -c presentacion/*.cpp
-	# g++ -Wall -c dominio/header/*.hpp
-	# g++ -Wall -c dominio/*.cpp
+	g++ -Wall -c presentacion/header/*.hpp
+	g++ -Wall -c presentacion/*.cpp
+	g++ -Wall -c dominio/header/*.hpp
+	g++ -Wall -c dominio/*.cpp
 	g++ -Wall -c common/clases/header/*.hpp
 	g++ -Wall -c common/datatype/header/*.hpp
 	g++ -Wall -c common/clases/*.cpp

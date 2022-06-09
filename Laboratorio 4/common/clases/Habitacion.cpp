@@ -31,14 +31,15 @@ void Habitacion::setCapacidad(int capacidad)
     this->capacidad = capacidad;
 }
 
+Habitacion::~Habitacion(){}
+
+
 Habitacion::Habitacion(int numero, float precio, int capacidad)
 {
     this->numero = numero;
     this->capacidad = capacidad;
     this->precio = precio;
 }
-
-Habitacion::~Habitacion(){}
 
 void Habitacion::imprimir()
 {

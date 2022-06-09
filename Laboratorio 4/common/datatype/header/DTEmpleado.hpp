@@ -12,6 +12,7 @@ class DTEmpleado
 {
 	public:
 		// Constructors
+		DTEmpleado(std::string nombre, std::string email, std::string contrasena, Cargo cargo,std::list<Notificacion*> notificaciones, std::list<Comentario*> comentarios,Hostal* hostal){};
 		DTEmpleado();
 		DTEmpleado(const Empleado* &empleado);
 		DTEmpleado(const Empleado &empleado);

@@ -31,6 +31,10 @@ void Usuario::setContrasena(std::string contrasena)
     this->contrasena = contrasena;
 }
 
+Usuario::~Usuario() {}
+
+Usuario::Usuario() {}
+
 Usuario::Usuario(std::string nombre, std::string email, std::string contrasena)
 {
     this->nombre = nombre;
@@ -38,16 +42,7 @@ Usuario::Usuario(std::string nombre, std::string email, std::string contrasena)
     this->contrasena = contrasena;
 }
 
-Usuario::Usuario() {}
-
-Usuario::~Usuario() {}
-
 bool Usuario::operator==(const Usuario &c)
 {
     return (nombre == c.nombre && email == c.email);
-}
-
-bool Usuario::operator==(const Usuario *&c)
-{
-    return (nombre == c->nombre && email == c->email);
 }

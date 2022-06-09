@@ -11,6 +11,7 @@ class DTHostal
 	public:
 		// Constructors
 		DTHostal();
+		DTHostal(std::string nombre,std::string direccion,std::string telefono, std::list<Habitacion*> listaHabitaciones, std::list<Calificacion*> listaCalificaciones){};
 		DTHostal(const Hostal* &hostal);
 		DTHostal(const Hostal &hostal);
 		DTHostal(const DTHostal &copy);

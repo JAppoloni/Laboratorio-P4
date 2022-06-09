@@ -22,7 +22,7 @@ private:
 
 public:
   Hostal(std::string nombre, std::string direccion, std::string telefono, std::list<Habitacion*> listaHabitaciones,std::list<Calificacion*> listaCalificaciones); 
-  Hostal( Hostal &copy); 
+  Hostal(Hostal &copy); 
   ~Hostal(); 
     
   std::string getNombre(); 
@@ -41,7 +41,7 @@ public:
    
    std::list<DTCalificacion> obtenerCalificaciones(); 
    DTHostal getDatatype();
-   // getDatatypeCompleto(): DTHostal que es?
+   // getDatatypeCompleto(): DTHostal 
    std::list<int> obtenerComentariosSinResponder(); //set(<idCalificacion>)
 
 

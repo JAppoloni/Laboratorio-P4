@@ -1,5 +1,6 @@
+#include "presentacion/header/menu.hpp"
 
 int main()
 {
-    return 0;
+    mainMenu();
 }

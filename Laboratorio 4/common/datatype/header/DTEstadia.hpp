@@ -3,12 +3,13 @@
 
 # include <iostream>
 # include <string>
+#include "Estadia.hpp"
 
 class DTEstadia
 {
 	public:
 		// Constructors
-		DTEstadia();
+		DTEstadia(Estadia* estadia);
 		DTEstadia(const DTEstadia &copy);
 		
 		// Destructor

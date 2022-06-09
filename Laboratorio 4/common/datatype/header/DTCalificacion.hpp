@@ -3,12 +3,14 @@
 
 # include <iostream>
 # include <string>
+#include "../../clases/header/Comentario.hpp"
 #include "../../clases/header/Calificacion.hpp"
+
 class DTCalificacion
 {
 	public:
 		// Constructors
-		DTCalificacion(Calificacion* c);
+		DTCalificacion(int _puntaje,std::string _comentario,DTFecha _fecha,Estadia* _estadiaComentario);
 		DTCalificacion(const DTCalificacion &copy);
 		
 		// Destructor
@@ -22,3 +24,4 @@ class DTCalificacion
 };
 
 #endif
+

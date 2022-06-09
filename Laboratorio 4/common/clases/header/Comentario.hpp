@@ -27,8 +27,7 @@ class Comentario
 
 
     private:
-		std::string _Comentario;
-		Calificacion* _CalificacionComentario;
+		
 
 };
 

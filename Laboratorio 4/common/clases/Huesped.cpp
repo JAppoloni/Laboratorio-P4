@@ -20,7 +20,7 @@ void Huesped::setEstadias(std::list<Estadia*> estadias){
 }
 
 
-Huesped::Huesped(std::string nombre, std::string email, std::string contrasena,bool esFinger,std::list<Estadia*> estadias) {
+Huesped::Huesped(std::string nombre, std::string email, std::string contrasena,bool esFinger,std::list<Estadia*> estadias):Usuario(nombre,  email, contrasena) {
   this->esFinger = esFinger;
   this->estadias = estadias;
 }
@@ -47,7 +47,9 @@ void Huesped::agregarEstadia(Estadia* e){
   
 }
 
-DTHuesped Huesped::getDatatype(){
-  return DTHuesped(this);
+DTHuesped Huesped::getDatatype() {
+
+  DTHuesped* data = new DTHuesped(this->nombre,this->email,this->contrasena,this->esFinger,this->estadias);
+  return *data;
 }
 

@@ -115,5 +115,7 @@ std::list<DTCalificacion> Hostal::obtenerCalificaciones(){
 
 DTHostal Hostal::getDatatype()
 {
-    return DTHostal(this);
+    DTHostal* data =  new DTHostal(this->nombre, this->direccion,this->telefono,this->listaHabitaciones,this->listaCalificaciones);
+    return *data;
+    
 }

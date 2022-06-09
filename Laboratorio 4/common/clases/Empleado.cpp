@@ -1,11 +1,13 @@
 #include "header/Empleado.hpp"
+#include "header/Estadia.hpp"
 #include <iostream>
 #include <string>
 
-Empleado::Empleado(std::string nombre, std::string email,  std::string contrasena, Cargo cargo,std::list<Notificacion*> notificaciones, std::list<Comentario*> comentarios ){ 
+Empleado::Empleado(std::string nombre, std::string email,  std::string contrasena, Cargo cargo,std::list<Notificacion*> notificaciones, std::list<Comentario*> comentarios,Hostal* hostal):Usuario(nombre,  email, contrasena){ 
   this->cargo = cargo; //ver
   this->Notificaciones = notificaciones;
   this->Comentarios = comentarios;
+  this->hostal = hostal;
 }
 
 Empleado::Empleado(Empleado &copy){
@@ -15,6 +17,7 @@ Empleado::Empleado(Empleado &copy){
   this->cargo = copy.getCargo();
   this->Comentarios = copy.getComentarios();
   this->Notificaciones = copy.getNotificaciones();
+  this->hostal = copy.getHostal();
 
 }
 
@@ -42,6 +45,14 @@ void Empleado::setComentarios(std::list<Comentario*> comentarios){
   Comentarios = comentarios;
 }
 
+Hostal* Empleado::getHostal(){
+  return hostal;
+ }
+
+void Empleado::setHostal(Hostal* hostal){
+  this->hostal = hostal;
+}
+
 Empleado::~Empleado(){
   Notificaciones.clear();
   Comentarios.clear();
@@ -59,19 +70,30 @@ Empleado &Empleado::operator=(const Empleado &assign)
 
 }
 
+
 DTEmpleado Empleado::getDatatype(){
- return DTEmpleado(this);
+  DTEmpleado* data = new DTEmpleado(nombre,email,contrasena,cargo,Notificaciones,Comentarios, hostal);
+ return *data;
+ 
+ 
 }
 
 void Empleado::agregarNotificacion( Calificacion c){
   //terminar: c->estadia->huesped->nombre?
+ //std::string autor = c.getEstadia().getHuesped().getNombre();
   Notificacion n = Notificacion("",c.getComentario(), c.getPuntaje());
+  Notificacion* notif;
+  notif = &n;
+  Notificaciones.insert(Notificaciones.begin(),notif);
 
 }
 
 void Empleado::agregarComentario(std::string comentario, Calificacion* c){
   Comentario com = Comentario(comentario, c);
-  Comentarios.insert(Comentarios.begin(), *com  ) ;
+  Comentario* co;
+  co = &com;
+
+ this->Comentarios.insert(Comentarios.begin(), co ) ;
 }
 
 std::list<DTNotificacion> Empleado::listarNotificaciones(){
@@ -93,6 +115,13 @@ std::set<int> Empleado::obtenerComentariosSinResponder(){
       idComentarios.insert(com->getCalificacionComentario()->obtenerID());
   }
   return idComentarios;
+}
+
+DTHostal Empleado::obtenerHostal(){
+  Hostal* h = this->getHostal();
+   DTHostal* data = new DTHostal(h->getNombre(),h->getDireccion(), h->getTelefono(),h->getHabitaciones(),h->getCalificaciones());
+ return *data;
+  
 }
 
 

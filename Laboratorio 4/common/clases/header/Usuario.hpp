@@ -11,7 +11,7 @@ protected:
     std::string contrasena;
 
 public:
-    Usuario(std::string, std::string, std::string); 
+    Usuario(std::string nombre, std::string email, std::string contrasena); 
     Usuario(); 
 
     virtual ~Usuario();  

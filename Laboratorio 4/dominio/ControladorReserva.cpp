@@ -1,4 +1,4 @@
-#include "header\ControladorReserva.hpp"
+#include "header/ControladorReserva.hpp"
 
 ControladorReserva * ControladorReserva::instancia = nullptr;
 

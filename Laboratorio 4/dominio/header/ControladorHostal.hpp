@@ -1,23 +1,21 @@
 #ifndef CONTROLADOR_HOSTAL
 #define CONTROLADOR_HOSTAL
 
-    #include <string>
-    #include <set>
-    #include "IControladorHostal.hpp"
+#include "IControladorHostal.hpp"
+using namespace std;
 
-    using namespace std;
+class ControladorHostal : public IControladorHostal
+{
+private:
+    static ControladorHostal *instancia;
+    ControladorHostal();
 
-    class ControladorHostal: public IControladorHostal{
-        private:
-            static ControladorHostal * instancia;
-            ControladorHostal();
+public:
+    static ControladorHostal *getInstancia();
 
-            //set<Hostal> hostales;
-        public:
-            static ControladorHostal * getInstancia();
-
-            //operaciones
-            virtual void agregarHostal(DTHostal hostal);
-    };
+     void agregarHostal(DTHostal hostal);
+     set<DTHostal> obtenerHostales();
+     void buscarHostal(string nombre);
+};
 
 #endif

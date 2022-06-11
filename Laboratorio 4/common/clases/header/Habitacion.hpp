@@ -23,7 +23,6 @@ public:
     void setPrecio(float precio);
     void setCapacidad(int capacidad);
 
-    Habitacion & operator=(const Habitacion &assign);
 };
 
 #endif

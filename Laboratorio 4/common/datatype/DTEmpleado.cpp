@@ -1,23 +1,16 @@
 #include "header/DTEmpleado.hpp"
 
 // Constructors
-DTEmpleado::DTEmpleado()
+
+DTEmpleado::DTEmpleado(std::string nombre, std::string contrasenya, std::string email, Cargo cargo): DTUsuario(nombre, contrasenya, email)
 {
+	_cargo = cargo;
 }
 
-DTEmpleado::DTEmpleado(const Empleado &copy)
+std::ostream &DTEmpleado::operator<<(std::ostream &out)
 {
-	(void)copy;
-}
-
-DTEmpleado::DTEmpleado(const Empleado *&copy)
-{
-	(void)copy;
-}
-
-DTEmpleado::DTEmpleado(const DTEmpleado &copy)
-{
-	(void)copy;
+	out << "IMPLEMENTAR" << std::endl;
+	return out;
 }
 
 // Destructor
@@ -25,9 +18,8 @@ DTEmpleado::~DTEmpleado()
 {
 }
 
-// Operators
-DTEmpleado &DTEmpleado::operator=(const DTEmpleado &assign)
+// Getters 
+Cargo DTEmpleado::getCargo() const
 {
-	(void)assign;
-	return *this;
+	return _cargo;
 }

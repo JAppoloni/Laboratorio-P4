@@ -1,33 +1,28 @@
-#ifndef DTHuesped_HPP
-#define DTHuesped_HPP
+#ifndef DTHUESPED_HPP
+#define DTHUESPED_HPP
 
 #include <iostream>
 #include <string>
-#include <list>
-#include "../../clases/header/Huesped.hpp"
-#include "../../clases/header/Estadia.hpp"
+#include "DTUsuario.hpp"
 
-class Huesped;
-class Estadia;
-
-class DTHuesped
+class DTHuesped : public DTUsuario
 {
-	public:
-		// Constructors
-		DTHuesped();
-		DTHuesped( std::string nombre,std::string email, std::string contrasena,bool esFinger,std::list<Estadia*> estadias){};
-		DTHuesped(const Huesped &h);
-		DTHuesped(const Huesped* &h);
-		DTHuesped(const DTHuesped &copy);
-		
-		// Destructor
-		~DTHuesped();
-		
-		// Operators
-		DTHuesped & operator=(const DTHuesped &assign);
-		
-	private:
-		
+public:
+	// Constructors
+	DTHuesped();
+	DTHuesped(std::string nombre, std::string contrasenya, std::string email, bool esFinger);
+
+	// Destructor
+	~DTHuesped();
+
+	// Operators
+	virtual std::ostream &operator<<(std::ostream &o);
+
+	// Getters 
+	bool getEsFinger();
+
+private:
+	bool _esFinger;
 };
 
 #endif

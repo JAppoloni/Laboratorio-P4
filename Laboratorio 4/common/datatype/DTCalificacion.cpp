@@ -1,33 +1,58 @@
 #include "header/DTCalificacion.hpp"
 
-// Constructors
-
-DTCalificacion::DTCalificacion(const DTCalificacion &copy)
+// ructors
+DTCalificacion::DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario, std::string respuesta)
 {
-	(void) copy;
+	_IDCalificacion = IDCalificacion;
+	_IDHuesped = IDHuesped;
+	_calificacion = calificacion;
+	_fecha = fecha;
+	_comentario = comentario;
+	_respuesta = respuesta;
 }
 
-DTCalificacion::DTCalificacion(const Calificacion &copy)
+DTCalificacion::DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario)
 {
-	(void) copy;
+	_IDCalificacion = IDCalificacion;
+	_IDHuesped = IDHuesped;
+	_calificacion = calificacion;
+	_fecha = fecha;
+	_comentario = comentario;
 }
-
-DTCalificacion::DTCalificacion(const Calificacion* &copy)
-{
-	(void) copy;
-}
-
 
 // Destructor
 DTCalificacion::~DTCalificacion()
 {
 }
 
-
 // Operators
-DTCalificacion & DTCalificacion::operator=(const DTCalificacion &assign)
+std::ostream &operator<<(std::ostream &out, DTCalificacion imprimir)
 {
-	(void) assign;
-	return *this;
+	return out << " Implementar /n";
 }
 
+// Getters
+int DTCalificacion::getIDCalificacion()
+{
+	return _IDCalificacion;
+}
+std::string DTCalificacion::getIDHuesped()
+{
+	return _IDHuesped;
+}
+int DTCalificacion::getCalificacion()
+{
+	return _calificacion;
+}
+DTFecha DTCalificacion::getFecha()
+{
+	return _fecha;
+}
+std::string DTCalificacion::getComentario()
+{
+	return _comentario;
+}
+std::string DTCalificacion::getRespuesta()
+{
+	return _respuesta;
+}

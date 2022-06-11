@@ -2,6 +2,7 @@
 #define RESERVAGRUPAL_HPP
 
 #include "Reserva.hpp"
+#include "../../datatype/header/DTReservaGrupal.hpp"
 
 class Huesped;
 class Estadia;
@@ -11,15 +12,10 @@ class ReservaGrupal : public Reserva
 public:
 	// Constructors
 	ReservaGrupal();
-	ReservaGrupal(const ReservaGrupal &copy);
 	ReservaGrupal(int codigo, DTFecha CheckIn, DTFecha checkOut, Huesped *huespedReserva, EstadoReserva estado, Habitacion *habitacionReserva, std::list<Huesped *> listaHuesped);
-	ReservaGrupal(int codigo, DTFecha CheckIn, DTFecha checkOut, Huesped *huespedReserva, EstadoReserva estado, Habitacion *habitacionReserva, std::list<Estadia *> listaEstadia, std::list<Huesped *> listaHuesped);
 
 	// Destructor
 	~ReservaGrupal();
-
-	// Operators
-	ReservaGrupal &operator=(const ReservaGrupal &assign);
 
 	// Getters / Setters
 	std::list<Estadia *> getListaEstadia() const;
@@ -37,7 +33,7 @@ public:
 	float calcularCosto();
 	void agregarEstadia(Estadia* estadia);
 	bool esReservaHostalHuesped(std::string email, std::string nombre);
-	void darBaja();
+	DTReserva* getDataReserva();
 
 private:
 	std::list<Estadia *> _listaEstadia;

@@ -4,7 +4,7 @@ ControladorHostal *ControladorHostal::instancia = nullptr;
 
 ControladorHostal::ControladorHostal() {}
 
-ControladorHostal* ::ControladorHostal::getInstancia()
+ControladorHostal * ::ControladorHostal::getInstancia()
 {
     if (instancia == nullptr)
         instancia = new ControladorHostal();
@@ -13,14 +13,9 @@ ControladorHostal* ::ControladorHostal::getInstancia()
 
 void ControladorHostal::agregarHostal(DTHostal hostal)
 {
-}
-
-set<DTHostal> ControladorHostal::obtenerHostales()
-{
-    set<DTHostal> a;
-    return a;
-}
-
-void ControladorHostal::buscarHostal(string nombre)
-{
+    if (hostales[hostal.getNombre()] == nullptr)
+    {
+        Hostal *nuevo = new Hostal(hostal.getNombre(), hostal.getDireccion(), hostal.getTelefono());
+        hostales[hostal.getNombre()] = nuevo;
+    };
 }

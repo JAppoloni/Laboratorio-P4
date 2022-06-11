@@ -21,15 +21,12 @@ class Estadia
 {
 public:
 	// Constructors
-	Estadia(const Estadia &copy);
 	Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia);
-	Estadia(DTFecha checkIn, DTFecha *chechOut, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia, Calificacion *calificacionEstadia);
-
+	
 	// Destructor
 	~Estadia();
 
 	// Operators
-	Estadia &operator=(const Estadia &assign);
 	bool operator==(const Estadia &assign);
 
 	// Getters / Setters

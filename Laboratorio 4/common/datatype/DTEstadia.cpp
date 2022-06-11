@@ -1,26 +1,44 @@
 #include "header/DTEstadia.hpp"
 
 // Constructors
-DTEstadia::DTEstadia()
+DTEstadia::DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkOut, std::string promo)
 {
+	_IDReserva = id;
+	_EmailHuesped = email;
+	_checkIn = checkIn;
+	_checkOut = checkOut;
+	_promo = promo;
 }
-
-DTEstadia::DTEstadia(const DTEstadia &copy)
-{
-	(void) copy;
-}
-
 
 // Destructor
 DTEstadia::~DTEstadia()
 {
 }
 
-
 // Operators
-DTEstadia & DTEstadia::operator=(const DTEstadia &assign)
+std::ostream &operator<<(std::ostream &out, DTEstadia imprimir)
 {
-	(void) assign;
-	return *this;
+	return out << " Implementar /n";
 }
 
+// Getters
+DTFecha DTEstadia::getCheckIn() const
+{
+	return _checkIn;
+}
+DTFecha *DTEstadia::getCheckOut() const
+{
+	return _checkOut;
+}
+std::string DTEstadia::getPromo() const
+{
+	return _promo;
+}
+std::string DTEstadia::getEmail() const
+{
+	return _EmailHuesped;
+}
+int DTEstadia::getID() const
+{
+	return _IDReserva;
+}

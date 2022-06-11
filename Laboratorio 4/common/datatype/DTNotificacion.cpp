@@ -1,29 +1,34 @@
 #include "header/DTNotificacion.hpp"
 
 // Constructors
-
-DTNotificacion::DTNotificacion(const DTNotificacion &copy)
+DTNotificacion::DTNotificacion(std::string autor, std::string comentario, int puntaje)
 {
-
+	_autor = autor;
+	_comentario = comentario;
+	_puntaje = puntaje;
 }
-
-DTNotificacion::DTNotificacion(std::string pautor, std::string pcomentario, int ppuntaje)
-{
-	autor = pautor;
-	comentario = pcomentario;
-	puntaje = ppuntaje;
-}
-
 
 // Destructor
 DTNotificacion::~DTNotificacion()
 {
 }
 
-
 // Operators
-DTNotificacion & DTNotificacion::operator=(const DTNotificacion &assign)
+std::ostream &operator<<(std::ostream &out, DTNotificacion imprimir)
 {
-	(void) assign;
-	return *this;
+	return out << " Implementar /n";
+}
+
+// Getters
+std::string DTNotificacion::getAutor() const
+{
+	return _autor;
+}
+std::string DTNotificacion::getComentario() const
+{
+	return _comentario;
+}
+int DTNotificacion::getPuntaje() const
+{
+	return _puntaje;
 }

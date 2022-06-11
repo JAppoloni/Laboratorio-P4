@@ -43,28 +43,6 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 	}
 }
 
-Estadia::Estadia(const Estadia &copy)
-{
-	ValidarEstadia(copy.getCheckIn(), copy.getReservaEstadia(), copy.getHuespedEstadia());
-	_checkIn = copy.getCheckIn();
-	_chechOut = copy.getChechOut();
-	_promo = copy.getPromo();
-	_reservaEstadia = copy.getReservaEstadia();
-	_huespedEstadia = copy.getHuespedEstadia();
-	_calificacionEstadia = copy.getCalificacionEstadia();
-}
-
-Estadia::Estadia(DTFecha checkIn, DTFecha *chechOut, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia, Calificacion *calificacionEstadia)
-{
-	ValidarEstadia(checkIn, reservaEstadia, huespedEstadia);
-	_checkIn = checkIn;
-	_chechOut = chechOut;
-	_promo = promo;
-	_reservaEstadia = reservaEstadia;
-	_huespedEstadia = huespedEstadia;
-	_calificacionEstadia = calificacionEstadia;
-}
-
 Estadia::Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia)
 {
 	ValidarEstadia(checkIn, reservaEstadia, huespedEstadia);
@@ -90,16 +68,6 @@ Estadia::~Estadia()
 }
 
 // Operators
-Estadia &Estadia::operator=(const Estadia &assign)
-{
-	_checkIn = assign.getCheckIn();
-	_chechOut = assign.getChechOut();
-	_promo = assign.getPromo();
-	_reservaEstadia = assign.getReservaEstadia();
-	_huespedEstadia = assign.getHuespedEstadia();
-	_calificacionEstadia = assign.getCalificacionEstadia();
-	return *this;
-}
 
 bool Estadia::operator==(const Estadia &assign)
 {
@@ -181,13 +149,12 @@ const char *Estadia::NOEXISTECHECKOUT::what() const throw()
 	return "No hay una fecha de finalización asociada a la Reserva.";
 }
 
-
 // Methods
 DTCalificacion Estadia::getCalificacionDataType()
 {
 
 	if (_calificacionEstadia != nullptr)
-		return DTCalificacion(*_calificacionEstadia);
+		return _calificacionEstadia->getDataType();
 	else
 		throw CalificacionNoExiste();
 }
@@ -216,16 +183,16 @@ int Estadia::obtenerID()
 	return _reservaEstadia->getCodigo();
 }
 
-
 float Estadia::calcularCosto()
 {
 	if (_chechOut == NULL)
-		{
-			throw NOEXISTECHECKOUT();
-			return 0;}
+	{
+		throw NOEXISTECHECKOUT();
+		return 0;
+	}
 	else
 	{
-		//Hagregar la Operación de diferencia de fechas cuando esten los DT
+		// Hagregar la Operación de diferencia de fechas cuando esten los DT
 		return 1;
 	}
 }

@@ -3,28 +3,36 @@
 
 #include <iostream>
 #include <string>
-#include "../../clases/header/Calificacion.hpp"
-#include "../../clases/header/Estadia.hpp"
-
-class Calificacion;
-class Estadia;
+#include "DTFecha.hpp"
 
 class DTCalificacion
 {
 public:
 	// Constructors
-	DTCalificacion(int _puntaje, std::string _comentario, DTFecha _fecha, Estadia *_estadiaComentario){};
-	DTCalificacion(const Calificacion *&Calificacion);
-	DTCalificacion(const Calificacion &Calificacion);
-	DTCalificacion(const DTCalificacion &copy);
+	DTCalificacion();
+	DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario);
+	DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario, std::string respuesta);
 
 	// Destructor
 	~DTCalificacion();
 
-	// Operators
-	DTCalificacion &operator=(const DTCalificacion &assign);
+	// Getters / Setters
+	int getIDCalificacion();
+	std::string getIDHuesped();
+	int getCalificacion();
+	DTFecha getFecha();
+	std::string getComentario();
+	std::string getRespuesta();
 
 private:
+	int _IDCalificacion; // codigo de reserva
+	std::string _IDHuesped;
+	int _calificacion;
+	DTFecha _fecha;
+	std::string _comentario;
+	std::string _respuesta;
 };
+
+std::ostream &operator<<(std::ostream &out, DTCalificacion imprimir);
 
 #endif

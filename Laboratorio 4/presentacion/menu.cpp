@@ -54,19 +54,19 @@ void mainMenu()
     {
         string option = outputMenu();
         int intOption;
-        
-        try 
+
+        try
         {
             intOption = stoi(option);
-        } 
-        catch (exception error) 
+        }
+        catch (exception const &excep)
         {
-            if (option == "S")
+            if (option == "S" || option == "s")
             {
                 exit = true;
                 break;
-            } 
-            else 
+            }
+            else
             {
                 intOption = -1;
             }
@@ -130,6 +130,6 @@ void mainMenu()
     }
 
     system("clear");
-            cout << "Hasta luego!" << endl
-                 << endl;
+    cout << "Hasta luego!" << endl
+         << endl;
 }

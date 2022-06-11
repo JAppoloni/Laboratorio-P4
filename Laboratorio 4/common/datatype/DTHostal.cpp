@@ -1,27 +1,22 @@
 #include "header/DTHostal.hpp"
-#include <iostream>
-
-
 
 // Constructors
-DTHostal::DTHostal()
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono)
 {
+	_nombre = nombre;
+	_direccion = direccion;
+	_telefono = telefono;
+	_listaHabitaciones = nullptr;
+	_listaHabitaciones = nullptr;
 }
 
-DTHostal::DTHostal(const DTHostal &copy)
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias)
 {
-	(void) copy;
-}
-
-
-DTHostal::DTHostal(const Hostal &copy)
-{
-	(void) copy;
-}
-
-DTHostal::DTHostal(const Hostal* &copy)
-{
-	(void) copy;
+	_nombre = nombre;
+	_direccion = direccion;
+	_telefono = telefono;
+	_listaHabitaciones = listaHabitaciones;
+	_listaEstadia = listaEstadias;
 }
 
 // Destructor
@@ -29,10 +24,30 @@ DTHostal::~DTHostal()
 {
 }
 
-
 // Operators
-DTHostal & DTHostal::operator=(const DTHostal &assign)
+std::ostream &operator<<(std::ostream &out, DTHostal imprimir)
 {
-	(void) assign;
-	return *this;
+	return out << " Implementar /n";
+}
+
+// Getters
+std::string DTHostal::getNombre() const
+{
+	return _nombre;
+}
+std::string DTHostal::getDireccion() const
+{
+	return _direccion;
+}
+std::string DTHostal::getTelefono() const
+{
+	return _telefono;
+}
+std::list<DTHabitacion> *DTHostal::getListaHabitaciones() const
+{
+	return _listaHabitaciones;
+}
+std::list<DTEstadia> *DTHostal::getListaEstadia() const
+{
+	return _listaEstadia;
 }

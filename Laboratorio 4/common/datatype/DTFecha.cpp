@@ -1,33 +1,102 @@
 #include "header/DTFecha.hpp"
+#include <iostream>
+#include <stdexcept>
 
-// Constructors
+int DTFecha::getDia()
+{
+    return this->dia;
+}
+
+int DTFecha::getMes()
+{
+    return this->mes;
+}
+
+int DTFecha::getAnio()
+{
+    return this->anio;
+}
+
+int DTFecha::calcularDias(DTFecha fchAComparar)
+{
+    return ((fchAComparar.anio - this->anio) * 12 * 31 + (fchAComparar.mes - this->mes) * 31 + (fchAComparar.dia - this->dia));
+}
+
+void DTFecha::imprimir()
+{
+    std::cout << this->dia << "//" << this->mes << "//" << this->anio;
+}
+
 DTFecha::DTFecha()
 {
 }
 
-DTFecha::DTFecha(const DTFecha &copy)
+DTFecha::DTFecha(int dia, int mes, int anio)
 {
-	(void) copy;
+    if ((dia > 31) || (dia < 1) || (mes > 12) || (mes < 1) || (anio < 1900))
+    {
+        throw std::invalid_argument("Fecha invalida");
+    }
+    else
+    {
+        this->anio = anio;
+        this->dia = dia;
+        this->mes = mes;
+    }
 }
 
-
-// Destructor
-DTFecha::~DTFecha()
+bool DTFecha::operator!=(const DTFecha &c) const
 {
+    return ((this->anio != c.anio) || (this->mes != c.mes) || (this->dia != c.dia));
 }
 
-
-// Operators
-DTFecha & DTFecha::operator=(const DTFecha &assign)
+bool DTFecha::operator==(const DTFecha &c) const
 {
-	(void) assign;
-	return *this;
+    return ((this->anio == c.anio) && (this->mes == c.mes) && (this->dia == c.dia));
 }
 
-
-bool  DTFecha::operator>=(const DTFecha &assign)
+bool DTFecha::operator>=(const DTFecha &c) const
 {
-	return false;
+    if (this->anio > c.anio)
+        return true;
+    else if (this->anio == c.anio)
+    {
+        if (this->mes > c.mes)
+            return true;
+        else if (this->mes == c.mes)
+            if (this->dia >= c.dia)
+                return true;
+    }
+    return false;
 }
 
+bool DTFecha::operator<=(const DTFecha &c) const
+{
 
+    return (c >= *this);
+}
+
+bool DTFecha::operator>(const DTFecha &c) const
+{
+    if (this->anio > c.anio)
+        return true;
+    else if (this->anio == c.anio)
+    {
+        if (this->mes > c.mes)
+            return true;
+        else if (this->mes == c.mes)
+            if (this->dia > c.dia)
+                return true;
+    }
+    return false;
+}
+
+bool DTFecha::operator<(const DTFecha &c) const
+{
+    return (c > *this);
+}
+
+std::ostream &operator<<(std::ostream &out, DTFecha fecha)
+{
+    return out << fecha.getDia() << "/" << fecha.getMes() << "/" << fecha.getAnio();
+}

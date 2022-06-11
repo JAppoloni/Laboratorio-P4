@@ -53,8 +53,8 @@ public:
 
 	// Methods
 	void cancelarReserva();
-	DTReserva getDataReserva();
 
+	virtual DTReserva* getDataReserva() = 0;
 	virtual float calcularCosto() = 0;
 	virtual void agregarEstadia(Estadia* estadia) = 0;
 	virtual bool esReservaHostalHuesped(std::string email, std::string nombre) = 0;

@@ -1,26 +1,32 @@
 #include "header/DTUsuario.hpp"
-#include <iostream>
+
 // Constructors
-DTUsuario::DTUsuario(Usuario* h)
+DTUsuario::DTUsuario()
 {
 }
 
-DTUsuario::DTUsuario(const DTUsuario &copy)
+DTUsuario::DTUsuario(std::string nombre, std::string contrasenya, std::string email)
 {
-	(void) copy;
+	_nombre = nombre;
+	_contrasenya = contrasenya;
+	_email = email;
 }
-
 
 // Destructor
 DTUsuario::~DTUsuario()
 {
-
 }
 
-
-// Operators
-DTUsuario & DTUsuario::operator=(const DTUsuario &assign)
+// Getters
+std::string DTUsuario::getNombre() const
 {
-	(void) assign;
-	return *this;
+	return _nombre;
+}
+std::string DTUsuario::getContrasenya() const
+{
+	return _contrasenya;
+}
+std::string DTUsuario::getEmail() const
+{
+	return _email;
 }

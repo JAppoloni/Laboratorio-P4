@@ -19,10 +19,8 @@ private:
 
 public:
     Huesped(std::string nombre, std::string email, std::string contrasena,  bool esFinger, std::list<Estadia*> estadias);
-    Huesped(const Huesped &copy); 
-
+  
     ~Huesped(); 
-    Huesped & operator=(const Huesped &assign); 
   
 
     bool getEsFinger();

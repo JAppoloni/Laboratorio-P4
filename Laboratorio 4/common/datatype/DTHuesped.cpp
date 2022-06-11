@@ -1,27 +1,12 @@
 #include "header/DTHuesped.hpp"
-#include <iostream>
 
-
-
-// Constructors
 DTHuesped::DTHuesped()
 {
 }
 
-DTHuesped::DTHuesped(const DTHuesped &copy)
+DTHuesped::DTHuesped(std::string nombre, std::string contrasenya, std::string email, bool esFinger) : DTUsuario(nombre, contrasenya, email)
 {
-	(void) copy;
-}
-
-
-DTHuesped::DTHuesped(const Huesped &copy)
-{
-	(void) copy;
-}
-
-DTHuesped::DTHuesped(const Huesped* &copy)
-{
-	(void) copy;
+	_esFinger = esFinger;
 }
 
 // Destructor
@@ -29,10 +14,15 @@ DTHuesped::~DTHuesped()
 {
 }
 
-
 // Operators
-DTHuesped & DTHuesped::operator=(const DTHuesped &assign)
+std::ostream &DTHuesped::operator<<(std::ostream &out)
 {
-	(void) assign;
-	return *this;
+	out << "IMPLEMENTAR" << std::endl;
+	return out;
+}
+
+// Getters
+bool DTHuesped::getEsFinger()
+{
+	return _esFinger;
 }

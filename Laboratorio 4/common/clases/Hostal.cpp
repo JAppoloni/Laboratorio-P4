@@ -29,20 +29,12 @@ void Hostal::setTelefono(std::string telefono)
     this->telefono = telefono;
 }
 
-void Hostal::setHabitaciones(std::list<Habitacion *> habitaciones)
-{
-    this->listaHabitaciones = habitaciones;
-}
 
 std::list<Habitacion *> Hostal::getHabitaciones()
 {
     return this->listaHabitaciones;
 }
 
-void Hostal::setCalificaciones(std::list<Calificacion *> calificaciones)
-{
-    this->listaCalificaciones = calificaciones;
-}
 std::list<Calificacion *> Hostal::getCalificaciones()
 {
     return this->listaCalificaciones;
@@ -97,4 +89,9 @@ DTHostal Hostal::getDatatype()
     DTHostal data =   DTHostal(this->nombre, this->direccion,this->telefono);
     return data;
     
+}
+
+void Hostal::agregarHabitacion(Habitacion * habitacion)
+{
+    listaHabitaciones.push_back(habitacion);
 }

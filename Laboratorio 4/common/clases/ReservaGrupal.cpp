@@ -111,10 +111,10 @@ bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre
 
 DTReserva* ReservaGrupal::getDataReserva()
 {
-	std::list<DTHuesped> listaHuespedes;
+	std::list<DTHuesped>* listaHuespedes = new std::list<DTHuesped>;
 	for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
 	{
-		listaHuespedes.push_back((*it)->getDatatype());
+		listaHuespedes->push_back((*it)->getDatatype());
 	}
 
 	return new DTReservaGrupal(_codigo,
@@ -122,7 +122,7 @@ DTReserva* ReservaGrupal::getDataReserva()
 								  _checkOut,
 								  _estado,
 								  calcularCosto(),
-								  DTHabitacion(_habitacionReserva->getNumero(), _habitacionReserva->getPrecio(), _habitacionReserva->getCapacidad()),
-								  _huespedReserva->getDatatype(),
+								  new DTHabitacion(_habitacionReserva->getNumero(), _habitacionReserva->getPrecio(), _habitacionReserva->getCapacidad()),
+								  _huespedReserva->getDatatypeptr(),
 								  listaHuespedes);
 }

@@ -1,12 +1,8 @@
 #ifndef CONTROLADOR_USUARIO
 #define CONTROLADOR_USUARIO
 
-    #include <string>
-    #include <map>
     #include "IControladorUsuario.hpp"
-    #include "../../common/clases/header/Usuario.hpp"
-    #include "../../common/clases/header/Empleado.hpp"
-    #include "../../common/clases/header/Huesped.hpp"
+    #include "ControladorHostal.hpp"
 
     using namespace std;
 
@@ -21,8 +17,16 @@
             static ControladorUsuario * getInstancia();
 
             virtual void ingresarUsuario(DTUsuario * dataUsuario);
+            virtual bool esEmailUsuario();
             virtual void cancelarAlta();
             virtual void reingresarEmail(string email);
+            virtual void confirmarAlta();
+            virtual void seleccionarHostal(string nombre);
+            virtual set<DTEmpleado *> obtenerEmpleadosSinHsotal(); 
+            virtual void seleccionarEmpleado(string email);
+            virtual void seleccionarCargo(Cargo cargo); 
+            virtual void cancelarAsignacion();
+            virtual void confirmarAsignacionDeEmpleadoAHostal();
     };
 
 

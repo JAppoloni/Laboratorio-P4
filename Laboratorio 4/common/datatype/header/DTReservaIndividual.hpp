@@ -9,7 +9,8 @@ class DTReservaIndividual : public DTReserva
 {
 public:
 	// Constructors
-	DTReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion habitacion, DTHuesped huesped, bool pago);
+	DTReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, bool pago);
+	DTReservaIndividual(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion* habitacion, DTHuesped* huesped, bool pago);
 
 	// Destructor
 	~DTReservaIndividual();

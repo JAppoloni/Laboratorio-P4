@@ -7,6 +7,7 @@
 Empleado::Empleado(std::string nombre, std::string email, std::string contrasena, Cargo cargo) : Usuario(nombre, email, contrasena)
 {
   this->cargo = cargo;
+  this->hostal = nullptr;
 }
 
 std::list<Calificacion *> Empleado::getNotificaciones()

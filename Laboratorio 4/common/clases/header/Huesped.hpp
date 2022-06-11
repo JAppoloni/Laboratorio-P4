@@ -18,7 +18,7 @@ private:
     
 
 public:
-    Huesped(std::string nombre, std::string email, std::string contrasena,  bool esFinger, std::list<Estadia*> estadias);
+    Huesped(std::string nombre, std::string email, std::string contrasena,  bool esFinger);
   
     ~Huesped(); 
   
@@ -32,6 +32,7 @@ public:
     //Metodos
     void agregarEstadia(Estadia* e); 
     DTHuesped getDatatype();
+    DTHuesped* getDatatypeptr();
 
 
     

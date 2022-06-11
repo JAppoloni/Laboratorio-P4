@@ -75,7 +75,7 @@ DTReserva *ReservaIndividual::getDataReserva()
 											 _checkOut,
 											 _estado,
 											 calcularCosto(),
-											 DTHabitacion(_habitacionReserva->getNumero(), _habitacionReserva->getPrecio(), _habitacionReserva->getCapacidad()),
-											 _huespedReserva->getDatatype(),
+											 new DTHabitacion(_habitacionReserva->getNumero(), _habitacionReserva->getPrecio(), _habitacionReserva->getCapacidad()),
+											 _huespedReserva->getDatatypeptr(),
 											 _pago);
 }

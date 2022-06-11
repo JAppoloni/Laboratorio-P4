@@ -19,7 +19,7 @@ class Empleado : public Usuario
 {
 private:
   Cargo cargo;
-  Hostal *hostal;
+  Hostal * hostal;
   std::list<Comentario *> Comentarios;
   std::list<Calificacion *> Notificaciones;
 

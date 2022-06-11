@@ -1,7 +1,18 @@
 #include "header/DTReserva.hpp"
 
 // Constructors
-DTReserva::DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion habitacion, DTHuesped huesped)
+DTReserva::DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo)
+{
+	_codigo = codigo;
+	_checkIn = checkIn;
+	_checkOut = checkOut;
+	_estado = estado;
+	_costo = costo;
+	_habitacion = nullptr;
+	_huesped = nullptr;
+}
+
+DTReserva::DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion* habitacion, DTHuesped* huesped)
 {
 	_codigo = codigo;
 	_checkIn = checkIn;
@@ -15,6 +26,8 @@ DTReserva::DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserv
 // Destructor
 DTReserva::~DTReserva()
 {
+	delete _habitacion;
+	delete _huesped;
 }
 
 // Getters
@@ -38,7 +51,7 @@ float DTReserva::getCosto() const
 {
 	return _costo;
 }
-DTHabitacion DTReserva::getHabitacion() const
+DTHabitacion* DTReserva::getHabitacion() const
 {
 	return _habitacion;
 }

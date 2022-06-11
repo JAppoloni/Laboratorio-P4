@@ -32,8 +32,8 @@ public:
   void setNombre(std::string nombre); 
   void setDireccion(std::string direccion); 
   void setTelefono(std::string telefono); 
-  void setHabitaciones(std::list<Habitacion*> habitaciones);
-  void setCalificaciones(std::list<Calificacion*> calificaciones);
+  void agregarHabitacion(Habitacion * habitacion);
+
 
   bool operator==(const Hostal & assign);
    

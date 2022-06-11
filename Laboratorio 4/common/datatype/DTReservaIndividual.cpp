@@ -6,8 +6,17 @@ DTReservaIndividual::DTReservaIndividual(int codigo,
 													  DTFecha checkOut,
 													  EstadoReserva estado,
 													  float costo,
-													  DTHabitacion habitacion,
-													  DTHuesped huesped,
+													  bool pago) : DTReserva(codigo, checkIn, checkOut, estado, costo)
+{
+	_pago = pago;
+}
+DTReservaIndividual::DTReservaIndividual(int codigo,
+													  DTFecha checkIn,
+													  DTFecha checkOut,
+													  EstadoReserva estado,
+													  float costo,
+													  DTHabitacion *habitacion,
+													  DTHuesped *huesped,
 													  bool pago) : DTReserva(codigo, checkIn, checkOut, estado, costo, habitacion, huesped)
 {
 	_pago = pago;
@@ -16,6 +25,8 @@ DTReservaIndividual::DTReservaIndividual(int codigo,
 // Destructor
 DTReservaIndividual::~DTReservaIndividual()
 {
+	delete _habitacion;
+	delete _huesped;
 }
 
 // Operators

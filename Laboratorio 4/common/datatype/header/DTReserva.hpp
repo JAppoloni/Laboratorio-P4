@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include "DTFecha.hpp"
-#include "DTHUesped.hpp"
+#include "DTHuesped.hpp"
 #include "DTHabitacion.hpp"
 #include "../../clases/header/EstadoReserva.hpp"
 
@@ -13,7 +13,8 @@ class DTReserva
 public:
 	// Constructors
 	DTReserva();
-	DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion habitacion, DTHuesped huesped);
+	DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo);
+	DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion *habitacion, DTHuesped *huesped);
 
 	// Destructor
 	~DTReserva();
@@ -27,7 +28,7 @@ public:
 	DTFecha getCheckOut() const;
 	EstadoReserva getEstado() const;
 	float getCosto() const;
-	DTHabitacion getHabitacion() const;
+	DTHabitacion *getHabitacion() const;
 
 protected:
 	int _codigo;
@@ -35,8 +36,8 @@ protected:
 	DTFecha _checkOut;
 	EstadoReserva _estado;
 	float _costo;
-	DTHabitacion _habitacion;
-	DTHuesped _huesped;
+	DTHabitacion *_habitacion;
+	DTHuesped *_huesped;
 };
 
 #endif

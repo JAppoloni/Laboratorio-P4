@@ -9,10 +9,11 @@
 class DTFecha
 {
 private:
-    struct tm *fecha;
+    tm *fecha;
 
 public:
     DTFecha();
+    DTFecha(tm fch);
     DTFecha(int min, int hh, int dd, int mm, int yyyy);
     DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday);
 
@@ -25,6 +26,8 @@ public:
     int getAnio();
     int diferenciaDias(DTFecha fchAComparar);
 
+    DTFecha &operator=(const DTFecha &assign);
+    DTFecha operator+(const tm &assign);
     bool operator!=(const DTFecha &) const;
     bool operator==(const DTFecha &) const;
     bool operator>=(const DTFecha &) const;

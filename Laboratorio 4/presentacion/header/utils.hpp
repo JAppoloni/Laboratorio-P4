@@ -4,6 +4,17 @@
 #include <stdio.h>
 #include <string>
 #include "../../Common/datatype/header/DTFecha.hpp"
+
+
+#define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
+#define PBWIDTH 60
+#define NC "\e[0m"
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define CYN "\e[0;36m"
+#define REDB "\e[41m"
+
+
 using namespace std;
 
 DTFecha ingresarFecha();
@@ -30,5 +41,7 @@ float leerFloatIntervalo(float menor, float mayor);
 void limpiar();
 
 void presioneParaContinuar();
+
+void printProgress(double percentage);
 
 #endif

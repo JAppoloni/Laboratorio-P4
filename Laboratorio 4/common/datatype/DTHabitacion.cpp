@@ -29,7 +29,10 @@ std::ostream &operator<<(std::ostream &out, DTHabitacion imprimir)
 
 // Destructor
 DTHabitacion::~DTHabitacion()
-{
+{\
+	if (_listaCalificaciones != nullptr)
+		_listaCalificaciones->clear();
+	delete _listaCalificaciones;
 }
 
 // Getters

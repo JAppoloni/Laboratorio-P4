@@ -13,6 +13,7 @@ DTEstadia::DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkO
 // Destructor
 DTEstadia::~DTEstadia()
 {
+	delete _checkOut;
 }
 
 // Operators

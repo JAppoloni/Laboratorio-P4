@@ -1,61 +1,12 @@
 #include "header/utils.hpp"
-#include<stdio.h>
+#include <stdio.h>
 #include <iostream>
 #include <ostream>
 #include <regex>
-// #include "../Common/datatype/header/DTFecha.hpp"
-// #include <chrono>
-// #include <ctime>
-// using namespace std;
-
-// std::time_t t = std::time(0); // get time now
-//       std::tm *now = std::localtime(&t);
-
-// // Function to creating loading bar
-// void loadingBar()
-// {
-//     // 0 - black background,
-//     // A - Green Foreground
-//     system("color 0A");
-
-//     // Initialize char for printing
-//     // loading bar
-//     char a = 177, b = 219;
-
-//     printf("\n\n\n\n");
-//     printf("\n\n\n\n\t\t\t\t\t"
-//            + "Loading...\n\n");
-//     printf("\t\t\t\t\t");
-
-//     // Print initial loading bar
-//     for (int i = 0; i < 26; i++)
-//         printf("%c", a);
-
-//     // Set the cursor again starting
-//     // point of loading bar
-//     printf("\r");
-//     printf("\t\t\t\t\t");
-
-//     // Print loading bar progress
-//     for (int i = 0; i < 26; i++) {
-//         printf("%c", b);
-
-//         // Sleep for 1 second
-//         Sleep(1000);
-//     }
-// }
-
-// // Driver Code
-// int main()
-// {
-//     // Function Call
-//     loadingBar();
-//     return 0;
-// }
 
 DTFecha ingresarFecha()
 {
-   DTFecha rtn = DTFecha();
+   DTFecha rtn;
    int dia, mes, anio, hh, wday, min;
    string str_fecha;
 
@@ -64,7 +15,7 @@ DTFecha ingresarFecha()
    {
       try
       {
-         cin >> str_fecha;
+         str_fecha = leerString();
          dia = stoi(str_fecha.substr(0, 2));
          mes = stoi(str_fecha.substr(3, 2));
          anio = stoi(str_fecha.substr(6, 4));
@@ -77,15 +28,15 @@ DTFecha ingresarFecha()
       }
       catch (const std::exception &e)
       {
-         cout << "\n\n --------------";
+         cout << RED "\n\n --------------"<<endl;
          cout << "El fomrato debe ser : dd 1-31" << endl;
-         cout << "\t\t   mm 0-11" << endl;
+         cout << "\t\t   mm 00-11" << endl;
          cout << "\t\t   yyyy >1900" << endl;
-         cout << "\t\t   hh 0-23" << endl;
-         cout << "\t\t   min 0-59" << endl;
+         cout << "\t\t   hh 00-23" << endl;
+         cout << "\t\t   min 00-59" << endl;
          cout << "\t\t   D 0-6 (L, M, X, J, V, S, D)" << endl;
-         std::cerr << e.what() << '\n';
-         cout << "--------------";
+         std::cerr << "El error es el siguiente:  "<< e.what() << '\n';
+         cout << "--------------" NC << endl;
 
          cout << "Intrese una fecha (dd/mm/yyyy hh:mm D): ";
       }
@@ -186,7 +137,7 @@ int leerIntIntervalo(int menor, int mayor)
          cin >> num;
          if (num < menor || num > mayor)
          {
-            std::cout << "\n Ingrese un número entre " << menor << " y " << mayor << ": ";
+            std::cout << "\n Ingrese un número entre " << RED << menor << NC << " y " << RED << mayor << NC << ": ";
          }
          else
          {
@@ -257,7 +208,7 @@ float leerFloatIntervalo(float menor, float mayor)
          cin >> num;
          if (num < menor || num > mayor)
          {
-            std::cout << "\n Ingrese un número entre " << menor << " y " << mayor << ": ";
+            std::cout << "\n Ingrese un número entre " << RED << menor << NC << " y " << RED << mayor << NC << ": ";
          }
          else
          {
@@ -281,4 +232,15 @@ void presioneParaContinuar()
 {
    cout << "Presione enter para continuar..." << endl;
    cin.ignore(1000, '\n');
+}
+
+void printProgress(double percentage)
+{
+   cout << GRN;
+   int val = (int)(percentage * 100);
+   int lpad = (int)(percentage * PBWIDTH);
+   int rpad = PBWIDTH - lpad;
+   printf("\r%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
+   fflush(stdout);
+   cout << NC;
 }

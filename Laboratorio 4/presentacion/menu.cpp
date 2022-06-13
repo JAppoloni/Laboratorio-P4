@@ -1,4 +1,5 @@
 #include "header/menu.hpp"
+#include "header/menuCargarDatos.hpp"
 #include <iostream>
 #include <string>
 
@@ -49,6 +50,7 @@ void notImplementedMessage()
 void mainMenu()
 {
     bool exit = false;
+    bool primeraVez = true;
 
     while (!exit)
     {
@@ -75,7 +77,8 @@ void mainMenu()
         switch (intOption)
         {
         case 0:
-            notImplementedMessage();
+            cargarDatos(primeraVez);
+            primeraVez = false;
             break;
         case 1:
             notImplementedMessage();

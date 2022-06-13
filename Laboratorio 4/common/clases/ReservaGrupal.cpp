@@ -58,20 +58,12 @@ const char *ReservaGrupal::YAEXISTEHUESPED::what() const throw()
 // Methods
 float ReservaGrupal::calcularCosto() // VER.
 {
-	// if (_listaEstadia == NULL)
-	// 	return 0;
-	// else
-	// {
-	// 	return 1;
-	// }
-	return 0;
+	return  _checkIn.diferenciaDias(_checkOut)*_habitacionReserva->getPrecio();
 }
 
 void ReservaGrupal::agregarEstadia(Estadia *estadia)
 {
 	Huesped *huesped = estadia->getHuespedEstadia();
-
-	// iter _listaEstadia
 
 	if (_listaEstadia.begin() == _listaEstadia.end() && _listaEstadia.empty() != true && huesped == (*_listaEstadia.end())->getHuespedEstadia())
 		throw YAEXISTEHUESPED();

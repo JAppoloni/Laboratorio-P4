@@ -48,7 +48,7 @@ Estadia::Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Hu
 	ValidarEstadia(checkIn, reservaEstadia, huespedEstadia);
 
 	_checkIn = checkIn;
-	_chechOut = nullptr;
+	_checkOut = nullptr;
 	_promo = promo;
 	_reservaEstadia = reservaEstadia;
 	_huespedEstadia = huespedEstadia;
@@ -61,7 +61,7 @@ Estadia::~Estadia()
 	_reservaEstadia = nullptr;
 	_huespedEstadia = nullptr;
 
-	delete _chechOut;
+	delete _checkOut;
 	delete _reservaEstadia;
 	delete _huespedEstadia;
 	delete _calificacionEstadia;
@@ -86,11 +86,11 @@ void Estadia::setCheckIn(DTFecha checkIn)
 
 DTFecha *Estadia::getChechOut() const
 {
-	return _chechOut;
+	return _checkOut;
 }
 void Estadia::setChechOut(DTFecha *chechOut)
 {
-	_chechOut = chechOut;
+	_checkOut = chechOut;
 }
 
 std::string Estadia::getPromo() const
@@ -123,10 +123,6 @@ void Estadia::setHuespedEstadia(Huesped *huespedEstadia)
 Calificacion *Estadia::getCalificacionEstadia() const
 {
 	return _calificacionEstadia;
-}
-void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
-{
-	_calificacionEstadia = calificacionEstadia;
 }
 
 // Exceptions
@@ -174,10 +170,6 @@ std::string Estadia::obtenerAutor()
 	return _huespedEstadia->getEmail();
 }
 
-void Estadia::notificarEstadia()
-{
-}
-
 int Estadia::obtenerID()
 {
 	return _reservaEstadia->getCodigo();
@@ -185,14 +177,24 @@ int Estadia::obtenerID()
 
 float Estadia::calcularCosto()
 {
-	if (_chechOut == NULL)
+	if (_checkOut == NULL)
 	{
 		throw NOEXISTECHECKOUT();
 		return 0;
 	}
 	else
 	{
-		// Hagregar la Operación de diferencia de fechas cuando esten los DT
-		return 1;
+		return _checkIn.diferenciaDias(DTFecha(_checkOut->getMinutos(), _checkOut->getHora(), _checkOut->getDia(), _checkOut->getMes(), _checkOut->getAnio())) * _reservaEstadia->getHabitacionReserva()->getPrecio();
 	}
+}
+
+
+void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
+{
+	// ! Notificar
+	_calificacionEstadia = calificacionEstadia;
+}
+
+void Estadia::notificarEstadia() // ! VER
+{
 }

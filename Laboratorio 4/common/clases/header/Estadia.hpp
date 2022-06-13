@@ -73,7 +73,7 @@ public:
 
 private:
 	DTFecha _checkIn;
-	DTFecha *_chechOut; // Puede ser NULL, es decir no ha terminado la estadía.
+	DTFecha *_checkOut; // Puede ser NULL, es decir no ha terminado la estadía.
 	std::string _promo;
 	Reserva *_reservaEstadia;
 	Huesped *_huespedEstadia;

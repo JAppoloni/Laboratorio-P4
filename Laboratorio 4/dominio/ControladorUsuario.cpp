@@ -58,11 +58,11 @@ bool ControladorUsuario::esEmailUsuario()
     return empleados[usuarioRecordado->getEmail()] != nullptr || huespedes[usuarioRecordado->getEmail()] != nullptr;
 }
 
-string nomHostalRecordado;
+string nomHostalRecordadoUsuario;
 
 void ControladorUsuario::seleccionarHostal(string nombre)
 {
-    nomHostalRecordado = nombre;
+    nomHostalRecordadoUsuario = nombre;
 }
 
 set<DTEmpleado *> ControladorUsuario::obtenerEmpleadosSinHsotal()
@@ -94,6 +94,6 @@ void ControladorUsuario::cancelarAsignacion(){}
 
 void ControladorUsuario::confirmarAsignacionDeEmpleadoAHostal()
 {
-    ControladorHostal * CH = ControladorHostal::getInstancia();
+    // ! ControladorHostal * CH = ControladorHostal::getInstancia();
 
 }

@@ -46,13 +46,7 @@ Estadia *ReservaIndividual::getEstadiaReserva() const
 // Methods
 float ReservaIndividual::calcularCosto()
 {
-	if (_estadiaReserva == NULL)
-		return 0;
-	else
-	{
-		// Hagregar la Operación de diferencia de fechas cuando esten los DT
-		return 1;
-	}
+	return _checkIn.diferenciaDias(_checkOut) * _habitacionReserva->getPrecio();
 }
 
 void ReservaIndividual::agregarEstadia(Estadia *estadia)

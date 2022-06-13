@@ -10,12 +10,16 @@ private:
     static ControladorHostal *instancia;
     ControladorHostal();
 
+    map<string, Hostal*> hostales;
 public:
     static ControladorHostal *getInstancia();
 
-     void agregarHostal(DTHostal hostal);
-     set<DTHostal> obtenerHostales();
-     void buscarHostal(string nombre);
+    virtual void agregarHostal(DTHostal hostal);
+    virtual set<DTHostal *> obtenerHostales();
+    virtual void buscarHostal(string nombre);
+    virtual void nuevaHabitacion(int numero, int capacidad, float costo);
+    virtual void crearHabitacion();
+    virtual void liberarMemoria();
 };
 
 #endif

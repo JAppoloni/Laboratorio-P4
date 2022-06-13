@@ -30,3 +30,4 @@ debug:
 	g++ -Wall -c -g common/clases/*.cpp 
 	g++ -Wall -c -g common/datatype/*.cpp 
 	g++ -Wall -g -g -o executable main.cpp *.o
+	make clean

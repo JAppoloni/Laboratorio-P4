@@ -1,12 +1,6 @@
 #include "header/Comentario.hpp"
 
 
-Comentario::Comentario(const Comentario &copy)
-{
-	_Comentario = copy.getComentario();
-	_CalificacionComentario = copy.getCalificacionComentario();
-}
-
 Comentario::Comentario(std::string Comentario, Calificacion* CalificacionComentario)
 {
 	_Comentario = Comentario;
@@ -22,13 +16,6 @@ Comentario::~Comentario()
 }
 
 
-// Operators
-Comentario & Comentario::operator=(const Comentario &assign)
-{
-	_Comentario = assign.getComentario();
-	_CalificacionComentario = assign.getCalificacionComentario();
-	return *this;
-}
 
 bool Comentario::operator==(const Comentario & assign)
 {
@@ -54,7 +41,7 @@ Calificacion* Comentario::getCalificacionComentario() const
 // Methods
 DTComentario Comentario::getDataType()
 {
-	return DTComentario(*this);
+	return DTComentario(_Comentario);
 }
 
 int Comentario::obtenerID()

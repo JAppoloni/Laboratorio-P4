@@ -1,15 +1,16 @@
-#ifndef DTNotificacion_HPP
-#define DTNotificacion_HPP
-#include "../../clases/header/Notificacion.hpp"
-#include <iostream>
-#include <string>
+#ifndef DTNOTIFICACION_HPP
+# define DTNOTIFICACION_HPP
+
+# include <iostream>
+# include <string>
 
 class DTNotificacion
 {
 	public:
 		// Constructors
-		DTNotificacion(std::string autor,std::string comentario, int puntaje);
+		DTNotificacion();
 		DTNotificacion(const DTNotificacion &copy);
+		DTNotificacion(std::string autor, std::string comentario, int puntaje);
 		
 		// Destructor
 		~DTNotificacion();
@@ -17,12 +18,18 @@ class DTNotificacion
 		// Operators
 		DTNotificacion & operator=(const DTNotificacion &assign);
 		
+		// Getters 
+		std::string getAutor() const;
+		std::string getComentario() const;
+		int getPuntaje() const;
+		
 	private:
-
-	std::string autor;
-	std::string comentario;
-	int puntaje;
+		std::string _autor;
+		std::string _comentario;
+		int _puntaje;
 		
 };
+
+std::ostream &operator<<(std::ostream &out, DTNotificacion imprimir);
 
 #endif

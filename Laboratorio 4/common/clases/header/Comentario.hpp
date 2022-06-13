@@ -14,14 +14,12 @@ class Comentario
 	public:
 		
 		// Constructors
-		Comentario(const Comentario &copy);
 		Comentario(std::string Comentario, Calificacion* CalificacionComentario);
 		
 		// Destructor
 		~Comentario();
 		
 		// Operators
-		Comentario & operator=(const Comentario &assign);
 		bool operator==(const Comentario & assign);
 
 		

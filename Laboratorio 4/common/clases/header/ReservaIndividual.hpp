@@ -2,6 +2,8 @@
 #define RESERVAINDIVIDUAL_HPP
 
 #include "Reserva.hpp"
+#include "../../datatype/header/DTReservaIndividual.hpp"
+
 class Huesped;
 class Estadia;
 
@@ -10,9 +12,8 @@ class ReservaIndividual : public Reserva
 public:
 	// Constructors
 	ReservaIndividual();
-	ReservaIndividual(const ReservaIndividual &copy);
 	ReservaIndividual(int codigo, DTFecha CheckIn, DTFecha checkOut, Huesped *huespedReserva, EstadoReserva estado, Habitacion *habitacionReserva, bool pago);
-	ReservaIndividual(int codigo, DTFecha CheckIn, DTFecha checkOut, Huesped *huespedReserva, EstadoReserva estado, Habitacion *habitacionReserva, bool pago, Estadia *estadiaReserva);
+	
 
 	// Destructor
 	~ReservaIndividual();
@@ -27,9 +28,9 @@ public:
 
 	// Methods
 	float calcularCosto();
-	void agregarEstadia(Estadia* estadia);
+	void agregarEstadia(Estadia *estadia);
 	bool esReservaHostalHuesped(std::string email, std::string nombre);
-	void darBaja();
+	DTReserva* getDataReserva();
 
 private:
 	bool _pago;

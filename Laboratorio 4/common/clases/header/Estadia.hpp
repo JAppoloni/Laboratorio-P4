@@ -21,15 +21,12 @@ class Estadia
 {
 public:
 	// Constructors
-	Estadia(const Estadia &copy);
 	Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia);
-	Estadia(DTFecha checkIn, DTFecha *chechOut, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia, Calificacion *calificacionEstadia);
-
+	
 	// Destructor
 	~Estadia();
 
 	// Operators
-	Estadia &operator=(const Estadia &assign);
 	bool operator==(const Estadia &assign);
 
 	// Getters / Setters
@@ -76,7 +73,7 @@ public:
 
 private:
 	DTFecha _checkIn;
-	DTFecha *_chechOut; // Puede ser NULL, es decir no ha terminado la estadía.
+	DTFecha *_checkOut; // Puede ser NULL, es decir no ha terminado la estadía.
 	std::string _promo;
 	Reserva *_reservaEstadia;
 	Huesped *_huespedEstadia;

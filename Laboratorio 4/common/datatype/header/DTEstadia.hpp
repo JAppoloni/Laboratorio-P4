@@ -1,24 +1,33 @@
-#ifndef DTEstadia_HPP
-# define DTEstadia_HPP
+#ifndef DTESTADIA_HPP
+#define DTESTADIA_HPP
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include "DTFecha.hpp"
 
 class DTEstadia
 {
-	public:
-		// Constructors
-		DTEstadia();
-		DTEstadia(const DTEstadia &copy);
-		
-		// Destructor
-		~DTEstadia();
-		
-		// Operators
-		DTEstadia & operator=(const DTEstadia &assign);
-		
-	private:
-		
+public:
+	// Constructors
+	DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkOut, std::string promo);
+
+	// Destructor
+	~DTEstadia();
+
+	// Getters
+	DTFecha getCheckIn() const;
+	DTFecha *getCheckOut() const;
+	std::string getPromo() const;
+	std::string getEmail() const;
+	int getID() const;
+
+private:
+	DTFecha _checkIn;
+	DTFecha *_checkOut;
+	std::string _promo;
+	int _IDReserva;
+	std::string _EmailHuesped;
 };
+
+std::ostream &operator<<(std::ostream &out, DTEstadia imprimir);
 
 #endif

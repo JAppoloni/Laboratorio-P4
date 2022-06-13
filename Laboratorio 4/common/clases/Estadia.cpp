@@ -43,34 +43,12 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 	}
 }
 
-Estadia::Estadia(const Estadia &copy)
-{
-	ValidarEstadia(copy.getCheckIn(), copy.getReservaEstadia(), copy.getHuespedEstadia());
-	_checkIn = copy.getCheckIn();
-	_chechOut = copy.getChechOut();
-	_promo = copy.getPromo();
-	_reservaEstadia = copy.getReservaEstadia();
-	_huespedEstadia = copy.getHuespedEstadia();
-	_calificacionEstadia = copy.getCalificacionEstadia();
-}
-
-Estadia::Estadia(DTFecha checkIn, DTFecha *chechOut, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia, Calificacion *calificacionEstadia)
-{
-	ValidarEstadia(checkIn, reservaEstadia, huespedEstadia);
-	_checkIn = checkIn;
-	_chechOut = chechOut;
-	_promo = promo;
-	_reservaEstadia = reservaEstadia;
-	_huespedEstadia = huespedEstadia;
-	_calificacionEstadia = calificacionEstadia;
-}
-
 Estadia::Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Huesped *huespedEstadia)
 {
 	ValidarEstadia(checkIn, reservaEstadia, huespedEstadia);
 
 	_checkIn = checkIn;
-	_chechOut = nullptr;
+	_checkOut = nullptr;
 	_promo = promo;
 	_reservaEstadia = reservaEstadia;
 	_huespedEstadia = huespedEstadia;
@@ -83,23 +61,13 @@ Estadia::~Estadia()
 	_reservaEstadia = nullptr;
 	_huespedEstadia = nullptr;
 
-	delete _chechOut;
+	delete _checkOut;
 	delete _reservaEstadia;
 	delete _huespedEstadia;
 	delete _calificacionEstadia;
 }
 
 // Operators
-Estadia &Estadia::operator=(const Estadia &assign)
-{
-	_checkIn = assign.getCheckIn();
-	_chechOut = assign.getChechOut();
-	_promo = assign.getPromo();
-	_reservaEstadia = assign.getReservaEstadia();
-	_huespedEstadia = assign.getHuespedEstadia();
-	_calificacionEstadia = assign.getCalificacionEstadia();
-	return *this;
-}
 
 bool Estadia::operator==(const Estadia &assign)
 {
@@ -118,11 +86,11 @@ void Estadia::setCheckIn(DTFecha checkIn)
 
 DTFecha *Estadia::getChechOut() const
 {
-	return _chechOut;
+	return _checkOut;
 }
 void Estadia::setChechOut(DTFecha *chechOut)
 {
-	_chechOut = chechOut;
+	_checkOut = chechOut;
 }
 
 std::string Estadia::getPromo() const
@@ -156,10 +124,6 @@ Calificacion *Estadia::getCalificacionEstadia() const
 {
 	return _calificacionEstadia;
 }
-void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
-{
-	_calificacionEstadia = calificacionEstadia;
-}
 
 // Exceptions
 const char *Estadia::FechaCheckInMenor::what() const throw()
@@ -181,13 +145,12 @@ const char *Estadia::NOEXISTECHECKOUT::what() const throw()
 	return "No hay una fecha de finalización asociada a la Reserva.";
 }
 
-
 // Methods
 DTCalificacion Estadia::getCalificacionDataType()
 {
 
 	if (_calificacionEstadia != nullptr)
-		return DTCalificacion(*_calificacionEstadia);
+		return _calificacionEstadia->getDataType();
 	else
 		throw CalificacionNoExiste();
 }
@@ -207,25 +170,31 @@ std::string Estadia::obtenerAutor()
 	return _huespedEstadia->getEmail();
 }
 
-void Estadia::notificarEstadia()
-{
-}
-
 int Estadia::obtenerID()
 {
 	return _reservaEstadia->getCodigo();
 }
 
-
 float Estadia::calcularCosto()
 {
-	if (_chechOut == NULL)
-		{
-			throw NOEXISTECHECKOUT();
-			return 0;}
+	if (_checkOut == NULL)
+	{
+		throw NOEXISTECHECKOUT();
+		return 0;
+	}
 	else
 	{
-		//Hagregar la Operación de diferencia de fechas cuando esten los DT
-		return 1;
+		return _checkIn.diferenciaDias(DTFecha(_checkOut->getMinutos(), _checkOut->getHora(), _checkOut->getDia(), _checkOut->getMes(), _checkOut->getAnio())) * _reservaEstadia->getHabitacionReserva()->getPrecio();
 	}
+}
+
+
+void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
+{
+	// ! Notificar
+	_calificacionEstadia = calificacionEstadia;
+}
+
+void Estadia::notificarEstadia() // ! VER
+{
 }

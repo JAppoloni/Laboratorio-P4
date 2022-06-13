@@ -10,22 +10,17 @@
 
 class Estadia;
 class Comentario;
-class DTCalificacion;
 
 class Calificacion
 {
 public:
    // Constructors
-   Calificacion(const Calificacion &copy);
-   Calificacion(const Calificacion *&copy);
-   Calificacion(int puntaje, std::string comentario, DTFecha fecha, Estadia *estadiaComentario, Comentario *respuestaComentario);
    Calificacion(int puntaje, std::string comentario, DTFecha fecha, Estadia *estadiaComentario);
 
    // Destructor
    ~Calificacion();
 
    // Operators
-   Calificacion &operator=(const Calificacion &assign);
    bool operator==(const Calificacion &assign);
 
    // Getters / Setters

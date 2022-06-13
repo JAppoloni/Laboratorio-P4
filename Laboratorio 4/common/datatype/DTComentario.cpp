@@ -1,20 +1,8 @@
 #include "header/DTComentario.hpp"
 
-// Constructors
-
-DTComentario::DTComentario(const DTComentario &copy)
+DTComentario::DTComentario(std::string comentario)
 {
-	(void) copy;
-}
-
-DTComentario::DTComentario(const Comentario &copy)
-{
-	(void) copy;
-}
-
-DTComentario::DTComentario(const Comentario* &copy)
-{
-	(void) copy;
+	_comentario = comentario;
 }
 
 // Destructor
@@ -22,11 +10,14 @@ DTComentario::~DTComentario()
 {
 }
 
-
 // Operators
-DTComentario & DTComentario::operator=(const DTComentario &assign)
+std::ostream &operator<<(std::ostream &out, DTComentario imprimir)
 {
-	(void) assign;
-	return *this;
+	return out << " Implementar /n";
 }
 
+// Getters 
+std::string DTComentario::getComentario() const
+{
+	return _comentario;
+}

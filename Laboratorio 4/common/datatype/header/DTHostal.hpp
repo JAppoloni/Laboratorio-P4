@@ -1,29 +1,38 @@
-#ifndef DTHostal_HPP
-#define DTHostal_HPP
-#include "../../clases/header/Hostal.hpp"
-# include <iostream>
-# include <string>
+#ifndef DTHOSTAL_HPP
+#define DTHOSTAL_HPP
 
-class Hostal;
+#include <iostream>
+#include <string>
+#include "DTHabitacion.hpp"
+#include "DTEstadia.hpp"
 
 class DTHostal
 {
-	public:
-		// Constructors
-		DTHostal();
-		DTHostal(std::string nombre,std::string direccion,std::string telefono, std::list<Habitacion*> listaHabitaciones, std::list<Calificacion*> listaCalificaciones){};
-		DTHostal(const Hostal* &hostal);
-		DTHostal(const Hostal &hostal);
-		DTHostal(const DTHostal &copy);
-		
-		// Destructor
-		~DTHostal();
-		
-		// Operators
-		DTHostal & operator=(const DTHostal &assign);
-		
-	private:
-		
+public:
+	// Constructors
+	DTHostal(std::string nombre, std::string direccion, std::string telefono);
+	DTHostal(std::string nombre, std::string direccion, std::string telefono, int *promClaif);
+	DTHostal(std::string nombre, std::string direccion, std::string telefono, int *promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias);
+
+	// Destructor
+	~DTHostal();
+
+	// Getters
+	int *getPromedioCalificaciones() const;
+	std::string getNombre() const;
+	std::string getDireccion() const;
+	std::string getTelefono() const;
+	std::list<DTHabitacion> *getListaHabitaciones() const;
+	std::list<DTEstadia> *getListaEstadia() const;
+
+private:
+	int *_promClaif;
+	std::string _nombre;
+	std::string _direccion;
+	std::string _telefono;
+	std::list<DTHabitacion> *_listaHabitaciones;
+	std::list<DTEstadia> *_listaEstadia;
 };
 
+std::ostream &operator<<(std::ostream &out, DTHostal imprimir);
 #endif

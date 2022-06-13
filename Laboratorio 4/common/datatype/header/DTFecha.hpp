@@ -1,25 +1,43 @@
-#ifndef DTFECHA_HPP
-# define DTFECHA_HPP
+#ifndef _DTFECHA_HH_
+#define _DTFECHA_HH_
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <time.h>
+#include <stdio.h>
+#include <string.h>
 
 class DTFecha
 {
-	public:
-		// Constructors
-		DTFecha();
-		DTFecha(const DTFecha &copy);
-		
-		// Destructor
-		~DTFecha();
-		
-		// Operators
-		DTFecha & operator=(const DTFecha &assign);
-		bool operator>=(const DTFecha& compare);
+private:
+    tm *fecha;
 
-	private:
-		
+public:
+    DTFecha();
+    DTFecha(tm fch);
+    DTFecha(int min, int hh, int dd, int mm, int yyyy);
+    DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday);
+
+    ~DTFecha();
+
+    int getMinutos();
+    int getHora();
+    int getDia();
+    int getMes();
+    int getAnio();
+    int diferenciaDias(DTFecha fchAComparar);
+
+    DTFecha &operator=(const DTFecha &assign);
+    DTFecha operator+(const tm &assign);
+    bool operator!=(const DTFecha &) const;
+    bool operator==(const DTFecha &) const;
+    bool operator>=(const DTFecha &) const;
+    bool operator<=(const DTFecha &) const;
+    bool operator>(const DTFecha &) const;
+    bool operator<(const DTFecha &) const;
+
+    void Imprimir();
 };
+
+std::ostream &operator<<(std::ostream &out, DTFecha fecha);
 
 #endif

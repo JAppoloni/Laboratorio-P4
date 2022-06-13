@@ -21,8 +21,7 @@ private:
 
 
 public:
-  Hostal(std::string nombre, std::string direccion, std::string telefono, std::list<Habitacion*> listaHabitaciones,std::list<Calificacion*> listaCalificaciones); 
-  Hostal(Hostal &copy); 
+  Hostal(std::string nombre, std::string direccion, std::string telefono); 
   ~Hostal(); 
     
   std::string getNombre(); 
@@ -33,10 +32,9 @@ public:
   void setNombre(std::string nombre); 
   void setDireccion(std::string direccion); 
   void setTelefono(std::string telefono); 
-  void setHabitaciones(std::list<Habitacion*> habitaciones);
-  void setCalificaciones(std::list<Calificacion*> calificaciones);
+  void agregarHabitacion(Habitacion * habitacion);
 
-  Hostal & operator=(const Hostal &assign);
+
   bool operator==(const Hostal & assign);
    
    std::list<DTCalificacion> obtenerCalificaciones(); 

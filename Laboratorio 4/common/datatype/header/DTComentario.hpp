@@ -1,31 +1,24 @@
-#ifndef DTComentario_HPP
-# define DTComentario_HPP
-#include "../../clases/header/Comentario.hpp"
-#include "../../clases/header/Calificacion.hpp"
+#ifndef DTCOMENTARIO_HPP
+#define DTCOMENTARIO_HPP
 
-# include <iostream>
-# include <string>
-
-class Comentario;
-class Calificacion;
+#include <iostream>
+#include <string>
 
 class DTComentario
 {
-	public:
-		// Constructors
-		DTComentario(std::string _Comentario, Calificacion* _CalificacionComentario){};
-		DTComentario(const Comentario &comentario);
-		DTComentario(const Comentario* &comentario);
-		DTComentario(const DTComentario &copy);
-		
-		// Destructor
-		~DTComentario();
-		
-		// Operators
-		DTComentario & operator=(const DTComentario &assign);
-		
-	private:
-		
+public:
+	// Constructors
+	DTComentario(std::string comentario);
+
+	// Destructor
+	~DTComentario();
+
+	// Getters
+	std::string getComentario() const;
+
+private:
+	std::string _comentario;
 };
 
+std::ostream &operator<<(std::ostream &out, DTComentario imprimir);
 #endif

@@ -1,31 +1,29 @@
+#ifndef DTEMPLEADO_HPP
+#define DTEMPLEADO_HPP
 
+#include "../../clases/header/Cargo.hpp"
+#include <iostream>
+#include <string>
+#include "DTUsuario.hpp"
 
-#ifndef DTEmpleado_HPP
-# define DTEmpleado_HPP
-#include "../../clases/header/Empleado.hpp"
-# include <iostream>
-# include <string>
-
-class Empleado;
-
-class DTEmpleado
+class DTEmpleado : public DTUsuario
 {
-	public:
-		// Constructors
-		DTEmpleado(std::string nombre, std::string email, std::string contrasena, Cargo cargo,std::list<Notificacion*> notificaciones, std::list<Comentario*> comentarios,Hostal* hostal){};
-		DTEmpleado();
-		DTEmpleado(const Empleado* &empleado);
-		DTEmpleado(const Empleado &empleado);
-		DTEmpleado(const DTEmpleado &copy);
-		
-		// Destructor
-		~DTEmpleado();
-		
-		// Operators
-		DTEmpleado & operator=(const DTEmpleado &assign);
-		
-	private:
-		
+public:
+	// Constructors
+	DTEmpleado( std::string nombre, std::string contrasenya, std::string email, Cargo cargo);
+	
+	// Destructor
+	~DTEmpleado();
+
+	// Operators
+	virtual std::ostream &operator<<(std::ostream &o);
+
+	// Getters 
+	Cargo getCargo() const;
+
+private:
+	Cargo _cargo;
 };
 
 #endif
+

@@ -90,7 +90,4 @@ void Reserva::cancelarReserva()
 {
 	_estado = Cancelada;
 }
-DTReserva Reserva::getDataReserva()
-{
-	return DTReserva((*this));
-}
+

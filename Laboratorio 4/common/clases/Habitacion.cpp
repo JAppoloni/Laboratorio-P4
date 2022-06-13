@@ -45,10 +45,3 @@ void Habitacion::imprimir()
 {
     std::cout << " La habitación número" << this->numero << " cuenta con una capacidad de " << this->capacidad << " a un precio de  $ " << this->precio << ".";
 }
-
-Habitacion &Habitacion::operator=(const Habitacion &assign){
-  numero = assign.numero;
-  capacidad = assign.capacidad;
-  precio = assign.precio;
-  return *this; 
-}

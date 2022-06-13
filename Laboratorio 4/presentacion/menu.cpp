@@ -1,4 +1,5 @@
 #include "header/menu.hpp"
+#include "header/menuCargarDatos.hpp"
 #include <iostream>
 #include <string>
 
@@ -49,24 +50,25 @@ void notImplementedMessage()
 void mainMenu()
 {
     bool exit = false;
+    bool primeraVez = true;
 
     while (!exit)
     {
         string option = outputMenu();
         int intOption;
-        
-        try 
+
+        try
         {
             intOption = stoi(option);
-        } 
-        catch (exception error) 
+        }
+        catch (exception const &excep)
         {
-            if (option == "S")
+            if (option == "S" || option == "s")
             {
                 exit = true;
                 break;
-            } 
-            else 
+            }
+            else
             {
                 intOption = -1;
             }
@@ -75,7 +77,8 @@ void mainMenu()
         switch (intOption)
         {
         case 0:
-            notImplementedMessage();
+            cargarDatos(primeraVez);
+            primeraVez = false;
             break;
         case 1:
             notImplementedMessage();
@@ -130,6 +133,6 @@ void mainMenu()
     }
 
     system("clear");
-            cout << "Hasta luego!" << endl
-                 << endl;
+    cout << "Hasta luego!" << endl
+         << endl;
 }

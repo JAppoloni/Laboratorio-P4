@@ -1,6 +1,5 @@
 #include "header/Calificacion.hpp"
 
-
 void Calificacion::ValidarPuntaje(int puntaje)
 {
 	if (puntaje < 1 || puntaje > 5)
@@ -9,15 +8,6 @@ void Calificacion::ValidarPuntaje(int puntaje)
 	}
 }
 
-Calificacion::Calificacion(const Calificacion &copy)
-{
-	ValidarPuntaje(copy.getPuntaje());
-	_puntaje = copy.getPuntaje();
-	_comentario = copy.getComentario();
-	_fecha = copy.getFecha();
-	_estadiaComentario = copy.getEstadiaComentario();
-	_respuestaComentario = copy.getRespuestaComentario();
-}
 
 Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, Estadia *estadiaComentario)
 {
@@ -29,34 +19,13 @@ Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, E
 	_respuestaComentario = NULL;
 }
 
-Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, Estadia *estadiaComentario, Comentario *respuestaComentario)
-{
-	ValidarPuntaje(puntaje);
-	_puntaje = puntaje;
-	_comentario = comentario;
-	_fecha = fecha;
-	_estadiaComentario = estadiaComentario;
-	_respuestaComentario = respuestaComentario;
-}
-
 // Destructor
 Calificacion::~Calificacion()
 {
 	_estadiaComentario = nullptr;
-	
+
 	delete _estadiaComentario;
 	delete _respuestaComentario;
-}
-
-// Operators
-Calificacion &Calificacion::operator=(const Calificacion &assign)
-{
-	_puntaje = assign.getPuntaje();
-	_comentario = assign.getComentario();
-	_fecha = assign.getFecha();
-	_estadiaComentario = assign.getEstadiaComentario();
-	_respuestaComentario = assign.getRespuestaComentario();
-	return *this;
 }
 
 bool Calificacion::operator==(const Calificacion &assign)
@@ -119,7 +88,7 @@ const char *Calificacion::OutOfRange::what() const throw()
 // Methods
 DTCalificacion Calificacion::getDataType()
 {
-	return DTCalificacion(*this);
+	return DTCalificacion(this->obtenerID(), _estadiaComentario->getHuespedEstadia()->getEmail(), _puntaje, _fecha, _comentario,_respuestaComentario->getComentario());
 }
 
 int Calificacion::obtenerID()

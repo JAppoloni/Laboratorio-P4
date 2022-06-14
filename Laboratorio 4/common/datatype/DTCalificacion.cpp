@@ -18,6 +18,8 @@ DTCalificacion::DTCalificacion(int IDReserva, std::string IDHuesped, int calific
 	_calificacion = calificacion;
 	_fecha = fecha;
 	_comentario = comentario;
+	_respuesta = "";
+
 }
 
 // Destructor
@@ -28,7 +30,14 @@ DTCalificacion::~DTCalificacion()
 // Operators
 std::ostream &operator<<(std::ostream &out, DTCalificacion imprimir)
 {
-	return out << " Implementar /n";
+	// out << "Reserva: " << imprimir.getIDReserva() << std::endl;
+	// out << "Huesped: " << imprimir.getIDHuesped() << std::endl;
+	out << "Calificación: " << imprimir.getCalificacion() << std::endl;
+	out << "Fecha: " << imprimir.getFecha() << std::endl;
+	out << "Comentario: " << imprimir.getComentario() << std::endl;
+	if (imprimir.getRespuesta() != "")
+		out << "Respuesta: " << imprimir.getRespuesta() << std::endl;
+	return out;
 }
 
 // Getters

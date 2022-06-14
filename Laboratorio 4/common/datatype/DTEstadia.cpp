@@ -19,8 +19,14 @@ DTEstadia::~DTEstadia()
 // Operators
 std::ostream &operator<<(std::ostream &out, DTEstadia imprimir)
 {
-	return out << " Implementar /n";
-}
+	out << "Reserva: " << imprimir.getID() << std::endl;
+	out << "Huésped: " << imprimir.getEmail() << std::endl;
+	out << "Check In: " << imprimir.getCheckIn() << std::endl;
+	if (imprimir.getCheckOut() != nullptr)
+		out << "Check Out: " << imprimir.getCheckOut() << std::endl;
+	out << "Promo: " << imprimir.getPromo() << std::endl;
+	return out;
+	}
 
 // Getters
 DTFecha DTEstadia::getCheckIn() const

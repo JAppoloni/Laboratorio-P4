@@ -24,7 +24,18 @@ DTHabitacion::DTHabitacion(int numero, float precio, int capacidad, std::list<DT
 // Operators
 std::ostream &operator<<(std::ostream &out, DTHabitacion imprimir)
 {
-	return out << " Implementar /n";
+	out << "Número: " << imprimir.getNumero() << std::endl;
+	out << "Precio: " << imprimir.getPrecio() << std::endl;
+	out << "Capacidad: " << imprimir.getCapacidad() << std::endl;
+	if (imprimir.getListaCalificaciones() != nullptr)
+	{
+		out << "Calificaciones: " << std::endl;
+		for (auto it = imprimir.getListaCalificaciones()->begin(); it != imprimir.getListaCalificaciones()->end(); it++)
+		{
+			out << *it << std::endl;
+		}
+	}
+	return out;
 }
 
 // Destructor

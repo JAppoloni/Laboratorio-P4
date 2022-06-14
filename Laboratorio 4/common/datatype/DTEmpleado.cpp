@@ -9,7 +9,11 @@ DTEmpleado::DTEmpleado(std::string nombre, std::string contrasenya, std::string 
 
 std::ostream &DTEmpleado::operator<<(std::ostream &out)
 {
-	out << "IMPLEMENTAR" << std::endl;
+	out << "Nombre: " << getNombre() << std::endl;
+	out << "Email: " << getEmail() << std::endl;
+	out << "Cargo: "; 
+	imprimirCargo(getCargo());
+	out << std::endl;
 	return out;
 }
 

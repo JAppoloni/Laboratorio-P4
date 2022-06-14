@@ -27,6 +27,9 @@ public:
 
     Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
+
+    //para pruebas
+    virtual set<DTHostal *> listarTodosLosHostalesDelSistema();
 };
 
 #endif

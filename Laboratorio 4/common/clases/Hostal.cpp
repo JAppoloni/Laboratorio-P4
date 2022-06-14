@@ -1,6 +1,7 @@
 #include "header/Hostal.hpp"
 #include <iostream>
 #include <string>
+#include <list>
 
 std::string Hostal::getNombre()
 {
@@ -28,7 +29,6 @@ void Hostal::setTelefono(std::string telefono)
 {
     this->telefono = telefono;
 }
-
 
 std::list<Habitacion *> Hostal::getHabitaciones()
 {
@@ -58,14 +58,24 @@ bool Hostal::operator==(const Hostal &hostal)
     return (nombre == hostal.nombre && direccion == hostal.direccion && telefono == hostal.telefono);
 }
 
+Hostal &Hostal::operator=(const Hostal &assign)
+{
+    this->nombre = assign.nombre;
+    this->direccion = assign.direccion;
+    this->telefono = assign.telefono;
+    this->listaHabitaciones = assign.listaHabitaciones;
+    return *this;
+}
 
 std::list<int> Hostal::obtenerComentariosSinResponder()
 {
     std::list<int> idComentarios = {};
-    std::list<Calificacion*>::iterator it;
-    for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it) {
-           Calificacion* c = *it;
-        if (!(c->estaResponida())) {
+    std::list<Calificacion *>::iterator it;
+    for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
+    {
+        Calificacion *c = *it;
+        if (!(c->estaResponida()))
+        {
             int id = c->obtenerID();
             idComentarios.insert(idComentarios.begin(), id);
         }
@@ -73,36 +83,37 @@ std::list<int> Hostal::obtenerComentariosSinResponder()
     return idComentarios;
 }
 
-std::list<DTCalificacion> Hostal::obtenerCalificaciones(){
-  std::list<DTCalificacion> calificaciones;// {};
-   std::list<Calificacion*>::iterator it;
-  for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it) {
-    Calificacion* c = *it;
-    calificaciones.insert(calificaciones.end(), c->getDataType());
-  }
-  return calificaciones;
+std::list<DTCalificacion> Hostal::obtenerCalificaciones()
+{
+    std::list<DTCalificacion> calificaciones; // {};
+    std::list<Calificacion *>::iterator it;
+    for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
+    {
+        Calificacion *c = *it;
+        calificaciones.insert(calificaciones.end(), c->getDataType());
+    }
+    return calificaciones;
 }
-
 
 DTHostal Hostal::getDatatype()
 {
-    DTHostal data =   DTHostal(this->nombre, this->direccion,this->telefono);
+    DTHostal data = DTHostal(this->nombre, this->direccion, this->telefono);
     return data;
-    
 }
 
-void Hostal::agregarHabitacion(Habitacion * habitacion)
+void Hostal::agregarHabitacion(Habitacion *habitacion)
 {
     listaHabitaciones.push_back(habitacion);
 }
 
-Habitacion * Hostal::getHabitacion(int num)
+Habitacion *Hostal::getHabitacion(int num)
 {
-    for(list<Habitacion*>::iterator it = listaHabitaciones.begin(); it != listaHabitaciones.end(); ++it){
-        if((*it)->getNumero() == num){
+    for (std::list<Habitacion *>::iterator it = listaHabitaciones.begin(); it != listaHabitaciones.end(); ++it)
+    {
+        if ((*it)->getNumero() == num)
+        {
             return *it;
         };
     };
     return nullptr;
 }
-  

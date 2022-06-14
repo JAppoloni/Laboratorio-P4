@@ -19,6 +19,9 @@ class IControladorHostal{
         virtual void liberarMemoria() = 0;//alta habitacion
         virtual list<DTHostal*> calcularTopTres() = 0;//consultar top 3 hostales
         virtual set<DTCalificacion*> consultarHostal(string nom) = 0;//consultar top 3 hostales 
+
+        //para pruebas
+        virtual set<DTHostal *> listarTodosLosHostalesDelSistema() = 0;
 };
 
 #endif

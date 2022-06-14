@@ -10,6 +10,7 @@
 #include "Huesped.hpp"
 #include "Estadia.hpp"
 
+class Habitacion;
 class Estadia;
 class Huesped;
 class DTReserva;

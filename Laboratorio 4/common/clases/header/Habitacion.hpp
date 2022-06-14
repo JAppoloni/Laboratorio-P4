@@ -3,6 +3,8 @@
 
 #include "Hostal.hpp"
 
+class Hostal;
+
 class Habitacion
 {
 private:

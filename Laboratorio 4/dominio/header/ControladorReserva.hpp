@@ -2,6 +2,9 @@
 #define CONTROLADOR_RESERVA
 
     #include "IControladorReserva.hpp"
+    #include "ControladorHostal.hpp"
+    #include "controladorUsuario.hpp"
+
     using namespace std;
 
     class ControladorReserva: public IControladorReserva{
@@ -24,6 +27,11 @@
 
             set<DTReserva *> listarReservasHuesped(string email, string nomHostal);
             Reserva * getReserva(int codigo);
+
+            //para pruebas
+            virtual set<DTReserva *> listarTodasLasReservasDelSistema();
+            virtual int conocerTotatalReservas();
+
     };
 
 #endif

@@ -10,7 +10,6 @@
 #include "Huesped.hpp"
 #include "Reserva.hpp"
 #include "Calificacion.hpp"
-#include "EstadoReserva.hpp"
 
 class Calificacion;
 class DTCalificacion;

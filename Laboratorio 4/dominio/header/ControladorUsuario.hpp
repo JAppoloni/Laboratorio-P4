@@ -33,6 +33,9 @@ public:
     virtual set<DTHuesped *> listarHuespedes();
 
     Huesped *getHuesped(string correo);
+    
+    //para pruebas
+    virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
 };
 
 #endif

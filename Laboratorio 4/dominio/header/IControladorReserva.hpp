@@ -8,9 +8,7 @@
     #include "../../common/clases/header/ReservaIndividual.hpp"
     #include "../../common/clases/header/ReservaGrupal.hpp"
     #include "../../common/datatype/header/DTReserva.hpp"
-    #include "ControladorHostal.hpp"
-    #include "controladorUsuario.hpp"
-
+    
     using namespace std;
 
     class IControladorReserva{
@@ -22,6 +20,10 @@
             virtual void asignarHuespedAReservaGrupal(string correoHuesped) = 0;//realizar reserva
             virtual void cancelarReserva() = 0;//realizar reserva
             virtual void confirmarReserva() = 0;//realizar reserva
+
+            //para pruebas
+            virtual set<DTReserva *> listarTodasLasReservasDelSistema() = 0;
+            virtual int conocerTotatalReservas() = 0;
     };
 
 #endif

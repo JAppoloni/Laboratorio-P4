@@ -11,12 +11,13 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 			bool existe = false;
 			ReservaGrupal *reserva = dynamic_cast<ReservaGrupal *>(reservaEstadia);
 
-			if ((reserva->getHuespedReserva() == huesped) || (*reserva->getListaHuesped().end()) == huesped)
+			if ((reserva->getHuespedReserva() == huesped) || (*reserva->getListaHuesped().end()) == huesped || (*reserva->getListaHuesped().begin() == huesped))
 				existe = true;
 
 			if (existe == false)
 			{
-
+				int tope = 0;
+				int lstElem = reserva->getListaHuesped().size();
 				for (std::list<Huesped *>::iterator it = reserva->getListaHuesped().begin(); it != reserva->getListaHuesped().end(); it++)
 				{
 					if ((*it) == huesped)
@@ -24,6 +25,9 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 						existe = true;
 						break;
 					}
+					if (tope > lstElem)
+						break;
+					tope++;
 				}
 
 				if (existe == false)
@@ -187,7 +191,6 @@ float Estadia::calcularCosto()
 		return _checkIn.diferenciaDias(DTFecha(_checkOut->getMinutos(), _checkOut->getHora(), _checkOut->getDia(), _checkOut->getMes(), _checkOut->getAnio())) * _reservaEstadia->getHabitacionReserva()->getPrecio();
 	}
 }
-
 
 void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
 {

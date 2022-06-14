@@ -11,6 +11,16 @@ DTReserva::DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserv
 	_habitacion = nullptr;
 	_huesped = nullptr;
 }
+DTReserva::DTReserva(DTFecha checkIn, DTFecha checkOut, DTHabitacion *habitacion, DTHuesped *huesped)
+{
+	_codigo = 0;
+	_checkIn = checkIn;
+	_checkOut = checkOut;
+	_estado = Abierta;
+	_costo = 0;
+	_habitacion = habitacion;
+	_huesped = huesped;
+}
 
 DTReserva::DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion* habitacion, DTHuesped* huesped)
 {
@@ -54,4 +64,9 @@ float DTReserva::getCosto() const
 DTHabitacion* DTReserva::getHabitacion() const
 {
 	return _habitacion;
+}
+
+DTHuesped* DTReserva::getHuesped() const
+{
+	return _huesped;
 }

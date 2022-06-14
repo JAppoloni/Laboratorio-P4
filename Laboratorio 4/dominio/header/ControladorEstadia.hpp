@@ -3,7 +3,6 @@
 
     #include "IControladorEstadia.hpp"
     #include "ControladorReserva.hpp"
-    #include "ControladorUsuario.hpp"
     #include "FechaSistema.hpp"
 
     using namespace std;
@@ -20,6 +19,9 @@
             virtual void seleccionarHostal(string nom);
             virtual set<DTReserva *> obtenerReservaHuesped(string email);
             virtual void registrarEstadiaHuesped(int codigo);
+
+            //para pruebas
+            virtual set<DTEstadia*> obtenerTodasLasEstadiasDelSistema();
     };
 
 #endif

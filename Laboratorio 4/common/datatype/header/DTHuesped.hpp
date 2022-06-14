@@ -20,6 +20,7 @@ public:
 
 	// Getters 
 	bool getEsFinger();
+	void imprimir();
 
 private:
 	bool _esFinger;

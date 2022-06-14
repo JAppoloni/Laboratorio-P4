@@ -52,6 +52,8 @@ void Empleado::setHostal(Hostal *hostal)
 
 Empleado::~Empleado()
 {
+  hostal = nullptr;
+  delete hostal;
   Comentarios.clear();
 }
 

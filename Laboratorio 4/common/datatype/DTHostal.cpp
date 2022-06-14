@@ -46,7 +46,27 @@ DTHostal::~DTHostal()
 // Operators
 std::ostream &operator<<(std::ostream &out, DTHostal imprimir)
 {
-	return out << " Implementar /n";
+	out << "Nombre: " << imprimir.getNombre() << std::endl;
+	out << "Direccion: " << imprimir.getDireccion() << std::endl;
+	out << "Telefono: " << imprimir.getTelefono() << std::endl;
+	out << "Promedio de calificaciones: " << imprimir.getPromedioCalificaciones() << std::endl;
+	if (imprimir.getListaHabitaciones() != nullptr)
+	{
+		out << "Habitaciones: " << std::endl;
+		for (auto it = imprimir.getListaHabitaciones()->begin(); it != imprimir.getListaHabitaciones()->end(); it++)
+		{
+			out << *it << std::endl;
+		}
+	}
+	if (imprimir.getListaEstadia() != nullptr)
+	{
+		out << "Estadias: " << std::endl;
+		for (auto it = imprimir.getListaEstadia()->begin(); it != imprimir.getListaEstadia()->end(); it++)
+		{
+			out << *it << std::endl;
+		}
+	}
+	return out;
 }
 
 // Getters

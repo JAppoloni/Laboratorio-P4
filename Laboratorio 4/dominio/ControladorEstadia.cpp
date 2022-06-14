@@ -5,11 +5,10 @@ ControladorEstadia * ControladorEstadia::instancia = nullptr;
 ControladorEstadia::ControladorEstadia(){}
 
 ControladorEstadia * ControladorEstadia::getInstancia(){
-    ControladorEstadia * res = instancia; 
-    if (res == nullptr){
-        res = new ControladorEstadia();
+    if (instancia == nullptr){
+        instancia = new ControladorEstadia();
     };
-    return res;
+    return instancia;
 }
 
 string nomHosRecordado;
@@ -36,5 +35,15 @@ void ControladorEstadia::registrarEstadiaHuesped(int codigo)
 
     estadias[codigo] = new Estadia(FS->getFecha(), "", CR->getReserva(codigo), CU->getHuesped(emailHuesRecordado));
     CR->getReserva(codigo)->agregarEstadia(estadias[codigo]);
+    CR->getReserva(codigo)->setEstado(Cerrada);
     CU->getHuesped(emailHuesRecordado)->agregarEstadia(estadias[codigo]);
+}
+
+set<DTEstadia*> ControladorEstadia::obtenerTodasLasEstadiasDelSistema()
+{
+    set<DTEstadia*> res;
+    for(map<int, Estadia*>::iterator it = estadias.begin(); it != estadias.end(); ++it){
+        res.insert(new DTEstadia(it->second->getReservaEstadia()->getCodigo(), it->second->getHuespedEstadia()->getEmail(), it->second->getCheckIn(), it->second->getChechOut(), it->second->getPromo()));
+    };
+    return res;
 }

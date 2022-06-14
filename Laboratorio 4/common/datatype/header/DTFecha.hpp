@@ -9,7 +9,7 @@
 class DTFecha
 {
 private:
-    tm *fecha;
+    tm fecha;
 
 public:
     DTFecha();

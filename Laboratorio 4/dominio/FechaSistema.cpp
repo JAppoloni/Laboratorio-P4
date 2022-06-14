@@ -12,12 +12,11 @@ FechaSistema::FechaSistema()
 
 FechaSistema *FechaSistema::getInstancia()
 {
-    FechaSistema *res = instancia;
-    if (res == nullptr)
+    if (instancia == nullptr)
     {
-        res = new FechaSistema();
+        instancia = new FechaSistema();
     };
-    return res;
+    return instancia;
 }
 
 DTFecha FechaSistema::getFecha()

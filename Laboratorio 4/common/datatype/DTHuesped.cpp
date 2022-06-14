@@ -1,5 +1,6 @@
 #include "header/DTHuesped.hpp"
 
+
 DTHuesped::DTHuesped()
 {
 }
@@ -17,7 +18,9 @@ DTHuesped::~DTHuesped()
 // Operators
 std::ostream &DTHuesped::operator<<(std::ostream &out)
 {
-	out << "IMPLEMENTAR" << std::endl;
+	out << "Nombre: " << getNombre() << std::endl;
+	out << "Email: " << getEmail() << std::endl;
+	out << "Es Finger: " << getEsFinger() << std::endl;
 	return out;
 }
 
@@ -25,4 +28,9 @@ std::ostream &DTHuesped::operator<<(std::ostream &out)
 bool DTHuesped::getEsFinger()
 {
 	return _esFinger;
+}
+
+void DTHuesped::imprimir()
+{
+	*this << std::cout;
 }

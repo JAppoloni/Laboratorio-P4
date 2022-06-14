@@ -13,7 +13,8 @@ DTComentario::~DTComentario()
 // Operators
 std::ostream &operator<<(std::ostream &out, DTComentario imprimir)
 {
-	return out << " Implementar /n";
+	out << "Comentario: " << imprimir.getComentario() << std::endl;
+	return out;
 }
 
 // Getters 

@@ -32,7 +32,19 @@ DTReservaIndividual::~DTReservaIndividual()
 // Operators
 std::ostream &DTReservaIndividual::operator<<(std::ostream &out)
 {
-	out << "IMPLEMENTAR" << std::endl;
+	out << "Código: " << getCodigo() << std::endl;
+	out << "Estado: ";
+	imprimirEstadoReserva(getEstado());
+	out << std::endl;
+	out << "CheckIn: " << getCheckIn();
+	out << "CheckOut: " << getCheckOut();
+	out << "Costo: " << getCosto() << std::endl;
+	out << "Habitacion:   Número: " << getHabitacion()->getNumero() << std::endl;
+	out << "\t      "
+		 << "Capacidad: " << getHabitacion()->getCapacidad() << std::endl;
+	out << "\t      "
+		 << "Precio: " << getHabitacion()->getPrecio() << std::endl;
+	out << "Huésped: " << getHuesped()->getNombre() << "  " << getHuesped()->getEmail() << " ,  Es FINGER: " << ((getHuesped()->getEsFinger() == 0) ? " No " : " Sí ") << std::endl;
 	return out;
 }
 

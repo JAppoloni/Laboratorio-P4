@@ -14,6 +14,7 @@ public:
 	// Constructors
 	DTReserva();
 	DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo);
+	DTReserva(DTFecha checkIn, DTFecha, DTHabitacion *habitacion, DTHuesped *huesped);
 	DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion *habitacion, DTHuesped *huesped);
 
 	// Destructor
@@ -29,6 +30,7 @@ public:
 	EstadoReserva getEstado() const;
 	float getCosto() const;
 	DTHabitacion *getHabitacion() const;
+	DTHuesped *getHuesped() const;
 
 protected:
 	int _codigo;

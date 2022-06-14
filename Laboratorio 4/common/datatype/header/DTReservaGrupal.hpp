@@ -23,6 +23,8 @@ public:
 	// Getters
 	std::list<DTHuesped> *getListaHuesped() const;
 
+
+
 private:
 	std::list<DTHuesped> *_listaHuesped;
 };

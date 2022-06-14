@@ -4,15 +4,15 @@ ControladorReserva * ControladorReserva::instancia = nullptr;
 
 ControladorReserva::ControladorReserva()
 {
-    contador_codigo = 0;
+    contador_codigo = 1;
 }
 
 ControladorReserva * ControladorReserva::getInstancia(){
-    ControladorReserva * res = instancia; 
-    if (res == nullptr){
-        res = new ControladorReserva();
+ 
+    if (instancia == nullptr){
+        instancia = new ControladorReserva();
     };
-    return res;
+    return instancia;
 }
 
 string hostalRecordado;
@@ -90,4 +90,19 @@ set<DTReserva *> ControladorReserva::listarReservasHuesped(string email, string 
 
 Reserva * ControladorReserva::getReserva(int codigo){
     return reservas[codigo];
+}
+
+set<DTReserva *> ControladorReserva::listarTodasLasReservasDelSistema()
+{
+    set<DTReserva*> res;
+    for(map<int, Reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
+        res.insert(it->second->getDataReserva());
+    };
+    return res;
+}
+
+int ControladorReserva::conocerTotatalReservas()
+{
+    return contador_codigo;
+
 }

@@ -16,7 +16,10 @@ DTNotificacion::~DTNotificacion()
 // Operators
 std::ostream &operator<<(std::ostream &out, DTNotificacion imprimir)
 {
-	return out << " Implementar /n";
+	out << "Autor: " << imprimir.getAutor() << std::endl;
+	out << "Comentario: " << imprimir.getComentario() << std::endl;
+	out << "Puntaje: " << imprimir.getPuntaje() << std::endl;
+	return out;
 }
 
 // Getters

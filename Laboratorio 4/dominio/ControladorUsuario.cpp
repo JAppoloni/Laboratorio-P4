@@ -6,12 +6,11 @@ ControladorUsuario::ControladorUsuario() {}
 
 ControladorUsuario *ControladorUsuario::getInstancia()
 {
-    ControladorUsuario *res = instancia;
-    if (res == nullptr)
+    if (instancia == nullptr)
     {
-        res = new ControladorUsuario();
+        instancia= new ControladorUsuario();
     };
-    return res;
+    return instancia;
 }
 
 DTUsuario *usuarioRecordado;
@@ -95,6 +94,9 @@ void ControladorUsuario::cancelarAsignacion(){}
 void ControladorUsuario::confirmarAsignacionDeEmpleadoAHostal()
 {
     ControladorHostal * CH = ControladorHostal::getInstancia();
+    if ( empleados[emailEmpRecordado]== nullptr)
+        throw invalid_argument("El empleado no existe");
+
     empleados[emailEmpRecordado]->setHostal(CH->getHostal(nomHostalRecordado));
     empleados[emailEmpRecordado]->setCargo(cargoRecordado);
 }
@@ -116,4 +118,16 @@ Huesped * ControladorUsuario::getHuesped(string correo)
         };
     };
     return nullptr;
+}
+
+set<DTUsuario*> ControladorUsuario::obtenerTodosLosUsuariosDelSistema()
+{
+    set<DTUsuario*> res;
+    for(map<string, Huesped*>::iterator it = huespedes.begin(); it != huespedes.end(); ++it){
+        res.insert(it->second->getDatatypeptr());
+    };
+    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
+        res.insert(new DTEmpleado(it->second->getNombre(), it->second->getContrasena(), it->second->getEmail(), it->second->getCargo()));
+    };
+    return res;
 }

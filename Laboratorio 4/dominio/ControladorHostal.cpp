@@ -54,7 +54,7 @@ void ControladorHostal::nuevaHabitacion(int numero, int capacidad, float costo)
 
 void ControladorHostal::crearHabitacion()
 {
-    Habitacion * nueva = new Habitacion(habRecordada->getNumero(), habRecordada->getPrecio(), habRecordada->getCapacidad());
+    Habitacion * nueva = new Habitacion(habRecordada->getNumero(), habRecordada->getPrecio(), habRecordada->getCapacidad(), hostales[nomHostalRecordado]);
     hostales[nomHostalRecordado]->agregarHabitacion(nueva);
     delete habRecordada;
 }

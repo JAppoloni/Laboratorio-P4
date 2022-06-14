@@ -63,42 +63,22 @@ float ReservaGrupal::calcularCosto() // VER.
 
 void ReservaGrupal::agregarEstadia(Estadia *estadia)
 {
-	Huesped *huesped = estadia->getHuespedEstadia();
-
-	if (_listaEstadia.begin() == _listaEstadia.end() && _listaEstadia.empty() != true && huesped == (*_listaEstadia.end())->getHuespedEstadia())
-		throw YAEXISTEHUESPED();
-	else
-	{
-		for (std::list<Estadia *>::iterator it = _listaEstadia.begin(); it != _listaEstadia.end(); ++it)
-		{
-			if ((*it)->getHuespedEstadia() == huesped)
-			{
-				throw YAEXISTEHUESPED();
-				break;
-			}
-		}
-	}
-
-	bool existeHuesped = false;
-
-	// La lista de Huespedes no tener nombres repetidos y debe tener al menos dos elementos
-	for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
-	{
-		if ((*it) == huesped)
-		{
-			existeHuesped = true;
-			break;
-		}
-	}
-	if (existeHuesped == false)
-		throw NOEXISTEHUESPED();
-	else
-		_listaEstadia.push_back(estadia);
+	_listaEstadia.push_back(estadia);
 }
 
 bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre)
-{ // iterar si esta en la lista
-	return _huespedReserva->getNombre() == nombre && _huespedReserva->getEmail() == email;
+{
+	if(_habitacionReserva->getHostal()->getNombre() == nombre){
+		if(_huespedReserva->getEmail() == email){
+			return true;
+		};
+		for(list<Huesped*>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it){
+			if((*it)->getEmail() == email){
+				return true;
+			};
+		};
+	};
+	return false;
 }
 
 DTReserva* ReservaGrupal::getDataReserva()

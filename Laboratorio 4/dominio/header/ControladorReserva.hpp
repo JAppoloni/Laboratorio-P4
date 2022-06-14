@@ -21,6 +21,9 @@
             virtual void asignarHuespedAReservaGrupal(string correoHuesped);
             virtual void cancelarReserva();
             virtual void confirmarReserva();
+
+            set<DTReserva *> listarReservasHuesped(string email, string nomHostal);
+            Reserva * getReserva(int codigo);
     };
 
 #endif

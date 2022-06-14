@@ -76,3 +76,18 @@ void ControladorReserva::confirmarReserva()
     }
     contador_codigo++;
 }
+
+set<DTReserva *> ControladorReserva::listarReservasHuesped(string email, string nomHostal)
+{
+    set<DTReserva*> res;
+    for(map<int, Reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
+        if(it->second->esReservaHostalHuesped(email, nomHostal) && it->second->getEstado() != Cancelada){
+            res.insert(it->second->getDataReserva());
+        };
+    };
+    return res;
+}
+
+Reserva * ControladorReserva::getReserva(int codigo){
+    return reservas[codigo];
+}

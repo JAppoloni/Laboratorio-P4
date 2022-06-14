@@ -58,7 +58,7 @@ void ReservaIndividual::agregarEstadia(Estadia *estadia)
 
 bool ReservaIndividual::esReservaHostalHuesped(std::string email, std::string nombre)
 {
-	return _huespedReserva->getNombre() == nombre && _huespedReserva->getEmail() == email;
+	return _habitacionReserva->getHostal()->getNombre() == nombre && _huespedReserva->getEmail() == email;
 }
 
 DTReserva *ReservaIndividual::getDataReserva()

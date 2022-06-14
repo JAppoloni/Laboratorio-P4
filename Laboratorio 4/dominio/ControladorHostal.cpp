@@ -24,7 +24,16 @@ set<DTHostal *> ControladorHostal::obtenerHostales()
 {
     set<DTHostal *> res;
     for(map<string, Hostal *>::iterator it = hostales.begin(); it != hostales.end(); ++it){
-        res.insert(new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono()));
+        int promedio = 0;
+        int cont = 0;
+        for (list<Calificacion *>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux){
+           cont++;
+           promedio = promedio + (*aux)->getPuntaje();  
+        };
+        if (cont != 0){
+            promedio = promedio / cont;
+        };
+        res.insert(new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio));
     };
     return res;
 }
@@ -53,4 +62,49 @@ void ControladorHostal::crearHabitacion()
 void ControladorHostal::liberarMemoria()
 {
     delete habRecordada;
+}
+
+Hostal * ControladorHostal::getHostal(string nom)
+{
+    return hostales[nom];
+}
+
+ set<DTHabitacion *> ControladorHostal::obtenerHabitacionesDeHostal(string nom)
+ {
+    set<DTHabitacion *> res;
+    for(list<Habitacion *>::iterator it = hostales[nom]->getHabitaciones().begin(); it != hostales[nom]->getHabitaciones().end(); ++it){
+        res.insert(new DTHabitacion((*it)->getNumero(), (*it)->getPrecio(), (*it)->getCapacidad()));
+    };
+    return res;
+ }
+
+list<DTHostal*> ControladorHostal::calcularTopTres() 
+{
+    map<int, DTHostal*> topHostales;
+    for(map<string, Hostal*>::iterator it = hostales.begin(); it != hostales.end(); ++it){
+        int promedio = 0;
+        int cont = 0;
+        for(list<Calificacion*>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux){
+            promedio = promedio + (*aux)->getPuntaje();
+        };
+        if (cont != 0){
+            promedio = promedio / cont;
+        };
+        topHostales[promedio] = new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio);
+    };
+    list<DTHostal*> res;
+    int cont = 0;
+    for(map<int, DTHostal*>::iterator it = topHostales.end(); it != topHostales.begin() && cont < 3; --it){
+        res.push_back(it->second);
+    };
+    return res;
+}
+
+set<DTCalificacion*> ControladorHostal::consultarHostal(string nom)
+{
+    set<DTCalificacion*> res;
+    for(list<Calificacion*>::iterator it = hostales[nom]->getCalificaciones().begin(); it != hostales[nom]->getCalificaciones().end(); ++it){
+        res.insert(new DTCalificacion(-1, "", (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
+    }; 
+    return res;
 }

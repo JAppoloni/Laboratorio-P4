@@ -8,6 +8,9 @@
 #include "../../datatype/header/DTCalificacion.hpp"
 #include <list> 
 
+
+using namespace std;
+
 class DTHostal;
 
 class Hostal
@@ -33,6 +36,7 @@ public:
   void setDireccion(std::string direccion); 
   void setTelefono(std::string telefono); 
   void agregarHabitacion(Habitacion * habitacion);
+  Habitacion * getHabitacion(int num);
 
 
   bool operator==(const Hostal & assign);
@@ -40,7 +44,7 @@ public:
    std::list<DTCalificacion> obtenerCalificaciones(); 
    DTHostal getDatatype();
    // getDatatypeCompleto(): DTHostal 
-   std::list<int> obtenerComentariosSinResponder(); //set(<idCalificacion>)
+   std::list<int> obtenerComentariosSinResponder(); //set(<IDReserva>)
 
 
 };

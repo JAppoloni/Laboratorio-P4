@@ -1,9 +1,9 @@
 #include "header/DTCalificacion.hpp"
 
 // ructors
-DTCalificacion::DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario, std::string respuesta)
+DTCalificacion::DTCalificacion(int IDReserva, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario, std::string respuesta)
 {
-	_IDCalificacion = IDCalificacion;
+	_IDReserva = IDReserva;
 	_IDHuesped = IDHuesped;
 	_calificacion = calificacion;
 	_fecha = fecha;
@@ -11,9 +11,9 @@ DTCalificacion::DTCalificacion(int IDCalificacion, std::string IDHuesped, int ca
 	_respuesta = respuesta;
 }
 
-DTCalificacion::DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario)
+DTCalificacion::DTCalificacion(int IDReserva, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario)
 {
-	_IDCalificacion = IDCalificacion;
+	_IDReserva = IDReserva;
 	_IDHuesped = IDHuesped;
 	_calificacion = calificacion;
 	_fecha = fecha;
@@ -32,9 +32,9 @@ std::ostream &operator<<(std::ostream &out, DTCalificacion imprimir)
 }
 
 // Getters
-int DTCalificacion::getIDCalificacion()
+int DTCalificacion::getIDReserva()
 {
-	return _IDCalificacion;
+	return _IDReserva;
 }
 std::string DTCalificacion::getIDHuesped()
 {

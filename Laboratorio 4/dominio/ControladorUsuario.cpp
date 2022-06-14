@@ -58,11 +58,11 @@ bool ControladorUsuario::esEmailUsuario()
     return empleados[usuarioRecordado->getEmail()] != nullptr || huespedes[usuarioRecordado->getEmail()] != nullptr;
 }
 
-string nomHostalRecordadoUsuario;
+string nomHostalRecordado;
 
 void ControladorUsuario::seleccionarHostal(string nombre)
 {
-    nomHostalRecordadoUsuario = nombre;
+    nomHostalRecordado = nombre;
 }
 
 set<DTEmpleado *> ControladorUsuario::obtenerEmpleadosSinHsotal()
@@ -94,6 +94,26 @@ void ControladorUsuario::cancelarAsignacion(){}
 
 void ControladorUsuario::confirmarAsignacionDeEmpleadoAHostal()
 {
-    // ! ControladorHostal * CH = ControladorHostal::getInstancia();
+    ControladorHostal * CH = ControladorHostal::getInstancia();
+    empleados[emailEmpRecordado]->setHostal(CH->getHostal(nomHostalRecordado));
+    empleados[emailEmpRecordado]->setCargo(cargoRecordado);
+}
 
+set<DTHuesped*> ControladorUsuario::listarHuespedes()
+{
+    set<DTHuesped*> res;
+    for(map<string, Huesped *>::iterator it = huespedes.begin(); it != huespedes.end(); ++it){
+        res.insert(it->second->getDatatypeptr());
+    };
+    return res;
+}
+
+Huesped * ControladorUsuario::getHuesped(string correo)
+{
+    for(map<string, Huesped*>::iterator it = huespedes.begin(); it != huespedes.end(); ++it){
+        if(it->second->getEmail() == correo){
+            return it->second;
+        };
+    };
+    return nullptr;
 }

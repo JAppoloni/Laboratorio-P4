@@ -20,6 +20,11 @@ public:
     virtual void nuevaHabitacion(int numero, int capacidad, float costo);
     virtual void crearHabitacion();
     virtual void liberarMemoria();
+    virtual list<DTHostal*> calcularTopTres();
+    virtual set<DTCalificacion*> consultarHostal(string nom);
+
+    Hostal * getHostal(string nom);
+    set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
 };
 
 #endif

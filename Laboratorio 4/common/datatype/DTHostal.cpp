@@ -8,10 +8,10 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 	_telefono = telefono;
 	_listaHabitaciones = nullptr;
 	_listaEstadia = nullptr;
-	_promClaif = nullptr;
+	_promClaif = 0;
 }
 
-DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, int *promClaif)
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, int promClaif)
 {
 	_nombre = nombre;
 	_direccion = direccion;
@@ -21,7 +21,7 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 	_listaEstadia = nullptr;
 }
 
-DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, int *promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias)
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, int promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias)
 {
 	_nombre = nombre;
 	_direccion = direccion;
@@ -41,7 +41,6 @@ DTHostal::~DTHostal()
 	
 	delete _listaHabitaciones;
 	delete _listaEstadia;
-	delete _promClaif;
 }
 
 // Operators
@@ -55,7 +54,7 @@ std::string DTHostal::getNombre() const
 {
 	return _nombre;
 }
-int *DTHostal::getPromedioCalificaciones() const
+int DTHostal::getPromedioCalificaciones() const
 {
 	return _promClaif;
 }

@@ -10,14 +10,14 @@ class DTCalificacion
 public:
 	// Constructors
 	DTCalificacion();
-	DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario);
-	DTCalificacion(int IDCalificacion, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario, std::string respuesta);
+	DTCalificacion(int IDReserva, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario);
+	DTCalificacion(int IDReserva, std::string IDHuesped, int calificacion, DTFecha fecha, std::string comentario, std::string respuesta);
 
 	// Destructor
 	~DTCalificacion();
 
 	// Getters / Setters
-	int getIDCalificacion();
+	int getIDReserva();
 	std::string getIDHuesped();
 	int getCalificacion();
 	DTFecha getFecha();
@@ -25,7 +25,7 @@ public:
 	std::string getRespuesta();
 
 private:
-	int _IDCalificacion; // codigo de reserva
+	int _IDReserva; 
 	std::string _IDHuesped;
 	int _calificacion;
 	DTFecha _fecha;

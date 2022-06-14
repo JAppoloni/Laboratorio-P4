@@ -27,6 +27,9 @@
             virtual void seleccionarCargo(Cargo cargo); 
             virtual void cancelarAsignacion();
             virtual void confirmarAsignacionDeEmpleadoAHostal();
+            virtual set<DTHuesped*> listarHuespedes();
+
+            Huesped * getHuesped(string correo);
     };
 
 

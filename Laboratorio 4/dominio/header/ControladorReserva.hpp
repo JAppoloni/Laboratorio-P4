@@ -1,7 +1,6 @@
 #ifndef CONTROLADOR_RESRVA
 #define CONTROLADOR_RESERVA
 
-    #include <string>
     #include "IControladorReserva.hpp"
     using namespace std;
 
@@ -9,8 +8,19 @@
         private:
             static ControladorReserva * instancia;
             ControladorReserva();
+
+            map<int, Reserva *> reservas;
+            int contador_codigo;
         public:
             static ControladorReserva * getInstancia();
+
+            virtual void crearReserva(string hostal, DTFecha checkIn, DTFecha checkOut, bool esGrupal);
+            virtual set<DTHabitacion *> listarHabitacionesDisponibles();
+            virtual void asignarHabitacionAReserva(int hab);
+            virtual void asignarHuespedQueRealizaReserva(string correoHuesped);
+            virtual void asignarHuespedAReservaGrupal(string correoHuesped);
+            virtual void cancelarReserva();
+            virtual void confirmarReserva();
     };
 
 #endif

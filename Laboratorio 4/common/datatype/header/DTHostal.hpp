@@ -11,14 +11,14 @@ class DTHostal
 public:
 	// Constructors
 	DTHostal(std::string nombre, std::string direccion, std::string telefono);
-	DTHostal(std::string nombre, std::string direccion, std::string telefono, int *promClaif);
-	DTHostal(std::string nombre, std::string direccion, std::string telefono, int *promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias);
+	DTHostal(std::string nombre, std::string direccion, std::string telefono, int promClaif);
+	DTHostal(std::string nombre, std::string direccion, std::string telefono, int promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias);
 
 	// Destructor
 	~DTHostal();
 
 	// Getters
-	int *getPromedioCalificaciones() const;
+	int getPromedioCalificaciones() const;
 	std::string getNombre() const;
 	std::string getDireccion() const;
 	std::string getTelefono() const;
@@ -26,7 +26,7 @@ public:
 	std::list<DTEstadia> *getListaEstadia() const;
 
 private:
-	int *_promClaif;
+	int _promClaif;
 	std::string _nombre;
 	std::string _direccion;
 	std::string _telefono;

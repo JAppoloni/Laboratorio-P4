@@ -24,6 +24,7 @@
             virtual void seleccionarCargo(Cargo cargo) = 0;//aignar empleado a hostal
             virtual void cancelarAsignacion() = 0;//asignar empleado a hostal
             virtual void confirmarAsignacionDeEmpleadoAHostal() = 0;//asignar empleado a hostal
+            virtual set<DTHuesped*> listarHuespedes() = 0;//realizar reserva
     };
     
 #endif

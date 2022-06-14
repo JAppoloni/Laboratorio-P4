@@ -95,3 +95,14 @@ void Hostal::agregarHabitacion(Habitacion * habitacion)
 {
     listaHabitaciones.push_back(habitacion);
 }
+
+Habitacion * Hostal::getHabitacion(int num)
+{
+    for(list<Habitacion*>::iterator it = listaHabitaciones.begin(); it != listaHabitaciones.end(); ++it){
+        if((*it)->getNumero() == num){
+            return *it;
+        };
+    };
+    return nullptr;
+}
+  

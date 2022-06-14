@@ -9,8 +9,10 @@ class ControladorHostal : public IControladorHostal
 private:
     static ControladorHostal *instancia;
     ControladorHostal();
+    string nomHostalRecordado;
 
-    map<string, Hostal*> hostales;
+    map<string, Hostal *> hostales;
+
 public:
     static ControladorHostal *getInstancia();
 
@@ -20,10 +22,10 @@ public:
     virtual void nuevaHabitacion(int numero, int capacidad, float costo);
     virtual void crearHabitacion();
     virtual void liberarMemoria();
-    virtual list<DTHostal*> calcularTopTres();
-    virtual set<DTCalificacion*> consultarHostal(string nom);
+    virtual list<DTHostal *> calcularTopTres();
+    virtual set<DTCalificacion *> consultarHostal(string nom);
 
-    Hostal * getHostal(string nom);
+    Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
 };
 

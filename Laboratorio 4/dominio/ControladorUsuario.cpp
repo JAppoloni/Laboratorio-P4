@@ -58,7 +58,7 @@ bool ControladorUsuario::esEmailUsuario()
     return empleados[usuarioRecordado->getEmail()] != nullptr || huespedes[usuarioRecordado->getEmail()] != nullptr;
 }
 
-string nomHostalRecordado;
+
 
 void ControladorUsuario::seleccionarHostal(string nombre)
 {

@@ -4,10 +4,10 @@
     #include <set>
     #include <map>
     #include <string>
-    #include "..\..\common\clases\header\Reserva.hpp"
-    #include "..\..\common\clases\header\ReservaIndividual.hpp"
-    #include "..\..\common\clases\header\ReservaGrupal.hpp"
-    #include "..\..\common\datatype\header\DTReserva.hpp"
+    #include "../../common/clases/header/Reserva.hpp"
+    #include "../../common/clases/header/ReservaIndividual.hpp"
+    #include "../../common/clases/header/ReservaGrupal.hpp"
+    #include "../../common/datatype/header/DTReserva.hpp"
     #include "ControladorHostal.hpp"
     #include "controladorUsuario.hpp"
 

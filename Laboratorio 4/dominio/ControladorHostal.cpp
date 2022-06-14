@@ -38,7 +38,6 @@ set<DTHostal *> ControladorHostal::obtenerHostales()
     return res;
 }
 
-string nomHostalRecordado;
 
 void ControladorHostal::buscarHostal(string nombre)
 {

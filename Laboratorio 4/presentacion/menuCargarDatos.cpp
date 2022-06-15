@@ -161,15 +161,15 @@ void cargarDatos(bool primeraVez)
       // R3 HO1 HA3 Individual 7/06/22 - 2pm 30/06/22 - topeam H1
       // R4 HO5 HA5 Individual 10/06/22 - 2pm 30/06/22 - topeam H6
 
-      DTFecha FchChechInR1 = DTFecha(00, 14, 01, 05, 2022, 6);
-      DTFecha FchChechInR2 = DTFecha(00, 20, 04, 01, 2001, 4);
-      DTFecha FchChechInR3 = DTFecha(00, 14, 07, 06, 2022, 2);
-      DTFecha FchChechInR4 = DTFecha(00, 14, 10, 06, 2022, 5);
+      DTFecha FchChechInR1 = DTFecha(00, 14, 01, 4, 2022, 6);
+      DTFecha FchChechInR2 = DTFecha(00, 20, 04, 0, 2001, 4);
+      DTFecha FchChechInR3 = DTFecha(00, 14, 07, 5, 2022, 2);
+      DTFecha FchChechInR4 = DTFecha(00, 14, 10, 5, 2022, 5);
 
-      DTFecha FchChechOutR1 = DTFecha(00, 10, 10, 5, 2022, 3);
-      DTFecha FchChechOutR2 = DTFecha(00, 2, 5, 1, 2001, 5);
-      DTFecha FchChechOutR3 = DTFecha(00, 11, 30, 6, 2022, 4);
-      DTFecha FchChechOutR4 = DTFecha(00, 11, 30, 6, 2022, 4);
+      DTFecha FchChechOutR1 = DTFecha(00, 10, 10, 4, 2022, 3);
+      DTFecha FchChechOutR2 = DTFecha(00, 2, 5, 0, 2001, 5);
+      DTFecha FchChechOutR3 = DTFecha(00, 11, 30, 5, 2022, 4);
+      DTFecha FchChechOutR4 = DTFecha(00, 11, 30, 5, 2022, 4);
 
       controladorReserva->crearReserva(HO1.getNombre(), FchChechInR1, FchChechOutR1, false);
       controladorReserva->asignarHabitacionAReserva(HA1->getNumero());
@@ -208,34 +208,28 @@ void cargarDatos(bool primeraVez)
       DTFecha FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
       controladorEstadia->obtenerReservaHuesped(H1->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 18, 01, 05, 2022, 6));
+      fechaSistema->setFecha(DTFecha(00, 18, 01, 4, 2022, 6));
       controladorEstadia->registrarEstadiaHuesped(posicion - 4);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H2->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H3->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H4->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H5->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H6->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 18, 07, 06, 2022));
-      try
-      {
-         controladorEstadia->registrarEstadiaHuesped(posicion - 1); /// ! DA ERROR, Preguntar
-      }
-      catch (const std::exception &e)
-      {
-      }
+      fechaSistema->setFecha(DTFecha(00, 22, 10, 5, 2022, 5));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 1);
       fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
@@ -246,6 +240,22 @@ void cargarDatos(bool primeraVez)
       // ES1 H1 10/05/22 - 9am
       // ES2 H2 05/01/01 - 2am
       // ES6 H6 15/06/22 - 10pm
+      FechaActual = fechaSistema->getFecha();
+      controladorEstadia->seleccionarHostal(HO1.getNombre());
+      controladorEstadia->buscarEstadiasAbiertasPorCorreo(H1->getEmail());
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 4);
+      fechaSistema->setFecha(DTFecha(00, 9, 10, 4, 2022, 2));
+      controladorEstadia->finalizarEstadia();
+      controladorEstadia->seleccionarHostal(HO3.getNombre());
+      controladorEstadia->buscarEstadiasAbiertasPorCorreo(H2->getEmail());
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 3);
+      fechaSistema->setFecha(DTFecha(00, 14, 05, 0, 2001, 1));
+      controladorEstadia->finalizarEstadia();
+      controladorEstadia->seleccionarHostal(HO5.getNombre());
+      controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
+      fechaSistema->setFecha(DTFecha(00, 10, 15, 5, 2022, 3));
+      fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);

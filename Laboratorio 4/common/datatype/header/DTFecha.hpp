@@ -14,11 +14,14 @@ private:
 public:
     DTFecha();
     DTFecha(tm fch);
+    DTFecha(DTFecha* fch);
     DTFecha(int min, int hh, int dd, int mm, int yyyy);
     DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday);
 
     ~DTFecha();
 
+    int getDweek();
+    int getSegundos();
     int getMinutos();
     int getHora();
     int getDia();

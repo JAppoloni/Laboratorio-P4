@@ -12,13 +12,17 @@
             static ControladorEstadia * instancia;
             ControladorEstadia();
 
-            map<int, Estadia*> estadias; //la clave es el codigo de la reserva
+            set<Estadia*> estadias; 
         public:
             static ControladorEstadia * getInstancia();
 
             virtual void seleccionarHostal(string nom);
             virtual set<DTReserva *> obtenerReservaHuesped(string email);
             virtual void registrarEstadiaHuesped(int codigo);
+            virtual set<DTEstadia*> buscarEstadiasAbiertasPorCorreo(string email);
+            virtual void seleccionarUnEstadiaAFinalizar(int codigoResEst);
+            virtual void finalizarEstadia();
+            virtual set<DTEstadia*> indicarEmail(string email);
 
             //para pruebas
             virtual set<DTEstadia*> obtenerTodasLasEstadiasDelSistema();

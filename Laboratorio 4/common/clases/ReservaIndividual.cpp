@@ -24,8 +24,6 @@ ReservaIndividual::~ReservaIndividual()
 	_huespedReserva = nullptr;
 	_habitacionReserva = nullptr;
 	delete _estadiaReserva;
-	delete _huespedReserva;
-	delete _habitacionReserva;
 }
 
 // Getters / Setters

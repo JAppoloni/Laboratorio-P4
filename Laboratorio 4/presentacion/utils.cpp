@@ -28,14 +28,14 @@ DTFecha ingresarFecha()
       }
       catch (const std::exception &e)
       {
-         cout << RED "\n\n --------------"<<endl;
+         cout << RED "\n\n --------------" << endl;
          cout << "El fomrato debe ser : dd 1-31" << endl;
          cout << "\t\t   mm 00-11" << endl;
          cout << "\t\t   yyyy >1900" << endl;
          cout << "\t\t   hh 00-23" << endl;
          cout << "\t\t   min 00-59" << endl;
          cout << "\t\t   D 0-6 (L, M, X, J, V, S, D)" << endl;
-         std::cerr << "El error es el siguiente:  "<< e.what() << '\n';
+         std::cerr << "El error es el siguiente:  " << e.what() << '\n';
          cout << "--------------" NC << endl;
 
          cout << "Intrese una fecha (dd/mm/yyyy hh:mm D): ";
@@ -89,7 +89,9 @@ int leerInt()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          valido = true;
       }
       catch (const std::exception &e)
@@ -108,7 +110,9 @@ int leerIntPositivo()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < 0)
          {
             std::cout << "\n Ingrese un número positivo: ";
@@ -134,7 +138,9 @@ int leerIntIntervalo(int menor, int mayor)
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < menor || num > mayor)
          {
             std::cout << "\n Ingrese un número entre " << RED << menor << NC << " y " << RED << mayor << NC << ": ";
@@ -160,7 +166,9 @@ float leerFloat()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          valido = true;
       }
       catch (const std::exception &e)
@@ -179,7 +187,9 @@ float leerFloatPositivo()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < 0)
          {
             std::cout << "\n Ingrese un número positivo: ";
@@ -205,7 +215,9 @@ float leerFloatIntervalo(float menor, float mayor)
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < menor || num > mayor)
          {
             std::cout << "\n Ingrese un número entre " << RED << menor << NC << " y " << RED << mayor << NC << ": ";
@@ -217,6 +229,7 @@ float leerFloatIntervalo(float menor, float mayor)
       }
       catch (const std::exception &e)
       {
+
          std::cout << "\n Ingrese un número correcto: ";
       }
    }

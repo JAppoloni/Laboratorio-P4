@@ -66,8 +66,6 @@ Estadia::~Estadia()
 	_huespedEstadia = nullptr;
 
 	delete _checkOut;
-	delete _reservaEstadia;
-	delete _huespedEstadia;
 	delete _calificacionEstadia;
 }
 
@@ -166,7 +164,7 @@ bool Estadia::esEstadiaCalificaicon(std::string email, int codigo)
 
 bool Estadia::getFinalizacion()
 {
-	return _reservaEstadia->getEstado() == Cerrada;
+	return _checkOut != nullptr;
 }
 
 std::string Estadia::obtenerAutor()

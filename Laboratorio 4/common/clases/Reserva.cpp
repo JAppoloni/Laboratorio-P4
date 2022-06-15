@@ -8,8 +8,6 @@ Reserva::~Reserva()
 {
 	_huespedReserva = nullptr;
 	_habitacionReserva = nullptr;
-	delete _huespedReserva;
-	delete _habitacionReserva;
 }
 
 // Operators

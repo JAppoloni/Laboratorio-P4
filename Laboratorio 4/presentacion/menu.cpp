@@ -138,6 +138,9 @@ void mainMenu()
         case 18:
             notImplementedMessage();
             break;
+        case 20:
+            menuImprimir();
+            break;
         default:
             system("clear");
             cout << "Seleccione una de las opciones disponibles." << endl

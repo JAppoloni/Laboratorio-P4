@@ -23,8 +23,6 @@ Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, E
 Calificacion::~Calificacion()
 {
 	_estadiaComentario = nullptr;
-
-	delete _estadiaComentario;
 	delete _respuestaComentario;
 }
 

@@ -35,12 +35,17 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 DTHostal::~DTHostal()
 {
 	if (_listaHabitaciones != nullptr)
+	{
 		_listaHabitaciones->clear();
+		delete _listaHabitaciones;
+		_listaEstadia = nullptr;
+	}
 	if (_listaEstadia != nullptr)
-		 _listaEstadia->clear();
-	
-	delete _listaHabitaciones;
-	delete _listaEstadia;
+	{
+		_listaEstadia->clear();
+		delete _listaEstadia;
+		_listaHabitaciones = nullptr;
+	}
 }
 
 // Operators

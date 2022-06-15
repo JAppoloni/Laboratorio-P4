@@ -16,11 +16,12 @@ using namespace std;
 void ImprimirHostales(string nombre);
 
 /**
- * @brief Imprime todas las reservas del sistema si codigo<0, sino solo la reserva con ese codigo
+ * @brief Imprimer todas las reservas del sistema si codigo<=0 y email == 0 imprime todoas, si el email es vacio imprime todas las del codifo, si el cod es vacio y el email no imprime todas las de ese email (No incluye reservas grupales)
  * 
- * @param cod 
+ * @param codigo 
+ * @param email 
  */
-void ImprimirReservas(int cod);
+void ImprimirReservas(int cod,  string email);
 
 /**
  * @brief Imprime todos los usuarios del sistema si email=="", sino solo el usuario con ese email

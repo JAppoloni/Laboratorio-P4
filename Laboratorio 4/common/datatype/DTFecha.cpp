@@ -23,6 +23,16 @@ int DTFecha::getHora()
     return this->fecha.tm_hour;
 }
 
+int DTFecha::getSegundos()
+{
+    return this->fecha.tm_sec;
+}
+
+int DTFecha::getDweek()
+{
+    return this->fecha.tm_wday;
+}
+
 int DTFecha::getMinutos()
 {
     return this->fecha.tm_min;
@@ -35,6 +45,14 @@ int DTFecha::diferenciaDias(DTFecha fchAComparar)
 
 DTFecha::DTFecha()
 {
+}
+
+DTFecha::DTFecha(DTFecha *fch)
+{
+    if (fch != NULL)
+    {
+        this->fecha = fch->fecha;
+    }
 }
 
 DTFecha::~DTFecha() {}

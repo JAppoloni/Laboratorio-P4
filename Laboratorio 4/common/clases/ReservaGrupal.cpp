@@ -21,9 +21,6 @@ ReservaGrupal::~ReservaGrupal()
 {
 	_huespedReserva = nullptr;
 	_habitacionReserva = nullptr;
-	delete _huespedReserva;
-	delete _habitacionReserva;
-
 	_listaEstadia.clear();
 	_listaHuesped.clear();
 }

@@ -12,7 +12,6 @@ Comentario::Comentario(std::string Comentario, Calificacion* CalificacionComenta
 Comentario::~Comentario()
 {
 	_CalificacionComentario = nullptr;
-	delete _CalificacionComentario;
 }
 
 

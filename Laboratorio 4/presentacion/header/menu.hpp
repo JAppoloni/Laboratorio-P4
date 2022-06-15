@@ -4,6 +4,8 @@
 #include "menuAltaHostal.hpp"
 #include "menuAltaUsuario.hpp"
 #include "menuAltaHabitacion.hpp"
+#include "menuConsultaUsuario.hpp"
+#include "menuTopTres.hpp"
 #include <stdlib.h>
 #include <iostream>
 

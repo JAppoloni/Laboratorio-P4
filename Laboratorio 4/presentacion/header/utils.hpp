@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include "../../common/datatype/header/DTFecha.hpp"
+#include "../../common/clases/header/Cargo.hpp"
 
 
 #define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
@@ -29,6 +30,7 @@ int leerInt();
 
 int leerIntPositivo();
 
+string cargoAString(Cargo cargo);
 
 int leerIntIntervalo(int menor, int mayor);
 

@@ -81,6 +81,28 @@ string leerString()
    return cadena;
 }
 
+string cargoAString(Cargo cargo) 
+{
+   if (cargo == administracion) 
+   {
+      return "Administracion";
+   }
+   else if (cargo == limpieza)
+   {
+      return "Limpieza";
+   }
+   else if (cargo == recepcion)
+   {
+      return "Recepcion";
+   }
+   else if (cargo == infraestructura)
+   {
+      return "Infraestructura";
+   }
+
+   return "<VACIO>";
+}
+
 int leerInt()
 {
    int num;

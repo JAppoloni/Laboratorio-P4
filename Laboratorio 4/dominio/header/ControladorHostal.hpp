@@ -23,7 +23,7 @@ public:
     virtual void crearHabitacion();
     virtual void liberarMemoria();
     virtual list<DTHostal *> calcularTopTres();
-    virtual set<DTCalificacion *> consultarHostal(string nom);
+    virtual list<DTCalificacion *> consultarHostal(string nom);
 
     Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);

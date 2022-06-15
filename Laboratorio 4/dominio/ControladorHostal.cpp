@@ -112,12 +112,12 @@ list<DTHostal *> ControladorHostal::calcularTopTres()
     return res;
 }
 
-set<DTCalificacion *> ControladorHostal::consultarHostal(string nom)
+list<DTCalificacion *> ControladorHostal::consultarHostal(string nom)
 {
-    set<DTCalificacion *> res;
+    list<DTCalificacion *> res;
     for (list<Calificacion *>::iterator it = hostales[nom]->getCalificaciones().begin(); it != hostales[nom]->getCalificaciones().end(); ++it)
     {
-        res.insert(new DTCalificacion(-1, "", (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
+        res.push_back(new DTCalificacion(-1, "", (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
     };
     return res;
 }

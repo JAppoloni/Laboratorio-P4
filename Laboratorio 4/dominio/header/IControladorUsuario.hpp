@@ -29,7 +29,7 @@
             virtual Huesped* getHuesped(string email) = 0;
 
             //para pruebas
-            virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema() = 0;
+            virtual list<DTUsuario*> obtenerTodosLosUsuariosDelSistema() = 0;
     };
     
 #endif

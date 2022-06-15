@@ -32,7 +32,7 @@ class ControladorUsuario: public IControladorUsuario
         virtual void confirmarAsignacionDeEmpleadoAHostal();
         virtual set<DTHuesped*> listarHuespedes();
         virtual Huesped* getHuesped(string correo);
-        virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
+        virtual list<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
 };
 
 #endif

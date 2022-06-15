@@ -119,8 +119,8 @@ void ImprimirUsuario(string email)
    cout << "\n Usuarios:" << endl;
    Fabrica fab = Fabrica();
    IControladorUsuario *ControladorUsuario = fab.getControladorUsuario();
-   set<DTUsuario *> setUsuario = ControladorUsuario->obtenerTodosLosUsuariosDelSistema();
-   for (set<DTUsuario *>::iterator it = setUsuario.begin(); it != setUsuario.end(); ++it)
+   list<DTUsuario *> setUsuario = ControladorUsuario->obtenerTodosLosUsuariosDelSistema();
+   for (list<DTUsuario *>::iterator it = setUsuario.begin(); it != setUsuario.end(); ++it)
    {
       if ((*it)->getEmail() == email)
       {

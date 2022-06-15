@@ -140,14 +140,14 @@ Huesped * ControladorUsuario::getHuesped(string correo)
     return nullptr;
 }
 
-set<DTUsuario*> ControladorUsuario::obtenerTodosLosUsuariosDelSistema()
+list<DTUsuario*> ControladorUsuario::obtenerTodosLosUsuariosDelSistema()
 {
-    set<DTUsuario*> res;
+    list<DTUsuario*> res;
     for(map<string, Huesped*>::iterator it = huespedes.begin(); it != huespedes.end(); ++it){
-        res.insert(it->second->getDatatypeptr());
+        res.push_back(it->second->getDatatypeptr());
     };
     for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
-        res.insert(new DTEmpleado(it->second->getNombre(), it->second->getContrasena(), it->second->getEmail(), it->second->getCargo()));
+        res.push_back(new DTEmpleado(it->second->getNombre(), it->second->getContrasena(), it->second->getEmail(), it->second->getCargo()));
     };
     return res;
 }

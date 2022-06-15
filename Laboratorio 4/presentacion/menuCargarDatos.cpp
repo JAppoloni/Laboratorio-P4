@@ -207,27 +207,27 @@ void cargarDatos(bool primeraVez)
       int posicion = controladorReserva->conocerTotatalReservas();
       DTFecha FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H1->getEmail());
+      set<DTReserva*> elimiar1 =controladorEstadia->obtenerReservaHuesped(H1->getEmail());
       fechaSistema->setFecha(DTFecha(00, 18, 01, 4, 2022, 6));
       controladorEstadia->registrarEstadiaHuesped(posicion - 4);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H2->getEmail());
+      set<DTReserva*> elimiar2 =controladorEstadia->obtenerReservaHuesped(H2->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H3->getEmail());
+      set<DTReserva*> elimiar3 =controladorEstadia->obtenerReservaHuesped(H3->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H4->getEmail());
+      set<DTReserva*> elimiar4 =controladorEstadia->obtenerReservaHuesped(H4->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H5->getEmail());
+      set<DTReserva*> elimiar5 =controladorEstadia->obtenerReservaHuesped(H5->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H6->getEmail());
+      set<DTReserva*> eliminar6 = controladorEstadia->obtenerReservaHuesped(H6->getEmail());
       fechaSistema->setFecha(DTFecha(00, 22, 10, 5, 2022, 5));
       controladorEstadia->registrarEstadiaHuesped(posicion - 1);
       fechaSistema->setFecha(FechaActual);
@@ -242,17 +242,17 @@ void cargarDatos(bool primeraVez)
       // ES6 H6 15/06/22 - 10pm
       FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
-      controladorEstadia->buscarEstadiasAbiertasPorCorreo(H1->getEmail());
+      set<DTEstadia*> eliminar7 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H1->getEmail());
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 4);
       fechaSistema->setFecha(DTFecha(00, 9, 10, 4, 2022, 2));
       controladorEstadia->finalizarEstadia();
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->buscarEstadiasAbiertasPorCorreo(H2->getEmail());
+      set<DTEstadia*> eliminar8 =controladorEstadia->buscarEstadiasAbiertasPorCorreo(H2->getEmail());
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 3);
       fechaSistema->setFecha(DTFecha(00, 14, 05, 0, 2001, 1));
       controladorEstadia->finalizarEstadia();
       controladorEstadia->seleccionarHostal(HO5.getNombre());
-      controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
+      set<DTEstadia*> eliminar9 =controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
       fechaSistema->setFecha(DTFecha(00, 10, 15, 5, 2022, 3));
       fechaSistema->setFecha(FechaActual);
@@ -279,6 +279,34 @@ void cargarDatos(bool primeraVez)
       progress(iter, tope, true);
       cout << endl;
       //----------------------------------------------------------------------------------------------------------------------
+      //----------------------------------------------------------------------------------------------------------------------
+      
+      // ! Liberar Memoria
+      delete HA1;
+      delete HA2;
+      delete HA3;
+      delete HA4;
+      delete HA5;
+      delete HA6;
+      delete E1;
+      delete E2;
+      delete E3;
+      delete E4;
+      delete H1;
+      delete H2;
+      delete H3;
+      delete H4;
+      delete H5;
+      delete H6;
+      elimiar1.clear();
+      elimiar2.clear();
+      elimiar3.clear();
+      elimiar4.clear();
+      elimiar5.clear();
+      eliminar6.clear();
+      eliminar7.clear();
+      eliminar8.clear();
+      eliminar9.clear();
    }
    catch (exception const &e)
    {

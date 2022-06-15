@@ -14,7 +14,8 @@ private:
 public:
     DTFecha();
     DTFecha(tm fch);
-    DTFecha(DTFecha* fch);
+    DTFecha(const DTFecha &);
+    DTFecha(DTFecha *fch);
     DTFecha(int min, int hh, int dd, int mm, int yyyy);
     DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday);
 

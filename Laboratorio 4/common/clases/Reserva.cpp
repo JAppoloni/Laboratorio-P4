@@ -89,3 +89,9 @@ void Reserva::cancelarReserva()
 	_estado = Cancelada;
 }
 
+float Reserva::calcularCosto()
+{
+	int dias = _checkIn.diferenciaDias(_checkOut);
+	float costoxHab = _habitacionReserva->getPrecio();
+	return dias * costoxHab;
+}

@@ -52,10 +52,6 @@ const char *ReservaGrupal::YAEXISTEHUESPED::what() const throw()
 }
 
 // Methods
-float ReservaGrupal::calcularCosto() // VER.
-{
-	return _checkIn.diferenciaDias(_checkOut) * _habitacionReserva->getPrecio();
-}
 
 void ReservaGrupal::agregarEstadia(Estadia *estadia)
 {
@@ -130,7 +126,7 @@ DTReserva *ReservaGrupal::getDataReserva()
 										_checkIn,
 										_checkOut,
 										_estado,
-										calcularCosto(),
+										this->calcularCosto(),
 										new DTHabitacion(_habitacionReserva->getNumero(), _habitacionReserva->getPrecio(), _habitacionReserva->getCapacidad()),
 										_huespedReserva->getDatatypeptr(),
 										listaHuespedes);

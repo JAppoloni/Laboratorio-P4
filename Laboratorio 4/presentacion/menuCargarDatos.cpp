@@ -58,12 +58,12 @@ void cargarDatos(bool primeraVez)
       progress(iter, tope, true);
       //----------------------------------------------------------------------------------------------------------------------
 
-      DTHuesped *H1 = new DTHuesped("Sofia", "123", " sofia@mail.com", true);
+      DTHuesped *H1 = new DTHuesped("Sofia", "123", "sofia@mail.com", true);
       DTHuesped *H2 = new DTHuesped("Frodo", "123", "frodo@mail.com", true);
       DTHuesped *H3 = new DTHuesped("Sam", "123", " sam@mail.com", false);
-      DTHuesped *H4 = new DTHuesped("Merry", "123", " merry@mail.com", false);
+      DTHuesped *H4 = new DTHuesped("Merry", "123", "merry@mail.com", false);
       DTHuesped *H5 = new DTHuesped("Pippin", "123", "pippin@mail.com", false);
-      DTHuesped *H6 = new DTHuesped("Seba", "123", " seba@mail.com", true);
+      DTHuesped *H6 = new DTHuesped("Seba", "123", "seba@mail.com", true);
 
       controladorUsuario->ingresarUsuario(H1);
       controladorUsuario->confirmarAlta();
@@ -208,28 +208,28 @@ void cargarDatos(bool primeraVez)
       DTFecha FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
       controladorEstadia->obtenerReservaHuesped(H1->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 18, 01, 05, 2022,6));
+      fechaSistema->setFecha(DTFecha(00, 18, 01, 05, 2022, 6));
       controladorEstadia->registrarEstadiaHuesped(posicion - 4);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H2->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H3->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H4->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H5->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H6->getEmail());
       fechaSistema->setFecha(DTFecha(00, 18, 07, 06, 2022));
-      controladorEstadia->registrarEstadiaHuesped(posicion-1);  /// ! DA ERROR, Preguntar
+      controladorEstadia->registrarEstadiaHuesped(posicion - 1); /// ! DA ERROR, Preguntar
       fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
@@ -262,11 +262,11 @@ void cargarDatos(bool primeraVez)
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
       cout << endl;
-      presioneParaContinuar();
       //----------------------------------------------------------------------------------------------------------------------
    }
    catch (exception const &e)
    {
-      cout << RED "Error: " << e.what() << NC << endl;
+      cout << RED "\n Error: " << e.what() << NC << endl;
    }
+   presioneParaContinuar();
 }

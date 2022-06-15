@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include "../../common/datatype/header/DTFecha.hpp"
+#include "../../common/datatype/header/DTHostal.hpp"
 #include "../../common/clases/header/Cargo.hpp"
 
 
@@ -45,5 +46,7 @@ void limpiar();
 void presioneParaContinuar();
 
 void printProgress(double percentage);
+
+bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre);
 
 #endif

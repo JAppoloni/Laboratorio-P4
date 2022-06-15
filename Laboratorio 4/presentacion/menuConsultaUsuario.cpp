@@ -26,7 +26,6 @@ void menuConsultaUsuario()
         cout << (*itr)->getEmail() << endl; // Aparentemente algunos usuarios tienen espacios al principio del mail
     }
 
-    
     DTUsuario* usuarioSeleccionado;
     bool seleccionCorrecta = false;
     while (!seleccionCorrecta) 

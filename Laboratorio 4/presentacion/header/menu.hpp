@@ -5,6 +5,7 @@
 #include "menuAltaUsuario.hpp"
 #include "menuAltaHabitacion.hpp"
 #include "menuConsultaUsuario.hpp"
+#include "menuConsultaHostal.hpp"
 #include "menuTopTres.hpp"
 #include <stdlib.h>
 #include <iostream>

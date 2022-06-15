@@ -118,7 +118,7 @@ void mainMenu()
             menuConsultaUsuario();
             break;
         case 12:
-            notImplementedMessage();
+            menuConsultaHostal();
             break;
         case 13:
             notImplementedMessage();

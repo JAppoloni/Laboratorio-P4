@@ -279,3 +279,16 @@ void printProgress(double percentage)
    fflush(stdout);
    cout << NC;
 }
+
+bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre)
+{
+    for (list<DTHostal *>::iterator itr = hostales.begin(); itr != hostales.end(); itr++) 
+    {
+        if ((*itr)->getNombre() == nombre)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

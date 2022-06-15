@@ -3,6 +3,7 @@
 
 #include "../../dominio/header/Fabrica.hpp"
 #include "../../common/datatype/header/DTHabitacion.hpp"
+#include "utils.hpp"
 
 void menuAltaHabitacion();
 

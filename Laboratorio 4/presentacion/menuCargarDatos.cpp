@@ -229,7 +229,13 @@ void cargarDatos(bool primeraVez)
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       controladorEstadia->obtenerReservaHuesped(H6->getEmail());
       fechaSistema->setFecha(DTFecha(00, 18, 07, 06, 2022));
-      controladorEstadia->registrarEstadiaHuesped(posicion - 1); /// ! DA ERROR, Preguntar
+      try
+      {
+         controladorEstadia->registrarEstadiaHuesped(posicion - 1); /// ! DA ERROR, Preguntar
+      }
+      catch (const std::exception &e)
+      {
+      }
       fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------

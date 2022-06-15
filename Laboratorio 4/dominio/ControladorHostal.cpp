@@ -89,6 +89,9 @@ list<DTHostal *> ControladorHostal::calcularTopTres()
         int cont = 0;
         for (list<Calificacion *>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux)
         {
+            if ((*aux) == nullptr)
+                break;
+
             promedio = promedio + (*aux)->getPuntaje();
         };
         if (cont != 0)

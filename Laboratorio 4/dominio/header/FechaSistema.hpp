@@ -3,7 +3,7 @@
 
 #include <string>
 #include "IFechaSistema.hpp"
-#include "../../Common/datatype/header/DTFecha.hpp"
+#include "../../common/datatype/header/DTFecha.hpp"
 
 using namespace std;
 

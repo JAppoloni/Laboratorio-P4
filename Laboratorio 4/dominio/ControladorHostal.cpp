@@ -20,9 +20,9 @@ void ControladorHostal::agregarHostal(DTHostal hostal)
     };
 }
 
-set<DTHostal *> ControladorHostal::obtenerHostales()
+list<DTHostal *> ControladorHostal::obtenerHostales()
 {
-    set<DTHostal *> res;
+    list<DTHostal *> res;
     for (map<string, Hostal *>::iterator it = hostales.begin(); it != hostales.end(); ++it)
     {
         int promedio = 0;
@@ -36,7 +36,7 @@ set<DTHostal *> ControladorHostal::obtenerHostales()
         {
             promedio = promedio / cont;
         };
-        res.insert(new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio));
+        res.push_back(new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio));
     };
     return res;
 }

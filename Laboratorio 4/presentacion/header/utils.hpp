@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <string>
-#include "../../Common/datatype/header/DTFecha.hpp"
+#include "../../common/datatype/header/DTFecha.hpp"
 
 
 #define PBSTR "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"

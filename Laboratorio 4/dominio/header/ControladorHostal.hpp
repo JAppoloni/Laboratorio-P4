@@ -17,7 +17,7 @@ public:
     static ControladorHostal *getInstancia();
 
     virtual void agregarHostal(DTHostal hostal);
-    virtual set<DTHostal *> obtenerHostales();
+    virtual list<DTHostal *> obtenerHostales();
     virtual void buscarHostal(string nombre);
     virtual void nuevaHabitacion(int numero, int capacidad, float costo);
     virtual void crearHabitacion();

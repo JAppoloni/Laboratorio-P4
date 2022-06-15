@@ -25,6 +25,24 @@ void ControladorUsuario::cancelarAlta()
     delete usuarioRecordado;
 }
 
+bool ControladorUsuario::confirmarEmailDisponible() {
+    if (usuarioRecordado == nullptr)
+    {
+        return false;
+    }
+
+    string email = usuarioRecordado->getEmail();
+
+    if (dynamic_cast<DTEmpleado *>(usuarioRecordado) != nullptr)
+    {
+        return empleados.find(email) == empleados.end();
+    }
+    else
+    {
+        return huespedes.find(email) == huespedes.end();
+    }
+}
+
 void ControladorUsuario::reingresarEmail(string email)
 {
     if (dynamic_cast<DTEmpleado *>(usuarioRecordado) != nullptr)
@@ -38,7 +56,7 @@ void ControladorUsuario::reingresarEmail(string email)
         DTHuesped *aux = dynamic_cast<DTHuesped *>(usuarioRecordado);
         usuarioRecordado = new DTHuesped(aux->getNombre(), aux->getContrasenya(), email, aux->getEsFinger());
         delete aux;
-    };
+    }
 }
 
 void ControladorUsuario::confirmarAlta()
@@ -46,10 +64,10 @@ void ControladorUsuario::confirmarAlta()
     if (dynamic_cast<DTEmpleado *>(usuarioRecordado) != nullptr){
         DTEmpleado * aux = dynamic_cast<DTEmpleado *>(usuarioRecordado);
         empleados[aux->getEmail()] = new Empleado(aux->getNombre(), aux->getEmail(), aux->getContrasenya(), aux->getCargo());
-    } else{
+    } else {
         DTHuesped * aux = dynamic_cast<DTHuesped *>(usuarioRecordado);
         huespedes[aux->getEmail()] = new Huesped(aux->getNombre(), aux->getEmail(), aux->getContrasenya(), aux->getEsFinger());
-    };
+    }
 }
 
 bool ControladorUsuario::esEmailUsuario()

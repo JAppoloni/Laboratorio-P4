@@ -46,7 +46,7 @@ public:
   void agregarComentario(std::string comentario, Calificacion *c);
 
   std::list<Calificacion> listarNotificaciones();
-  std::set<DTCalificacion> obtenerComentariosSinResponder();
+  std::list<DTCalificacion> obtenerComentariosSinResponder();
   DTEmpleado getDatatype();
   DTHostal obtenerHostal();
 };

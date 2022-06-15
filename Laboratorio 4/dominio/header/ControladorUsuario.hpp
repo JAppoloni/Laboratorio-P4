@@ -6,36 +6,29 @@
 
 using namespace std;
 
-class ControladorUsuario : public IControladorUsuario
+class ControladorUsuario: public IControladorUsuario
 {
-private:
-    string nomHostalRecordado;
-    static ControladorUsuario *instancia;
-    ControladorUsuario();
+    private:
+        static ControladorUsuario * instancia;
+        ControladorUsuario();
 
-    map<string, Empleado *> empleados;
-    map<string, Huesped *> huespedes;
+        map<string, Empleado*> empleados;
+        map<string, Huesped*> huespedes;
+    public:
+        static ControladorUsuario * getInstancia();
 
-public:
-    static ControladorUsuario *getInstancia();
-
-    virtual void ingresarUsuario(DTUsuario *dataUsuario);
-    virtual bool esEmailUsuario();
-    virtual void cancelarAlta();
-    virtual void reingresarEmail(string email);
-    virtual void confirmarAlta();
-    virtual void seleccionarHostal(string nombre);
-    virtual set<DTEmpleado *> obtenerEmpleadosSinHsotal();
-    virtual void seleccionarEmpleado(string email);
-    virtual void seleccionarCargo(Cargo cargo);
-    virtual void cancelarAsignacion();
-    virtual void confirmarAsignacionDeEmpleadoAHostal();
-    virtual set<DTHuesped *> listarHuespedes();
-
-    Huesped *getHuesped(string correo);
-    
-    //para pruebas
-    virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
+        virtual void ingresarUsuario(DTUsuario * dataUsuario);
+        virtual bool confirmarEmailDisponible();
+        virtual bool esEmailUsuario();
+        virtual void cancelarAlta();
+        virtual void reingresarEmail(string email);
+        virtual void confirmarAlta();
+        virtual void seleccionarHostal(string nombre);
+        virtual set<DTEmpleado *> obtenerEmpleadosSinHsotal(); 
+        virtual void seleccionarEmpleado(string email);
+        virtual void seleccionarCargo(Cargo cargo); 
+        virtual void cancelarAsignacion();
+        virtual void confirmarAsignacionDeEmpleadoAHostal();
 };
 
 #endif

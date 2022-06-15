@@ -1,4 +1,4 @@
-#ifndef CONTROLADOR_RESRVA
+#ifndef CONTROLADOR_RESERVA
 #define CONTROLADOR_RESERVA
 
     #include "IControladorReserva.hpp"

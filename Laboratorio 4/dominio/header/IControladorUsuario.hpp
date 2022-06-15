@@ -14,6 +14,7 @@
     class IControladorUsuario{
         public:
             virtual void ingresarUsuario(DTUsuario * dataUsuario) = 0; //alta usuario
+            virtual bool confirmarEmailDisponible() = 0; // alta usuario
             virtual void cancelarAlta() = 0;//alta usuario
             virtual bool esEmailUsuario() = 0; //email del DTUsuario recordado en el caso de uso alta usuario; alta usuario
             virtual void reingresarEmail(string email) = 0;//alta usuario

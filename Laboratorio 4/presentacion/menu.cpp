@@ -14,7 +14,7 @@ string outputMenu()
     cout << "Bienvenido a FingVMB, elija una opcion" << endl
          << endl;
 
-    cout << "0.  Cargar datos de prueba" << endl;
+    cout << "0.  Cargar Datos de Prueba" << endl;
     cout << "1.  Alta de Usuario" << endl;
     cout << "2.  Alta de Hostal" << endl;
     cout << "3.  Alta de Habitacion" << endl;
@@ -30,6 +30,10 @@ string outputMenu()
     cout << "13. Consulta de Reserva" << endl;
     cout << "13. Consulta de Estadia" << endl;
     cout << "14. Baja de reserva" << endl;
+    cout << "15. Suscribirse a Notificaciones" << endl;
+    cout << "16. Consulta de notificaciones" << endl;
+    cout << "17. Eliminar Subscripcion" << endl;
+    cout << "18. Modificar Fecha del Sistema" << endl;
     cout << "S.  Salir" << endl
          << endl;
 
@@ -50,7 +54,7 @@ void notImplementedMessage()
 void mainMenu()
 {
     bool exit = false;
-    bool primeraVez = true;
+    bool datosCargados = false;
 
     while (!exit)
     {
@@ -77,17 +81,17 @@ void mainMenu()
         switch (intOption)
         {
         case 0:
-            cargarDatos(primeraVez);
-            primeraVez = false;
+            cargarDatos(!datosCargados);
+            datosCargados = true;
             break;
         case 1:
-            notImplementedMessage();
+            menuAltaUsuario();
             break;
         case 2:
-            notImplementedMessage();
+            menuAltaHostal();
             break;
         case 3:
-            notImplementedMessage();
+            menuAltaHabitacion();
             break;
         case 4:
             notImplementedMessage();
@@ -120,6 +124,18 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 14:
+            notImplementedMessage();
+            break;
+        case 15:
+            notImplementedMessage();
+            break;
+        case 16:
+            notImplementedMessage();
+            break;
+        case 17:
+            notImplementedMessage();
+            break;
+        case 18:
             notImplementedMessage();
             break;
         default:

@@ -87,9 +87,9 @@ void Empleado::agregarComentario(std::string comentario, Calificacion *c)
   this->Comentarios.insert(Comentarios.begin(), co);
 }
 
-std::set<DTCalificacion> Empleado::obtenerComentariosSinResponder() // Esta Operación no es del Controlador??????
+std::list<DTCalificacion> Empleado::obtenerComentariosSinResponder() // Esta Operación no es del Controlador??????
 {
-  std::set<DTCalificacion> idComentarios;
+  std::list<DTCalificacion> idComentarios;
 
   // for (std::list<Comentario *>::iterator it = Comentarios.begin(); it != Comentarios.end(); ++it)
   // {

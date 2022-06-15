@@ -69,7 +69,7 @@ Hostal &Hostal::operator=(const Hostal &assign)
 
 std::list<int> Hostal::obtenerComentariosSinResponder()
 {
-    std::list<int> idComentarios = {};
+    std::list<int> idComentarios;
     std::list<Calificacion *>::iterator it;
     for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
     {

@@ -29,6 +29,9 @@ list<DTHostal *> ControladorHostal::obtenerHostales()
         int cont = 0;
         for (list<Calificacion *>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux)
         {
+            if ((*aux) == nullptr)
+                break;
+
             cont++;
             promedio = promedio + (*aux)->getPuntaje();
         };

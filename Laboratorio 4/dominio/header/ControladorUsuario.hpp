@@ -11,6 +11,7 @@ class ControladorUsuario: public IControladorUsuario
     private:
         static ControladorUsuario * instancia;
         ControladorUsuario();
+        string nomHostalRecordado;
 
         map<string, Empleado*> empleados;
         map<string, Huesped*> huespedes;
@@ -29,6 +30,9 @@ class ControladorUsuario: public IControladorUsuario
         virtual void seleccionarCargo(Cargo cargo); 
         virtual void cancelarAsignacion();
         virtual void confirmarAsignacionDeEmpleadoAHostal();
+        virtual set<DTHuesped*> listarHuespedes();
+        virtual Huesped* getHuesped(string correo);
+        virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
 };
 
 #endif

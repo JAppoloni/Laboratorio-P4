@@ -3,7 +3,7 @@
 
     #include "IControladorReserva.hpp"
     #include "ControladorHostal.hpp"
-    #include "controladorUsuario.hpp"
+    #include "ControladorUsuario.hpp"
 
     using namespace std;
 

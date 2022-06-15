@@ -26,6 +26,7 @@
             virtual void cancelarAsignacion() = 0;//asignar empleado a hostal
             virtual void confirmarAsignacionDeEmpleadoAHostal() = 0;//asignar empleado a hostal
             virtual set<DTHuesped*> listarHuespedes() = 0;//realizar reserva
+            virtual Huesped* getHuesped(string email) = 0;
 
             //para pruebas
             virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema() = 0;

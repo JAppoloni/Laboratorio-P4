@@ -2,14 +2,16 @@
 
 ControladorUsuario *ControladorUsuario::instancia = nullptr;
 
-ControladorUsuario::ControladorUsuario() {}
+ControladorUsuario::ControladorUsuario() {
+    nomHostalRecordado = "";
+}
 
 ControladorUsuario *ControladorUsuario::getInstancia()
 {
     if (instancia == nullptr)
     {
-        instancia= new ControladorUsuario();
-    };
+        instancia = new ControladorUsuario();
+    }
     return instancia;
 }
 

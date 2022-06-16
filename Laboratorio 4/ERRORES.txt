@@ -1,9 +1,0 @@
-undefined reference to `ControladorEstadia::buscarCalificacion()'
- undefined reference to `ControladorEstadia::buscarComentario()'
-undefined reference to `ControladorEstadia::buscarInformacionReserva()'
-undefined reference to `ControladorEstadia::liberarRegistros()'
- undefined reference to `ControladorUsuario::listarUsuarios()'
-undefined reference to `Observer::~Observer()'
-/usr/bin/ld: Empleado.o: in function `Empleado::~Empleado()':
- `Observer::~Observer()'
- `Observer::Observer()':

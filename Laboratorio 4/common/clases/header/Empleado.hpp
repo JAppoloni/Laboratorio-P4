@@ -51,7 +51,10 @@ public:
   void eliminarNotificacion(Calificacion *c); 
   void eliminarNotificaciones();
   DTEmpleado getDatatype();
+  DTEmpleado *getDatatypeptr();
   DTHostal obtenerHostal();
+  void eliminarComentario(Comentario * com);
+
 };
 
 #endif

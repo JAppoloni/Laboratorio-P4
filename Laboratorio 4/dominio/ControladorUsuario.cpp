@@ -256,3 +256,32 @@ set<DTCalificacion *> ControladorUsuario::listarNotificacionesEmpleado(string em
     e->eliminarNotificaciones();
     return res;
 }
+
+//listar usuarios
+set<DTUsuario *> ControladorUsuario::listarUsuarios()
+{
+    set<DTUsuario *> res;
+    for (map<string, Huesped *>::iterator it = huespedes.begin(); it != huespedes.end(); ++it)
+    {
+        res.insert(it->second->getDatatypeptr());
+    };
+    for (map<string, Empleado *>::iterator it = empleados.begin(); it != empleados.end(); ++it)
+    {
+        res.insert(it->second->getDatatypeptr());
+    };
+    return res;
+}
+
+void ControladorUsuario::eliminarNotificacion(Calificacion * calif)
+{
+    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
+        it->second->eliminarNotificacion(calif);
+    }
+}
+
+void ControladorUsuario::eliminarComentarioEmpleado(Comentario * com)
+{
+    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
+        it->second->eliminarComentario(com);
+    }
+}

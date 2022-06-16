@@ -81,7 +81,17 @@ DTFecha::DTFecha(DTFecha *fch)
 {
     if (fch != nullptr)
     {
-        this->fecha = fch->fecha;
+        this->fecha.tm_mday = fch->fecha.tm_mday;
+        this->fecha.tm_mon = fch->fecha.tm_mon;
+        this->fecha.tm_year = fch->fecha.tm_year;
+        this->fecha.tm_hour = fch->fecha.tm_hour;
+        this->fecha.tm_min = fch->fecha.tm_min;
+        this->fecha.tm_sec = fch->fecha.tm_sec;
+        this->fecha.tm_wday = fch->fecha.tm_wday;
+        this->fecha.tm_yday = fch->fecha.tm_yday;
+        this->fecha.tm_isdst = fch->fecha.tm_isdst;
+        this->fecha.tm_gmtoff = fch->fecha.tm_gmtoff;
+        this->fecha.tm_zone = fch->fecha.tm_zone;
     }
 }
 
@@ -137,8 +147,11 @@ DTFecha DTFecha::operator+(const tm &fch)
     auxfch->tm_year = this->fecha.tm_year + fch.tm_year;
     auxfch->tm_wday = this->fecha.tm_wday + fch.tm_wday;
     auxfch->tm_yday = this->fecha.tm_yday + fch.tm_yday;
-    mktime(auxfch); // Corregir Errores de formato de fecha
-    
+    auxfch->tm_isdst = 0;
+    auxfch->tm_gmtoff = 0;
+    auxfch->tm_zone = nullptr;
+    time_t remover = mktime(auxfch); // Corregir Errores de formato de fecha
+
     auxfch->tm_isdst = 0;
     auxfch->tm_gmtoff = 0;
     auxfch->tm_zone = nullptr;

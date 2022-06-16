@@ -10,6 +10,12 @@ Empleado::Empleado(std::string nombre, std::string email, std::string contrasena
   this->hostal = nullptr;
 }
 
+Empleado::Observer::~Observer()
+{
+}
+
+
+
 std::list<Calificacion *> Empleado::getNotificaciones()
 {
   return Notificaciones;
@@ -71,7 +77,6 @@ Empleado::~Empleado()
   {
     if (it != nullptr)
     {
-      delete it;
       it = nullptr;
     }
   }
@@ -90,8 +95,12 @@ Empleado &Empleado::operator=(const Empleado &assign)
 
 DTEmpleado Empleado::getDatatype()
 {
-  // DTEmpleado data = DTEmpleado(nombre, email, contrasena, cargo, Comentarios, hostal);
   return DTEmpleado(nombre, email, contrasena, cargo);
+}
+
+DTEmpleado* Empleado::getDatatypeptr()
+{
+  return new DTEmpleado(nombre, email, contrasena, cargo);
 }
 
 void Empleado::agregarNotificacion(Calificacion *c)
@@ -130,4 +139,9 @@ void Empleado::eliminarNotificacion(Calificacion *c){
 
 void Empleado::eliminarNotificaciones(){
  Notificaciones.clear();
+}
+
+void Empleado::eliminarComentario(Comentario * com)
+{
+  Comentarios.remove(com);
 }

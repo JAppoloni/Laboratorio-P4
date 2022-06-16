@@ -35,6 +35,8 @@ class ControladorUsuario: public IControladorUsuario
         virtual Huesped* getHuesped(string correo);
         virtual set<DTCalificacion*> obtenerComentariosSinResponderEmpleado(string email);
         virtual void responderCalificacion(int codigo, string email, string comentario);
+        void eliminarNotificacion(Calificacion * calif);
+        void eliminarComentarioEmpleado(Comentario * com);
 
         virtual set<DTUsuario *> listarUsuarios(); 
         virtual void eliminarSuscripcion(string email);

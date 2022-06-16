@@ -44,6 +44,7 @@ public:
 
    std::list<DTCalificacion> obtenerCalificaciones();
    DTHostal getDatatype();
+   void eliminarCalificacion(Calificacion * calif);
    // getDatatypeCompleto(): DTHostal
    std::set<DTCalificacion*> obtenerComentariosSinResponder();
 };

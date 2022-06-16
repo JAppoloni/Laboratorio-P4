@@ -45,6 +45,7 @@ public:
    DTCalificacion getDataType();
    int obtenerID();
    bool estaResponida();
+   
 
 private:
    int _puntaje;

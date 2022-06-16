@@ -103,3 +103,4 @@ bool Calificacion::estaResponida()
 {
 	return this->getRespuestaComentario() != nullptr;
 }
+

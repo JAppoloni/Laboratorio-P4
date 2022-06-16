@@ -33,9 +33,7 @@ public:
     void agregarEstadia(Estadia* e); 
     DTHuesped getDatatype();
     DTHuesped* getDatatypeptr();
-
-
-    
+    void elimirarEstadia(Estadia * estadia);
 };
 
 #endif

@@ -23,24 +23,28 @@ void ControladorHostal::agregarHostal(DTHostal hostal)
 list<DTHostal *> ControladorHostal::obtenerHostales()
 {
     list<DTHostal *> res;
-    for (map<string, Hostal *>::iterator it = hostales.begin(); it != hostales.end(); ++it)
-    {
-        int promedio = 0;
-        int cont = 0;
-        for (list<Calificacion *>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux)
-        {
-            if ((*aux) == nullptr)
-                break;
 
-            cont++;
-            promedio = promedio + (*aux)->getPuntaje();
-        };
-        if (cont != 0)
+    if (!hostales.empty())
+    {
+        for (auto itHostales : hostales)
         {
-            promedio = promedio / cont;
-        };
-        res.push_back(new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio));
-    };
+
+            float promedio = 0;
+
+            if (!itHostales.second->getCalificaciones().empty())
+            {
+                int cont = 0;
+                for (auto itClaificacion : itHostales.second->getCalificaciones())
+                {
+                    promedio += itClaificacion->getPuntaje();
+                    cont++;
+                }
+                promedio = promedio / cont;
+            }
+            DTHostal *nuevoHost = new DTHostal(itHostales.first, itHostales.second->getDireccion(), itHostales.second->getTelefono(), promedio);
+            res.push_back(nuevoHost);
+        }
+    }
     return res;
 }
 
@@ -76,77 +80,109 @@ Hostal *ControladorHostal::getHostal(string nom)
 set<DTHabitacion *> ControladorHostal::obtenerHabitacionesDeHostal(string nom)
 {
     set<DTHabitacion *> res;
-    for (list<Habitacion *>::iterator it = hostales[nom]->getHabitaciones().begin(); it != hostales[nom]->getHabitaciones().end(); ++it)
+    if (!hostales[nom]->getHabitaciones().empty())
     {
-        res.insert(new DTHabitacion((*it)->getNumero(), (*it)->getPrecio(), (*it)->getCapacidad()));
-    };
+        for (auto it : hostales[nom]->getHabitaciones())
+        {
+            DTHabitacion *nueva = new DTHabitacion(it->getNumero(), it->getPrecio(), it->getCapacidad());
+            res.insert(nueva);
+        }
+    }
     return res;
 }
 
 list<DTHostal *> ControladorHostal::calcularTopTres()
 {
-    map<int, DTHostal *> topHostales;
-    for (map<string, Hostal *>::iterator it = hostales.begin(); it != hostales.end(); ++it)
+    list<DTHostal *> topTresHostales;
+
+    if (!hostales.empty())
     {
-        int promedio = 0;
-        int cont = 0;
-        for (list<Calificacion *>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux)
+        list<DTHostal> topHostales;
+
+        for (auto it : hostales)
         {
-            if ((*aux) == nullptr)
+            float promedio = 0;
+            if (!it.second->getCalificaciones().empty())
+            {
+                int cont = 0;
+                for (auto itClaificacion : it.second->getCalificaciones())
+                {
+                    promedio += itClaificacion->getPuntaje();
+                    cont++;
+                }
+                promedio = promedio / cont;
+            }
+            DTHostal agregarAlista = DTHostal(it.first, it.second->getDireccion(), it.second->getTelefono(), promedio);
+
+            if (!topHostales.empty())
+            {
+                bool insertado = false;
+                for (auto itTop : topHostales)
+                {
+                    if (itTop.getPromedioCalificaciones() < promedio)
+                    {
+                        topHostales.push_front(agregarAlista);
+                        insertado = true;
+                        break;
+                    }
+                }
+                if (!insertado)
+                {
+                    topHostales.push_back(agregarAlista);
+                }
+            }
+            else
+            {
+                topHostales.push_back(agregarAlista);
+            }
+        }
+        int contador = 0;
+        for (auto it : topHostales)
+        {
+            if (contador > 3)
                 break;
 
-            promedio = promedio + (*aux)->getPuntaje();
-        };
-        if (cont != 0)
-        {
-            promedio = promedio / cont;
-        };
-        topHostales[promedio] = new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio);
-    };
-    list<DTHostal *> res;
-    int cont = 0;
-    for (map<int, DTHostal *>::iterator it = topHostales.end(); it != topHostales.begin() && cont < 3; --it)
-    {
-        res.push_back(it->second);
-    };
-    return res;
+            DTHostal *nuevoHost = new DTHostal(it.getNombre(), it.getDireccion(), it.getTelefono(), it.getPromedioCalificaciones());
+            topTresHostales.push_back(nuevoHost);
+        }
+    }
+    return topTresHostales;
 }
 
 set<DTCalificacion *> ControladorHostal::consultarHostal(string nom)
 {
     set<DTCalificacion *> res;
-    for (list<Calificacion *>::iterator it = hostales[nom]->getCalificaciones().begin(); it != hostales[nom]->getCalificaciones().end(); ++it)
+
+    for (auto it : hostales[nom]->getCalificaciones())
     {
-        res.insert(new DTCalificacion(-1, "", (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
-    };
+        DTCalificacion *nueva = new DTCalificacion(-1, "", it->getPuntaje(), it->getFecha(), it->getComentario());
+        res.insert(nueva);
+    }
     return res;
 }
 
 set<DTHostal *> ControladorHostal::listarTodosLosHostalesDelSistema()
 {
     set<DTHostal *> res;
-    for (map<string, Hostal *>::iterator it = hostales.begin(); it != hostales.end(); ++it)
+    if (!hostales.empty())
     {
-        int promedio = 0;
-        int cont = 0;
-
-        if (it->second->getCalificaciones().size() != 0)
+        for (auto it : hostales)
         {
-            for (list<Calificacion *>::iterator aux = it->second->getCalificaciones().begin(); aux != it->second->getCalificaciones().end(); ++aux)
+            float promedio = 0;
+            if (!it.second->getCalificaciones().empty())
             {
-                if ((*aux) == nullptr)
-                    break;
-
-                cont++;
-                promedio = promedio + (*aux)->getPuntaje();
-            };
-            if (cont != 0)
-            {
+                int cont = 0;
+                for (auto itClaificacion : it.second->getCalificaciones())
+                {
+                    promedio += itClaificacion->getPuntaje();
+                    cont++;
+                }
                 promedio = promedio / cont;
-            };
+            }
+            DTHostal *nuevoHost = new DTHostal(it.first, it.second->getDireccion(), it.second->getTelefono(), promedio);
+            res.insert(nuevoHost);
         }
-        res.insert(new DTHostal(it->second->getNombre(), it->second->getDireccion(), it->second->getTelefono(), promedio));
-    };
+    }
     return res;
 }
 
@@ -157,7 +193,7 @@ void ControladorHostal::liberarRegistros()
         if (it.second != nullptr)
         {
             delete it.second;
-        it.second = nullptr;
+            it.second = nullptr;
         }
     }
     hostales.clear();

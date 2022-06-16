@@ -287,6 +287,7 @@ void cargarDatos(bool primeraVez)
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
       fechaSistema->setFecha(FechaActual);
 
+
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
       //----------------------------------------------------------------------------------------------------------------------
@@ -327,9 +328,9 @@ void cargarDatos(bool primeraVez)
       // C2 E4 "Desapareció y se fue sin pagar." 06/01/01 - 3pm
 
       FechaActual = fechaSistema->getFecha();
-      set<DTCalificacion *> eliminar13 = controladorUsuario->obtenerComentariosSinResponderEmpleado(E4->getEmail() );
+      set<DTCalificacion *> eliminar13 = controladorUsuario->obtenerComentariosSinResponderEmpleado(E4->getEmail());
       fechaSistema->setFecha(DTFecha(00, 15, 06, 0, 2001, 2));
-      controladorUsuario->responderCalificacion(posicion - 3,H2->getEmail(), "Desapareció y se fue sin pagar.");
+      controladorUsuario->responderCalificacion(posicion - 3, H2->getEmail(), "Desapareció y se fue sin pagar.");
       fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
@@ -372,18 +373,18 @@ void cargarDatos(bool primeraVez)
       delete H6;
       H6 = nullptr;
 
-      // freeSetReserva(eliminar1);
-      // freeSetReserva(eliminar2);
-      // freeSetReserva(eliminar3);
-      // freeSetReserva(eliminar4);
-      // freeSetReserva(eliminar5);
-      // freeSetReserva(eliminar6);
-      // freeSetEstadia(eliminar7);
-      // freeSetEstadia(eliminar8);
-      // freeSetEstadia(eliminar9);
-      // freeSetEstadia(eliminar10);
-      // freeSetEstadia(eliminar11);
-      // freeSetEstadia(eliminar12);
+      freeSetReserva(eliminar1);
+      freeSetReserva(eliminar2);
+      freeSetReserva(eliminar3);
+      freeSetReserva(eliminar4);
+      freeSetReserva(eliminar5);
+      freeSetReserva(eliminar6);
+      freeSetEstadia(eliminar7);
+      freeSetEstadia(eliminar8);
+      freeSetEstadia(eliminar9);
+      freeSetEstadia(eliminar10);
+      freeSetEstadia(eliminar11);
+      freeSetEstadia(eliminar12);
 
       for (auto it : eliminar13)
       {

@@ -68,16 +68,32 @@ void ControladorReserva::confirmarReserva()
 
     if (!esGruparRecordado)
     {
-        reservas[contador_codigo] = new ReservaIndividual(contador_codigo, checkInRecordado, checkOutRecordado, CU->getHuesped(correoHuespedRecordado), Abierta, CH->getHostal(hostalRecordado)->getHabitacion(numHabRecordado), false);
+        ReservaIndividual *reserva = new ReservaIndividual(contador_codigo,
+                                                           checkInRecordado,
+                                                           checkOutRecordado,
+                                                           CU->getHuesped(correoHuespedRecordado),
+                                                           Abierta,
+                                                           CH->getHostal(hostalRecordado)->getHabitacion(numHabRecordado),
+                                                           false);
+        reservas[contador_codigo] = reserva;
     }
     else
     {
         list<Huesped *> huespedesRG;
-        for (set<string>::iterator it = correosHuespedesRGRecordados.begin(); it != correosHuespedesRGRecordados.end(); ++it)
+        for (auto it : correosHuespedesRGRecordados)
         {
-            huespedesRG.push_front(CU->getHuesped(*it));
+            huespedesRG.push_back(CU->getHuesped(it));
         };
-        reservas[contador_codigo] = new ReservaGrupal(contador_codigo, checkInRecordado, checkOutRecordado, CU->getHuesped(correoHuespedRecordado), Abierta, CH->getHostal(hostalRecordado)->getHabitacion(numHabRecordado), huespedesRG);
+
+        ReservaGrupal *reservaGrupal = new ReservaGrupal(
+            contador_codigo,
+            checkInRecordado,
+            checkOutRecordado,
+            CU->getHuesped(correoHuespedRecordado),
+            Abierta,
+            CH->getHostal(hostalRecordado)->getHabitacion(numHabRecordado),
+            huespedesRG);
+        reservas[contador_codigo] = reservaGrupal;
     }
     contador_codigo++;
 }
@@ -85,14 +101,13 @@ void ControladorReserva::confirmarReserva()
 set<DTReserva *> ControladorReserva::listarReservasHuesped(string email, string nomHostal)
 {
     set<DTReserva *> res;
-    for (map<int, Reserva *>::iterator it = reservas.begin(); it != reservas.end(); ++it)
+    for (auto it : reservas)
     {
-        if (it->second->esReservaHostalHuesped(email, nomHostal) && it->second->getEstado() != Cancelada)
+        if (it.second->esReservaHostalHuesped(email, nomHostal) && it.second->getEstado() != Cancelada)
         {
-            res.insert(it->second->getDataReserva());
-        };
-    };
-    return res;
+            res.insert(it.second->getDataReserva());
+        }
+    }
 }
 
 Reserva *ControladorReserva::getReserva(int codigo)
@@ -103,10 +118,12 @@ Reserva *ControladorReserva::getReserva(int codigo)
 set<DTReserva *> ControladorReserva::listarTodasLasReservasDelSistema()
 {
     set<DTReserva *> res;
-    for (map<int, Reserva *>::iterator it = reservas.begin(); it != reservas.end(); ++it)
+
+    for (auto it : reservas)
     {
-        res.insert(it->second->getDataReserva());
-    };
+        res.insert(it.second->getDataReserva());
+    }
+
     return res;
 }
 
@@ -144,24 +161,38 @@ void ControladorReserva::seleccionarHostal(string nom)
 set<DTReserva *> ControladorReserva::listarReservas()
 {
     set<DTReserva *> res;
-    for (map<int, Reserva *>::iterator it = reservas.begin(); it != reservas.end(); ++it)
+    if (!nomHostalRecordado.empty())
     {
-        if (it->second->getHabitacionReserva()->getHostal()->getNombre() == nomHostalRecordado)
+        for (auto it : reservas)
         {
-            if (dynamic_cast<ReservaIndividual *>(it->second) != nullptr)
+
+            if (it.second->getHabitacionReserva()->getHostal()->getNombre() == nomHostalRecordado)
             {
-                ReservaIndividual *aux = dynamic_cast<ReservaIndividual *>(it->second);
-                DTReserva *nuevo = new DTReservaIndividual(aux->getCodigo(), aux->getCheckIn(), aux->getCheckOut(), aux->getEstado(), aux->calcularCosto(), aux->getPago());
-                res.insert(nuevo);
-            }
-            else
-            {
-                ReservaGrupal *aux = dynamic_cast<ReservaGrupal *>(it->second);
-                DTReserva *nuevo = new DTReservaGrupal(aux->getCodigo(), aux->getCheckIn(), aux->getCheckOut(), aux->getEstado(), aux->calcularCosto());
-                res.insert(nuevo);
+                if (dynamic_cast<ReservaIndividual *>(it.second) != nullptr)
+                {
+                    ReservaIndividual *aux = dynamic_cast<ReservaIndividual *>(it.second);
+                    DTReserva *nuevo = new DTReservaIndividual(aux->getCodigo(),
+                                                               aux->getCheckIn(),
+                                                               aux->getCheckOut(),
+                                                               aux->getEstado(),
+                                                               aux->calcularCosto(),
+                                                               aux->getPago());
+                    res.insert(nuevo);
+                }
+                else
+                {
+                    ReservaGrupal *aux = dynamic_cast<ReservaGrupal *>(it.second);
+                    DTReserva *nuevo = new DTReservaGrupal(aux->getCodigo(),
+                                                           aux->getCheckIn(),
+                                                           aux->getCheckOut(),
+                                                           aux->getEstado(),
+                                                           aux->calcularCosto());
+                    res.insert(nuevo);
+                };
             };
         };
-    };
+    }
+
     return res;
 }
 
@@ -176,6 +207,28 @@ void ControladorReserva::cancelarBaja() {}
 
 void ControladorReserva::confirmarBaja()
 {
-    
+    ControladorEstadia *CE = ControladorEstadia::getInstancia();
+    if (dynamic_cast<ReservaIndividual *>(reservas[codigoRecordado]) != nullptr)
+    {
+        ReservaIndividual *aux = dynamic_cast<ReservaIndividual *>(reservas[codigoRecordado]);
+        if (aux->getEstadiaReserva() != nullptr)
+        {
+            CE->eliminarEstadia(aux->getEstadiaReserva());
+        };
+    }
+    else
+    {
+        ReservaGrupal *aux = dynamic_cast<ReservaGrupal *>(reservas[codigoRecordado]);
+
+        if (!aux->getListaEstadia().empty())
+        {
+            for (auto it : aux->getListaEstadia())
+            {
+                CE->eliminarEstadia(it);
+            }
+            aux->getListaEstadia().clear();
+        }
+    }
+    reservas.erase(codigoRecordado);
+    delete reservas[codigoRecordado];
 }
-// eliminar reserva (borrar link del controlador), estadia (eliminar del controlador y link de huesped a esatdia), calificaciones (eliminar link de empleado (notificacioin) y link de hostal), comentarios (link de empleado)

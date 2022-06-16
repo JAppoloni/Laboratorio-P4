@@ -1,0 +1,12 @@
+#ifndef MENU_ALTA_USUARIO_H
+#define MENU_ALTA_USUARIO_H
+
+#include "../../common/datatype/header/DTHostal.hpp"
+#include "../../dominio/header/Fabrica.hpp"
+#include "utils.hpp"
+#include <iostream>
+using namespace std;
+
+void menuBajaReserva();
+
+#endif

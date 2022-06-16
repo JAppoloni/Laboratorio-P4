@@ -63,7 +63,6 @@ Hostal::~Hostal()
     {
         if (it != nullptr)
         {
-            delete it;
             it = nullptr;
         }
     }
@@ -141,4 +140,9 @@ Habitacion *Hostal::getHabitacion(int num)
 void Hostal::agregarCalificacion(Calificacion *calificacion)
 {
     listaCalificaciones.push_back(calificacion);
+}
+
+void Hostal::eliminarCalificacion(Calificacion * calif)
+{
+    listaCalificaciones.remove(calif);
 }

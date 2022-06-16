@@ -103,7 +103,7 @@ DTFecha *Estadia::getChechOut() const
 }
 void Estadia::setChechOut(DTFecha *chechOut)
 {
-	_checkOut = chechOut;
+	_checkOut = new DTFecha(chechOut);
 }
 
 std::string Estadia::getPromo() const
@@ -205,8 +205,4 @@ void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
 {
 	// ! Notificar
 	_calificacionEstadia = calificacionEstadia;
-}
-
-void Estadia::notificarEstadia() // ! VER
-{
 }

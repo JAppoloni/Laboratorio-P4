@@ -102,3 +102,11 @@ DTHostal Empleado::obtenerHostal()
 {
   return DTHostal(this->getHostal()->getNombre(), this->getHostal()->getDireccion(), this->getHostal()->getTelefono());
 }
+
+void Empleado::eliminarNotificacion(Calificacion *c){
+ Notificaciones.remove(c);
+}
+
+void Empleado::eliminarNotificaciones(){
+ Notificaciones.clear();
+}

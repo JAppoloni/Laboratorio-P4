@@ -36,6 +36,11 @@ class ControladorUsuario: public IControladorUsuario
         virtual set<DTCalificacion*> obtenerComentariosSinResponderEmpleado(string email);
         virtual void responderCalificacion(int codigo, string email, string comentario);
 
+        virtual set<DTUsuario *> listarUsuarios(); 
+        virtual void eliminarSuscripcion(string email);
+        virtual set<DTCalificacion*> listarNotificacionesEmpleado(string email);
+        virtual void suscribirseNotificacion(string email);
+
         virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
 };
 

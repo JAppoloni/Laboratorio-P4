@@ -1,723 +1,1225 @@
-==15406== Memcheck, a memory error detector
-==15406== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==15406== Using Valgrind-3.16.1-36d6727e1d-20200622X and LibVEX; rerun with -h for copyright info
-==15406== Command: ./executable
-==15406== Parent PID: 6889
-==15406== 
---15406-- 
---15406-- Valgrind options:
---15406--    --leak-check=full
---15406--    --show-leak-kinds=all
---15406--    --track-origins=yes
---15406--    --verbose
---15406--    --log-file=valgrind-out.txt
---15406-- Contents of /proc/version:
---15406--   Linux version 4.4.0-18362-Microsoft (Microsoft@Microsoft.com) (gcc version 5.4.0 (GCC) ) #1049-Microsoft Thu Aug 14 12:01:00 PST 2020
---15406-- 
---15406-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
---15406-- Page sizes: currently 4096, max supported 4096
---15406-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
---15406-- Reading syms from /mnt/c/Users/JAppoloni/Documents/programacion-4-laboratorio/Laboratorio 4/executable
---15406-- Reading syms from /lib/x86_64-linux-gnu/ld-2.31.so
---15406--   Considering /usr/lib/debug/.build-id/32/438eb3b034da54caf58c7a65446639f7cfe274.debug ..
---15406--   .. build-id is valid
---15406-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
---15406--   Considering /usr/lib/debug/.build-id/54/299c4aec0e5e5f3d7b8135341351d0e1dbfc64.debug ..
---15406--   .. build-id is valid
---15406--    object doesn't have a dynamic symbol table
---15406-- Scheduler: using generic scheduler lock implementation.
---15406-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
-==15406== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-15406-by-jappoloni-on-???
-==15406== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-15406-by-jappoloni-on-???
-==15406== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-15406-by-jappoloni-on-???
-==15406== 
-==15406== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==15406== don't want to do, unless you know exactly what you're doing,
-==15406== or are doing some strange experiment):
-==15406==   /usr/bin/vgdb --pid=15406 ...command...
-==15406== 
-==15406== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==15406==   /path/to/gdb ./executable
-==15406== and then give GDB the following command
-==15406==   target remote | /usr/bin/vgdb --pid=15406
-==15406== --pid is optional if only one valgrind process is running
-==15406== 
-==15406== error calling PR_SET_PTRACER, vgdb might block
---15406-- REDIR: 0x401f970 (ld-linux-x86-64.so.2:strlen) redirected to 0x580ca5f2 (vgPlain_amd64_linux_REDIR_FOR_strlen)
---15406-- REDIR: 0x401f750 (ld-linux-x86-64.so.2:index) redirected to 0x580ca60c (vgPlain_amd64_linux_REDIR_FOR_index)
---15406-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
---15406--   Considering /usr/lib/debug/.build-id/f2/7641e081d3c37b410d7f31da4e2bf21040f356.debug ..
---15406--   .. build-id is valid
---15406-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
---15406--   Considering /usr/lib/debug/.build-id/25/7cdcdf80e04f91ca9e3b185ee3b52995e89946.debug ..
---15406--   .. build-id is valid
-==15406== WARNING: new redirection conflicts with existing -- ignoring it
---15406--     old: 0x0401f970 (strlen              ) R-> (0000.0) 0x580ca5f2 vgPlain_amd64_linux_REDIR_FOR_strlen
---15406--     new: 0x0401f970 (strlen              ) R-> (2007.0) 0x0483bda0 strlen
---15406-- REDIR: 0x401c190 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483cc90 (strcmp)
---15406-- REDIR: 0x401feb0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4840740 (mempcpy)
---15406-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
---15406--    object doesn't have a symbol table
---15406-- Reading syms from /lib/x86_64-linux-gnu/libm-2.31.so
---15406--   Considering /usr/lib/debug/.build-id/e9/d2c06479b13dd3cfa78d714d11dccf6fcbee51.debug ..
---15406--   .. build-id is valid
---15406-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
---15406--    object doesn't have a symbol table
---15406-- Reading syms from /lib/x86_64-linux-gnu/libc-2.31.so
---15406--   Considering /usr/lib/debug/.build-id/54/eef5ce96cf37cb175b0d93186836ca1caf470c.debug ..
---15406--   .. build-id is valid
---15406-- REDIR: 0x4c06ea0 (libc.so.6:memmove) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06250 (libc.so.6:strncpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c071c0 (libc.so.6:strcasecmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c05b70 (libc.so.6:strcat) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c062b0 (libc.so.6:rindex) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c08550 (libc.so.6:rawmemchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c20710 (libc.so.6:wmemchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c202b0 (libc.so.6:wcscmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c07000 (libc.so.6:mempcpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06e30 (libc.so.6:bcmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c061f0 (libc.so.6:strncmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c05c20 (libc.so.6:strcmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06f60 (libc.so.6:memset) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c20270 (libc.so.6:wcschr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06150 (libc.so.6:strnlen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c05cf0 (libc.so.6:strcspn) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c07210 (libc.so.6:strncasecmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c05c90 (libc.so.6:strcpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c07360 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c21910 (libc.so.6:wcsnlen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c202f0 (libc.so.6:wcscpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c062f0 (libc.so.6:strpbrk) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c05bd0 (libc.so.6:index) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06110 (libc.so.6:strlen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c0c8b0 (libc.so.6:memrchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c07260 (libc.so.6:strcasecmp_l) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06df0 (libc.so.6:memchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c20390 (libc.so.6:wcslen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c06590 (libc.so.6:strspn) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c07160 (libc.so.6:stpncpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c07100 (libc.so.6:stpcpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c08590 (libc.so.6:strchrnul) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4c072b0 (libc.so.6:strncasecmp_l) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
---15406-- REDIR: 0x4cd78f0 (libc.so.6:__strrchr_avx2) redirected to 0x483b7b0 (rindex)
---15406-- REDIR: 0x4c020f0 (libc.so.6:malloc) redirected to 0x4838710 (malloc)
---15406-- REDIR: 0x4cd7ac0 (libc.so.6:__strlen_avx2) redirected to 0x483bc80 (strlen)
---15406-- REDIR: 0x4cd40d0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x483ee80 (bcmp)
---15406-- REDIR: 0x4cd2ff0 (libc.so.6:__strcmp_avx2) redirected to 0x483cb90 (strcmp)
---15406-- REDIR: 0x4c02e50 (libc.so.6:calloc) redirected to 0x483aab0 (calloc)
---15406-- REDIR: 0x4cdaa90 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x48403c0 (mempcpy)
---15406-- REDIR: 0x4cd7700 (libc.so.6:__strchrnul_avx2) redirected to 0x48402b0 (strchrnul)
---15406-- REDIR: 0x4cd7c50 (libc.so.6:__strnlen_avx2) redirected to 0x483bc20 (strnlen)
---15406-- REDIR: 0x48f30a0 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4838d80 (operator new(unsigned long))
---15406-- REDIR: 0x4c02720 (libc.so.6:free) redirected to 0x4839940 (free)
---15406-- REDIR: 0x4cdaab0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x483f760 (memmove)
---15406-- REDIR: 0x4c06a30 (libc.so.6:__GI_strstr) redirected to 0x4840990 (__strstr_sse2)
---15406-- REDIR: 0x48f1490 (libstdc++.so.6:operator delete(void*)) redirected to 0x4839e40 (operator delete(void*))
---15406-- REDIR: 0x48f14a0 (libstdc++.so.6:operator delete(void*, unsigned long)) redirected to 0x483a020 (operator delete(void*, unsigned long))
-==15406== Invalid read of size 8
-==15406==    at 0x12DC15: Estadia::~Estadia() (Estadia.cpp:64)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a240 is 112 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DC50: Estadia::~Estadia() (Estadia.cpp:70)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a208 is 56 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DC8B: Estadia::~Estadia() (Estadia.cpp:76)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a230 is 96 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DCA4: Estadia::~Estadia() (Estadia.cpp:79)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a238 is 104 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x12DCC8: Estadia::~Estadia() (Estadia.cpp:62)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a210 is 64 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid free() / delete / delete[] / realloc()
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x134643: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a1d0 is 0 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DC15: Estadia::~Estadia() (Estadia.cpp:64)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab50 is 112 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DC50: Estadia::~Estadia() (Estadia.cpp:70)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab18 is 56 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DC8B: Estadia::~Estadia() (Estadia.cpp:76)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab40 is 96 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x12DCA4: Estadia::~Estadia() (Estadia.cpp:79)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab48 is 104 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid read of size 8
-==15406==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x12DCC8: Estadia::~Estadia() (Estadia.cpp:62)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab20 is 64 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== Invalid free() / delete / delete[] / realloc()
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x132E46: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5aae0 is 0 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== HEAP SUMMARY:
-==15406==     in use at exit: 526 bytes in 7 blocks
-==15406==   total heap usage: 318 allocs, 317 frees, 93,948 bytes allocated
-==15406== 
-==15406== Searching for pointers to 7 not-freed blocks
-==15406== Checked 114,832 bytes
-==15406== 
-==15406== 31 bytes in 1 blocks are indirectly lost in loss record 1 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x1135A8: ControladorHostal::buscarHostal(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorHostal.cpp:49)
-==15406==    by 0x13911A: cargarDatos(bool) (menuCargarDatos.cpp:138)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 31 bytes in 1 blocks are indirectly lost in loss record 2 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x11F976: ControladorUsuario::seleccionarHostal(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:87)
-==15406==    by 0x13957D: cargarDatos(bool) (menuCargarDatos.cpp:166)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 56 bytes in 1 blocks are definitely lost in loss record 3 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110226: ControladorEstadia::getInstancia() (ControladorEstadia.cpp:11)
-==15406==    by 0x12E544: Fabrica::getControladorEstadia() (Fabrica.cpp:7)
-==15406==    by 0x137BDE: cargarDatos(bool) (menuCargarDatos.cpp:66)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 64 bytes in 1 blocks are definitely lost in loss record 4 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x11A94E: ControladorReserva::getInstancia() (ControladorReserva.cpp:15)
-==15406==    by 0x12E56C: Fabrica::getControladorReserva() (Fabrica.cpp:17)
-==15406==    by 0x137BB8: cargarDatos(bool) (menuCargarDatos.cpp:64)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 119 (88 direct, 31 indirect) bytes in 1 blocks are definitely lost in loss record 5 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x113040: ControladorHostal::getInstancia() (ControladorHostal.cpp:10)
-==15406==    by 0x12E558: Fabrica::getControladorHostal() (Fabrica.cpp:12)
-==15406==    by 0x137BA5: cargarDatos(bool) (menuCargarDatos.cpp:63)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 120 bytes in 1 blocks are definitely lost in loss record 6 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x12E7FE: FechaSistema::getInstancia() (FechaSistema.cpp:17)
-==15406==    by 0x12E594: Fabrica::getFechaSistema() (Fabrica.cpp:27)
-==15406==    by 0x137BF1: cargarDatos(bool) (menuCargarDatos.cpp:67)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 167 (136 direct, 31 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 7
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x11EFE4: ControladorUsuario::getInstancia() (ControladorUsuario.cpp:14)
-==15406==    by 0x12E580: Fabrica::getControladorUsuario() (Fabrica.cpp:22)
-==15406==    by 0x137BCB: cargarDatos(bool) (menuCargarDatos.cpp:65)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== LEAK SUMMARY:
-==15406==    definitely lost: 464 bytes in 5 blocks
-==15406==    indirectly lost: 62 bytes in 2 blocks
-==15406==      possibly lost: 0 bytes in 0 blocks
-==15406==    still reachable: 0 bytes in 0 blocks
-==15406==         suppressed: 0 bytes in 0 blocks
-==15406== 
-==15406== ERROR SUMMARY: 41 errors from 17 contexts (suppressed: 0 from 0)
-==15406== 
-==15406== 2 errors in context 1 of 17:
-==15406== Invalid free() / delete / delete[] / realloc()
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x134643: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a1d0 is 0 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 2 errors in context 2 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x12DCC8: Estadia::~Estadia() (Estadia.cpp:62)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a210 is 64 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 2 errors in context 3 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DCA4: Estadia::~Estadia() (Estadia.cpp:79)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a238 is 104 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 2 errors in context 4 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DC8B: Estadia::~Estadia() (Estadia.cpp:76)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a230 is 96 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 2 errors in context 5 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DC50: Estadia::~Estadia() (Estadia.cpp:70)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a208 is 56 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 2 errors in context 6 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DC15: Estadia::~Estadia() (Estadia.cpp:64)
-==15406==    by 0x134636: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
-==15406==    by 0x13467D: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5a240 is 112 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A12D: cargarDatos(bool) (menuCargarDatos.cpp:242)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 4 errors in context 7 of 17:
-==15406== Invalid free() / delete / delete[] / realloc()
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x132E46: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5aae0 is 0 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 4 errors in context 8 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
-==15406==    by 0x12DCC8: Estadia::~Estadia() (Estadia.cpp:62)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab20 is 64 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 4 errors in context 9 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DCA4: Estadia::~Estadia() (Estadia.cpp:79)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab48 is 104 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 4 errors in context 10 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DC8B: Estadia::~Estadia() (Estadia.cpp:76)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab40 is 96 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 4 errors in context 11 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DC50: Estadia::~Estadia() (Estadia.cpp:70)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab18 is 56 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== 
-==15406== 4 errors in context 12 of 17:
-==15406== Invalid read of size 8
-==15406==    at 0x12DC15: Estadia::~Estadia() (Estadia.cpp:64)
-==15406==    by 0x132E39: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
-==15406==    by 0x132EBD: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
-==15406==    by 0x11B3A0: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
-==15406==    by 0x12E621: Fabrica::liberarMemoria() (Fabrica.cpp:39)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Address 0x4d5ab50 is 112 bytes inside a block of size 120 free'd
-==15406==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
-==15406==    by 0x111473: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:123)
-==15406==    by 0x12E60A: Fabrica::liberarMemoria() (Fabrica.cpp:38)
-==15406==    by 0x1354AB: mainMenu() (menu.cpp:155)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406==  Block was alloc'd at
-==15406==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
-==15406==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
-==15406==    by 0x13A245: cargarDatos(bool) (menuCargarDatos.cpp:246)
-==15406==    by 0x135344: mainMenu() (menu.cpp:84)
-==15406==    by 0x10F8AD: main (main.cpp:5)
-==15406== 
-==15406== ERROR SUMMARY: 41 errors from 17 contexts (suppressed: 0 from 0)
+==23657== Memcheck, a memory error detector
+==23657== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==23657== Using Valgrind-3.16.1-36d6727e1d-20200622X and LibVEX; rerun with -h for copyright info
+==23657== Command: ./executable
+==23657== Parent PID: 20646
+==23657== 
+--23657-- 
+--23657-- Valgrind options:
+--23657--    --leak-check=full
+--23657--    --show-leak-kinds=all
+--23657--    --track-origins=yes
+--23657--    --verbose
+--23657--    --log-file=valgrind-out.txt
+--23657-- Contents of /proc/version:
+--23657--   Linux version 4.4.0-18362-Microsoft (Microsoft@Microsoft.com) (gcc version 5.4.0 (GCC) ) #1049-Microsoft Thu Aug 14 12:01:00 PST 2020
+--23657-- 
+--23657-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--23657-- Page sizes: currently 4096, max supported 4096
+--23657-- Valgrind library directory: /usr/lib/x86_64-linux-gnu/valgrind
+--23657-- Reading syms from /mnt/c/Users/JAppoloni/Documents/programacion-4-laboratorio/Laboratorio 4/executable
+--23657-- Reading syms from /lib/x86_64-linux-gnu/ld-2.31.so
+--23657--   Considering /usr/lib/debug/.build-id/32/438eb3b034da54caf58c7a65446639f7cfe274.debug ..
+--23657--   .. build-id is valid
+--23657-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/memcheck-amd64-linux
+--23657--   Considering /usr/lib/debug/.build-id/54/299c4aec0e5e5f3d7b8135341351d0e1dbfc64.debug ..
+--23657--   .. build-id is valid
+--23657--    object doesn't have a dynamic symbol table
+--23657-- Scheduler: using generic scheduler lock implementation.
+--23657-- Reading suppressions file: /usr/lib/x86_64-linux-gnu/valgrind/default.supp
+==23657== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-23657-by-jappoloni-on-???
+==23657== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-23657-by-jappoloni-on-???
+==23657== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-23657-by-jappoloni-on-???
+==23657== 
+==23657== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==23657== don't want to do, unless you know exactly what you're doing,
+==23657== or are doing some strange experiment):
+==23657==   /usr/bin/vgdb --pid=23657 ...command...
+==23657== 
+==23657== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==23657==   /path/to/gdb ./executable
+==23657== and then give GDB the following command
+==23657==   target remote | /usr/bin/vgdb --pid=23657
+==23657== --pid is optional if only one valgrind process is running
+==23657== 
+==23657== error calling PR_SET_PTRACER, vgdb might block
+--23657-- REDIR: 0x401f970 (ld-linux-x86-64.so.2:strlen) redirected to 0x580ca5f2 (vgPlain_amd64_linux_REDIR_FOR_strlen)
+--23657-- REDIR: 0x401f750 (ld-linux-x86-64.so.2:index) redirected to 0x580ca60c (vgPlain_amd64_linux_REDIR_FOR_index)
+--23657-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_core-amd64-linux.so
+--23657--   Considering /usr/lib/debug/.build-id/f2/7641e081d3c37b410d7f31da4e2bf21040f356.debug ..
+--23657--   .. build-id is valid
+--23657-- Reading syms from /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so
+--23657--   Considering /usr/lib/debug/.build-id/25/7cdcdf80e04f91ca9e3b185ee3b52995e89946.debug ..
+--23657--   .. build-id is valid
+==23657== WARNING: new redirection conflicts with existing -- ignoring it
+--23657--     old: 0x0401f970 (strlen              ) R-> (0000.0) 0x580ca5f2 vgPlain_amd64_linux_REDIR_FOR_strlen
+--23657--     new: 0x0401f970 (strlen              ) R-> (2007.0) 0x0483bda0 strlen
+--23657-- REDIR: 0x401c190 (ld-linux-x86-64.so.2:strcmp) redirected to 0x483cc90 (strcmp)
+--23657-- REDIR: 0x401feb0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4840740 (mempcpy)
+--23657-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28
+--23657--    object doesn't have a symbol table
+--23657-- Reading syms from /lib/x86_64-linux-gnu/libm-2.31.so
+--23657--   Considering /usr/lib/debug/.build-id/e9/d2c06479b13dd3cfa78d714d11dccf6fcbee51.debug ..
+--23657--   .. build-id is valid
+--23657-- Reading syms from /lib/x86_64-linux-gnu/libgcc_s.so.1
+--23657--    object doesn't have a symbol table
+--23657-- Reading syms from /lib/x86_64-linux-gnu/libc-2.31.so
+--23657--   Considering /usr/lib/debug/.build-id/54/eef5ce96cf37cb175b0d93186836ca1caf470c.debug ..
+--23657--   .. build-id is valid
+--23657-- REDIR: 0x4c06ea0 (libc.so.6:memmove) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06250 (libc.so.6:strncpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c071c0 (libc.so.6:strcasecmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c05b70 (libc.so.6:strcat) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c062b0 (libc.so.6:rindex) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c08550 (libc.so.6:rawmemchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c20710 (libc.so.6:wmemchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c202b0 (libc.so.6:wcscmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c07000 (libc.so.6:mempcpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06e30 (libc.so.6:bcmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c061f0 (libc.so.6:strncmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c05c20 (libc.so.6:strcmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06f60 (libc.so.6:memset) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c20270 (libc.so.6:wcschr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06150 (libc.so.6:strnlen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c05cf0 (libc.so.6:strcspn) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c07210 (libc.so.6:strncasecmp) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c05c90 (libc.so.6:strcpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c07360 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c21910 (libc.so.6:wcsnlen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c202f0 (libc.so.6:wcscpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c062f0 (libc.so.6:strpbrk) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c05bd0 (libc.so.6:index) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06110 (libc.so.6:strlen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c0c8b0 (libc.so.6:memrchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c07260 (libc.so.6:strcasecmp_l) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06df0 (libc.so.6:memchr) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c20390 (libc.so.6:wcslen) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c06590 (libc.so.6:strspn) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c07160 (libc.so.6:stpncpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c07100 (libc.so.6:stpcpy) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c08590 (libc.so.6:strchrnul) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4c072b0 (libc.so.6:strncasecmp_l) redirected to 0x482e1b0 (_vgnU_ifunc_wrapper)
+--23657-- REDIR: 0x4cd78f0 (libc.so.6:__strrchr_avx2) redirected to 0x483b7b0 (rindex)
+--23657-- REDIR: 0x4c020f0 (libc.so.6:malloc) redirected to 0x4838710 (malloc)
+--23657-- REDIR: 0x4cd7ac0 (libc.so.6:__strlen_avx2) redirected to 0x483bc80 (strlen)
+--23657-- REDIR: 0x4cd40d0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x483ee80 (bcmp)
+--23657-- REDIR: 0x4cd2ff0 (libc.so.6:__strcmp_avx2) redirected to 0x483cb90 (strcmp)
+--23657-- REDIR: 0x4c02e50 (libc.so.6:calloc) redirected to 0x483aab0 (calloc)
+--23657-- REDIR: 0x4cdaa90 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x48403c0 (mempcpy)
+--23657-- REDIR: 0x4cd7700 (libc.so.6:__strchrnul_avx2) redirected to 0x48402b0 (strchrnul)
+--23657-- REDIR: 0x4cd7c50 (libc.so.6:__strnlen_avx2) redirected to 0x483bc20 (strnlen)
+--23657-- REDIR: 0x48f30a0 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4838d80 (operator new(unsigned long))
+--23657-- REDIR: 0x4c02720 (libc.so.6:free) redirected to 0x4839940 (free)
+--23657-- REDIR: 0x4cdaab0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x483f760 (memmove)
+--23657-- REDIR: 0x4c06a30 (libc.so.6:__GI_strstr) redirected to 0x4840990 (__strstr_sse2)
+--23657-- REDIR: 0x48f1490 (libstdc++.so.6:operator delete(void*)) redirected to 0x4839e40 (operator delete(void*))
+--23657-- REDIR: 0x48f14a0 (libstdc++.so.6:operator delete(void*, unsigned long)) redirected to 0x483a020 (operator delete(void*, unsigned long))
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED62: Estadia::~Estadia() (Estadia.cpp:72)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5d840 is 0 bytes inside a block of size 56 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x1274E3: DTEstadia::~DTEstadia() (DTEstadia.cpp:18)
+==23657==    by 0x138759: freeSetEstadia(std::set<DTEstadia*, std::less<DTEstadia*>, std::allocator<DTEstadia*> >) (menuCargarDatos.cpp:38)
+==23657==    by 0x13C409: cargarDatos(bool) (menuCargarDatos.cpp:384)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110ED5: ControladorEstadia::finalizarEstadia() (ControladorEstadia.cpp:92)
+==23657==    by 0x13B55D: cargarDatos(bool) (menuCargarDatos.cpp:278)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ECFD: Estadia::~Estadia() (Estadia.cpp:64)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a240 is 112 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ED38: Estadia::~Estadia() (Estadia.cpp:70)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a208 is 56 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ED73: Estadia::~Estadia() (Estadia.cpp:76)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a230 is 96 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ED8C: Estadia::~Estadia() (Estadia.cpp:79)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a238 is 104 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x12EDB0: Estadia::~Estadia() (Estadia.cpp:62)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a210 is 64 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x13530F: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a1d0 is 0 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ECFD: Estadia::~Estadia() (Estadia.cpp:64)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab50 is 112 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ED38: Estadia::~Estadia() (Estadia.cpp:70)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab18 is 56 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ED73: Estadia::~Estadia() (Estadia.cpp:76)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab40 is 96 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x12ED8C: Estadia::~Estadia() (Estadia.cpp:79)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab48 is 104 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x12EDB0: Estadia::~Estadia() (Estadia.cpp:62)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab20 is 64 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x133B12: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5aae0 is 0 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x10FA53: Calificacion::~Calificacion() (Calificacion.cpp:24)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f2f0 is 96 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x10FA6C: Calificacion::~Calificacion() (Calificacion.cpp:27)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f2f8 is 104 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x10FAC2: Calificacion::~Calificacion() (Calificacion.cpp:22)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f298 is 8 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x10FAC2: Calificacion::~Calificacion() (Calificacion.cpp:22)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f340 is 0 bytes inside a block of size 61 free'd
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x10FAC2: Calificacion::~Calificacion() (Calificacion.cpp:22)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x10F9D6: Calificacion::Calificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, DTFecha, Estadia*) (Calificacion.cpp:15)
+==23657==    by 0x11165A: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x1301B0: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f290 is 0 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x11003E: Comentario::~Comentario() (Comentario.cpp:14)
+==23657==    by 0x12C262: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f9a0 is 32 bytes inside a block of size 40 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x10FA96: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12C4D1: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x11005E: Comentario::~Comentario() (Comentario.cpp:12)
+==23657==    by 0x12C262: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f980 is 0 bytes inside a block of size 40 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x10FA96: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12C4D1: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x11005E: Comentario::~Comentario() (Comentario.cpp:12)
+==23657==    by 0x12C262: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f9f0 is 0 bytes inside a block of size 33 free'd
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x11005E: Comentario::~Comentario() (Comentario.cpp:12)
+==23657==    by 0x10FA89: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x10FFFF: Comentario::Comentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Comentario.cpp:6)
+==23657==    by 0x12C4E6: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12C26F: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f980 is 0 bytes inside a block of size 40 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x10FA96: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12C4D1: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== HEAP SUMMARY:
+==23657==     in use at exit: 638 bytes in 9 blocks
+==23657==   total heap usage: 369 allocs, 376 frees, 97,159 bytes allocated
+==23657== 
+==23657== Searching for pointers to 9 not-freed blocks
+==23657== Checked 114,832 bytes
+==23657== 
+==23657== 31 bytes in 1 blocks are indirectly lost in loss record 1 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x113A8E: ControladorHostal::buscarHostal(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorHostal.cpp:49)
+==23657==    by 0x139DF0: cargarDatos(bool) (menuCargarDatos.cpp:138)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 31 bytes in 1 blocks are indirectly lost in loss record 2 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x1206A4: ControladorUsuario::seleccionarHostal(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:87)
+==23657==    by 0x13A253: cargarDatos(bool) (menuCargarDatos.cpp:166)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 56 bytes in 1 blocks are definitely lost in loss record 3 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110226: ControladorEstadia::getInstancia() (ControladorEstadia.cpp:11)
+==23657==    by 0x12F62C: Fabrica::getControladorEstadia() (Fabrica.cpp:7)
+==23657==    by 0x1388B4: cargarDatos(bool) (menuCargarDatos.cpp:66)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 56 bytes in 1 blocks are definitely lost in loss record 4 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x111253: ControladorEstadia::indicarEmail(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:110)
+==23657==    by 0x13B8D1: cargarDatos(bool) (menuCargarDatos.cpp:302)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 56 bytes in 1 blocks are definitely lost in loss record 5 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x111253: ControladorEstadia::indicarEmail(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:110)
+==23657==    by 0x13BA6D: cargarDatos(bool) (menuCargarDatos.cpp:308)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 64 bytes in 1 blocks are definitely lost in loss record 6 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11AE34: ControladorReserva::getInstancia() (ControladorReserva.cpp:15)
+==23657==    by 0x12F654: Fabrica::getControladorReserva() (Fabrica.cpp:17)
+==23657==    by 0x13888E: cargarDatos(bool) (menuCargarDatos.cpp:64)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 119 (88 direct, 31 indirect) bytes in 1 blocks are definitely lost in loss record 7 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x113526: ControladorHostal::getInstancia() (ControladorHostal.cpp:10)
+==23657==    by 0x12F640: Fabrica::getControladorHostal() (Fabrica.cpp:12)
+==23657==    by 0x13887B: cargarDatos(bool) (menuCargarDatos.cpp:63)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 120 bytes in 1 blocks are definitely lost in loss record 8 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12F8E8: FechaSistema::getInstancia() (FechaSistema.cpp:17)
+==23657==    by 0x12F67C: Fabrica::getFechaSistema() (Fabrica.cpp:27)
+==23657==    by 0x1388C7: cargarDatos(bool) (menuCargarDatos.cpp:67)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 167 (136 direct, 31 indirect) bytes in 1 blocks are definitely lost in loss record 9 of 9
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11FD12: ControladorUsuario::getInstancia() (ControladorUsuario.cpp:14)
+==23657==    by 0x12F668: Fabrica::getControladorUsuario() (Fabrica.cpp:22)
+==23657==    by 0x1388A1: cargarDatos(bool) (menuCargarDatos.cpp:65)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== LEAK SUMMARY:
+==23657==    definitely lost: 576 bytes in 7 blocks
+==23657==    indirectly lost: 62 bytes in 2 blocks
+==23657==      possibly lost: 0 bytes in 0 blocks
+==23657==    still reachable: 0 bytes in 0 blocks
+==23657==         suppressed: 0 bytes in 0 blocks
+==23657== 
+==23657== ERROR SUMMARY: 64 errors from 29 contexts (suppressed: 0 from 0)
+==23657== 
+==23657== 1 errors in context 1 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12C26F: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f980 is 0 bytes inside a block of size 40 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x10FA96: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12C4D1: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 1 errors in context 2 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x11005E: Comentario::~Comentario() (Comentario.cpp:12)
+==23657==    by 0x12C262: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f9f0 is 0 bytes inside a block of size 33 free'd
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x11005E: Comentario::~Comentario() (Comentario.cpp:12)
+==23657==    by 0x10FA89: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x10FFFF: Comentario::Comentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Comentario.cpp:6)
+==23657==    by 0x12C4E6: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 1 errors in context 3 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x11005E: Comentario::~Comentario() (Comentario.cpp:12)
+==23657==    by 0x12C262: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f980 is 0 bytes inside a block of size 40 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x10FA96: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12C4D1: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 1 errors in context 4 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x11003E: Comentario::~Comentario() (Comentario.cpp:14)
+==23657==    by 0x12C262: Empleado::~Empleado() (Empleado.cpp:74)
+==23657==    by 0x12C2E3: Empleado::~Empleado() (Empleado.cpp:79)
+==23657==    by 0x120FF9: ControladorUsuario::liberarRegistros() (ControladorUsuario.cpp:182)
+==23657==    by 0x12F739: Fabrica::liberarMemoria() (Fabrica.cpp:41)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f9a0 is 32 bytes inside a block of size 40 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x10FA96: Calificacion::~Calificacion() (Calificacion.cpp:29)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x12C4D1: Empleado::agregarComentario(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, Calificacion*) (Empleado.cpp:104)
+==23657==    by 0x1212C2: ControladorUsuario::responderCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorUsuario.cpp:227)
+==23657==    by 0x13BEED: cargarDatos(bool) (menuCargarDatos.cpp:332)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 5 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x13530F: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a1d0 is 0 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 6 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x12EDB0: Estadia::~Estadia() (Estadia.cpp:62)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a210 is 64 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 7 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ED8C: Estadia::~Estadia() (Estadia.cpp:79)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a238 is 104 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 8 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ED73: Estadia::~Estadia() (Estadia.cpp:76)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a230 is 96 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 9 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ED38: Estadia::~Estadia() (Estadia.cpp:70)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a208 is 56 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 10 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ECFD: Estadia::~Estadia() (Estadia.cpp:64)
+==23657==    by 0x135302: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:32)
+==23657==    by 0x135349: ReservaIndividual::~ReservaIndividual() (ReservaIndividual.cpp:35)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5a240 is 112 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AE03: cargarDatos(bool) (menuCargarDatos.cpp:242)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 2 errors in context 11 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED62: Estadia::~Estadia() (Estadia.cpp:72)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5d840 is 0 bytes inside a block of size 56 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x1274E3: DTEstadia::~DTEstadia() (DTEstadia.cpp:18)
+==23657==    by 0x138759: freeSetEstadia(std::set<DTEstadia*, std::less<DTEstadia*>, std::allocator<DTEstadia*> >) (menuCargarDatos.cpp:38)
+==23657==    by 0x13C409: cargarDatos(bool) (menuCargarDatos.cpp:384)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110ED5: ControladorEstadia::finalizarEstadia() (ControladorEstadia.cpp:92)
+==23657==    by 0x13B55D: cargarDatos(bool) (menuCargarDatos.cpp:278)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 3 errors in context 12 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x1301B0: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f290 is 0 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 3 errors in context 13 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x10FAC2: Calificacion::~Calificacion() (Calificacion.cpp:22)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f340 is 0 bytes inside a block of size 61 free'd
+==23657==    at 0x4839EAB: operator delete(void*) (vg_replace_malloc.c:584)
+==23657==    by 0x10FAC2: Calificacion::~Calificacion() (Calificacion.cpp:22)
+==23657==    by 0x12ED1A: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x49807B1: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_assign(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x4980AC9: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x10F9D6: Calificacion::Calificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, DTFecha, Estadia*) (Calificacion.cpp:15)
+==23657==    by 0x11165A: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 3 errors in context 14 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x10FAC2: Calificacion::~Calificacion() (Calificacion.cpp:22)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f298 is 8 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 3 errors in context 15 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x10FA6C: Calificacion::~Calificacion() (Calificacion.cpp:27)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f2f8 is 104 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 3 errors in context 16 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x10FA53: Calificacion::~Calificacion() (Calificacion.cpp:24)
+==23657==    by 0x1301A3: Hostal::~Hostal() (Hostal.cpp:66)
+==23657==    by 0x1148E3: ControladorHostal::liberarRegistros() (ControladorHostal.cpp:159)
+==23657==    by 0x12F720: Fabrica::liberarMemoria() (Fabrica.cpp:40)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5f2f0 is 96 bytes inside a block of size 112 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x12ED27: Estadia::~Estadia() (Estadia.cpp:66)
+==23657==    by 0x11194C: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x11163E: ControladorEstadia::ingresarCalificacion(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (ControladorEstadia.cpp:135)
+==23657==    by 0x13BCF0: cargarDatos(bool) (menuCargarDatos.cpp:317)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 4 errors in context 17 of 29:
+==23657== Invalid free() / delete / delete[] / realloc()
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x133B12: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5aae0 is 0 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 4 errors in context 18 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x4980AA0: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string() (in /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.28)
+==23657==    by 0x12EDB0: Estadia::~Estadia() (Estadia.cpp:62)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab20 is 64 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 4 errors in context 19 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ED8C: Estadia::~Estadia() (Estadia.cpp:79)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab48 is 104 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 4 errors in context 20 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ED73: Estadia::~Estadia() (Estadia.cpp:76)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab40 is 96 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 4 errors in context 21 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ED38: Estadia::~Estadia() (Estadia.cpp:70)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab18 is 56 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== 
+==23657== 4 errors in context 22 of 29:
+==23657== Invalid read of size 8
+==23657==    at 0x12ECFD: Estadia::~Estadia() (Estadia.cpp:64)
+==23657==    by 0x133B05: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:38)
+==23657==    by 0x133B89: ReservaGrupal::~ReservaGrupal() (ReservaGrupal.cpp:42)
+==23657==    by 0x11B886: ControladorReserva::liberarRegistros() (ControladorReserva.cpp:124)
+==23657==    by 0x12F709: Fabrica::liberarMemoria() (Fabrica.cpp:39)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Address 0x4d5ab50 is 112 bytes inside a block of size 120 free'd
+==23657==    at 0x483A08B: operator delete(void*, unsigned long) (vg_replace_malloc.c:593)
+==23657==    by 0x111959: ControladorEstadia::liberarRegistros() (ControladorEstadia.cpp:170)
+==23657==    by 0x12F6F2: Fabrica::liberarMemoria() (Fabrica.cpp:38)
+==23657==    by 0x136181: mainMenu() (menu.cpp:158)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657==  Block was alloc'd at
+==23657==    at 0x4838DEF: operator new(unsigned long) (vg_replace_malloc.c:342)
+==23657==    by 0x110417: ControladorEstadia::registrarEstadiaHuesped(int) (ControladorEstadia.cpp:38)
+==23657==    by 0x13AF1B: cargarDatos(bool) (menuCargarDatos.cpp:246)
+==23657==    by 0x136010: mainMenu() (menu.cpp:84)
+==23657==    by 0x10F8AD: main (main.cpp:5)
+==23657== 
+==23657== ERROR SUMMARY: 64 errors from 29 contexts (suppressed: 0 from 0)

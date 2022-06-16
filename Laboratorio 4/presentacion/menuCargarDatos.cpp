@@ -283,8 +283,8 @@ void cargarDatos(bool primeraVez)
       controladorEstadia->finalizarEstadia();
       controladorEstadia->seleccionarHostal(HO5.getNombre());
       set<DTEstadia *> eliminar9 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
-      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
       fechaSistema->setFecha(DTFecha(00, 10, 15, 5, 2022, 3));
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
       fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
@@ -297,11 +297,26 @@ void cargarDatos(bool primeraVez)
       // C2 ES2 H2 "Se pone peligroso de noche, no  recomiendo. Además no hay caja fuerte para guardar anillos. " 2 05/01/01 - 3am
       // C3 ES6 H6 "Había pulgas en la habitación. Que lugar más mamarracho!!" 1 15/06/22 - topepm
 
-// void seleccionarHostal(string nom)
-// set<DTEstadia*> indicarEmail(string email)
-// void seleccionarEstadia(int codigo) //codigo de la reserva de la estadia
-// void ingresarCalificacion(int puntaje, string comentario)
-// void notificarNuevaCalificacion() //por el momento no hace nada porque falta que Carolina agrege unas cosas 
+      FechaActual = fechaSistema->getFecha();
+      controladorEstadia->seleccionarHostal(HO1.getNombre());
+      set<DTEstadia *> eliminar10 = controladorEstadia->indicarEmail(H1->getEmail());
+      controladorEstadia->seleccionarEstadia(posicion - 4); // codigo de la reserva de la estadia
+      fechaSistema->setFecha(DTFecha(00, 18, 11, 4, 2022, 3));
+      controladorEstadia->ingresarCalificacion(3, "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba cayendo. No vuelvo.");
+      controladorEstadia->notificarNuevaCalificacion(); // por el momento no hace nada porque falta que Carolina agrege unas cosas
+      controladorEstadia->seleccionarHostal(HO3.getNombre());
+      set<DTEstadia *> eliminar11 = controladorEstadia->indicarEmail(H2->getEmail());
+      controladorEstadia->seleccionarEstadia(posicion - 3);
+      fechaSistema->setFecha(DTFecha(00, 3, 5, 0, 2001, 1));
+      controladorEstadia->ingresarCalificacion(2, "Se pone peligroso de noche, no  recomiendo. Además no hay caja fuerte para guardar anillos.");
+      controladorEstadia->notificarNuevaCalificacion();
+      controladorEstadia->seleccionarHostal(HO5.getNombre());
+      set<DTEstadia *> eliminar12 = controladorEstadia->indicarEmail(H6->getEmail());
+      controladorEstadia->seleccionarEstadia(posicion - 1);
+      fechaSistema->setFecha(DTFecha(00, 11, 15, 5, 2022, 3));
+      controladorEstadia->ingresarCalificacion(1, "Había pulgas en la habitación. Que lugar más mamarracho!!");
+      controladorEstadia->notificarNuevaCalificacion();
+      fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
@@ -311,8 +326,11 @@ void cargarDatos(bool primeraVez)
       // Calificación Empleado Respuesta Fecha
       // C2 E4 "Desapareció y se fue sin pagar." 06/01/01 - 3pm
 
-// set<DTCalificacion*> obtenerComentariosSinResponderEmpleado(string email)
-// void responderCalificacion(int codigo, string email, string comentario)      
+      FechaActual = fechaSistema->getFecha();
+      set<DTCalificacion *> eliminar13 = controladorUsuario->obtenerComentariosSinResponderEmpleado(E4->getEmail() );
+      fechaSistema->setFecha(DTFecha(00, 15, 06, 0, 2001, 2));
+      controladorUsuario->responderCalificacion(posicion - 3,H2->getEmail(), "Desapareció y se fue sin pagar.");
+      fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
@@ -354,15 +372,28 @@ void cargarDatos(bool primeraVez)
       delete H6;
       H6 = nullptr;
 
-      freeSetReserva(eliminar1);
-      freeSetReserva(eliminar2);
-      freeSetReserva(eliminar3);
-      freeSetReserva(eliminar4);
-      freeSetReserva(eliminar5);
-      freeSetReserva(eliminar6);
-      freeSetEstadia(eliminar7);
-      freeSetEstadia(eliminar8);
-      freeSetEstadia(eliminar9);
+      // freeSetReserva(eliminar1);
+      // freeSetReserva(eliminar2);
+      // freeSetReserva(eliminar3);
+      // freeSetReserva(eliminar4);
+      // freeSetReserva(eliminar5);
+      // freeSetReserva(eliminar6);
+      // freeSetEstadia(eliminar7);
+      // freeSetEstadia(eliminar8);
+      // freeSetEstadia(eliminar9);
+      // freeSetEstadia(eliminar10);
+      // freeSetEstadia(eliminar11);
+      // freeSetEstadia(eliminar12);
+
+      for (auto it : eliminar13)
+      {
+         if (it != nullptr)
+         {
+            delete it;
+         }
+         it = nullptr;
+      }
+      eliminar13.clear();
 
       controladorHostal = nullptr;
       controladorReserva = nullptr;

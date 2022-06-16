@@ -190,20 +190,42 @@ void ControladorUsuario::liberarRegistros()
         instancia = nullptr;
     }
 }
-set<DTCalificacion*> ControladorUsuario::obtenerComentariosSinResponderEmpleado(string email)
+set<DTCalificacion *> ControladorUsuario::obtenerComentariosSinResponderEmpleado(string EmailEMPLEADO)
 {
-    emailEmpRecordado = email;
-    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
-        if(it->second->getEmail() == email){
+    emailEmpRecordado = EmailEMPLEADO;
+    for (map<string, Empleado *>::iterator it = empleados.begin(); it != empleados.end(); ++it)
+    {
+        if (it->second->getEmail() == EmailEMPLEADO)
+        {
             return it->second->getHostal()->obtenerComentariosSinResponder();
         };
     };
-    set<DTCalificacion*> vacio;
+    set<DTCalificacion *> vacio;
     return vacio;
 }
 
-void ControladorUsuario::responderCalificacion(int codigo, string email, string comentario)
+void ControladorUsuario::responderCalificacion(int codigo, string emailHuesped, string comentario)
 {
-    ControladorEstadia * CE = ControladorEstadia::getInstancia();
-    empleados[email]->agregarComentario(comentario, CE->obtenerCalificacion(codigo, email));
+    ControladorEstadia *CE = ControladorEstadia::getInstancia();
+    Empleado *emp = empleados[emailEmpRecordado];
+
+    if (emp == nullptr)
+    {
+        emp = nullptr;
+        throw invalid_argument("El empleado no existe");
+    }
+    else
+    {
+        Calificacion *auxCalif = CE->obtenerCalificacion(codigo, emailHuesped);
+        if (auxCalif == nullptr)
+        {
+            emp = nullptr;
+            throw invalid_argument("La calificación no existe");
+        }
+        else
+        {
+            emp->agregarComentario(comentario, auxCalif);
+            emp = nullptr;
+        }
+    }
 }

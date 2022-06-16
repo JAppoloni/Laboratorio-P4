@@ -89,7 +89,8 @@ void ControladorEstadia::finalizarEstadia()
         if ((*it)->getHuespedEstadia()->getEmail() == emailHuesRecordado && (*it)->getReservaEstadia()->getCodigo() == codigoResEstRecordado)
         {
             FechaSistema *FS = FechaSistema::getInstancia();
-            (*it)->setChechOut(new DTFecha(FS->getFecha().getMinutos(), FS->getFecha().getHora(), FS->getFecha().getDia(), FS->getFecha().getMes(), FS->getFecha().getAnio(), FS->getFecha().getDweek()));
+            DTFecha *aux = new DTFecha(FS->getFecha());
+            (*it)->setChechOut(aux);
             break;
         };
     };

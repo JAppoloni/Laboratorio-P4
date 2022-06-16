@@ -176,5 +176,6 @@ void ControladorReserva::cancelarBaja() {}
 
 void ControladorReserva::confirmarBaja()
 {
+    
 }
 // eliminar reserva (borrar link del controlador), estadia (eliminar del controlador y link de huesped a esatdia), calificaciones (eliminar link de empleado (notificacioin) y link de hostal), comentarios (link de empleado)

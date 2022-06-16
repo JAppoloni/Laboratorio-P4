@@ -67,20 +67,22 @@ Hostal &Hostal::operator=(const Hostal &assign)
     return *this;
 }
 
-std::list<int> Hostal::obtenerComentariosSinResponder()
+std::set<DTCalificacion*> Hostal::obtenerComentariosSinResponder()
 {
-    std::list<int> idComentarios;
+    std::set<DTCalificacion*> res;
     std::list<Calificacion *>::iterator it;
     for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
     {
+        if((*it) == nullptr){
+            break;
+        }
         Calificacion *c = *it;
         if (!(c->estaResponida()))
         {
-            int id = c->obtenerID();
-            idComentarios.insert(idComentarios.begin(), id);
-        }
-    }
-    return idComentarios;
+            res.insert(new DTCalificacion((*it)->obtenerID(), (*it)->getEstadiaComentario()->getHuespedEstadia()->getEmail(), (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
+        };
+    };
+    return res;
 }
 
 std::list<DTCalificacion> Hostal::obtenerCalificaciones()
@@ -116,4 +118,9 @@ Habitacion *Hostal::getHabitacion(int num)
         };
     };
     return nullptr;
+}
+
+void Hostal::agregarCalificacion(Calificacion *calificacion)
+{
+    listaCalificaciones.push_back(calificacion);
 }

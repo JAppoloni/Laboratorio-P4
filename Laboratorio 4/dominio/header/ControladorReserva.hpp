@@ -24,6 +24,11 @@
             virtual void asignarHuespedAReservaGrupal(string correoHuesped);
             virtual void cancelarReserva();
             virtual void confirmarReserva();
+            virtual void seleccionarHostal(string nom);
+            virtual set<DTReserva*> listarReservas();
+            virtual void seleccionarReservaAEliminar(int codigo);
+            virtual void cancelarBaja();
+            virtual void confirmarBaja();
 
             set<DTReserva *> listarReservasHuesped(string email, string nomHostal);
             Reserva * getReserva(int codigo);

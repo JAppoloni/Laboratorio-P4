@@ -16,7 +16,7 @@ Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, E
 	_comentario = comentario;
 	_fecha = fecha;
 	_estadiaComentario = estadiaComentario;
-	_respuestaComentario = NULL;
+	_respuestaComentario = nullptr;
 }
 
 // Destructor
@@ -96,5 +96,5 @@ int Calificacion::obtenerID()
 
 bool Calificacion::estaResponida()
 {
-	return this->getRespuestaComentario() != NULL;
+	return this->getRespuestaComentario() != nullptr;
 }

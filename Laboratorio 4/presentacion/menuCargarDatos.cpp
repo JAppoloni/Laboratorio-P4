@@ -267,6 +267,12 @@ void cargarDatos(bool primeraVez)
       // C2 ES2 H2 "Se pone peligroso de noche, no  recomiendo. Además no hay caja fuerte para guardar anillos. " 2 05/01/01 - 3am
       // C3 ES6 H6 "Había pulgas en la habitación. Que lugar más mamarracho!!" 1 15/06/22 - topepm
 
+// void seleccionarHostal(string nom)
+// set<DTEstadia*> indicarEmail(string email)
+// void seleccionarEstadia(int codigo) //codigo de la reserva de la estadia
+// void ingresarCalificacion(int puntaje, string comentario)
+// void notificarNuevaCalificacion() //por el momento no hace nada porque falta que Carolina agrege unas cosas 
+
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
       //----------------------------------------------------------------------------------------------------------------------
@@ -274,6 +280,9 @@ void cargarDatos(bool primeraVez)
       // Comentar calificación
       // Calificación Empleado Respuesta Fecha
       // C2 E4 "Desapareció y se fue sin pagar." 06/01/01 - 3pm
+
+// set<DTCalificacion*> obtenerComentariosSinResponderEmpleado(string email)
+// void responderCalificacion(int codigo, string email, string comentario)      
 
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);

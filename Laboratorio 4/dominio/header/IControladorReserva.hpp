@@ -20,6 +20,11 @@
             virtual void asignarHuespedAReservaGrupal(string correoHuesped) = 0;//realizar reserva
             virtual void cancelarReserva() = 0;//realizar reserva
             virtual void confirmarReserva() = 0;//realizar reserva
+            virtual void seleccionarHostal(string nom) = 0;//baja reserva
+            virtual set<DTReserva*> listarReservas() = 0;//baja reserva
+            virtual void seleccionarReservaAEliminar(int codigo) = 0;//baja reserva
+            virtual void cancelarBaja() = 0;//baja reserva
+            virtual void confirmarBaja() = 0;//baja reserva
 
             //para pruebas
             virtual set<DTReserva *> listarTodasLasReservasDelSistema() = 0;

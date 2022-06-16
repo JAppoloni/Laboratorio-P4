@@ -23,6 +23,10 @@
             virtual void seleccionarUnEstadiaAFinalizar(int codigoResEst);
             virtual void finalizarEstadia();
             virtual set<DTEstadia*> indicarEmail(string email);
+            virtual void seleccionarEstadia(int codigo);
+            virtual void ingresarCalificacion(int puntaje, string comentario);
+            virtual void notificarNuevaCalificacion();
+            Calificacion * obtenerCalificacion(int codigo, string email);
 
             //para pruebas
             virtual set<DTEstadia*> obtenerTodasLasEstadiasDelSistema();

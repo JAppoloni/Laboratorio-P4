@@ -104,5 +104,45 @@ set<DTReserva *> ControladorReserva::listarTodasLasReservasDelSistema()
 int ControladorReserva::conocerTotatalReservas()
 {
     return contador_codigo;
+}
+
+string nomHostalRecordado;
+
+void ControladorReserva::seleccionarHostal(string nom)
+{
+    nomHostalRecordado = nom;
+}
+
+set<DTReserva*> ControladorReserva::listarReservas()
+{
+    set<DTReserva*> res;
+    for(map<int, Reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
+        if(it->second->getHabitacionReserva()->getHostal()->getNombre() == nomHostalRecordado){
+            if(dynamic_cast<ReservaIndividual*>(it->second) != nullptr){
+                ReservaIndividual * aux = dynamic_cast<ReservaIndividual*>(it->second);
+                DTReserva * nuevo = new DTReservaIndividual(aux->getCodigo(), aux->getCheckIn(), aux->getCheckOut(), aux->getEstado(), aux->calcularCosto(), aux->getPago());
+                res.insert(nuevo);
+            }else{
+                ReservaGrupal * aux = dynamic_cast<ReservaGrupal*>(it->second);
+                DTReserva * nuevo = new DTReservaGrupal(aux->getCodigo(), aux->getCheckIn(), aux->getCheckOut(), aux->getEstado(), aux->calcularCosto());
+                res.insert(nuevo);
+            };
+        };
+    };
+    return res;
+}
+
+int codigoRecordado;
+
+void ControladorReserva::seleccionarReservaAEliminar(int codigo)
+{
+    codigoRecordado = codigo;
+}
+            
+void ControladorReserva::cancelarBaja(){}
+
+void ControladorReserva::confirmarBaja()
+{
 
 }
+//eliminar reserva (borrar link del controlador), estadia (eliminar del controlador y link de huesped a esatdia), calificaciones (eliminar link de empleado (notificacioin) y link de hostal), comentarios (link de empleado)

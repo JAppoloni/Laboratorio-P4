@@ -149,3 +149,4 @@ set<DTHostal *> ControladorHostal::listarTodosLosHostalesDelSistema()
     };
     return res;
 }
+

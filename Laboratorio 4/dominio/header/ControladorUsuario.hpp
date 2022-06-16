@@ -3,6 +3,7 @@
 
 #include "IControladorUsuario.hpp"
 #include "ControladorHostal.hpp"
+#include "ControladorEstadia.hpp"
 
 using namespace std;
 
@@ -32,6 +33,9 @@ class ControladorUsuario: public IControladorUsuario
         virtual void confirmarAsignacionDeEmpleadoAHostal();
         virtual set<DTHuesped*> listarHuespedes();
         virtual Huesped* getHuesped(string correo);
+        virtual set<DTCalificacion*> obtenerComentariosSinResponderEmpleado(string email);
+        virtual void responderCalificacion(int codigo, string email, string comentario);
+
         virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
 };
 

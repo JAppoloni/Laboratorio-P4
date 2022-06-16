@@ -229,3 +229,30 @@ void ControladorUsuario::responderCalificacion(int codigo, string emailHuesped, 
         }
     }
 }
+
+void ControladorUsuario::suscribirseNotificacion(string email)
+{
+    Empleado *e = empleados.find(email)->second;
+    ControladorEstadia *CE = CE->getInstancia();
+    CE->agregar(e);
+}
+
+void ControladorUsuario::eliminarSuscripcion(string email)
+{
+    Empleado *e = empleados.find(email)->second;
+    ControladorEstadia *CE = CE->getInstancia();
+    CE->eliminar(e);
+}
+
+set<DTCalificacion *> ControladorUsuario::listarNotificacionesEmpleado(string email)
+{
+    set<DTCalificacion *> res;
+    Empleado *e = empleados.find(email)->second;
+    list<Calificacion *>::iterator it;
+    for (it = e->getNotificaciones().begin(); it != e->getNotificaciones().end(); ++it)
+    {
+        res.insert(new DTCalificacion((*it)->obtenerID(), (*it)->getEstadiaComentario()->getHuespedEstadia()->getEmail(), (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
+    }
+    e->eliminarNotificaciones();
+    return res;
+}

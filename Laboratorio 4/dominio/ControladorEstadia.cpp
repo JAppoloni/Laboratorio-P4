@@ -161,21 +161,52 @@ Calificacion *ControladorEstadia::obtenerCalificacion(int codigo, string email)
     return nullptr;
 }
 
+//notificaciones 
+ void ControladorEstadia::eliminar(Observer* o){
+    empleados.erase(o);
+ }
 
-void ControladorEstadia::liberarRegistros()
-{
-    for (auto it : estadias)
-    {
-        if (it != nullptr)
-        {
-            delete it;
-            it = nullptr;
-        }
-    }
-    estadias.clear();
+ void ControladorEstadia::agregar(Observer* o){
+     empleados.insert(o);
+}
 
-    if (instancia != nullptr)
-    {
-        instancia = nullptr;
+
+set<DTHostal*> ControladorEstadia::listarHostales(){
+    ControladorHostal*  CH = CH->getInstancia();
+    set<DTHostal*> hostales = CH->listarTodosLosHostalesDelSistema(); 
+    return hostales;
+}
+ set<DTEstadia*> ControladorEstadia::listarEstadias(){
+    set<DTEstadia*> res;
+    for(set<Estadia*>::iterator it = estadias.begin(); it != estadias.end(); ++it){
+        res.insert(new DTEstadia((*it)->obtenerID(),(*it)->getHuespedEstadia()->getEmail(),(*it)->getCheckIn(),(*it)->getChechOut(),(*it)->getPromo()));
     }
+    return res;
+
+}
+
+ DTEstadia* estadiaRecordada;
+ void ControladorEstadia::seleccionarEstadia(DTEstadia* estadia){
+    estadiaRecordada = estadia;
+ }
+ 
+ //DTCalificacion ControladorEstadia::buscarCalificacion(){
+
+ //}
+ //DTComentario ControladorEstadia::buscarComentario(){
+
+ //}
+ //DTReserva* ControladorEstadia::buscarInformacionReserva() {
+   // Estadia* e; 
+   // Reserva* r = e->getReservaEstadia();
+   // DTReserva* res =  r->getDataReserva();
+   // return res;
+ //}
+
+void ControladorEstadia::liberarMemoria(){
+  if ( estadiaRecordada != nullptr) {
+    delete estadiaRecordada;
+    estadiaRecordada = nullptr;
+ }
+
 }

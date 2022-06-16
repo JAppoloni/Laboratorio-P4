@@ -30,11 +30,15 @@ public:
     virtual Huesped *getHuesped(string email) = 0;
     virtual set<DTCalificacion *> obtenerComentariosSinResponderEmpleado(string email) = 0; // comentar calificacion
     virtual void responderCalificacion(int codigo, string email, string comentario) = 0;    // comentar calificacion
-
+    virtual set<DTUsuario *> listarUsuarios() = 0;                                          // consulta usuario
+    virtual void eliminarSuscripcion(string email) = 0;                                     // eliminar suscripcion
+    virtual set<DTCalificacion *> listarNotificacionesEmpleado(string email) = 0;           // listar Notificaciones Empleado
+    virtual void suscribirseNotificacion(string email) = 0;                                 // suscribirse a notificacion
     // para pruebas
     virtual set<DTUsuario *> obtenerTodosLosUsuariosDelSistema() = 0;
 
     // para eliminar datos
     virtual void liberarRegistros() = 0;
 };
+
 #endif

@@ -57,13 +57,11 @@ void ReservaGrupal::agregarEstadia(Estadia *estadia)
 {
 	Huesped *huesped = estadia->getHuespedEstadia();
 
-	if (_listaEstadia.begin() == _listaEstadia.end() && _listaEstadia.empty() != true && huesped == (*_listaEstadia.end())->getHuespedEstadia())
-		throw YAEXISTEHUESPED();
-	else
+	if (_listaEstadia.size() != 0)
 	{
-		for (std::list<Estadia *>::iterator it = _listaEstadia.begin(); it != _listaEstadia.end(); ++it)
+		for (auto it : _listaEstadia)
 		{
-			if ((*it)->getHuespedEstadia() == huesped)
+			if (it->getHuespedEstadia() == huesped)
 			{
 				throw YAEXISTEHUESPED();
 				break;
@@ -75,37 +73,33 @@ void ReservaGrupal::agregarEstadia(Estadia *estadia)
 	{
 		bool existeHuesped = false;
 
-		if (_listaHuesped.begin() == _listaHuesped.end() && huesped == *_listaHuesped.end())
-			throw YAEXISTEHUESPED();
-		else
+		for (auto it : _listaHuesped)
 		{
-			for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+			if (it == huesped)
 			{
-				if ((*it) == huesped)
-				{
-					existeHuesped = true;
-					break;
-				}
+				existeHuesped = true;
+				break;
 			}
 		}
-		if (existeHuesped == false)
+
+		if (!existeHuesped)
 			throw NOEXISTEHUESPED();
 	}
 	_listaEstadia.push_back(estadia);
 	// _listaEstadia.push_back(estadia);
 }
 
-bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre)
+bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombreHostal)
 {
-	if (_habitacionReserva->getHostal()->getNombre() == nombre)
+	if (_habitacionReserva->getHostal()->getNombre() == nombreHostal)
 	{
 		if (_huespedReserva->getEmail() == email)
 		{
 			return true;
 		};
-		for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+		for (auto it : _listaHuesped)
 		{
-			if ((*it)->getEmail() == email)
+			if (it->getEmail() == email)
 			{
 				return true;
 			};
@@ -117,9 +111,9 @@ bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre
 DTReserva *ReservaGrupal::getDataReserva()
 {
 	std::list<DTHuesped> *listaHuespedes = new std::list<DTHuesped>;
-	for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+	for (auto it : _listaHuesped)
 	{
-		listaHuespedes->push_back((*it)->getDatatype());
+		listaHuespedes->push_back(it->getDatatype());
 	}
 
 	return new DTReservaGrupal(_codigo,

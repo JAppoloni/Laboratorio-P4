@@ -44,5 +44,5 @@ Usuario::Usuario(std::string nombre, std::string email, std::string contrasena)
 
 bool Usuario::operator==(const Usuario &c)
 {
-    return (nombre == c.nombre && email == c.email);
+    return (email == c.email);
 }

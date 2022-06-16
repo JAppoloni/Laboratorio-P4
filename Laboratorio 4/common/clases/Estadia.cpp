@@ -11,24 +11,20 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 			bool existe = false;
 			ReservaGrupal *reserva = dynamic_cast<ReservaGrupal *>(reservaEstadia);
 
-			if ((reserva->getHuespedReserva() == huesped) || (*reserva->getListaHuesped().end()) == huesped || (*reserva->getListaHuesped().begin() == huesped))
+			if (reserva->getHuespedReserva() == huesped)
 				existe = true;
 
-			if (existe == false)
+			if (!existe)
 			{
-				int tope = 0;
-				int lstElem = reserva->getListaHuesped().size();
-				for (std::list<Huesped *>::iterator it = reserva->getListaHuesped().begin(); it != reserva->getListaHuesped().end(); it++)
+				for (auto it : reserva->getListaHuesped())
 				{
-					if ((*it) == huesped)
+					if (it == huesped)
 					{
 						existe = true;
 						break;
 					}
-					if (tope > lstElem)
-						break;
-					tope++;
 				}
+				reserva = nullptr;
 
 				if (existe == false)
 					throw HuesedNoExiste();
@@ -37,7 +33,10 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 		else
 		{
 			ReservaIndividual *reserva = dynamic_cast<ReservaIndividual *>(reservaEstadia);
-			if (reserva->getHuespedReserva() != huesped)
+			bool Noexiste = (reserva->getHuespedReserva() != huesped);
+			reserva = nullptr;
+
+			if (Noexiste)
 				throw HuesedNoExiste();
 		}
 	}

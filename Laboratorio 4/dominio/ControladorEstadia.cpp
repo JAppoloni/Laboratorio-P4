@@ -190,18 +190,18 @@ set<DTHostal*> ControladorEstadia::listarHostales(){
     estadiaRecordada = estadia;
  }
  
- //DTCalificacion ControladorEstadia::buscarCalificacion(){
+ DTCalificacion ControladorEstadia::buscarCalificacion(){
 
- //}
- //DTComentario ControladorEstadia::buscarComentario(){
+ }
+ DTComentario ControladorEstadia::buscarComentario(){
 
- //}
- //DTReserva* ControladorEstadia::buscarInformacionReserva() {
-   // Estadia* e; 
-   // Reserva* r = e->getReservaEstadia();
-   // DTReserva* res =  r->getDataReserva();
-   // return res;
- //}
+ }
+ DTReserva* ControladorEstadia::buscarInformacionReserva() {
+   Estadia* e; 
+   Reserva* r = e->getReservaEstadia();
+   DTReserva* res =  r->getDataReserva();
+   return res;
+ }
 
 void ControladorEstadia::liberarMemoria(){
   if ( estadiaRecordada != nullptr) {

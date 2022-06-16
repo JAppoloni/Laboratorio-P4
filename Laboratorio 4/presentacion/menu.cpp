@@ -59,6 +59,13 @@ void mainMenu()
     while (!exit)
     {
         string option = outputMenu();
+
+        if (option == "S" || option == "s")
+        {
+            exit = true;
+            break;
+        }
+
         int intOption;
 
         try
@@ -67,15 +74,8 @@ void mainMenu()
         }
         catch (exception const &excep)
         {
-            if (option == "S" || option == "s")
-            {
-                exit = true;
-                break;
-            }
-            else
-            {
-                intOption = -1;
-            }
+
+            intOption = -1;
         }
 
         switch (intOption)

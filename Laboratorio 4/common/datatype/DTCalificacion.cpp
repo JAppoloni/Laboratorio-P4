@@ -30,8 +30,6 @@ DTCalificacion::~DTCalificacion()
 // Operators
 std::ostream &operator<<(std::ostream &out, DTCalificacion imprimir)
 {
-	// out << "Reserva: " << imprimir.getIDReserva() << std::endl;
-	// out << "Huesped: " << imprimir.getIDHuesped() << std::endl;
 	out << "Calificación: " << imprimir.getCalificacion() << std::endl;
 	out << "Fecha: " << imprimir.getFecha() << std::endl;
 	out << "Comentario: " << imprimir.getComentario() << std::endl;

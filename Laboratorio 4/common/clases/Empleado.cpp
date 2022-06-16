@@ -52,8 +52,29 @@ void Empleado::setHostal(Hostal *hostal)
 
 Empleado::~Empleado()
 {
-  hostal = nullptr;
-  delete hostal;
+  if (this->hostal != nullptr)
+  {
+    this->hostal = nullptr;
+  }
+
+  for (auto it : this->Notificaciones)
+  {
+    if (it != nullptr)
+    {
+      delete it;
+      it = nullptr;
+    }
+  }
+  Notificaciones.clear();
+
+  for (auto it : this->Comentarios)
+  {
+    if (it != nullptr)
+    {
+      delete it;
+      it = nullptr;
+    }
+  }
   Comentarios.clear();
 }
 

@@ -33,6 +33,9 @@ class ControladorUsuario: public IControladorUsuario
         virtual set<DTHuesped*> listarHuespedes();
         virtual Huesped* getHuesped(string correo);
         virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
+        virtual void liberarRegistros() ;
+
+        ~ControladorUsuario();
 };
 
 #endif

@@ -28,8 +28,11 @@ public:
     Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
 
-    //para pruebas
+    // para pruebas
     virtual set<DTHostal *> listarTodosLosHostalesDelSistema();
+
+    // para eliminar datos
+    virtual void liberarRegistros();
 };
 
 #endif

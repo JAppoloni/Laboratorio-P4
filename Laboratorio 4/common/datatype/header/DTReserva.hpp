@@ -18,7 +18,7 @@ public:
 	DTReserva(int codigo, DTFecha checkIn, DTFecha checkOut, EstadoReserva estado, float costo, DTHabitacion *habitacion, DTHuesped *huesped);
 
 	// Destructor
-	~DTReserva();
+	virtual ~DTReserva()  = 0;
 
 	// Operators
 	virtual std::ostream &operator<<(std::ostream &o) = 0;

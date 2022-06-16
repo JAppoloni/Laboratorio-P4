@@ -1,15 +1,17 @@
 #include "header/ControladorReserva.hpp"
 
-ControladorReserva * ControladorReserva::instancia = nullptr;
+ControladorReserva *ControladorReserva::instancia = nullptr;
 
 ControladorReserva::ControladorReserva()
 {
     contador_codigo = 1;
 }
 
-ControladorReserva * ControladorReserva::getInstancia(){
- 
-    if (instancia == nullptr){
+ControladorReserva *ControladorReserva::getInstancia()
+{
+
+    if (instancia == nullptr)
+    {
         instancia = new ControladorReserva();
     };
     return instancia;
@@ -31,7 +33,7 @@ void ControladorReserva::crearReserva(string hostal, DTFecha checkIn, DTFecha ch
 set<DTHabitacion *> ControladorReserva::listarHabitacionesDisponibles()
 {
     set<DTHabitacion *> res;
-    ControladorHostal * CH = ControladorHostal::getInstancia();
+    ControladorHostal *CH = ControladorHostal::getInstancia();
     res = CH->obtenerHabitacionesDeHostal(hostalRecordado);
     return res;
 }
@@ -45,31 +47,34 @@ void ControladorReserva::asignarHabitacionAReserva(int hab)
 
 string correoHuespedRecordado;
 
-void ControladorReserva::asignarHuespedQueRealizaReserva(string correoHuesped) 
+void ControladorReserva::asignarHuespedQueRealizaReserva(string correoHuesped)
 {
     correoHuespedRecordado = correoHuesped;
 }
 
-set<string> correosHuespedesRGRecordados; 
+set<string> correosHuespedesRGRecordados;
 
 void ControladorReserva::asignarHuespedAReservaGrupal(string correoHuesped)
 {
     correosHuespedesRGRecordados.insert(correoHuesped);
 }
 
-void ControladorReserva::cancelarReserva(){}
+void ControladorReserva::cancelarReserva() {}
 
 void ControladorReserva::confirmarReserva()
 {
-    ControladorHostal * CH = ControladorHostal::getInstancia();
-    //CH->getHostal()->getHabitacion()
-    ControladorUsuario * CU = ControladorUsuario::getInstancia();
-    //CU->getHuesped(correoHuespedRecordado)
-    if(!esGruparRecordado){
+    ControladorHostal *CH = ControladorHostal::getInstancia();
+    ControladorUsuario *CU = ControladorUsuario::getInstancia();
+
+    if (!esGruparRecordado)
+    {
         reservas[contador_codigo] = new ReservaIndividual(contador_codigo, checkInRecordado, checkOutRecordado, CU->getHuesped(correoHuespedRecordado), Abierta, CH->getHostal(hostalRecordado)->getHabitacion(numHabRecordado), false);
-    } else{
+    }
+    else
+    {
         list<Huesped *> huespedesRG;
-        for(set<string>::iterator it = correosHuespedesRGRecordados.begin(); it != correosHuespedesRGRecordados.end(); ++it){
+        for (set<string>::iterator it = correosHuespedesRGRecordados.begin(); it != correosHuespedesRGRecordados.end(); ++it)
+        {
             huespedesRG.push_front(CU->getHuesped(*it));
         };
         reservas[contador_codigo] = new ReservaGrupal(contador_codigo, checkInRecordado, checkOutRecordado, CU->getHuesped(correoHuespedRecordado), Abierta, CH->getHostal(hostalRecordado)->getHabitacion(numHabRecordado), huespedesRG);
@@ -79,23 +84,27 @@ void ControladorReserva::confirmarReserva()
 
 set<DTReserva *> ControladorReserva::listarReservasHuesped(string email, string nomHostal)
 {
-    set<DTReserva*> res;
-    for(map<int, Reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
-        if(it->second->esReservaHostalHuesped(email, nomHostal) && it->second->getEstado() != Cancelada){
+    set<DTReserva *> res;
+    for (map<int, Reserva *>::iterator it = reservas.begin(); it != reservas.end(); ++it)
+    {
+        if (it->second->esReservaHostalHuesped(email, nomHostal) && it->second->getEstado() != Cancelada)
+        {
             res.insert(it->second->getDataReserva());
         };
     };
     return res;
 }
 
-Reserva * ControladorReserva::getReserva(int codigo){
+Reserva *ControladorReserva::getReserva(int codigo)
+{
     return reservas[codigo];
 }
 
 set<DTReserva *> ControladorReserva::listarTodasLasReservasDelSistema()
 {
-    set<DTReserva*> res;
-    for(map<int, Reserva*>::iterator it = reservas.begin(); it != reservas.end(); ++it){
+    set<DTReserva *> res;
+    for (map<int, Reserva *>::iterator it = reservas.begin(); it != reservas.end(); ++it)
+    {
         res.insert(it->second->getDataReserva());
     };
     return res;
@@ -104,5 +113,23 @@ set<DTReserva *> ControladorReserva::listarTodasLasReservasDelSistema()
 int ControladorReserva::conocerTotatalReservas()
 {
     return contador_codigo;
+}
 
+void ControladorReserva::liberarRegistros()
+{
+    for (auto it : reservas)
+    {
+        if (it.second != nullptr)
+        {
+            delete it.second;
+        it.second = nullptr;
+        };
+    }
+
+    reservas.clear();
+
+    if (instancia != nullptr)
+    {
+        instancia = nullptr;
+    }
 }

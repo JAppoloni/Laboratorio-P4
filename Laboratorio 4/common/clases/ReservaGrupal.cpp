@@ -19,10 +19,26 @@ ReservaGrupal::ReservaGrupal(int codigo, DTFecha CheckIn, DTFecha checkOut, Hues
 // Destructor
 ReservaGrupal::~ReservaGrupal()
 {
-	_huespedReserva = nullptr;
-	_habitacionReserva = nullptr;
-	_listaEstadia.clear();
+	if (_huespedReserva != nullptr)
+		_huespedReserva = nullptr;
+
+	if (_habitacionReserva != nullptr)
+		_habitacionReserva = nullptr;
+
+	for (auto it : _listaHuesped)
+	{
+		if (it != nullptr)
+			it = nullptr;
+	}
 	_listaHuesped.clear();
+
+	for (auto it : _listaEstadia)
+	{
+		if (it != nullptr)
+			delete it;
+		it = nullptr;
+	}
+	_listaEstadia.clear();
 }
 
 // Getters / Setters
@@ -86,7 +102,6 @@ void ReservaGrupal::agregarEstadia(Estadia *estadia)
 			throw NOEXISTEHUESPED();
 	}
 	_listaEstadia.push_back(estadia);
-	// _listaEstadia.push_back(estadia);
 }
 
 bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombreHostal)

@@ -60,7 +60,7 @@ DTFecha::DTFecha()
     this->fecha.tm_yday = 0;
     this->fecha.tm_isdst = 0;
     this->fecha.tm_gmtoff = 0;
-    this->fecha.tm_zone = NULL;
+    this->fecha.tm_zone = nullptr;
 }
 DTFecha::DTFecha(const DTFecha &fch)
 {
@@ -69,7 +69,7 @@ DTFecha::DTFecha(const DTFecha &fch)
 
 DTFecha::DTFecha(DTFecha *fch)
 {
-    if (fch != NULL)
+    if (fch != nullptr)
     {
         this->fecha = fch->fecha;
     }
@@ -89,7 +89,7 @@ DTFecha::DTFecha(tm fch)
     this->fecha.tm_yday = fch.tm_yday;
     this->fecha.tm_isdst = fch.tm_isdst;
     this->fecha.tm_gmtoff = fch.tm_gmtoff;
-    this->fecha.tm_zone = NULL;
+    this->fecha.tm_zone = nullptr;
 }
 
 DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy)
@@ -111,7 +111,7 @@ DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy)
         this->fecha.tm_yday = 0;
         this->fecha.tm_isdst = 0;
         this->fecha.tm_gmtoff = 0;
-        this->fecha.tm_zone = NULL;
+        this->fecha.tm_zone = nullptr;
     }
 }
 
@@ -129,7 +129,7 @@ DTFecha DTFecha::operator+(const tm &fch)
     auxfch->tm_yday = this->fecha.tm_yday + fch.tm_yday;
     auxfch->tm_isdst = fch.tm_isdst;
     auxfch->tm_gmtoff = 0;
-    auxfch->tm_zone = NULL;
+    auxfch->tm_zone = nullptr;
     DTFecha rtnFecha = DTFecha(*auxfch);
     delete auxfch;
     return rtnFecha;
@@ -154,7 +154,7 @@ DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday)
         this->fecha.tm_yday = 0;
         this->fecha.tm_isdst = 0;
         this->fecha.tm_gmtoff = 0;
-        this->fecha.tm_zone = NULL;
+        this->fecha.tm_zone = nullptr;
     }
 }
 

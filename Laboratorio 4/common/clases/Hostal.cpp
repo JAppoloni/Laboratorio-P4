@@ -49,13 +49,30 @@ Hostal::Hostal(std::string nombre, std::string direccion, std::string telefono)
 
 Hostal::~Hostal()
 {
+    for (auto it : this->listaHabitaciones)
+    {
+        if (it != nullptr)
+        {
+            delete it;
+            it = nullptr;
+        }
+    }
     listaHabitaciones.clear();
+
+    for (auto it : this->listaCalificaciones)
+    {
+        if (it != nullptr)
+        {
+            delete it;
+            it = nullptr;
+        }
+    }
     listaCalificaciones.clear();
 }
 
 bool Hostal::operator==(const Hostal &hostal)
 {
-    return (nombre == hostal.nombre && direccion == hostal.direccion && telefono == hostal.telefono);
+    return (nombre == hostal.nombre);
 }
 
 Hostal &Hostal::operator=(const Hostal &assign)
@@ -64,6 +81,7 @@ Hostal &Hostal::operator=(const Hostal &assign)
     this->direccion = assign.direccion;
     this->telefono = assign.telefono;
     this->listaHabitaciones = assign.listaHabitaciones;
+    this->listaCalificaciones = assign.listaCalificaciones;
     return *this;
 }
 
@@ -85,7 +103,7 @@ std::list<int> Hostal::obtenerComentariosSinResponder()
 
 std::list<DTCalificacion> Hostal::obtenerCalificaciones()
 {
-    std::list<DTCalificacion> calificaciones; // {};
+    std::list<DTCalificacion> calificaciones;
     std::list<Calificacion *>::iterator it;
     for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
     {

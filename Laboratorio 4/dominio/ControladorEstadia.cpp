@@ -114,3 +114,20 @@ set<DTEstadia *> ControladorEstadia::indicarEmail(string email)
     return res;
 }
 
+void ControladorEstadia::liberarRegistros()
+{
+    for (auto it : estadias)
+    {
+        if (it != nullptr)
+        {
+            delete it;
+            it = nullptr;
+        }
+    }
+    estadias.clear();
+    
+    if (instancia != nullptr)
+    {
+        instancia = nullptr;
+    }
+}

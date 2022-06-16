@@ -12,6 +12,36 @@ void progress(float &iter, int tope, bool eliminar)
    iter++;
 }
 
+void freeSetReserva(set<DTReserva *> lista)
+{
+   for (auto it : lista)
+   {
+      if (dynamic_cast<DTReservaGrupal *>(it) != nullptr)
+      {
+         delete dynamic_cast<DTReservaGrupal *>(it);
+      }
+      else if (dynamic_cast<DTReservaIndividual *>(it) != nullptr)
+      {
+         delete dynamic_cast<DTReservaIndividual *>(it);
+      }
+      it = nullptr;
+   }
+   lista.clear();
+}
+
+void freeSetEstadia(set<DTEstadia *> lista)
+{
+   for (auto it : lista)
+   {
+      if (it != nullptr)
+      {
+         delete it;
+      }
+      it = nullptr;
+   }
+   lista.clear();
+}
+
 void cargarDatos(bool primeraVez)
 {
    if (primeraVez == false)
@@ -207,27 +237,27 @@ void cargarDatos(bool primeraVez)
       int posicion = controladorReserva->conocerTotatalReservas();
       DTFecha FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
-      set<DTReserva*> elimiar1 =controladorEstadia->obtenerReservaHuesped(H1->getEmail());
+      set<DTReserva *> eliminar1 = controladorEstadia->obtenerReservaHuesped(H1->getEmail());
       fechaSistema->setFecha(DTFecha(00, 18, 01, 4, 2022, 6));
       controladorEstadia->registrarEstadiaHuesped(posicion - 4);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      set<DTReserva*> elimiar2 =controladorEstadia->obtenerReservaHuesped(H2->getEmail());
+      set<DTReserva *> eliminar2 = controladorEstadia->obtenerReservaHuesped(H2->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      set<DTReserva*> elimiar3 =controladorEstadia->obtenerReservaHuesped(H3->getEmail());
+      set<DTReserva *> eliminar3 = controladorEstadia->obtenerReservaHuesped(H3->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      set<DTReserva*> elimiar4 =controladorEstadia->obtenerReservaHuesped(H4->getEmail());
+      set<DTReserva *> eliminar4 = controladorEstadia->obtenerReservaHuesped(H4->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      set<DTReserva*> elimiar5 =controladorEstadia->obtenerReservaHuesped(H5->getEmail());
+      set<DTReserva *> eliminar5 = controladorEstadia->obtenerReservaHuesped(H5->getEmail());
       fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
       controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      set<DTReserva*> eliminar6 = controladorEstadia->obtenerReservaHuesped(H6->getEmail());
+      set<DTReserva *> eliminar6 = controladorEstadia->obtenerReservaHuesped(H6->getEmail());
       fechaSistema->setFecha(DTFecha(00, 22, 10, 5, 2022, 5));
       controladorEstadia->registrarEstadiaHuesped(posicion - 1);
       fechaSistema->setFecha(FechaActual);
@@ -242,17 +272,17 @@ void cargarDatos(bool primeraVez)
       // ES6 H6 15/06/22 - 10pm
       FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
-      set<DTEstadia*> eliminar7 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H1->getEmail());
+      set<DTEstadia *> eliminar7 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H1->getEmail());
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 4);
       fechaSistema->setFecha(DTFecha(00, 9, 10, 4, 2022, 2));
       controladorEstadia->finalizarEstadia();
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      set<DTEstadia*> eliminar8 =controladorEstadia->buscarEstadiasAbiertasPorCorreo(H2->getEmail());
+      set<DTEstadia *> eliminar8 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H2->getEmail());
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 3);
       fechaSistema->setFecha(DTFecha(00, 14, 05, 0, 2001, 1));
       controladorEstadia->finalizarEstadia();
       controladorEstadia->seleccionarHostal(HO5.getNombre());
-      set<DTEstadia*> eliminar9 =controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
+      set<DTEstadia *> eliminar9 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
       controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
       fechaSistema->setFecha(DTFecha(00, 10, 15, 5, 2022, 3));
       fechaSistema->setFecha(FechaActual);
@@ -280,33 +310,56 @@ void cargarDatos(bool primeraVez)
       cout << endl;
       //----------------------------------------------------------------------------------------------------------------------
       //----------------------------------------------------------------------------------------------------------------------
-      
+
       // ! Liberar Memoria
       delete HA1;
+      HA1 = nullptr;
       delete HA2;
+      HA2 = nullptr;
       delete HA3;
+      HA3 = nullptr;
       delete HA4;
+      HA4 = nullptr;
       delete HA5;
+      HA5 = nullptr;
       delete HA6;
+      HA6 = nullptr;
       delete E1;
+      E1 = nullptr;
       delete E2;
+      E2 = nullptr;
       delete E3;
+      E3 = nullptr;
       delete E4;
+      E4 = nullptr;
       delete H1;
+      H1 = nullptr;
       delete H2;
+      H2 = nullptr;
       delete H3;
+      H3 = nullptr;
       delete H4;
+      H4 = nullptr;
       delete H5;
+      H5 = nullptr;
       delete H6;
-      elimiar1.clear();
-      elimiar2.clear();
-      elimiar3.clear();
-      elimiar4.clear();
-      elimiar5.clear();
-      eliminar6.clear();
-      eliminar7.clear();
-      eliminar8.clear();
-      eliminar9.clear();
+      H6 = nullptr;
+
+      freeSetReserva(eliminar1);
+      freeSetReserva(eliminar2);
+      freeSetReserva(eliminar3);
+      freeSetReserva(eliminar4);
+      freeSetReserva(eliminar5);
+      freeSetReserva(eliminar6);
+      freeSetEstadia(eliminar7);
+      freeSetEstadia(eliminar8);
+      freeSetEstadia(eliminar9);
+
+      controladorHostal = nullptr;
+      controladorReserva = nullptr;
+      controladorUsuario = nullptr;
+      controladorEstadia = nullptr;
+      fechaSistema = nullptr;
    }
    catch (exception const &e)
    {

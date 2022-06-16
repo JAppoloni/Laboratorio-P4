@@ -149,3 +149,21 @@ set<DTHostal *> ControladorHostal::listarTodosLosHostalesDelSistema()
     };
     return res;
 }
+
+void ControladorHostal::liberarRegistros()
+{
+    for (auto it : hostales)
+    {
+        if (it.second != nullptr)
+        {
+            delete it.second;
+        it.second = nullptr;
+        }
+    }
+    hostales.clear();
+
+    if (instancia != nullptr)
+    {
+        instancia = nullptr;
+    }
+}

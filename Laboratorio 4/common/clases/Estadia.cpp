@@ -61,11 +61,23 @@ Estadia::Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Hu
 // Destructor
 Estadia::~Estadia()
 {
-	_reservaEstadia = nullptr;
-	_huespedEstadia = nullptr;
+	if (_calificacionEstadia != nullptr)
+	{
+		delete _calificacionEstadia;
+		_calificacionEstadia = nullptr;
+	}
 
-	delete _checkOut;
-	delete _calificacionEstadia;
+	if (_checkOut != nullptr)
+	{
+		delete _checkOut;
+		_checkOut = nullptr;
+	}
+
+	if (_reservaEstadia != nullptr)
+		_reservaEstadia = nullptr;
+
+	if (_huespedEstadia != nullptr)
+		_huespedEstadia = nullptr;
 }
 
 // Operators
@@ -178,7 +190,7 @@ int Estadia::obtenerID()
 
 float Estadia::calcularCosto()
 {
-	if (_checkOut == NULL)
+	if (_checkOut == nullptr)
 	{
 		throw NOEXISTECHECKOUT();
 		return 0;

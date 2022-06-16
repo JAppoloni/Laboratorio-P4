@@ -45,3 +45,12 @@ void FechaSistema::setFecha(DTFecha fecha)
     _tiepoActual = *tiempo_en_TM;
     this->_fecha = fecha;
 }
+
+
+void FechaSistema::liberarRegistros()
+{
+      if (instancia != nullptr)
+    {
+        instancia = nullptr;
+    }
+}

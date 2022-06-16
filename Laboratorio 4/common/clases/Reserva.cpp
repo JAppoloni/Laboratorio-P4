@@ -6,8 +6,11 @@ Reserva::Reserva() {}
 // Destructor
 Reserva::~Reserva()
 {
-	_huespedReserva = nullptr;
-	_habitacionReserva = nullptr;
+	if (_huespedReserva != nullptr)
+		_huespedReserva = nullptr;
+
+	if (_habitacionReserva != nullptr)
+		_habitacionReserva = nullptr;
 }
 
 // Operators

@@ -1,23 +1,43 @@
 #include "header/Fabrica.hpp"
 
-    Fabrica::Fabrica(){}
+Fabrica::Fabrica() {}
 
-    IControladorEstadia *Fabrica::getControladorEstadia(){
-        return ControladorEstadia::getInstancia();
-    }
+IControladorEstadia *Fabrica::getControladorEstadia()
+{
+    return ControladorEstadia::getInstancia();
+}
 
-    IControladorHostal * Fabrica::getControladorHostal(){
-        return ControladorHostal::getInstancia();
-    }
+IControladorHostal *Fabrica::getControladorHostal()
+{
+    return ControladorHostal::getInstancia();
+}
 
-    IControladorReserva * Fabrica::getControladorReserva(){
-        return ControladorReserva::getInstancia();
-    }
+IControladorReserva *Fabrica::getControladorReserva()
+{
+    return ControladorReserva::getInstancia();
+}
 
-    IControladorUsuario * Fabrica::getControladorUsuario(){
-        return ControladorUsuario::getInstancia();
-    }
+IControladorUsuario *Fabrica::getControladorUsuario()
+{
+    return ControladorUsuario::getInstancia();
+}
 
-    IFechaSistema * Fabrica::getFechaSistema(){
-        return FechaSistema::getInstancia();
-    }
+IFechaSistema *Fabrica::getFechaSistema()
+{
+    return FechaSistema::getInstancia();
+}
+
+void Fabrica::liberarMemoria()
+{
+    IControladorHostal *controladorHostal = getControladorHostal();
+    IControladorReserva *controladorReserva = getControladorReserva();
+    IControladorUsuario *controladorUsuario = getControladorUsuario();
+    IControladorEstadia *controladorEstadia = getControladorEstadia();
+    IFechaSistema *fechaSistema = getFechaSistema();
+
+    controladorEstadia->liberarRegistros();
+    controladorReserva->liberarRegistros();
+    controladorHostal->liberarRegistros();
+    controladorUsuario->liberarRegistros();
+    fechaSistema->liberarRegistros();
+}

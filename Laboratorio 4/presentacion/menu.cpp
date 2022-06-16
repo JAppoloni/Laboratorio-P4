@@ -2,7 +2,7 @@
 #include "header/menuCargarDatos.hpp"
 #include <iostream>
 #include <string>
-
+#include "../dominio/header/Fabrica.hpp"
 using namespace std;
 
 string outputMenu()
@@ -150,6 +150,9 @@ void mainMenu()
             break;
         }
     }
+
+    Fabrica fab = Fabrica();
+    fab.liberarMemoria();
 
     system("clear");
     cout << "Hasta luego!" << endl

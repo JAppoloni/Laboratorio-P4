@@ -17,7 +17,6 @@ private:
 
 public:
     static ControladorEstadia *getInstancia();
-
     virtual void seleccionarHostal(string nom);
     virtual set<DTReserva *> obtenerReservaHuesped(string email);
     virtual void registrarEstadiaHuesped(int codigo);
@@ -25,6 +24,10 @@ public:
     virtual void seleccionarUnEstadiaAFinalizar(int codigoResEst);
     virtual void finalizarEstadia();
     virtual set<DTEstadia *> indicarEmail(string email);
+    virtual void seleccionarEstadia(int codigo);
+    virtual void ingresarCalificacion(int puntaje, string comentario);
+    virtual void notificarNuevaCalificacion();
+    Calificacion *obtenerCalificacion(int codigo, string email);
 
     // para pruebas
     virtual set<DTEstadia *> obtenerTodasLasEstadiasDelSistema();

@@ -105,7 +105,7 @@ set<DTEstadia *> ControladorEstadia::indicarEmail(string email)
         {
             break;
         };
-        if ((*it)->getHuespedEstadia()->getEmail() == email && (*it)->getChechOut() != nullptr)
+        if ((*it)->getHuespedEstadia()->getEmail() == email && (*it)->getChechOut() != nullptr && (*it)->getReservaEstadia()->getHabitacionReserva()->getHostal()->getNombre() == nomHosRecordado)
         {
             DTFecha *aux = new DTFecha((*it)->getChechOut());
             res.insert(new DTEstadia((*it)->getReservaEstadia()->getCodigo(), (*it)->getHuespedEstadia()->getEmail(), aux, (*it)->getChechOut(), (*it)->getPromo()));
@@ -113,6 +113,53 @@ set<DTEstadia *> ControladorEstadia::indicarEmail(string email)
     };
     return res;
 }
+
+int codResEstRecordado;
+
+void ControladorEstadia::seleccionarEstadia(int codigo)
+{
+    codResEstRecordado = codigo;
+}
+
+void ControladorEstadia::ingresarCalificacion(int puntaje, string comentario)
+{
+    for (set<Estadia *>::iterator it = estadias.begin(); it != estadias.end(); ++it)
+    {
+        if ((*it) == nullptr)
+        {
+            break;
+        };
+        if ((*it)->getHuespedEstadia()->getEmail() == emailHuesRecordado && (*it)->getReservaEstadia()->getCodigo() == codResEstRecordado)
+        {
+            FechaSistema *FS = FechaSistema::getInstancia();
+            Calificacion *nueva = new Calificacion(puntaje, comentario, FS->getFecha(), *it);
+            (*it)->setCalificacionEstadia(nueva);
+            (*it)->getReservaEstadia()->getHabitacionReserva()->getHostal()->agregarCalificacion(nueva);
+            break;
+        };
+    };
+}
+
+void ControladorEstadia::notificarNuevaCalificacion()
+{
+}
+
+Calificacion *ControladorEstadia::obtenerCalificacion(int codigo, string email)
+{
+    for (set<Estadia *>::iterator it = estadias.begin(); it != estadias.end(); ++it)
+    {
+        if ((*it) == nullptr)
+        {
+            break;
+        }
+        if ((*it)->getReservaEstadia()->getCodigo() == codigo && (*it)->getHuespedEstadia()->getEmail() == email)
+        {
+            return (*it)->getCalificacionEstadia();
+        };
+    };
+    return nullptr;
+}
+
 
 void ControladorEstadia::liberarRegistros()
 {
@@ -125,7 +172,7 @@ void ControladorEstadia::liberarRegistros()
         }
     }
     estadias.clear();
-    
+
     if (instancia != nullptr)
     {
         instancia = nullptr;

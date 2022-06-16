@@ -28,12 +28,12 @@ string outputMenu()
     cout << "11. Consulta de Usuario" << endl;
     cout << "12. Consulta de Hostal" << endl;
     cout << "13. Consulta de Reserva" << endl;
-    cout << "13. Consulta de Estadia" << endl;
-    cout << "14. Baja de reserva" << endl;
-    cout << "15. Suscribirse a Notificaciones" << endl;
-    cout << "16. Consulta de notificaciones" << endl;
-    cout << "17. Eliminar Subscripcion" << endl;
-    cout << "18. Modificar Fecha del Sistema" << endl;
+    cout << "14. Consulta de Estadia" << endl;
+    cout << "15. Baja de reserva" << endl;
+    cout << "16. Suscribirse a Notificaciones" << endl;
+    cout << "17. Consulta de notificaciones" << endl;
+    cout << "18. Eliminar Subscripcion" << endl;
+    cout << "19. Modificar Fecha del Sistema" << endl;
     cout << "S.  Salir" << endl
          << endl;
 
@@ -136,6 +136,9 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 18:
+            notImplementedMessage();
+            break;
+        case 19:
             notImplementedMessage();
             break;
         case 20:

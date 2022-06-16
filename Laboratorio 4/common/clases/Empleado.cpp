@@ -101,11 +101,9 @@ void Empleado::agregarNotificacion(Calificacion *c)
 
 void Empleado::agregarComentario(std::string comentario, Calificacion *c)
 {
-  Comentario com = Comentario(comentario, c);
-  Comentario *co;
-  co = &com;
-
-  this->Comentarios.insert(Comentarios.begin(), co);
+  Comentario * com = new Comentario(comentario, c);
+  this->Comentarios.push_back(com);
+  c->setRespuestaComentario(com);
 }
 
 std::list<DTCalificacion> Empleado::obtenerComentariosSinResponder() // Esta Operación no es del Controlador??????

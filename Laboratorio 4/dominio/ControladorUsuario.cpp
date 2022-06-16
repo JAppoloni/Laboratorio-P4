@@ -190,3 +190,20 @@ void ControladorUsuario::liberarRegistros()
         instancia = nullptr;
     }
 }
+set<DTCalificacion*> ControladorUsuario::obtenerComentariosSinResponderEmpleado(string email)
+{
+    emailEmpRecordado = email;
+    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
+        if(it->second->getEmail() == email){
+            return it->second->getHostal()->obtenerComentariosSinResponder();
+        };
+    };
+    set<DTCalificacion*> vacio;
+    return vacio;
+}
+
+void ControladorUsuario::responderCalificacion(int codigo, string email, string comentario)
+{
+    ControladorEstadia * CE = ControladorEstadia::getInstancia();
+    empleados[email]->agregarComentario(comentario, CE->obtenerCalificacion(codigo, email));
+}

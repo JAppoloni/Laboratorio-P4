@@ -19,6 +19,9 @@ public:
     virtual void seleccionarUnEstadiaAFinalizar(int codigoResEst) = 0;          // finalizar estadia
     virtual void finalizarEstadia() = 0;                                        // finalizar estadia
     virtual set<DTEstadia *> indicarEmail(string email) = 0;                    // calificar estadia
+    virtual void seleccionarEstadia(int codigo) = 0;                            // calificar estadia
+    virtual void ingresarCalificacion(int puntaje, string comentario) = 0;      // calificar estadia
+    virtual void notificarNuevaCalificacion() = 0;                              // calificar estadia
 
     // para pruebas
     virtual set<DTEstadia *> obtenerTodasLasEstadiasDelSistema() = 0;

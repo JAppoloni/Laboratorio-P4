@@ -23,6 +23,16 @@ int DTFecha::getHora()
     return this->fecha.tm_hour;
 }
 
+int DTFecha::getSegundos()
+{
+    return this->fecha.tm_sec;
+}
+
+int DTFecha::getDweek()
+{
+    return this->fecha.tm_wday;
+}
+
 int DTFecha::getMinutos()
 {
     return this->fecha.tm_min;
@@ -30,11 +40,59 @@ int DTFecha::getMinutos()
 
 int DTFecha::diferenciaDias(DTFecha fchAComparar)
 {
-    return ceil(abs(difftime(mktime(&(this->fecha)), mktime(&fchAComparar.fecha)) / ((float)24 * 60 * 60)));
+    DTFecha aux = DTFecha(this->fecha);
+    time_t fecha1 = mktime(&aux.fecha);
+    DTFecha aux2 = DTFecha(fchAComparar);
+    time_t fecha2 = mktime(&aux2.fecha);
+    double diffTime = difftime(fecha2, fecha1);
+    return ceil(abs(diffTime / ((float)24 * 60 * 60)));
 }
 
 DTFecha::DTFecha()
 {
+    this->fecha.tm_mday = 0;
+    this->fecha.tm_mon = 0;
+    this->fecha.tm_year = 0;
+    this->fecha.tm_hour = 0;
+    this->fecha.tm_min = 0;
+    this->fecha.tm_sec = 0;
+    this->fecha.tm_wday = 0;
+    this->fecha.tm_yday = 0;
+    this->fecha.tm_isdst = 0;
+    this->fecha.tm_gmtoff = 0;
+    this->fecha.tm_zone = nullptr;
+}
+DTFecha::DTFecha(const DTFecha &fch)
+{
+    this->fecha.tm_mday = fch.fecha.tm_mday;
+    this->fecha.tm_mon = fch.fecha.tm_mon;
+    this->fecha.tm_year = fch.fecha.tm_year;
+    this->fecha.tm_hour = fch.fecha.tm_hour;
+    this->fecha.tm_min = fch.fecha.tm_min;
+    this->fecha.tm_sec = fch.fecha.tm_sec;
+    this->fecha.tm_wday = fch.fecha.tm_wday;
+    this->fecha.tm_yday = fch.fecha.tm_yday;
+    this->fecha.tm_isdst = fch.fecha.tm_isdst;
+    this->fecha.tm_gmtoff = fch.fecha.tm_gmtoff;
+    this->fecha.tm_zone = fch.fecha.tm_zone;
+}
+
+DTFecha::DTFecha(DTFecha *fch)
+{
+    if (fch != nullptr)
+    {
+        this->fecha.tm_mday = fch->fecha.tm_mday;
+        this->fecha.tm_mon = fch->fecha.tm_mon;
+        this->fecha.tm_year = fch->fecha.tm_year;
+        this->fecha.tm_hour = fch->fecha.tm_hour;
+        this->fecha.tm_min = fch->fecha.tm_min;
+        this->fecha.tm_sec = fch->fecha.tm_sec;
+        this->fecha.tm_wday = fch->fecha.tm_wday;
+        this->fecha.tm_yday = fch->fecha.tm_yday;
+        this->fecha.tm_isdst = fch->fecha.tm_isdst;
+        this->fecha.tm_gmtoff = fch->fecha.tm_gmtoff;
+        this->fecha.tm_zone = fch->fecha.tm_zone;
+    }
 }
 
 DTFecha::~DTFecha() {}
@@ -49,7 +107,9 @@ DTFecha::DTFecha(tm fch)
     this->fecha.tm_year = fch.tm_year;
     this->fecha.tm_wday = fch.tm_wday;
     this->fecha.tm_yday = fch.tm_yday;
-    this->fecha.tm_isdst = fch.tm_isdst;
+    this->fecha.tm_isdst = 0;
+    this->fecha.tm_gmtoff = 0;
+    this->fecha.tm_zone = nullptr;
 }
 
 DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy)
@@ -67,22 +127,39 @@ DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy)
         this->fecha.tm_mday = dd;
         this->fecha.tm_mon = mm;
         this->fecha.tm_year = yyyy - 1900;
+        this->fecha.tm_wday = 0;
+        this->fecha.tm_yday = 0;
+        this->fecha.tm_isdst = 0;
+        this->fecha.tm_gmtoff = 0;
+        this->fecha.tm_zone = nullptr;
     }
 }
 
 DTFecha DTFecha::operator+(const tm &fch)
 {
-    tm *rtn = new struct tm;
-    rtn->tm_sec = this->fecha.tm_sec + fch.tm_sec;
-    rtn->tm_min = this->fecha.tm_min + fch.tm_min;
-    rtn->tm_hour = this->fecha.tm_hour + fch.tm_hour;
-    rtn->tm_mday = this->fecha.tm_mday + fch.tm_mday;
-    rtn->tm_mon = this->fecha.tm_mon + fch.tm_mon;
-    rtn->tm_year = this->fecha.tm_year + fch.tm_year;
-    rtn->tm_wday = this->fecha.tm_wday + fch.tm_wday;
-    rtn->tm_yday = this->fecha.tm_yday + fch.tm_yday;
-    mktime(rtn);
-    return DTFecha(*rtn);
+    tm *auxfch = new struct tm;
+
+    auxfch->tm_sec = this->fecha.tm_sec + fch.tm_sec;
+    auxfch->tm_min = this->fecha.tm_min + fch.tm_min;
+    auxfch->tm_hour = this->fecha.tm_hour + fch.tm_hour;
+    auxfch->tm_mday = this->fecha.tm_mday + fch.tm_mday;
+    auxfch->tm_mon = this->fecha.tm_mon + fch.tm_mon;
+    auxfch->tm_year = this->fecha.tm_year + fch.tm_year;
+    auxfch->tm_wday = this->fecha.tm_wday + fch.tm_wday;
+    auxfch->tm_yday = this->fecha.tm_yday + fch.tm_yday;
+    auxfch->tm_isdst = 0;
+    auxfch->tm_gmtoff = 0;
+    auxfch->tm_zone = nullptr;
+    mktime(auxfch); // Corregir Errores de formato de fecha
+
+    auxfch->tm_isdst = 0;
+    auxfch->tm_gmtoff = 0;
+    auxfch->tm_zone = nullptr;
+
+    DTFecha rtnFecha = DTFecha(*auxfch);
+    delete auxfch;
+
+    return rtnFecha;
 }
 
 DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday)
@@ -101,6 +178,10 @@ DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday)
         this->fecha.tm_mon = mm;
         this->fecha.tm_year = yyyy - 1900;
         this->fecha.tm_wday = wday;
+        this->fecha.tm_yday = 0;
+        this->fecha.tm_isdst = 0;
+        this->fecha.tm_gmtoff = 0;
+        this->fecha.tm_zone = nullptr;
     }
 }
 
@@ -228,5 +309,9 @@ DTFecha &DTFecha::operator=(const DTFecha &assign)
     this->fecha.tm_mon = assign.fecha.tm_mon;
     this->fecha.tm_year = assign.fecha.tm_year;
     this->fecha.tm_wday = assign.fecha.tm_wday;
+    this->fecha.tm_yday = assign.fecha.tm_yday;
+    this->fecha.tm_isdst = assign.fecha.tm_isdst;
+    this->fecha.tm_gmtoff = assign.fecha.tm_gmtoff;
+    this->fecha.tm_zone = assign.fecha.tm_zone;
     return *this;
 }

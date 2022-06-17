@@ -4,6 +4,35 @@
 #include <ostream>
 #include <regex>
 
+bool confirmarBaja()
+{
+   string confirmacion;
+   bool seleccionCorrecta = false;
+   while (!seleccionCorrecta)
+   {
+      cout << "Desea confirmar el alta? (S/N)" << endl;
+      cin >> confirmacion;
+
+      if (confirmacion != "S" && confirmacion != "s" && confirmacion != "N" && confirmacion != "n")
+      {
+         cout << "Seleccione una de las opciones disponibles." << endl;
+      }
+      else
+      {
+         seleccionCorrecta = true;
+      }
+   }
+
+   if (confirmacion == "S" || confirmacion == "s")
+   {
+     return true;
+   }
+   else
+   {
+     return false;
+   }
+}
+
 DTFecha ingresarFecha()
 {
    DTFecha rtn;
@@ -28,14 +57,14 @@ DTFecha ingresarFecha()
       }
       catch (const std::exception &e)
       {
-         cout << RED "\n\n --------------"<<endl;
+         cout << RED "\n\n --------------" << endl;
          cout << "El fomrato debe ser : dd 1-31" << endl;
          cout << "\t\t   mm 00-11" << endl;
          cout << "\t\t   yyyy >1900" << endl;
          cout << "\t\t   hh 00-23" << endl;
          cout << "\t\t   min 00-59" << endl;
          cout << "\t\t   D 0-6 (L, M, X, J, V, S, D)" << endl;
-         std::cerr << "El error es el siguiente:  "<< e.what() << '\n';
+         std::cerr << "El error es el siguiente:  " << e.what() << '\n';
          cout << "--------------" NC << endl;
 
          cout << "Intrese una fecha (dd/mm/yyyy hh:mm D): ";
@@ -81,6 +110,28 @@ string leerString()
    return cadena;
 }
 
+string cargoAString(Cargo cargo) 
+{
+   if (cargo == administracion) 
+   {
+      return "Administracion";
+   }
+   else if (cargo == limpieza)
+   {
+      return "Limpieza";
+   }
+   else if (cargo == recepcion)
+   {
+      return "Recepcion";
+   }
+   else if (cargo == infraestructura)
+   {
+      return "Infraestructura";
+   }
+
+   return "<VACIO>";
+}
+
 int leerInt()
 {
    int num;
@@ -89,7 +140,9 @@ int leerInt()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          valido = true;
       }
       catch (const std::exception &e)
@@ -108,7 +161,9 @@ int leerIntPositivo()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < 0)
          {
             std::cout << "\n Ingrese un número positivo: ";
@@ -134,7 +189,9 @@ int leerIntIntervalo(int menor, int mayor)
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < menor || num > mayor)
          {
             std::cout << "\n Ingrese un número entre " << RED << menor << NC << " y " << RED << mayor << NC << ": ";
@@ -160,7 +217,9 @@ float leerFloat()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          valido = true;
       }
       catch (const std::exception &e)
@@ -179,7 +238,9 @@ float leerFloatPositivo()
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < 0)
          {
             std::cout << "\n Ingrese un número positivo: ";
@@ -205,7 +266,9 @@ float leerFloatIntervalo(float menor, float mayor)
    {
       try
       {
-         cin >> num;
+         string aux;
+         getline(cin, aux);
+         num = stoi(aux);
          if (num < menor || num > mayor)
          {
             std::cout << "\n Ingrese un número entre " << RED << menor << NC << " y " << RED << mayor << NC << ": ";
@@ -217,6 +280,7 @@ float leerFloatIntervalo(float menor, float mayor)
       }
       catch (const std::exception &e)
       {
+
          std::cout << "\n Ingrese un número correcto: ";
       }
    }
@@ -243,4 +307,17 @@ void printProgress(double percentage)
    printf("\r%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
    fflush(stdout);
    cout << NC;
+}
+
+bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre)
+{
+    for (list<DTHostal *>::iterator itr = hostales.begin(); itr != hostales.end(); itr++) 
+    {
+        if ((*itr)->getNombre() == nombre)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

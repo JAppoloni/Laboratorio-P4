@@ -11,7 +11,17 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 	_promClaif = 0;
 }
 
-DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, int promClaif)
+DTHostal ::DTHostal(const DTHostal &other)
+{
+	_nombre = other._nombre;
+	_direccion = other._direccion;
+	_telefono = other._telefono;
+	_listaHabitaciones = other._listaHabitaciones;
+	_listaEstadia = other._listaEstadia;
+	_promClaif = other._promClaif;
+}
+
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif)
 {
 	_nombre = nombre;
 	_direccion = direccion;
@@ -21,7 +31,7 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 	_listaEstadia = nullptr;
 }
 
-DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, int promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias)
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias)
 {
 	_nombre = nombre;
 	_direccion = direccion;
@@ -35,12 +45,17 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 DTHostal::~DTHostal()
 {
 	if (_listaHabitaciones != nullptr)
+	{
 		_listaHabitaciones->clear();
+		delete _listaHabitaciones;
+		_listaEstadia = nullptr;
+	}
 	if (_listaEstadia != nullptr)
-		 _listaEstadia->clear();
-	
-	delete _listaHabitaciones;
-	delete _listaEstadia;
+	{
+		_listaEstadia->clear();
+		delete _listaEstadia;
+		_listaHabitaciones = nullptr;
+	}
 }
 
 // Operators
@@ -74,7 +89,7 @@ std::string DTHostal::getNombre() const
 {
 	return _nombre;
 }
-int DTHostal::getPromedioCalificaciones() const
+float DTHostal::getPromedioCalificaciones() const
 {
 	return _promClaif;
 }
@@ -93,4 +108,15 @@ std::list<DTHabitacion> *DTHostal::getListaHabitaciones() const
 std::list<DTEstadia> *DTHostal::getListaEstadia() const
 {
 	return _listaEstadia;
+}
+
+DTHostal& DTHostal::operator=(const DTHostal &hostal)
+{
+	_nombre = hostal.getNombre();
+	_direccion = hostal.getDireccion();
+	_telefono = hostal.getTelefono();
+	_listaHabitaciones = hostal.getListaHabitaciones();
+	_listaEstadia = hostal.getListaEstadia();
+	_promClaif = hostal.getPromedioCalificaciones();
+	return *this;
 }

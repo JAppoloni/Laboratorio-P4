@@ -10,6 +10,10 @@ Empleado::Empleado(std::string nombre, std::string email, std::string contrasena
   this->hostal = nullptr;
 }
 
+Empleado::Observer::~Observer()
+{
+}
+
 std::list<Calificacion *> Empleado::getNotificaciones()
 {
   return Notificaciones;
@@ -52,8 +56,28 @@ void Empleado::setHostal(Hostal *hostal)
 
 Empleado::~Empleado()
 {
-  hostal = nullptr;
-  delete hostal;
+  if (this->hostal != nullptr)
+  {
+    this->hostal = nullptr;
+  }
+
+  for (auto it : this->Notificaciones)
+  {
+    if (it != nullptr)
+    {
+      delete it;
+      it = nullptr;
+    }
+  }
+  Notificaciones.clear();
+
+  for (auto it : this->Comentarios)
+  {
+    if (it != nullptr)
+    {
+      it = nullptr;
+    }
+  }
   Comentarios.clear();
 }
 
@@ -69,8 +93,12 @@ Empleado &Empleado::operator=(const Empleado &assign)
 
 DTEmpleado Empleado::getDatatype()
 {
-  // DTEmpleado data = DTEmpleado(nombre, email, contrasena, cargo, Comentarios, hostal);
   return DTEmpleado(nombre, email, contrasena, cargo);
+}
+
+DTEmpleado *Empleado::getDatatypeptr()
+{
+  return new DTEmpleado(nombre, email, contrasena, cargo);
 }
 
 void Empleado::agregarNotificacion(Calificacion *c)
@@ -80,16 +108,14 @@ void Empleado::agregarNotificacion(Calificacion *c)
 
 void Empleado::agregarComentario(std::string comentario, Calificacion *c)
 {
-  Comentario com = Comentario(comentario, c);
-  Comentario *co;
-  co = &com;
-
-  this->Comentarios.insert(Comentarios.begin(), co);
+  Comentario *com = new Comentario(comentario, c);
+  this->Comentarios.push_back(com);
+  c->setRespuestaComentario(com);
 }
 
-std::set<DTCalificacion> Empleado::obtenerComentariosSinResponder() // Esta Operación no es del Controlador??????
+std::list<DTCalificacion> Empleado::obtenerComentariosSinResponder() // Esta Operación no es del Controlador??????
 {
-  std::set<DTCalificacion> idComentarios;
+  std::list<DTCalificacion> idComentarios;
 
   // for (std::list<Comentario *>::iterator it = Comentarios.begin(); it != Comentarios.end(); ++it)
   // {
@@ -103,4 +129,19 @@ std::set<DTCalificacion> Empleado::obtenerComentariosSinResponder() // Esta Oper
 DTHostal Empleado::obtenerHostal()
 {
   return DTHostal(this->getHostal()->getNombre(), this->getHostal()->getDireccion(), this->getHostal()->getTelefono());
+}
+
+void Empleado::eliminarNotificacion(Calificacion *c)
+{
+  Notificaciones.remove(c);
+}
+
+void Empleado::eliminarNotificaciones()
+{
+  Notificaciones.clear();
+}
+
+void Empleado::eliminarComentario(Comentario *com)
+{
+  Comentarios.remove(com);
 }

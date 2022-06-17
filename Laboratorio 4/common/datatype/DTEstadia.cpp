@@ -13,7 +13,11 @@ DTEstadia::DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkO
 // Destructor
 DTEstadia::~DTEstadia()
 {
-	delete _checkOut;
+	if (_checkOut != nullptr)
+	{
+		delete _checkOut;
+		_checkOut = nullptr;
+	}
 }
 
 // Operators
@@ -21,12 +25,15 @@ std::ostream &operator<<(std::ostream &out, DTEstadia imprimir)
 {
 	out << "Reserva: " << imprimir.getID() << std::endl;
 	out << "Huésped: " << imprimir.getEmail() << std::endl;
-	out << "Check In: " << imprimir.getCheckIn() << std::endl;
+	out << "Check In: " << imprimir.getCheckIn();
 	if (imprimir.getCheckOut() != nullptr)
-		out << "Check Out: " << imprimir.getCheckOut() << std::endl;
-	out << "Promo: " << imprimir.getPromo() << std::endl;
+		out << "Check Out: " << *imprimir.getCheckOut();
+	if (imprimir.getPromo() == "")
+		out << "Promo: No tiene promo" << std::endl;
+	else
+		out << "Promo: " << imprimir.getPromo() << std::endl;
 	return out;
-	}
+}
 
 // Getters
 DTFecha DTEstadia::getCheckIn() const

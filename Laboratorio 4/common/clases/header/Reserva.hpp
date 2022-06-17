@@ -54,12 +54,11 @@ public:
 
 	// Methods
 	void cancelarReserva();
+	float calcularCosto();
 
 	virtual DTReserva* getDataReserva() = 0;
-	virtual float calcularCosto() = 0;
 	virtual void agregarEstadia(Estadia* estadia) = 0;
 	virtual bool esReservaHostalHuesped(std::string email, std::string nombre) = 0;
-	// virtual void darBaja(); // DEPENDE DEL TIPO DE RESERVA
 
 protected:
 	int _codigo;

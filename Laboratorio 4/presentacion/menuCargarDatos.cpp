@@ -12,6 +12,36 @@ void progress(float &iter, int tope, bool eliminar)
    iter++;
 }
 
+void freeSetReserva(set<DTReserva *> lista)
+{
+   for (auto it : lista)
+   {
+      if (dynamic_cast<DTReservaGrupal *>(it) != nullptr)
+      {
+         delete dynamic_cast<DTReservaGrupal *>(it);
+      }
+      else if (dynamic_cast<DTReservaIndividual *>(it) != nullptr)
+      {
+         delete dynamic_cast<DTReservaIndividual *>(it);
+      }
+      it = nullptr;
+   }
+   lista.clear();
+}
+
+void freeSetEstadia(set<DTEstadia *> lista)
+{
+   for (auto it : lista)
+   {
+      if (it != nullptr)
+      {
+         delete it;
+      }
+      it = nullptr;
+   }
+   lista.clear();
+}
+
 void cargarDatos(bool primeraVez)
 {
    if (primeraVez == false)
@@ -58,12 +88,12 @@ void cargarDatos(bool primeraVez)
       progress(iter, tope, true);
       //----------------------------------------------------------------------------------------------------------------------
 
-      DTHuesped *H1 = new DTHuesped("Sofia", "123", " sofia@mail.com", true);
+      DTHuesped *H1 = new DTHuesped("Sofia", "123", "sofia@mail.com", true);
       DTHuesped *H2 = new DTHuesped("Frodo", "123", "frodo@mail.com", true);
       DTHuesped *H3 = new DTHuesped("Sam", "123", " sam@mail.com", false);
-      DTHuesped *H4 = new DTHuesped("Merry", "123", " merry@mail.com", false);
+      DTHuesped *H4 = new DTHuesped("Merry", "123", "merry@mail.com", false);
       DTHuesped *H5 = new DTHuesped("Pippin", "123", "pippin@mail.com", false);
-      DTHuesped *H6 = new DTHuesped("Seba", "123", " seba@mail.com", true);
+      DTHuesped *H6 = new DTHuesped("Seba", "123", "seba@mail.com", true);
 
       controladorUsuario->ingresarUsuario(H1);
       controladorUsuario->confirmarAlta();
@@ -161,15 +191,15 @@ void cargarDatos(bool primeraVez)
       // R3 HO1 HA3 Individual 7/06/22 - 2pm 30/06/22 - topeam H1
       // R4 HO5 HA5 Individual 10/06/22 - 2pm 30/06/22 - topeam H6
 
-      DTFecha FchChechInR1 = DTFecha(00, 14, 01, 05, 2022, 6);
-      DTFecha FchChechInR2 = DTFecha(00, 20, 04, 01, 2001, 4);
-      DTFecha FchChechInR3 = DTFecha(00, 14, 07, 06, 2022, 2);
-      DTFecha FchChechInR4 = DTFecha(00, 14, 10, 06, 2022, 5);
+      DTFecha FchChechInR1 = DTFecha(00, 14, 01, 4, 2022, 6);
+      DTFecha FchChechInR2 = DTFecha(00, 20, 04, 0, 2001, 4);
+      DTFecha FchChechInR3 = DTFecha(00, 14, 07, 5, 2022, 2);
+      DTFecha FchChechInR4 = DTFecha(00, 14, 10, 5, 2022, 5);
 
-      DTFecha FchChechOutR1 = DTFecha(00, 10, 10, 5, 2022, 3);
-      DTFecha FchChechOutR2 = DTFecha(00, 2, 5, 1, 2001, 5);
-      DTFecha FchChechOutR3 = DTFecha(00, 11, 30, 6, 2022, 4);
-      DTFecha FchChechOutR4 = DTFecha(00, 11, 30, 6, 2022, 4);
+      DTFecha FchChechOutR1 = DTFecha(00, 10, 10, 4, 2022, 3);
+      DTFecha FchChechOutR2 = DTFecha(00, 2, 5, 0, 2001, 5);
+      DTFecha FchChechOutR3 = DTFecha(00, 11, 30, 5, 2022, 4);
+      DTFecha FchChechOutR4 = DTFecha(00, 11, 30, 5, 2022, 4);
 
       controladorReserva->crearReserva(HO1.getNombre(), FchChechInR1, FchChechOutR1, false);
       controladorReserva->asignarHabitacionAReserva(HA1->getNumero());
@@ -207,29 +237,29 @@ void cargarDatos(bool primeraVez)
       int posicion = controladorReserva->conocerTotatalReservas();
       DTFecha FechaActual = fechaSistema->getFecha();
       controladorEstadia->seleccionarHostal(HO1.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H1->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 18, 01, 05, 2022,6));
+      set<DTReserva *> eliminar1 = controladorEstadia->obtenerReservaHuesped(H1->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 18, 01, 4, 2022, 6));
       controladorEstadia->registrarEstadiaHuesped(posicion - 4);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H2->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      set<DTReserva *> eliminar2 = controladorEstadia->obtenerReservaHuesped(H2->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H3->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      set<DTReserva *> eliminar3 = controladorEstadia->obtenerReservaHuesped(H3->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H4->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      set<DTReserva *> eliminar4 = controladorEstadia->obtenerReservaHuesped(H4->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H5->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 21, 04, 01, 2001,4));
-      controladorEstadia->registrarEstadiaHuesped(posicion -3);
+      set<DTReserva *> eliminar5 = controladorEstadia->obtenerReservaHuesped(H5->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 21, 04, 0, 2001, 4));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 3);
       controladorEstadia->seleccionarHostal(HO3.getNombre());
-      controladorEstadia->obtenerReservaHuesped(H6->getEmail());
-      fechaSistema->setFecha(DTFecha(00, 18, 07, 06, 2022));
-      controladorEstadia->registrarEstadiaHuesped(posicion-1);  /// ! DA ERROR, Preguntar
+      set<DTReserva *> eliminar6 = controladorEstadia->obtenerReservaHuesped(H6->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 22, 10, 5, 2022, 5));
+      controladorEstadia->registrarEstadiaHuesped(posicion - 1);
       fechaSistema->setFecha(FechaActual);
 
       //----------------------------------------------------------------------------------------------------------------------
@@ -240,6 +270,23 @@ void cargarDatos(bool primeraVez)
       // ES1 H1 10/05/22 - 9am
       // ES2 H2 05/01/01 - 2am
       // ES6 H6 15/06/22 - 10pm
+      FechaActual = fechaSistema->getFecha();
+      controladorEstadia->seleccionarHostal(HO1.getNombre());
+      set<DTEstadia *> eliminar7 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H1->getEmail());
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 4);
+      fechaSistema->setFecha(DTFecha(00, 9, 10, 4, 2022, 2));
+      controladorEstadia->finalizarEstadia();
+      controladorEstadia->seleccionarHostal(HO3.getNombre());
+      set<DTEstadia *> eliminar8 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H2->getEmail());
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 3);
+      fechaSistema->setFecha(DTFecha(00, 14, 05, 0, 2001, 1));
+      controladorEstadia->finalizarEstadia();
+      controladorEstadia->seleccionarHostal(HO5.getNombre());
+      set<DTEstadia *> eliminar9 = controladorEstadia->buscarEstadiasAbiertasPorCorreo(H6->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 10, 15, 5, 2022, 3));
+      controladorEstadia->seleccionarUnEstadiaAFinalizar(posicion - 1);
+      fechaSistema->setFecha(FechaActual);
+
 
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
@@ -251,6 +298,27 @@ void cargarDatos(bool primeraVez)
       // C2 ES2 H2 "Se pone peligroso de noche, no  recomiendo. Además no hay caja fuerte para guardar anillos. " 2 05/01/01 - 3am
       // C3 ES6 H6 "Había pulgas en la habitación. Que lugar más mamarracho!!" 1 15/06/22 - topepm
 
+      FechaActual = fechaSistema->getFecha();
+      controladorEstadia->seleccionarHostal(HO1.getNombre());
+      set<DTEstadia *> eliminar10 = controladorEstadia->indicarEmail(H1->getEmail());
+      controladorEstadia->seleccionarEstadia(posicion - 4); // codigo de la reserva de la estadia
+      fechaSistema->setFecha(DTFecha(00, 18, 11, 4, 2022, 3));
+      controladorEstadia->ingresarCalificacion(3, "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba cayendo. No vuelvo.");
+      controladorEstadia->notificarNuevaCalificacion(); // por el momento no hace nada porque falta que Carolina agrege unas cosas
+      controladorEstadia->seleccionarHostal(HO3.getNombre());
+      set<DTEstadia *> eliminar11 = controladorEstadia->indicarEmail(H2->getEmail());
+      controladorEstadia->seleccionarEstadia(posicion - 3);
+      fechaSistema->setFecha(DTFecha(00, 3, 5, 0, 2001, 1));
+      controladorEstadia->ingresarCalificacion(2, "Se pone peligroso de noche, no  recomiendo. Además no hay caja fuerte para guardar anillos.");
+      controladorEstadia->notificarNuevaCalificacion();
+      controladorEstadia->seleccionarHostal(HO5.getNombre());
+      set<DTEstadia *> eliminar12 = controladorEstadia->indicarEmail(H6->getEmail());
+      controladorEstadia->seleccionarEstadia(posicion - 1);
+      fechaSistema->setFecha(DTFecha(00, 11, 15, 5, 2022, 3));
+      controladorEstadia->ingresarCalificacion(1, "Había pulgas en la habitación. Que lugar más mamarracho!!");
+      controladorEstadia->notificarNuevaCalificacion();
+      fechaSistema->setFecha(FechaActual);
+
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
       //----------------------------------------------------------------------------------------------------------------------
@@ -259,14 +327,84 @@ void cargarDatos(bool primeraVez)
       // Calificación Empleado Respuesta Fecha
       // C2 E4 "Desapareció y se fue sin pagar." 06/01/01 - 3pm
 
+      FechaActual = fechaSistema->getFecha();
+      set<DTCalificacion *> eliminar13 = controladorUsuario->obtenerComentariosSinResponderEmpleado(E4->getEmail());
+      fechaSistema->setFecha(DTFecha(00, 15, 06, 0, 2001, 2));
+      controladorUsuario->responderCalificacion(posicion - 3, H2->getEmail(), "Desapareció y se fue sin pagar.");
+      fechaSistema->setFecha(FechaActual);
+
       //----------------------------------------------------------------------------------------------------------------------
       progress(iter, tope, true);
       cout << endl;
-      presioneParaContinuar();
       //----------------------------------------------------------------------------------------------------------------------
+      //----------------------------------------------------------------------------------------------------------------------
+
+      // ! Liberar Memoria
+      delete HA1;
+      HA1 = nullptr;
+      delete HA2;
+      HA2 = nullptr;
+      delete HA3;
+      HA3 = nullptr;
+      delete HA4;
+      HA4 = nullptr;
+      delete HA5;
+      HA5 = nullptr;
+      delete HA6;
+      HA6 = nullptr;
+      delete E1;
+      E1 = nullptr;
+      delete E2;
+      E2 = nullptr;
+      delete E3;
+      E3 = nullptr;
+      delete E4;
+      E4 = nullptr;
+      delete H1;
+      H1 = nullptr;
+      delete H2;
+      H2 = nullptr;
+      delete H3;
+      H3 = nullptr;
+      delete H4;
+      H4 = nullptr;
+      delete H5;
+      H5 = nullptr;
+      delete H6;
+      H6 = nullptr;
+
+      freeSetReserva(eliminar1);
+      freeSetReserva(eliminar2);
+      freeSetReserva(eliminar3);
+      freeSetReserva(eliminar4);
+      freeSetReserva(eliminar5);
+      freeSetReserva(eliminar6);
+      freeSetEstadia(eliminar7);
+      freeSetEstadia(eliminar8);
+      freeSetEstadia(eliminar9);
+      freeSetEstadia(eliminar10);
+      freeSetEstadia(eliminar11);
+      freeSetEstadia(eliminar12);
+
+      for (auto it : eliminar13)
+      {
+         if (it != nullptr)
+         {
+            delete it;
+         }
+         it = nullptr;
+      }
+      eliminar13.clear();
+
+      controladorHostal = nullptr;
+      controladorReserva = nullptr;
+      controladorUsuario = nullptr;
+      controladorEstadia = nullptr;
+      fechaSistema = nullptr;
    }
    catch (exception const &e)
    {
-      cout << RED "Error: " << e.what() << NC << endl;
+      cout << RED "\n Error: " << e.what() << NC << endl;
    }
+   presioneParaContinuar();
 }

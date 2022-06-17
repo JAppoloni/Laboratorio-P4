@@ -25,9 +25,9 @@ public:
 	bool getPago() const;
 	void setPago(bool pago);
 	Estadia *getEstadiaReserva() const;
+	void setEstadia(Estadia* est);
 
 	// Methods
-	float calcularCosto();
 	void agregarEstadia(Estadia *estadia);
 	bool esReservaHostalHuesped(std::string email, std::string nombre);
 	DTReserva* getDataReserva();

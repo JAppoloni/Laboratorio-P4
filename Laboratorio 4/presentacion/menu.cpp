@@ -1,9 +1,4 @@
 #include "header/menu.hpp"
-#include "header/menuCargarDatos.hpp"
-#include <iostream>
-#include <string>
-
-using namespace std;
 
 string outputMenu()
 {
@@ -14,7 +9,7 @@ string outputMenu()
     cout << "Bienvenido a FingVMB, elija una opcion" << endl
          << endl;
 
-    cout << "0.  Cargar datos de prueba" << endl;
+    cout << "0.  Cargar Datos de Prueba" << endl;
     cout << "1.  Alta de Usuario" << endl;
     cout << "2.  Alta de Hostal" << endl;
     cout << "3.  Alta de Habitacion" << endl;
@@ -28,8 +23,12 @@ string outputMenu()
     cout << "11. Consulta de Usuario" << endl;
     cout << "12. Consulta de Hostal" << endl;
     cout << "13. Consulta de Reserva" << endl;
-    cout << "13. Consulta de Estadia" << endl;
-    cout << "14. Baja de reserva" << endl;
+    cout << "14. Consulta de Estadia" << endl;
+    cout << "15. Baja de reserva" << endl;
+    cout << "16. Suscribirse a Notificaciones" << endl;
+    cout << "17. Consulta de notificaciones" << endl;
+    cout << "18. Eliminar Subscripcion" << endl;
+    cout << "19. Modificar Fecha del Sistema" << endl;
     cout << "S.  Salir" << endl
          << endl;
 
@@ -50,11 +49,18 @@ void notImplementedMessage()
 void mainMenu()
 {
     bool exit = false;
-    bool primeraVez = true;
+    bool datosCargados = false;
 
     while (!exit)
     {
         string option = outputMenu();
+
+        if (option == "S" || option == "s")
+        {
+            exit = true;
+            break;
+        }
+
         int intOption;
 
         try
@@ -63,31 +69,24 @@ void mainMenu()
         }
         catch (exception const &excep)
         {
-            if (option == "S" || option == "s")
-            {
-                exit = true;
-                break;
-            }
-            else
-            {
-                intOption = -1;
-            }
+
+            intOption = -1;
         }
 
         switch (intOption)
         {
         case 0:
-            cargarDatos(primeraVez);
-            primeraVez = false;
+            cargarDatos(!datosCargados);
+            datosCargados = true;
             break;
         case 1:
-            notImplementedMessage();
+            menuAltaUsuario();
             break;
         case 2:
-            notImplementedMessage();
+            menuAltaHostal();
             break;
         case 3:
-            notImplementedMessage();
+            menuAltaHabitacion();
             break;
         case 4:
             notImplementedMessage();
@@ -96,7 +95,7 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 6:
-            notImplementedMessage();
+            menuTopTres();
             break;
         case 7:
             notImplementedMessage();
@@ -111,16 +110,34 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 11:
-            notImplementedMessage();
+            menuConsultaUsuario();
             break;
         case 12:
-            notImplementedMessage();
+            menuConsultaHostal();
             break;
         case 13:
             notImplementedMessage();
             break;
         case 14:
             notImplementedMessage();
+            break;
+        case 15:
+            menuBajaReserva();
+            break;
+        case 16:
+            notImplementedMessage();
+            break;
+        case 17:
+            notImplementedMessage();
+            break;
+        case 18:
+            notImplementedMessage();
+            break;
+        case 19:
+            notImplementedMessage();
+            break;
+        case 20:
+            menuImprimir();
             break;
         default:
             system("clear");
@@ -131,6 +148,9 @@ void mainMenu()
             break;
         }
     }
+
+    Fabrica fab = Fabrica();
+    fab.liberarMemoria();
 
     system("clear");
     cout << "Hasta luego!" << endl

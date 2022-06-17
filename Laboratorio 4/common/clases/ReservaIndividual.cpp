@@ -3,7 +3,7 @@
 // Constructors
 ReservaIndividual::ReservaIndividual()
 {
-	_estadiaReserva = NULL;
+	_estadiaReserva = nullptr;
 }
 
 ReservaIndividual::ReservaIndividual(int codigo, DTFecha CheckIn, DTFecha checkOut, Huesped *huespedReserva, EstadoReserva estado, Habitacion *habitacionReserva, bool pago)
@@ -15,17 +15,23 @@ ReservaIndividual::ReservaIndividual(int codigo, DTFecha CheckIn, DTFecha checkO
 	_estado = estado;
 	_habitacionReserva = habitacionReserva;
 	_pago = pago;
-	_estadiaReserva = NULL;
+	_estadiaReserva = nullptr;
 }
 
 // Destructor
 ReservaIndividual::~ReservaIndividual()
 {
-	_huespedReserva = nullptr;
-	_habitacionReserva = nullptr;
-	delete _estadiaReserva;
-	delete _huespedReserva;
-	delete _habitacionReserva;
+	if (_huespedReserva != nullptr)
+		_huespedReserva = nullptr;
+
+	if (_habitacionReserva != nullptr)
+		_habitacionReserva = nullptr;
+
+	if (_estadiaReserva != nullptr)
+	{
+		delete _estadiaReserva;
+		_estadiaReserva = nullptr;
+	}
 }
 
 // Getters / Setters
@@ -38,20 +44,20 @@ void ReservaIndividual::setPago(bool pago)
 	_pago = pago;
 }
 
+void ReservaIndividual::setEstadia(Estadia *est)
+{
+	_estadiaReserva = est;
+}
+
 Estadia *ReservaIndividual::getEstadiaReserva() const
 {
 	return _estadiaReserva;
 }
 
 // Methods
-float ReservaIndividual::calcularCosto()
-{
-	return _checkIn.diferenciaDias(_checkOut) * _habitacionReserva->getPrecio();
-}
-
 void ReservaIndividual::agregarEstadia(Estadia *estadia)
 {
-	if (_estadiaReserva != NULL)
+	if (_estadiaReserva != nullptr)
 		throw YAEXISTEESTADIA();
 	_estadiaReserva = estadia;
 }

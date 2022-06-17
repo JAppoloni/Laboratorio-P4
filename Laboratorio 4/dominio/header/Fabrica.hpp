@@ -14,6 +14,7 @@ class Fabrica{
         IControladorReserva * getControladorReserva();
         IControladorUsuario * getControladorUsuario();
         IFechaSistema * getFechaSistema();
+        void liberarMemoria();
 };
 
 #endif

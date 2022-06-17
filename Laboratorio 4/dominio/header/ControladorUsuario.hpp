@@ -3,23 +3,23 @@
 
 #include "IControladorUsuario.hpp"
 #include "ControladorHostal.hpp"
+#include "ControladorEstadia.hpp"
 
 using namespace std;
 
 class ControladorUsuario : public IControladorUsuario
 {
 private:
-    string nomHostalRecordado;
     static ControladorUsuario *instancia;
-    ControladorUsuario();
-
     map<string, Empleado *> empleados;
     map<string, Huesped *> huespedes;
+    ControladorUsuario();
 
 public:
     static ControladorUsuario *getInstancia();
 
     virtual void ingresarUsuario(DTUsuario *dataUsuario);
+    virtual bool confirmarEmailDisponible();
     virtual bool esEmailUsuario();
     virtual void cancelarAlta();
     virtual void reingresarEmail(string email);
@@ -31,11 +31,21 @@ public:
     virtual void cancelarAsignacion();
     virtual void confirmarAsignacionDeEmpleadoAHostal();
     virtual set<DTHuesped *> listarHuespedes();
+    virtual Huesped *getHuesped(string correo);
+    virtual set<DTCalificacion *> obtenerComentariosSinResponderEmpleado(string email);
+    virtual void responderCalificacion(int codigo, string email, string comentario);
+    void eliminarNotificacion(Calificacion *calif);
+    void eliminarComentarioEmpleado(Comentario *com);
+    virtual list<DTUsuario *> listarUsuarios();
+    DTUsuario *seleccionarUsuario(string email);
+    virtual void eliminarSuscripcion(string email);
+    virtual set<DTCalificacion *> listarNotificacionesEmpleado(string email);
+    virtual void suscribirseNotificacion(string email);
 
-    Huesped *getHuesped(string correo);
-    
-    //para pruebas
-    virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
+    virtual set<DTUsuario *> obtenerTodosLosUsuariosDelSistema();
+    virtual void liberarRegistros();
+
+    ~ControladorUsuario();
 };
 
 #endif

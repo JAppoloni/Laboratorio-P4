@@ -1,4 +1,3 @@
-
 #ifndef MENUCARGARDATOS_MENU_H
 #define MENUCARGARDATOS_MENU_H
 
@@ -7,20 +6,12 @@
 #include "utils.hpp"
 #include "menuImprimir.hpp"
 #include "../../common/clases/header/Cargo.hpp"
-// #include "../../common/datatype/header/DTEmpleado.hpp"
-// #include "../../common/datatype/header/DTHuesped.hpp"
-// #include "../../common/datatype/header/DTHostal.hpp"
-// #include "../../common/datatype/header/DTHabitacion.hpp"
 #include "../../dominio/header/Fabrica.hpp"
-// #include "../../dominio/header/IControladorEstadia.hpp"
-// #include "../../dominio/header/IControladorHostal.hpp"
-// #include "../../dominio/header/IControladorReserva.hpp"
-// #include "../../dominio/header/IControladorUsuario.hpp"
-// #include "../../dominio/header/IFechaSistema.hpp"
 
 using namespace std;
 
 
 void cargarDatos(bool primeraVez);
+void menuImprimir();
 
 #endif

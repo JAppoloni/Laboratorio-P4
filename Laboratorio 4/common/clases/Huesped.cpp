@@ -43,6 +43,10 @@ DTHuesped Huesped::getDatatype()
 }
 DTHuesped *Huesped::getDatatypeptr()
 {
-
   return new DTHuesped(this->nombre, this->contrasena, this->email, this->esFinger);
+}
+
+void Huesped::elimirarEstadia(Estadia *estadia)
+{
+  estadias.remove(estadia);
 }

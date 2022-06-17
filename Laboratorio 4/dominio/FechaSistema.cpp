@@ -43,6 +43,5 @@ void FechaSistema::setFecha(DTFecha fecha)
     time_t tiempoActual = time(0); // get time now
     tm *tiempo_en_TM = localtime(&tiempoActual);
     _tiepoActual = *tiempo_en_TM;
-
     this->_fecha = fecha;
 }

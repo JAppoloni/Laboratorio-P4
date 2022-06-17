@@ -64,9 +64,16 @@ public:
 	// Methods
 	DTCalificacion getCalificacionDataType();
 	bool esEstadiaCalificaicon(std::string email, int codigo);
+
+	/**
+	 * @brief Get the Finalizacion object
+	 * 
+	 * @return true si CheckOut es distinto de null
+	 * @return false  si CheckOut es null
+	 *
+	 */
 	bool getFinalizacion();
 	std::string obtenerAutor();
-	void notificarEstadia();
 	int obtenerID();
 	float calcularCosto();
 

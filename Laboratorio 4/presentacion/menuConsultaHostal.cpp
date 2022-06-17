@@ -24,7 +24,7 @@ void menuConsultaHostal()
 
     while (!seleccionCorrecta) {
         cout << endl << "Ingrese el nombre del hostal a consultar:" << endl;
-        cin >> nombreHostal;
+        nombreHostal = leerString();
 
         if (buscarNombreDeHostal(hostales, nombreHostal))
         {

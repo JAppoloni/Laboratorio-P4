@@ -26,7 +26,7 @@ void menuAltaHabitacion()
 
     while (!seleccionCorrecta) {
         cout << endl << "Ingrese el nombre del hostal al que se agregara la nueva habitacion:" << endl;
-        cin >> nombreHostal;
+        nombreHostal = leerString();
 
         if (buscarNombreDeHostal(hostales, nombreHostal))
         {

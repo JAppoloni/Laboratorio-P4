@@ -8,10 +8,8 @@ class ControladorHostal : public IControladorHostal
 {
 private:
     static ControladorHostal *instancia;
-    ControladorHostal();
-    string nomHostalRecordado;
-
     map<string, Hostal *> hostales;
+    ControladorHostal();
 
 public:
     static ControladorHostal *getInstancia();

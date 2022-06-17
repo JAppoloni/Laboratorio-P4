@@ -33,11 +33,9 @@ void Fabrica::liberarMemoria()
     IControladorReserva *controladorReserva = getControladorReserva();
     IControladorUsuario *controladorUsuario = getControladorUsuario();
     IControladorEstadia *controladorEstadia = getControladorEstadia();
-    IFechaSistema *fechaSistema = getFechaSistema();
-
+    
     controladorEstadia->liberarRegistros();
     controladorReserva->liberarRegistros();
     controladorHostal->liberarRegistros();
     controladorUsuario->liberarRegistros();
-    fechaSistema->liberarRegistros();
 }

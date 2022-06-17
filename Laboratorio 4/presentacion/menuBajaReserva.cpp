@@ -1,6 +1,7 @@
 
 #include "header/menuBajaReserva.hpp"
 #include <string>
+
 void menuBajaReserva()
 {
    Fabrica fabrica = Fabrica();
@@ -8,70 +9,94 @@ void menuBajaReserva()
    IControladorReserva *controladorReserva = fabrica.getControladorReserva();
    list<DTHostal *> listaHostales = contoraladoraHostal->obtenerHostales();
 
-   int minElem = 1;
-   int maxElem = 1;
-
-   cout << "Hostales: " << endl;
-   for (auto it : listaHostales)
+   if (listaHostales.empty())
    {
-      cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
-      maxElem++;
+      cout << "No hay hostales cargados" << endl;
    }
-   cout << "Ingrese el numero del hostal: ( " << RED << minElem << " - " << maxElem << NC << " )" << endl;
-   int numHostal = leerIntIntervalo(minElem, maxElem);
-
-   string nombreHostal;
-   for (auto it : listaHostales)
+   else
    {
-      if (minElem == maxElem)
+      int minElem = 1;
+      int maxElem = 0;
+
+      cout << "Hostales: " << endl;
+      for (auto it : listaHostales)
       {
-         nombreHostal = it->getNombre();
-         break;
+         maxElem++;
+         cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
       }
-      minElem++;
-   }
-   cout << "El hostal seleccionado es: " << nombreHostal << endl;
-   controladorReserva->seleccionarHostal(nombreHostal);
+      cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
 
-   set<DTReserva *> listaReservas = controladorReserva->listarReservas();
+      int numHostal = leerIntIntervalo(minElem, maxElem);
+      string nombreHostal;
 
-   minElem = 1;
-   maxElem = 1;
-   cout << "Reservas: " << endl;
-   for (auto it : listaReservas)
-   {
-      cout << GRN << maxElem << NC << ".  " << it->getCodigo() << endl;
-      maxElem++;
-   }
-   cout << "Ingrese el numero de la reserva: ( " << RED << minElem << " - " << maxElem << NC << " )" << endl;
-   int numReserva = leerIntIntervalo(minElem, maxElem);
-   string codigoReserva;
-   for (auto it : listaReservas)
-   {
-      if (minElem == maxElem)
+      for (auto it : listaHostales)
       {
-         codigoReserva = it->getCodigo();
-         break;
+         if (minElem == numHostal)
+         {
+            nombreHostal = it->getNombre();
+         }
+         minElem++;
+         delete it;
+         it = nullptr;
       }
-      minElem++;
+      listaHostales.clear();
+
+      cout << "El hostal seleccionado es: " << nombreHostal << endl;
+      controladorReserva->seleccionarHostal(nombreHostal);
+      set<DTReserva *> listaReservas = controladorReserva->listarReservas();
+
+      if (listaReservas.empty())
+      {
+         cout << "No hay Reservas cargadas" << endl;
+      }
+      else
+      {
+         minElem = 1;
+         maxElem = 0;
+         cout << "Reservas: " << endl;
+         for (auto it : listaReservas)
+         {
+            maxElem++;
+            cout << GRN << maxElem << NC << ".  " << it->getCodigo() << endl;
+         }
+
+         cout << "Ingrese el numero de la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :"; // << endl;
+         int numReserva = leerIntIntervalo(minElem, maxElem);
+         int codigoReserva;
+
+         for (auto it : listaReservas)
+         {
+            if (minElem == numReserva)
+            {
+               codigoReserva = it->getCodigo();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
+         }
+         listaReservas.clear();
+
+         cout << "La reserva seleccionada es: " << codigoReserva << endl;
+
+         controladorReserva->seleccionarReservaAEliminar(codigoReserva);
+
+         try
+         {
+            if (confirmarBaja())
+            {
+               controladorReserva->confirmarBaja();
+            }
+            else
+            {
+               controladorReserva->cancelarBaja();
+            }
+         }
+         catch (const std::exception &e)
+         {
+            std::cerr << RED "\n ERROR: " << e.what() << NC << '\n';
+         }
+         cin.ignore();
+      }
    }
-   cout << "La reserva seleccionada es: " << codigoReserva << endl;
-   controladorReserva->borrarReserva(codigoReserva);
+   presioneParaContinuar();
 }
-
-// //controlador hostal
-// list<DTHostal *> obtenerHostales()
-// //controlador reserva
-// void seleccionarHostal(string nom)
-// set<DTReserva *> listarReservas()
-// void seleccionarReservaAEliminar(int codigo)
-// void cancelarBaja()
-// void confirmarBaja()
-
-/*El caso de uso comienza cuando un usuario desea eliminar una reserva del sistema.
-Para ello, el sistema lista todos los hostales y el usuario selecciona uno de ellos. A
-continuación, el sistema retorna la lista de todas las reservas y el empleado selecciona
-la reserva que desea eliminar ingresando su código. El usuario indica si confirma la
-baja o cancela. En caso de confirmar, se elimina la reserva del sistema junto a toda la
-información asociada a ella, entre la que se encuentra las estadías, consumiciones y
-calificaciones asociadas.*/

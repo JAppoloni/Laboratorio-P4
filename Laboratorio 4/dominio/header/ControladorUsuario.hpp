@@ -7,46 +7,45 @@
 
 using namespace std;
 
-class ControladorUsuario: public IControladorUsuario
+class ControladorUsuario : public IControladorUsuario
 {
-    private:
-        static ControladorUsuario * instancia;
-        ControladorUsuario();
-        string nomHostalRecordado;
+private:
+    static ControladorUsuario *instancia;
+    map<string, Empleado *> empleados;
+    map<string, Huesped *> huespedes;
+    ControladorUsuario();
 
-        map<string, Empleado*> empleados;
-        map<string, Huesped*> huespedes;
-    public:
-        static ControladorUsuario * getInstancia();
+public:
+    static ControladorUsuario *getInstancia();
 
-        virtual void ingresarUsuario(DTUsuario * dataUsuario);
-        virtual bool confirmarEmailDisponible();
-        virtual bool esEmailUsuario();
-        virtual void cancelarAlta();
-        virtual void reingresarEmail(string email);
-        virtual void confirmarAlta();
-        virtual void seleccionarHostal(string nombre);
-        virtual set<DTEmpleado *> obtenerEmpleadosSinHsotal(); 
-        virtual void seleccionarEmpleado(string email);
-        virtual void seleccionarCargo(Cargo cargo); 
-        virtual void cancelarAsignacion();
-        virtual void confirmarAsignacionDeEmpleadoAHostal();
-        virtual set<DTHuesped*> listarHuespedes();
-        virtual Huesped* getHuesped(string correo);
-        virtual set<DTCalificacion*> obtenerComentariosSinResponderEmpleado(string email);
-        virtual void responderCalificacion(int codigo, string email, string comentario);
-        void eliminarNotificacion(Calificacion * calif);
-        void eliminarComentarioEmpleado(Comentario * com);
+    virtual void ingresarUsuario(DTUsuario *dataUsuario);
+    virtual bool confirmarEmailDisponible();
+    virtual bool esEmailUsuario();
+    virtual void cancelarAlta();
+    virtual void reingresarEmail(string email);
+    virtual void confirmarAlta();
+    virtual void seleccionarHostal(string nombre);
+    virtual set<DTEmpleado *> obtenerEmpleadosSinHsotal();
+    virtual void seleccionarEmpleado(string email);
+    virtual void seleccionarCargo(Cargo cargo);
+    virtual void cancelarAsignacion();
+    virtual void confirmarAsignacionDeEmpleadoAHostal();
+    virtual set<DTHuesped *> listarHuespedes();
+    virtual Huesped *getHuesped(string correo);
+    virtual set<DTCalificacion *> obtenerComentariosSinResponderEmpleado(string email);
+    virtual void responderCalificacion(int codigo, string email, string comentario);
+    void eliminarNotificacion(Calificacion *calif);
+    void eliminarComentarioEmpleado(Comentario *com);
+    virtual set<DTUsuario *> listarUsuarios();
+    DTUsuario *seleccionarUsuario(string email);
+    virtual void eliminarSuscripcion(string email);
+    virtual set<DTCalificacion *> listarNotificacionesEmpleado(string email);
+    virtual void suscribirseNotificacion(string email);
 
-        virtual set<DTUsuario *> listarUsuarios(); 
-        virtual void eliminarSuscripcion(string email);
-        virtual set<DTCalificacion*> listarNotificacionesEmpleado(string email);
-        virtual void suscribirseNotificacion(string email);
+    virtual set<DTUsuario *> obtenerTodosLosUsuariosDelSistema();
+    virtual void liberarRegistros();
 
-        virtual set<DTUsuario*> obtenerTodosLosUsuariosDelSistema();
-        virtual void liberarRegistros() ;
-
-        ~ControladorUsuario();
+    ~ControladorUsuario();
 };
 
 #endif

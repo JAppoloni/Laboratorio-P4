@@ -19,7 +19,6 @@ public:
     static FechaSistema *getInstancia();
     DTFecha getFecha();
     void setFecha(DTFecha fecha);
-    virtual void liberarRegistros();
 };
 
 #endif

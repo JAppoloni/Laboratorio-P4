@@ -11,10 +11,8 @@ class ControladorReserva : public IControladorReserva
 {
 private:
     static ControladorReserva *instancia;
-    ControladorReserva();
-
     map<int, Reserva *> reservas;
-    int contador_codigo;
+    ControladorReserva();
 
 public:
     static ControladorReserva *getInstancia();

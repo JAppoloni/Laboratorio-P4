@@ -25,6 +25,7 @@ public:
 	bool getPago() const;
 	void setPago(bool pago);
 	Estadia *getEstadiaReserva() const;
+	void setEstadia(Estadia* est);
 
 	// Methods
 	void agregarEstadia(Estadia *estadia);

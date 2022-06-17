@@ -1,5 +1,17 @@
 #include "header/ControladorEstadia.hpp"
 
+/*
+ * Variables de instancia
+ */
+int codResEstRecordado;
+int codigoResEstRecordado;
+string nomHosRecordado;
+string emailHuesRecordado;
+
+/*
+ * Variables de instancia
+ */
+
 ControladorEstadia *ControladorEstadia::instancia = nullptr;
 
 ControladorEstadia::ControladorEstadia() {}
@@ -13,14 +25,10 @@ ControladorEstadia *ControladorEstadia::getInstancia()
     return instancia;
 }
 
-string nomHosRecordado;
-
 void ControladorEstadia::seleccionarHostal(string nom)
 {
     nomHosRecordado = nom;
 }
-
-string emailHuesRecordado;
 
 set<DTReserva *> ControladorEstadia::obtenerReservaHuesped(string email)
 {
@@ -83,8 +91,6 @@ set<DTEstadia *> ControladorEstadia::buscarEstadiasAbiertasPorCorreo(string emai
     return res;
 }
 
-int codigoResEstRecordado;
-
 void ControladorEstadia::seleccionarUnEstadiaAFinalizar(int codigoResEst)
 {
     codigoResEstRecordado = codigoResEst;
@@ -99,8 +105,9 @@ void ControladorEstadia::finalizarEstadia()
             if (it->getReservaEstadia()->getCodigo() == codigoResEstRecordado && it->getHuespedEstadia()->getEmail() == emailHuesRecordado)
             {
                 FechaSistema *FS = FechaSistema::getInstancia();
-                DTFecha aux = new DTFecha(FS->getFecha());
+                DTFecha aux = DTFecha(FS->getFecha());
                 it->setChechOut(&aux);
+
                 break;
             }
         }
@@ -133,8 +140,6 @@ set<DTEstadia *> ControladorEstadia::indicarEmail(string email)
     return res;
 }
 
-int codResEstRecordado;
-
 void ControladorEstadia::seleccionarEstadia(int codigo)
 {
     codResEstRecordado = codigo;
@@ -158,9 +163,7 @@ void ControladorEstadia::ingresarCalificacion(int puntaje, string comentario)
     }
 }
 
-void ControladorEstadia::notificarNuevaCalificacion()
-{
-}
+void ControladorEstadia::notificarNuevaCalificacion() {}
 
 void ControladorEstadia::eliminarEstadia(Estadia *estadia)
 {
@@ -176,13 +179,9 @@ void ControladorEstadia::eliminarEstadia(Estadia *estadia)
         {
             ControladorUsuario *CU = ControladorUsuario::getInstancia();
             CU->eliminarComentarioEmpleado(estadia->getCalificacionEstadia()->getRespuestaComentario());
-            delete estadia->getCalificacionEstadia()->getRespuestaComentario();
         };
-
-        delete estadia->getCalificacionEstadia();
     }
     estadias.erase(estadia);
-    delete estadia;
 }
 
 Calificacion *ControladorEstadia::obtenerCalificacion(int codigo, string email)
@@ -249,9 +248,11 @@ void ControladorEstadia::seleccionarEstadia(DTEstadia *estadia)
 DTCalificacion ControladorEstadia::buscarCalificacion()
 {
 }
+
 DTComentario ControladorEstadia::buscarComentario()
 {
 }
+
 DTReserva *ControladorEstadia::buscarInformacionReserva()
 {
     Estadia *e;
@@ -275,6 +276,32 @@ void ControladorEstadia::liberarRegistros()
     {
         for (auto it : estadias)
         {
+            Reserva *itReserva = it->getReservaEstadia();
+
+            if (dynamic_cast<ReservaIndividual *>(itReserva) != nullptr)
+            {
+                ReservaIndividual *aux = dynamic_cast<ReservaIndividual *>(itReserva);
+                aux->setEstadia(nullptr);
+            }
+            else
+            {
+                ReservaGrupal *aux = dynamic_cast<ReservaGrupal *>(itReserva);
+                aux->setEstadia(it);
+            }
+
+            it->getHuespedEstadia()->elimirarEstadia(it);
+            if (it->getCalificacionEstadia() != nullptr)
+            {
+                ControladorUsuario *CU = ControladorUsuario::getInstancia();
+                CU->eliminarNotificacion(it->getCalificacionEstadia());
+                it->getReservaEstadia()->getHabitacionReserva()->getHostal()->eliminarCalificacion(it->getCalificacionEstadia());
+
+                if (it->getCalificacionEstadia()->getRespuestaComentario() != nullptr)
+                {
+                    ControladorUsuario *CU = ControladorUsuario::getInstancia();
+                    CU->eliminarComentarioEmpleado(it->getCalificacionEstadia()->getRespuestaComentario());
+                };
+            }
             delete it;
             it = nullptr;
         }
@@ -289,10 +316,5 @@ void ControladorEstadia::liberarRegistros()
             it = nullptr;
         }
         empleados.clear();
-    }
-
-    if (instancia != nullptr)
-    {
-        instancia = nullptr;
     }
 }

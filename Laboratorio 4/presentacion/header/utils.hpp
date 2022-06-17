@@ -44,4 +44,6 @@ void presioneParaContinuar();
 
 void printProgress(double percentage);
 
+bool confirmarBaja();
+
 #endif

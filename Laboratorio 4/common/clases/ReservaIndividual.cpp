@@ -44,6 +44,11 @@ void ReservaIndividual::setPago(bool pago)
 	_pago = pago;
 }
 
+void ReservaIndividual::setEstadia(Estadia *est)
+{
+	_estadiaReserva = est;
+}
+
 Estadia *ReservaIndividual::getEstadiaReserva() const
 {
 	return _estadiaReserva;

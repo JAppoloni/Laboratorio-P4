@@ -30,7 +30,7 @@ public:
     virtual void ingresarCalificacion(int puntaje, string comentario);
     virtual void notificarNuevaCalificacion();
     Calificacion *obtenerCalificacion(int codigo, string email);
-    void eliminarEstadia(Estadia * estadia);
+    void eliminarEstadia(Estadia *estadia);
 
     virtual set<DTHostal *> listarHostales();
     virtual set<DTEstadia *> listarEstadias();

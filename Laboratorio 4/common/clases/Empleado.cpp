@@ -14,8 +14,6 @@ Empleado::Observer::~Observer()
 {
 }
 
-
-
 std::list<Calificacion *> Empleado::getNotificaciones()
 {
   return Notificaciones;
@@ -98,7 +96,7 @@ DTEmpleado Empleado::getDatatype()
   return DTEmpleado(nombre, email, contrasena, cargo);
 }
 
-DTEmpleado* Empleado::getDatatypeptr()
+DTEmpleado *Empleado::getDatatypeptr()
 {
   return new DTEmpleado(nombre, email, contrasena, cargo);
 }
@@ -110,7 +108,7 @@ void Empleado::agregarNotificacion(Calificacion *c)
 
 void Empleado::agregarComentario(std::string comentario, Calificacion *c)
 {
-  Comentario * com = new Comentario(comentario, c);
+  Comentario *com = new Comentario(comentario, c);
   this->Comentarios.push_back(com);
   c->setRespuestaComentario(com);
 }
@@ -133,15 +131,17 @@ DTHostal Empleado::obtenerHostal()
   return DTHostal(this->getHostal()->getNombre(), this->getHostal()->getDireccion(), this->getHostal()->getTelefono());
 }
 
-void Empleado::eliminarNotificacion(Calificacion *c){
- Notificaciones.remove(c);
+void Empleado::eliminarNotificacion(Calificacion *c)
+{
+  Notificaciones.remove(c);
 }
 
-void Empleado::eliminarNotificaciones(){
- Notificaciones.clear();
+void Empleado::eliminarNotificaciones()
+{
+  Notificaciones.clear();
 }
 
-void Empleado::eliminarComentario(Comentario * com)
+void Empleado::eliminarComentario(Comentario *com)
 {
   Comentarios.remove(com);
 }

@@ -1,4 +1,12 @@
 #include "header/ControladorHostal.hpp"
+/*
+ * Variables de instancia
+ */
+DTHabitacion *habRecordada;
+string _nombreRecordado_Hostal_CHostal;
+/*
+ * Fin de variables de instancia
+ */
 
 ControladorHostal *ControladorHostal::instancia = nullptr;
 
@@ -50,10 +58,8 @@ list<DTHostal *> ControladorHostal::obtenerHostales()
 
 void ControladorHostal::buscarHostal(string nombre)
 {
-    nomHostalRecordado = nombre;
+    _nombreRecordado_Hostal_CHostal = nombre;
 }
-
-DTHabitacion *habRecordada;
 
 void ControladorHostal::nuevaHabitacion(int numero, int capacidad, float costo)
 {
@@ -62,14 +68,19 @@ void ControladorHostal::nuevaHabitacion(int numero, int capacidad, float costo)
 
 void ControladorHostal::crearHabitacion()
 {
-    Habitacion *nueva = new Habitacion(habRecordada->getNumero(), habRecordada->getPrecio(), habRecordada->getCapacidad(), hostales[nomHostalRecordado]);
-    hostales[nomHostalRecordado]->agregarHabitacion(nueva);
-    delete habRecordada;
+    Habitacion *nueva = new Habitacion(habRecordada->getNumero(), habRecordada->getPrecio(), habRecordada->getCapacidad(), hostales[_nombreRecordado_Hostal_CHostal]);
+    hostales[_nombreRecordado_Hostal_CHostal]->agregarHabitacion(nueva);
+    liberarMemoria();
 }
 
 void ControladorHostal::liberarMemoria()
 {
-    delete habRecordada;
+    _nombreRecordado_Hostal_CHostal = "";
+    if (habRecordada != nullptr)
+    {
+        delete habRecordada;
+        habRecordada = nullptr;
+    }
 }
 
 Hostal *ControladorHostal::getHostal(string nom)
@@ -197,9 +208,5 @@ void ControladorHostal::liberarRegistros()
         }
     }
     hostales.clear();
-
-    if (instancia != nullptr)
-    {
-        instancia = nullptr;
-    }
+    liberarMemoria();
 }

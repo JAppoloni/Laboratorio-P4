@@ -150,7 +150,7 @@ DTFecha DTFecha::operator+(const tm &fch)
     auxfch->tm_isdst = 0;
     auxfch->tm_gmtoff = 0;
     auxfch->tm_zone = nullptr;
-    time_t remover = mktime(auxfch); // Corregir Errores de formato de fecha
+    mktime(auxfch); // Corregir Errores de formato de fecha
 
     auxfch->tm_isdst = 0;
     auxfch->tm_gmtoff = 0;

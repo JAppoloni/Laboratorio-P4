@@ -1,10 +1,18 @@
 #include "header/ControladorUsuario.hpp"
 
+/*
+ * Variables de instancia
+ */
+
+string _nombreRecordado_Hostal_IUsuario;
 ControladorUsuario *ControladorUsuario::instancia = nullptr;
+
+/*
+ * Fin de variables de instancia
+ */
 
 ControladorUsuario::ControladorUsuario()
 {
-    nomHostalRecordado = "";
 }
 
 ControladorUsuario *ControladorUsuario::getInstancia()
@@ -84,17 +92,17 @@ bool ControladorUsuario::esEmailUsuario()
 
 void ControladorUsuario::seleccionarHostal(string nombre)
 {
-    nomHostalRecordado = nombre;
+    _nombreRecordado_Hostal_IUsuario = nombre;
 }
 
 set<DTEmpleado *> ControladorUsuario::obtenerEmpleadosSinHsotal()
 {
     set<DTEmpleado *> res;
-    for (map<string, Empleado *>::iterator it = empleados.begin(); it != empleados.end(); ++it)
+    for (auto it : empleados)
     {
-        if (it->second->getHostal() == nullptr)
+        if (it.second->getHostal() == nullptr)
         {
-            res.insert(new DTEmpleado(it->second->getNombre(), it->second->getContrasena(), it->second->getEmail(), it->second->getCargo()));
+            res.insert(new DTEmpleado(it.second->getNombre(), it.second->getContrasena(), it.second->getEmail(), it.second->getCargo()));
         };
     };
     return res;
@@ -122,27 +130,27 @@ void ControladorUsuario::confirmarAsignacionDeEmpleadoAHostal()
     if (empleados[emailEmpRecordado] == nullptr)
         throw invalid_argument("El empleado no existe");
 
-    empleados[emailEmpRecordado]->setHostal(CH->getHostal(nomHostalRecordado));
+    empleados[emailEmpRecordado]->setHostal(CH->getHostal(_nombreRecordado_Hostal_IUsuario));
     empleados[emailEmpRecordado]->setCargo(cargoRecordado);
 }
 
 set<DTHuesped *> ControladorUsuario::listarHuespedes()
 {
     set<DTHuesped *> res;
-    for (map<string, Huesped *>::iterator it = huespedes.begin(); it != huespedes.end(); ++it)
+    for (auto it : huespedes)
     {
-        res.insert(it->second->getDatatypeptr());
+        res.insert(it.second->getDatatypeptr());
     };
     return res;
 }
 
 Huesped *ControladorUsuario::getHuesped(string correo)
 {
-    for (map<string, Huesped *>::iterator it = huespedes.begin(); it != huespedes.end(); ++it)
+    for (auto it : huespedes)
     {
-        if (it->second->getEmail() == correo)
+        if (it.second->getEmail() == correo)
         {
-            return it->second;
+            return it.second;
         };
     };
     return nullptr;
@@ -151,13 +159,13 @@ Huesped *ControladorUsuario::getHuesped(string correo)
 set<DTUsuario *> ControladorUsuario::obtenerTodosLosUsuariosDelSistema()
 {
     set<DTUsuario *> res;
-    for (map<string, Huesped *>::iterator it = huespedes.begin(); it != huespedes.end(); ++it)
+    for (auto it : huespedes)
     {
-        res.insert(it->second->getDatatypeptr());
+        res.insert(it.second->getDatatypeptr());
     };
-    for (map<string, Empleado *>::iterator it = empleados.begin(); it != empleados.end(); ++it)
+    for (auto it : empleados)
     {
-        res.insert(new DTEmpleado(it->second->getNombre(), it->second->getContrasena(), it->second->getEmail(), it->second->getCargo()));
+        res.insert(new DTEmpleado(it.second->getNombre(), it.second->getContrasena(), it.second->getEmail(), it.second->getCargo()));
     };
     return res;
 }
@@ -184,20 +192,15 @@ void ControladorUsuario::liberarRegistros()
         }
     }
     empleados.clear();
-
-    if (instancia != nullptr)
-    {
-        instancia = nullptr;
-    }
 }
 set<DTCalificacion *> ControladorUsuario::obtenerComentariosSinResponderEmpleado(string EmailEMPLEADO)
 {
     emailEmpRecordado = EmailEMPLEADO;
-    for (map<string, Empleado *>::iterator it = empleados.begin(); it != empleados.end(); ++it)
+    for (auto it : empleados)
     {
-        if (it->second->getEmail() == EmailEMPLEADO)
+        if (it.second->getEmail() == EmailEMPLEADO)
         {
-            return it->second->getHostal()->obtenerComentariosSinResponder();
+            return it.second->getHostal()->obtenerComentariosSinResponder();
         };
     };
     set<DTCalificacion *> vacio;
@@ -248,40 +251,58 @@ set<DTCalificacion *> ControladorUsuario::listarNotificacionesEmpleado(string em
 {
     set<DTCalificacion *> res;
     Empleado *e = empleados.find(email)->second;
-    list<Calificacion *>::iterator it;
-    for (it = e->getNotificaciones().begin(); it != e->getNotificaciones().end(); ++it)
+
+    for (auto it : e->getNotificaciones())
     {
-        res.insert(new DTCalificacion((*it)->obtenerID(), (*it)->getEstadiaComentario()->getHuespedEstadia()->getEmail(), (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
+        res.insert(new DTCalificacion(it->obtenerID(), it->getEstadiaComentario()->getHuespedEstadia()->getEmail(), it->getPuntaje(), it->getFecha(), it->getComentario()));
     }
     e->eliminarNotificaciones();
     return res;
 }
 
-//listar usuarios
+// listar usuarios
 set<DTUsuario *> ControladorUsuario::listarUsuarios()
 {
     set<DTUsuario *> res;
-    for (map<string, Huesped *>::iterator it = huespedes.begin(); it != huespedes.end(); ++it)
+    for (auto it : huespedes)
     {
-        res.insert(it->second->getDatatypeptr());
+        res.insert(it.second->getDatatypeptr());
     };
-    for (map<string, Empleado *>::iterator it = empleados.begin(); it != empleados.end(); ++it)
+    for (auto it : empleados)
     {
-        res.insert(it->second->getDatatypeptr());
+        res.insert(it.second->getDatatypeptr());
     };
     return res;
 }
 
-void ControladorUsuario::eliminarNotificacion(Calificacion * calif)
+DTUsuario *ControladorUsuario::seleccionarUsuario(string email)
 {
-    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
-        it->second->eliminarNotificacion(calif);
+    if (empleados[email] != nullptr)
+    {
+        return empleados[email]->getDatatypeptr();
+    }
+    else if (huespedes[email])
+    {
+        return huespedes[email]->getDatatypeptr();
+    }
+    else
+    {
+        throw std::invalid_argument("no hay usuarios con ese email");
     }
 }
 
-void ControladorUsuario::eliminarComentarioEmpleado(Comentario * com)
+void ControladorUsuario::eliminarNotificacion(Calificacion *calif)
 {
-    for(map<string, Empleado*>::iterator it = empleados.begin(); it != empleados.end(); ++it){
-        it->second->eliminarComentario(com);
+    for (auto it : empleados)
+    {
+        it.second->eliminarNotificacion(calif);
+    }
+}
+
+void ControladorUsuario::eliminarComentarioEmpleado(Comentario *com)
+{
+    for (auto it : empleados)
+    {
+        it.second->eliminarComentario(com);
     }
 }

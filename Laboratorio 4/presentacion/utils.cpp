@@ -4,6 +4,35 @@
 #include <ostream>
 #include <regex>
 
+bool confirmarBaja()
+{
+   string confirmacion;
+   bool seleccionCorrecta = false;
+   while (!seleccionCorrecta)
+   {
+      cout << "Desea confirmar el alta? (S/N)" << endl;
+      cin >> confirmacion;
+
+      if (confirmacion != "S" && confirmacion != "s" && confirmacion != "N" && confirmacion != "n")
+      {
+         cout << "Seleccione una de las opciones disponibles." << endl;
+      }
+      else
+      {
+         seleccionCorrecta = true;
+      }
+   }
+
+   if (confirmacion == "S" || confirmacion == "s")
+   {
+     return true;
+   }
+   else
+   {
+     return false;
+   }
+}
+
 DTFecha ingresarFecha()
 {
    DTFecha rtn;

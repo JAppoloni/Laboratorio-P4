@@ -8,7 +8,6 @@ class IFechaSistema
 public:
     virtual DTFecha getFecha() = 0;
     virtual void setFecha(DTFecha fecha) = 0;
-    virtual void liberarRegistros() = 0;
 };
 
 #endif

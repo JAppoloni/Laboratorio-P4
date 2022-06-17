@@ -1,5 +1,5 @@
-#ifndef MENU_ALTA_USUARIO_H
-#define MENU_ALTA_USUARIO_H
+#ifndef MENU_BAJA_RESERVA_H
+#define MENU_BAJA_RESERVA_H
 
 #include "../../common/datatype/header/DTHostal.hpp"
 #include "../../dominio/header/Fabrica.hpp"

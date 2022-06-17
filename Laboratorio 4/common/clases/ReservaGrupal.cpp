@@ -51,6 +51,10 @@ void ReservaGrupal::setListaEstadia(std::list<Estadia *> listaEstadia)
 {
 	_listaEstadia = listaEstadia;
 }
+void ReservaGrupal::setEstadia(Estadia* est)
+{
+	_listaEstadia.remove(est);
+}
 
 std::list<Huesped *> ReservaGrupal::getListaHuesped() const
 {

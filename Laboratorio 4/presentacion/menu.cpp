@@ -95,7 +95,7 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 6:
-            notImplementedMessage();
+            menuTopTres();
             break;
         case 7:
             notImplementedMessage();
@@ -110,10 +110,10 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 11:
-            notImplementedMessage();
+            menuConsultaUsuario();
             break;
         case 12:
-            notImplementedMessage();
+            menuConsultaHostal();
             break;
         case 13:
             notImplementedMessage();

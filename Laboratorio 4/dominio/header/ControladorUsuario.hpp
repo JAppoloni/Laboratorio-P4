@@ -36,7 +36,7 @@ public:
     virtual void responderCalificacion(int codigo, string email, string comentario);
     void eliminarNotificacion(Calificacion *calif);
     void eliminarComentarioEmpleado(Comentario *com);
-    virtual set<DTUsuario *> listarUsuarios();
+    virtual list<DTUsuario *> listarUsuarios();
     DTUsuario *seleccionarUsuario(string email);
     virtual void eliminarSuscripcion(string email);
     virtual set<DTCalificacion *> listarNotificacionesEmpleado(string email);

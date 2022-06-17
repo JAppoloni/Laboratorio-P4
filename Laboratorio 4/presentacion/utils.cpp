@@ -110,6 +110,28 @@ string leerString()
    return cadena;
 }
 
+string cargoAString(Cargo cargo) 
+{
+   if (cargo == administracion) 
+   {
+      return "Administracion";
+   }
+   else if (cargo == limpieza)
+   {
+      return "Limpieza";
+   }
+   else if (cargo == recepcion)
+   {
+      return "Recepcion";
+   }
+   else if (cargo == infraestructura)
+   {
+      return "Infraestructura";
+   }
+
+   return "<VACIO>";
+}
+
 int leerInt()
 {
    int num;
@@ -285,4 +307,17 @@ void printProgress(double percentage)
    printf("\r%3d%% [%.*s%*s]", val, lpad, PBSTR, rpad, "");
    fflush(stdout);
    cout << NC;
+}
+
+bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre)
+{
+    for (list<DTHostal *>::iterator itr = hostales.begin(); itr != hostales.end(); itr++) 
+    {
+        if ((*itr)->getNombre() == nombre)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

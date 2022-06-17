@@ -261,16 +261,16 @@ set<DTCalificacion *> ControladorUsuario::listarNotificacionesEmpleado(string em
 }
 
 // listar usuarios
-set<DTUsuario *> ControladorUsuario::listarUsuarios()
+list<DTUsuario *> ControladorUsuario::listarUsuarios()
 {
-    set<DTUsuario *> res;
+    list<DTUsuario *> res;
     for (auto it : huespedes)
     {
-        res.insert(it.second->getDatatypeptr());
+        res.push_back(it.second->getDatatypeptr());
     };
     for (auto it : empleados)
     {
-        res.insert(it.second->getDatatypeptr());
+        res.push_back(it.second->getDatatypeptr());
     };
     return res;
 }

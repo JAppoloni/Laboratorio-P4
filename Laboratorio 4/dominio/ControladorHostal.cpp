@@ -150,24 +150,25 @@ list<DTHostal *> ControladorHostal::calcularTopTres()
         int contador = 0;
         for (auto it : topHostales)
         {
-            if (contador > 3)
+            if (contador >= 3)
                 break;
 
             DTHostal *nuevoHost = new DTHostal(it.getNombre(), it.getDireccion(), it.getTelefono(), it.getPromedioCalificaciones());
             topTresHostales.push_back(nuevoHost);
+            contador++;
         }
     }
     return topTresHostales;
 }
 
-set<DTCalificacion *> ControladorHostal::consultarHostal(string nom)
+list<DTCalificacion *> ControladorHostal::consultarHostal(string nom)
 {
-    set<DTCalificacion *> res;
+    list<DTCalificacion *> res;
 
     for (auto it : hostales[nom]->getCalificaciones())
     {
         DTCalificacion *nueva = new DTCalificacion(-1, "", it->getPuntaje(), it->getFecha(), it->getComentario());
-        res.insert(nueva);
+        res.push_back(nueva);
     }
     return res;
 }

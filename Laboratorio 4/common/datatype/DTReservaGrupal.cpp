@@ -13,11 +13,23 @@ DTReservaGrupal::DTReservaGrupal(int codigo, DTFecha checkIn, DTFecha checkOut, 
 DTReservaGrupal::~DTReservaGrupal()
 {
 	if (_listaHuesped != nullptr)
+	{
 		_listaHuesped->clear();
+		delete _listaHuesped;
+		_listaHuesped = nullptr;
+	}
 
-	delete _habitacion;
-	delete _huesped;
-	delete _listaHuesped;
+	if (_habitacion != nullptr)
+	{
+		delete _habitacion;
+		_habitacion = nullptr;
+	}
+
+	if (_huesped != nullptr)
+	{
+		delete _huesped;
+		_huesped = nullptr;
+	}
 }
 
 std::ostream &DTReservaGrupal::operator<<(std::ostream &out)
@@ -40,7 +52,7 @@ std::ostream &DTReservaGrupal::operator<<(std::ostream &out)
 	{
 		out << "Lista de huéspedes: " << std::endl;
 		for (auto it = _listaHuesped->begin(); it != _listaHuesped->end(); ++it)
-		{ // \t
+		{
 			out << "\t   "
 				 << it->getNombre() << "  " << it->getEmail() << " ,  Es FINGER: " << ((it->getEsFinger() == 0) ? " No " : " Sí ") << std::endl;
 		}

@@ -20,6 +20,14 @@ public:
 	// Getters / Setters
 	std::list<Estadia *> getListaEstadia() const;
 	void setListaEstadia(std::list<Estadia *> listaEstadia);
+	
+	/**
+	 * @brief Dada una estadía la elimina de la lista de estadías de la reserva.
+	 * 
+	 * @param estadia 
+	 */
+	void setEstadia(Estadia * estadia);
+	
 	std::list<Huesped *> getListaHuesped() const;
 	void setListaHuesped(std::list<Huesped *> listaHuesped);
 
@@ -30,7 +38,6 @@ public:
 	};
 
 	// Methods
-	float calcularCosto();
 	void agregarEstadia(Estadia* estadia);
 	bool esReservaHostalHuesped(std::string email, std::string nombre);
 	DTReserva* getDataReserva();

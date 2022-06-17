@@ -25,8 +25,16 @@ DTReservaIndividual::DTReservaIndividual(int codigo,
 // Destructor
 DTReservaIndividual::~DTReservaIndividual()
 {
-	delete _habitacion;
-	delete _huesped;
+	if (_habitacion != nullptr)
+	{
+		delete _habitacion;
+	}
+	if (_huesped != nullptr)
+	{
+		delete _huesped;
+	}
+	 _habitacion = nullptr;
+	 _huesped = nullptr;
 }
 
 // Operators

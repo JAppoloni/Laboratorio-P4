@@ -10,12 +10,13 @@
 #include "../../datatype/header/DTEmpleado.hpp"
 #include "../../datatype/header/DTHostal.hpp"
 #include "../../datatype/header/DTNotificacion.hpp"
+#include "../../../dominio/header/Observer.hpp"
 
 #include <set>
 #include <string>
 #include <list>
 
-class Empleado : public Usuario
+class Empleado : public Observer, public Usuario
 {
 private:
   Cargo cargo;
@@ -47,8 +48,13 @@ public:
 
   std::list<Calificacion> listarNotificaciones();
   std::list<DTCalificacion> obtenerComentariosSinResponder();
+  void eliminarNotificacion(Calificacion *c); 
+  void eliminarNotificaciones();
   DTEmpleado getDatatype();
+  DTEmpleado *getDatatypeptr();
   DTHostal obtenerHostal();
+  void eliminarComentario(Comentario * com);
+
 };
 
 #endif

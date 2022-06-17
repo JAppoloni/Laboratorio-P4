@@ -8,10 +8,8 @@ class ControladorHostal : public IControladorHostal
 {
 private:
     static ControladorHostal *instancia;
-    ControladorHostal();
-    string nomHostalRecordado;
-
     map<string, Hostal *> hostales;
+    ControladorHostal();
 
 public:
     static ControladorHostal *getInstancia();
@@ -28,8 +26,11 @@ public:
     Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
 
-    //para pruebas
+    // para pruebas
     virtual set<DTHostal *> listarTodosLosHostalesDelSistema();
+
+    // para eliminar datos
+    virtual void liberarRegistros();
 };
 
 #endif

@@ -49,13 +49,29 @@ Hostal::Hostal(std::string nombre, std::string direccion, std::string telefono)
 
 Hostal::~Hostal()
 {
+    for (auto it : this->listaHabitaciones)
+    {
+        if (it != nullptr)
+        {
+            delete it;
+            it = nullptr;
+        }
+    }
     listaHabitaciones.clear();
+
+    for (auto it : this->listaCalificaciones)
+    {
+        if (it != nullptr)
+        {
+            it = nullptr;
+        }
+    }
     listaCalificaciones.clear();
 }
 
 bool Hostal::operator==(const Hostal &hostal)
 {
-    return (nombre == hostal.nombre && direccion == hostal.direccion && telefono == hostal.telefono);
+    return (nombre == hostal.nombre);
 }
 
 Hostal &Hostal::operator=(const Hostal &assign)
@@ -64,28 +80,31 @@ Hostal &Hostal::operator=(const Hostal &assign)
     this->direccion = assign.direccion;
     this->telefono = assign.telefono;
     this->listaHabitaciones = assign.listaHabitaciones;
+    this->listaCalificaciones = assign.listaCalificaciones;
     return *this;
 }
 
-std::list<int> Hostal::obtenerComentariosSinResponder()
+std::set<DTCalificacion*> Hostal::obtenerComentariosSinResponder()
 {
-    std::list<int> idComentarios;
+    std::set<DTCalificacion*> res;
     std::list<Calificacion *>::iterator it;
     for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
     {
+        if((*it) == nullptr){
+            break;
+        }
         Calificacion *c = *it;
         if (!(c->estaResponida()))
         {
-            int id = c->obtenerID();
-            idComentarios.insert(idComentarios.begin(), id);
-        }
-    }
-    return idComentarios;
+            res.insert(new DTCalificacion((*it)->obtenerID(), (*it)->getEstadiaComentario()->getHuespedEstadia()->getEmail(), (*it)->getPuntaje(), (*it)->getFecha(), (*it)->getComentario()));
+        };
+    };
+    return res;
 }
 
 std::list<DTCalificacion> Hostal::obtenerCalificaciones()
 {
-    std::list<DTCalificacion> calificaciones; // {};
+    std::list<DTCalificacion> calificaciones;
     std::list<Calificacion *>::iterator it;
     for (it = listaCalificaciones.begin(); it != listaCalificaciones.end(); ++it)
     {
@@ -116,4 +135,14 @@ Habitacion *Hostal::getHabitacion(int num)
         };
     };
     return nullptr;
+}
+
+void Hostal::agregarCalificacion(Calificacion *calificacion)
+{
+    listaCalificaciones.push_back(calificacion);
+}
+
+void Hostal::eliminarCalificacion(Calificacion * calif)
+{
+    listaCalificaciones.remove(calif);
 }

@@ -16,14 +16,14 @@ DTUsuario* consultarUsuarioExiste(list<DTUsuario*> usuarios, string email)
 void menuConsultaUsuario()
 {
     IControladorUsuario* controlador = Fabrica().getControladorUsuario();
-    list<DTUsuario*> usuarios = controlador->obtenerTodosLosUsuariosDelSistema();
+    list<DTUsuario*> usuarios = controlador->listarUsuarios();
 
     system("clear");
     cout << "Listado de emails de usuarios del sistema: " << endl << endl;
 
-    for (list<DTUsuario*>::iterator itr = usuarios.begin(); itr != usuarios.end(); itr++) 
+    for (auto itr : usuarios) 
     {
-        cout << (*itr)->getEmail() << endl; // Aparentemente algunos usuarios tienen espacios al principio del mail
+        cout << itr->getEmail() << endl; // Aparentemente algunos usuarios tienen espacios al principio del mail
     }
 
     DTUsuario* usuarioSeleccionado;

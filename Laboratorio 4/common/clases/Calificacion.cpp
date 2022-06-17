@@ -8,7 +8,6 @@ void Calificacion::ValidarPuntaje(int puntaje)
 	}
 }
 
-
 Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, Estadia *estadiaComentario)
 {
 	ValidarPuntaje(puntaje);
@@ -16,14 +15,20 @@ Calificacion::Calificacion(int puntaje, std::string comentario, DTFecha fecha, E
 	_comentario = comentario;
 	_fecha = fecha;
 	_estadiaComentario = estadiaComentario;
-	_respuestaComentario = NULL;
+	_respuestaComentario = nullptr;
 }
 
 // Destructor
 Calificacion::~Calificacion()
 {
-	_estadiaComentario = nullptr;
-	delete _respuestaComentario;
+	if (_estadiaComentario != nullptr)
+		_estadiaComentario = nullptr;
+
+	if (_respuestaComentario != nullptr)
+	{
+		delete _respuestaComentario;
+		_respuestaComentario = nullptr;
+	}
 }
 
 bool Calificacion::operator==(const Calificacion &assign)
@@ -86,7 +91,7 @@ const char *Calificacion::OutOfRange::what() const throw()
 // Methods
 DTCalificacion Calificacion::getDataType()
 {
-	return DTCalificacion(this->obtenerID(), _estadiaComentario->getHuespedEstadia()->getEmail(), _puntaje, _fecha, _comentario,_respuestaComentario->getComentario());
+	return DTCalificacion(this->obtenerID(), _estadiaComentario->getHuespedEstadia()->getEmail(), _puntaje, _fecha, _comentario, _respuestaComentario->getComentario());
 }
 
 int Calificacion::obtenerID()
@@ -96,5 +101,6 @@ int Calificacion::obtenerID()
 
 bool Calificacion::estaResponida()
 {
-	return this->getRespuestaComentario() != NULL;
+	return this->getRespuestaComentario() != nullptr;
 }
+

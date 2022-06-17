@@ -11,24 +11,20 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 			bool existe = false;
 			ReservaGrupal *reserva = dynamic_cast<ReservaGrupal *>(reservaEstadia);
 
-			if ((reserva->getHuespedReserva() == huesped) || (*reserva->getListaHuesped().end()) == huesped || (*reserva->getListaHuesped().begin() == huesped))
+			if (reserva->getHuespedReserva() == huesped)
 				existe = true;
 
-			if (existe == false)
+			if (!existe)
 			{
-				int tope = 0;
-				int lstElem = reserva->getListaHuesped().size();
-				for (std::list<Huesped *>::iterator it = reserva->getListaHuesped().begin(); it != reserva->getListaHuesped().end(); it++)
+				for (auto it : reserva->getListaHuesped())
 				{
-					if ((*it) == huesped)
+					if (it == huesped)
 					{
 						existe = true;
 						break;
 					}
-					if (tope > lstElem)
-						break;
-					tope++;
 				}
+				reserva = nullptr;
 
 				if (existe == false)
 					throw HuesedNoExiste();
@@ -37,7 +33,10 @@ void Estadia::ValidarEstadia(DTFecha checkIn, Reserva *reservaEstadia, Huesped *
 		else
 		{
 			ReservaIndividual *reserva = dynamic_cast<ReservaIndividual *>(reservaEstadia);
-			if (reserva->getHuespedReserva() != huesped)
+			bool Noexiste = (reserva->getHuespedReserva() != huesped);
+			reserva = nullptr;
+
+			if (Noexiste)
 				throw HuesedNoExiste();
 		}
 	}
@@ -62,11 +61,23 @@ Estadia::Estadia(DTFecha checkIn, std::string promo, Reserva *reservaEstadia, Hu
 // Destructor
 Estadia::~Estadia()
 {
-	_reservaEstadia = nullptr;
-	_huespedEstadia = nullptr;
+	if (_calificacionEstadia != nullptr)
+	{
+		delete _calificacionEstadia;
+		_calificacionEstadia = nullptr;
+	}
 
-	delete _checkOut;
-	delete _calificacionEstadia;
+	if (_checkOut != nullptr)
+	{
+		delete _checkOut;
+		_checkOut = nullptr;
+	}
+
+	if (_reservaEstadia != nullptr)
+		_reservaEstadia = nullptr;
+
+	if (_huespedEstadia != nullptr)
+		_huespedEstadia = nullptr;
 }
 
 // Operators
@@ -92,7 +103,7 @@ DTFecha *Estadia::getChechOut() const
 }
 void Estadia::setChechOut(DTFecha *chechOut)
 {
-	_checkOut = chechOut;
+	_checkOut = new DTFecha(chechOut);
 }
 
 std::string Estadia::getPromo() const
@@ -179,7 +190,7 @@ int Estadia::obtenerID()
 
 float Estadia::calcularCosto()
 {
-	if (_checkOut == NULL)
+	if (_checkOut == nullptr)
 	{
 		throw NOEXISTECHECKOUT();
 		return 0;
@@ -194,8 +205,4 @@ void Estadia::setCalificacionEstadia(Calificacion *calificacionEstadia)
 {
 	// ! Notificar
 	_calificacionEstadia = calificacionEstadia;
-}
-
-void Estadia::notificarEstadia() // ! VER
-{
 }

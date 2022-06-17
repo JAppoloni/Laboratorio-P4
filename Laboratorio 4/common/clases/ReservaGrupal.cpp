@@ -19,10 +19,26 @@ ReservaGrupal::ReservaGrupal(int codigo, DTFecha CheckIn, DTFecha checkOut, Hues
 // Destructor
 ReservaGrupal::~ReservaGrupal()
 {
-	_huespedReserva = nullptr;
-	_habitacionReserva = nullptr;
-	_listaEstadia.clear();
+	if (_huespedReserva != nullptr)
+		_huespedReserva = nullptr;
+
+	if (_habitacionReserva != nullptr)
+		_habitacionReserva = nullptr;
+
+	for (auto it : _listaHuesped)
+	{
+		if (it != nullptr)
+			it = nullptr;
+	}
 	_listaHuesped.clear();
+
+	for (auto it : _listaEstadia)
+	{
+		if (it != nullptr)
+			delete it;
+		it = nullptr;
+	}
+	_listaEstadia.clear();
 }
 
 // Getters / Setters
@@ -34,6 +50,10 @@ std::list<Estadia *> ReservaGrupal::getListaEstadia() const
 void ReservaGrupal::setListaEstadia(std::list<Estadia *> listaEstadia)
 {
 	_listaEstadia = listaEstadia;
+}
+void ReservaGrupal::setEstadia(Estadia* est)
+{
+	_listaEstadia.remove(est);
 }
 
 std::list<Huesped *> ReservaGrupal::getListaHuesped() const
@@ -52,22 +72,16 @@ const char *ReservaGrupal::YAEXISTEHUESPED::what() const throw()
 }
 
 // Methods
-float ReservaGrupal::calcularCosto() // VER.
-{
-	return _checkIn.diferenciaDias(_checkOut) * _habitacionReserva->getPrecio();
-}
 
 void ReservaGrupal::agregarEstadia(Estadia *estadia)
 {
 	Huesped *huesped = estadia->getHuespedEstadia();
 
-	if (_listaEstadia.begin() == _listaEstadia.end() && _listaEstadia.empty() != true && huesped == (*_listaEstadia.end())->getHuespedEstadia())
-		throw YAEXISTEHUESPED();
-	else
+	if (_listaEstadia.size() != 0)
 	{
-		for (std::list<Estadia *>::iterator it = _listaEstadia.begin(); it != _listaEstadia.end(); ++it)
+		for (auto it : _listaEstadia)
 		{
-			if ((*it)->getHuespedEstadia() == huesped)
+			if (it->getHuespedEstadia() == huesped)
 			{
 				throw YAEXISTEHUESPED();
 				break;
@@ -79,37 +93,32 @@ void ReservaGrupal::agregarEstadia(Estadia *estadia)
 	{
 		bool existeHuesped = false;
 
-		if (_listaHuesped.begin() == _listaHuesped.end() && huesped == *_listaHuesped.end())
-			throw YAEXISTEHUESPED();
-		else
+		for (auto it : _listaHuesped)
 		{
-			for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+			if (it == huesped)
 			{
-				if ((*it) == huesped)
-				{
-					existeHuesped = true;
-					break;
-				}
+				existeHuesped = true;
+				break;
 			}
 		}
-		if (existeHuesped == false)
+
+		if (!existeHuesped)
 			throw NOEXISTEHUESPED();
 	}
 	_listaEstadia.push_back(estadia);
-	// _listaEstadia.push_back(estadia);
 }
 
-bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre)
+bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombreHostal)
 {
-	if (_habitacionReserva->getHostal()->getNombre() == nombre)
+	if (_habitacionReserva->getHostal()->getNombre() == nombreHostal)
 	{
 		if (_huespedReserva->getEmail() == email)
 		{
 			return true;
 		};
-		for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+		for (auto it : _listaHuesped)
 		{
-			if ((*it)->getEmail() == email)
+			if (it->getEmail() == email)
 			{
 				return true;
 			};
@@ -121,16 +130,16 @@ bool ReservaGrupal::esReservaHostalHuesped(std::string email, std::string nombre
 DTReserva *ReservaGrupal::getDataReserva()
 {
 	std::list<DTHuesped> *listaHuespedes = new std::list<DTHuesped>;
-	for (std::list<Huesped *>::iterator it = _listaHuesped.begin(); it != _listaHuesped.end(); ++it)
+	for (auto it : _listaHuesped)
 	{
-		listaHuespedes->push_back((*it)->getDatatype());
+		listaHuespedes->push_back(it->getDatatype());
 	}
 
 	return new DTReservaGrupal(_codigo,
 										_checkIn,
 										_checkOut,
 										_estado,
-										calcularCosto(),
+										this->calcularCosto(),
 										new DTHabitacion(_habitacionReserva->getNumero(), _habitacionReserva->getPrecio(), _habitacionReserva->getCapacidad()),
 										_huespedReserva->getDatatypeptr(),
 										listaHuespedes);

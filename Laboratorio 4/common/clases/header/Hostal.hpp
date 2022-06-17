@@ -7,6 +7,7 @@
 #include "../../datatype/header/DTHostal.hpp"
 #include "../../datatype/header/DTCalificacion.hpp"
 #include <list>
+#include <set>
 
 class Calificacion;
 class Habitacion;
@@ -34,6 +35,7 @@ public:
    void setDireccion(std::string direccion);
    void setTelefono(std::string telefono);
    void agregarHabitacion(Habitacion *habitacion);
+   void agregarCalificacion(Calificacion *calificacion);
    Habitacion *getHabitacion(int num);
 
    // Operadores
@@ -42,8 +44,9 @@ public:
 
    std::list<DTCalificacion> obtenerCalificaciones();
    DTHostal getDatatype();
+   void eliminarCalificacion(Calificacion * calif);
    // getDatatypeCompleto(): DTHostal
-   std::list<int> obtenerComentariosSinResponder(); // set(<IDReserva>)
+   std::set<DTCalificacion*> obtenerComentariosSinResponder();
 };
 
 #endif

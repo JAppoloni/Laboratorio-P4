@@ -107,7 +107,7 @@ void mainMenu()
             menuCalificarEstadia();
             break;
         case 10:
-            notImplementedMessage();
+            menuComentarCalificacion();
             break;
         case 11:
             menuConsultaUsuario();

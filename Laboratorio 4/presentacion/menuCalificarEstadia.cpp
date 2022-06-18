@@ -120,6 +120,15 @@ void menuCalificarEstadia()
     {
         cout << "El puntaje ingresado es invalido. Presione enter para continuar." << endl;
         cin.ignore();
+        for (auto hostal : hostales)
+        {
+            delete hostal;
+        }
+
+        for (auto estadia : estadias)
+        {
+            delete estadia;
+        }
         return;
     }
 
@@ -127,4 +136,17 @@ void menuCalificarEstadia()
 
     cout << "Calificacion ingresada satisfactoriamente" << endl;
     cin.ignore();
+
+    for (auto hostal : hostales)
+    {
+        delete hostal;
+    }
+    hostales.clear();
+
+    for (auto estadia : estadias)
+    {
+        delete estadia;
+    }
+    estadias.clear();
+    estadiaSeleccionada = nullptr;
 }

@@ -70,4 +70,10 @@ void menuComentarCalificacion()
 
     cout << "Respuesta ingresada correctamente. Presione enter para continuar." << endl;
     cin.ignore();
+
+    for (auto cal : calificaciones)
+    {
+        delete cal;
+    }
+    calificaciones.clear();
 }

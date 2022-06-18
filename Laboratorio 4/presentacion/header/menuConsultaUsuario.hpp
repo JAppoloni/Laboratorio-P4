@@ -4,7 +4,7 @@
 #include "../../dominio/header/Fabrica.hpp"
 #include "../../common/datatype/header/DTEmpleado.hpp"
 #include "../../common/datatype/header/DTHuesped.hpp"
-#include "../../presentacion/header/utils.hpp"
+#include "utils.hpp"
 
 void menuConsultaUsuario();
 

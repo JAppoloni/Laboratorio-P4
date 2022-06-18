@@ -104,4 +104,10 @@ void menuAltaHabitacion()
 
     cin.ignore();
     cin.ignore(1000, '\n');
+
+    for (auto hostal : hostales)
+    {
+        delete hostal;
+    }
+    hostales.clear();
 }

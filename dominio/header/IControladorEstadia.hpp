@@ -24,12 +24,11 @@ public:
     virtual void ingresarCalificacion(int puntaje, string comentario) = 0;      // calificar estadia
     virtual void notificarNuevaCalificacion() = 0;                              // calificar estadia
 
-    virtual set<DTHostal *> listarHostales() = 0;            // Consulta de Estadia
     virtual set<DTEstadia *> listarEstadias() = 0;           // Consulta de Estadia
-    virtual void seleccionarEstadia(DTEstadia *estadia) = 0; // Consulta de Estadia
-    virtual DTCalificacion buscarCalificacion() = 0;         // Consulta de Estadia
-    virtual DTComentario buscarComentario() = 0;             // Consulta de Estadia
-    virtual DTReserva *buscarInformacionReserva() = 0;       // Consulta de Estadia
+    virtual void seleccionarEstadia(int id, string email) = 0; // Consulta de Estadia
+    virtual DTCalificacion* buscarCalificacion() = 0;         // Consulta de Estadia
+    virtual DTComentario* buscarComentario() = 0;             // Consulta de Estadia
+    virtual DTReserva*buscarInformacionReserva() = 0;       // Consulta de Estadia
     virtual void liberarMemoria() = 0;                       // Consulta de Estadia
                                        // para notificaciones
     virtual void eliminar(Observer *o) = 0; // eliminar observador

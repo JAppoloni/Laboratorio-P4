@@ -306,3 +306,16 @@ void ControladorUsuario::eliminarComentarioEmpleado(Comentario *com)
         it.second->eliminarComentario(com);
     }
 }
+
+set<DTEmpleado*> ControladorUsuario::listarEmpleados()
+{
+    set<DTEmpleado*> res; 
+    if(!empleados.empty())
+    {
+        for(auto it : empleados)
+        {
+            res.insert(new DTEmpleado(it.second->getNombre(), it.second->getContrasena(), it.second->getEmail(), it.second->getCargo()));
+        }
+    }
+    return res;
+}

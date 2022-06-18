@@ -126,6 +126,7 @@ void menuAltaUsuario()
         if (email == "c" || email == "C")
         {
             controlador->cancelarAlta();
+            delete dataUsuario;
             return;
         }
     }
@@ -163,4 +164,7 @@ void menuAltaUsuario()
     cout << endl << "Presione enter para continuar." << endl << endl;
     cin.ignore();
     cin.ignore(1000, '\n');
+
+    delete dataUsuario;
+    dataUsuario = nullptr;
 }

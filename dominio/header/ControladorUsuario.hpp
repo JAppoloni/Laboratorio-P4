@@ -39,6 +39,7 @@ public:
     virtual list<DTUsuario *> listarUsuarios();
     DTUsuario *seleccionarUsuario(string email);
     virtual void eliminarSuscripcion(string email);
+    virtual set<DTEmpleado*> listarEmpleados();
     virtual set<DTCalificacion *> listarNotificacionesEmpleado(string email);
     virtual void suscribirseNotificacion(string email);
 

@@ -40,7 +40,7 @@ void menuTopTres()
     while (!seleccionCorrecta) 
     {
         cout << "Ingrese el nombre de uno de los hostales para obtener sus datos, o [C] para cancelar:" << endl;
-        cin >> nombreHostal;
+        nombreHostal = leerString();
 
         if (nombreHostal == "c" || nombreHostal == "C")
         {
@@ -52,8 +52,8 @@ void menuTopTres()
             list<DTCalificacion*> calificaciones = controlador->consultarHostal(nombreHostal);
             for (list<DTCalificacion*>::iterator itr = calificaciones.begin(); itr != calificaciones.end(); itr++)
             {
-                cout << "calificacion" << endl;
-                delete (*itr);
+                cout << **itr << endl;
+                delete *itr;
             }
         }
         else
@@ -62,8 +62,9 @@ void menuTopTres()
         }
     }
 
-    for (list<DTHostal*>::iterator itr = topTres.begin(); itr != topTres.end(); itr++)
+    for (auto hostal : topTres)
     {
-        delete (*itr);
+        delete hostal;
     }
+    topTres.clear();
 }

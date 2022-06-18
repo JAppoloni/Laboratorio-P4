@@ -10,7 +10,7 @@ bool confirmarBaja()
    bool seleccionCorrecta = false;
    while (!seleccionCorrecta)
    {
-      cout << "Desea confirmar el alta? (S/N)" << endl;
+      cout << "Desea confirmar la baja? (S/N)" << endl;
       cin >> confirmacion;
 
       if (confirmacion != "S" && confirmacion != "s" && confirmacion != "N" && confirmacion != "n")

@@ -11,6 +11,12 @@
 #include "menuConsultaUsuario.hpp"
 #include "menuConsultaHostal.hpp"
 #include "menuTopTres.hpp"
+#include "menuModificarFechaSistema.hpp"
+#include "menuEliminarSuscripcion.hpp"
+#include "menuSuscribirseANotificacion.hpp"
+#include "menuConsultaNotificaciones.hpp"
+#include "menuCalificarEstadia.hpp"
+#include "menuComentarCalificacion.hpp"
 #include <stdlib.h>
 #include <string>
 #include <iostream>

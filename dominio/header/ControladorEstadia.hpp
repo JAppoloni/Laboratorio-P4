@@ -14,7 +14,7 @@ class ControladorEstadia : public IControladorEstadia
 private:
     static ControladorEstadia *instancia;
     ControladorEstadia();
-    set<Observer *> empleados;
+    set<Observer *> empleados; //Empleados suscriptos
     set<Estadia *> estadias;
 
 public:
@@ -32,12 +32,11 @@ public:
     Calificacion *obtenerCalificacion(int codigo, string email);
     void eliminarEstadia(Estadia *estadia);
 
-    virtual set<DTHostal *> listarHostales();
     virtual set<DTEstadia *> listarEstadias();
-    virtual void seleccionarEstadia(DTEstadia *estadia);
-    virtual DTCalificacion buscarCalificacion();
-    virtual DTComentario buscarComentario();
-    virtual DTReserva *buscarInformacionReserva();
+    virtual void seleccionarEstadia(int id, string email);
+    virtual DTCalificacion* buscarCalificacion();
+    virtual DTComentario* buscarComentario();
+    virtual DTReserva* buscarInformacionReserva();
     virtual void liberarMemoria();
     virtual void eliminar(Observer *o);
     virtual void agregar(Observer *o);

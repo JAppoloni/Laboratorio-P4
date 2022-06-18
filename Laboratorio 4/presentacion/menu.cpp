@@ -104,7 +104,7 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 9:
-            notImplementedMessage();
+            menuCalificarEstadia();
             break;
         case 10:
             notImplementedMessage();

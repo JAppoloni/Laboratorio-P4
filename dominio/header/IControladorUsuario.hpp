@@ -32,7 +32,8 @@ public:
     virtual void responderCalificacion(int codigo, string email, string comentario) = 0;    // comentar calificacion
     virtual list<DTUsuario *> listarUsuarios() = 0;                                          // consulta usuario
     virtual DTUsuario * seleccionarUsuario(string email) = 0;                               // consulta usuario
-    virtual void eliminarSuscripcion(string email) = 0;                                     // eliminar suscripcion
+    virtual void eliminarSuscripcion(string email) = 0;                                     // eliminar suscripcion; suscribirse a notificacion
+    virtual set<DTEmpleado*> listarEmpleados() = 0;                                          // eliminar suscripcion
     virtual set<DTCalificacion *> listarNotificacionesEmpleado(string email) = 0;           // listar Notificaciones Empleado
     virtual void suscribirseNotificacion(string email) = 0;                                 // suscribirse a notificacion
     // para pruebas

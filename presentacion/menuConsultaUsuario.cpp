@@ -60,4 +60,12 @@ void menuConsultaUsuario()
     cout << endl << "Presione enter para continuar." << endl;
     cin.ignore();
     cin.ignore(1000, '\n');
+
+    for (auto usuario : usuarios)
+    {
+        delete usuario;
+    }
+    usuarios.clear();
+    empleado = nullptr;
+    huesped = nullptr;
 }

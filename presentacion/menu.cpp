@@ -110,7 +110,7 @@ void mainMenu()
             menuCalificarEstadia();
             break;
         case 10:
-            notImplementedMessage();
+            menuComentarCalificacion();
             break;
         case 11:
             menuConsultaUsuario();
@@ -128,16 +128,16 @@ void mainMenu()
             menuBajaReserva();
             break;
         case 16:
-            notImplementedMessage();
+            suscribirseANotificacion();
             break;
         case 17:
-            notImplementedMessage();
+            consultaNotificaciones();
             break;
         case 18:
-            notImplementedMessage();
+            eliminarSuscripcion();
             break;
         case 19:
-            notImplementedMessage();
+            modificarFechaSistema();
             break;
         case 20:
             menuImprimir();

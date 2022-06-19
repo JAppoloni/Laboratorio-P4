@@ -35,96 +35,129 @@ void menuCalificarEstadia()
 
     if (hostales.empty()) 
     {
-        cout << "No hay hostales disponibles. Presione enter para continuar.";
-        cin.ignore(1000, '\n');
-        return;
+        cout << "No hay hostales disponibles.";
     }
-
-    string nombreHostal;
-    bool seleccionCorrecta = false;
-
-    while (!seleccionCorrecta) 
+    else
     {
-        cout << endl << "Ingrese el nombre del hostal a consultar:" << endl;
-        nombreHostal = leerString();
+        string nombreHostal;
+        bool seleccionCorrecta = false;
 
-        if (buscarNombreDeHostal(hostales, nombreHostal))
+        while (!seleccionCorrecta) 
         {
-            seleccionCorrecta = true;
+            cout << endl << "Ingrese el nombre del hostal a consultar:" << endl;
+            nombreHostal = leerString();
+
+            if (buscarNombreDeHostal(hostales, nombreHostal))
+            {
+                seleccionCorrecta = true;
+            }
+            else
+            {
+                cout << "No existe un hostal con el nombre seleccionado." << endl;
+            }
         }
-        else
+
+        IControladorEstadia* controladorEstadia = fabrica.getControladorEstadia();
+        controladorEstadia->seleccionarHostal(nombreHostal);
+
+        cout << endl << "Emails de los huespedes en el sitema: " << endl;
+
+        IControladorUsuario* CU = fabrica.getControladorUsuario();
+        set<DTHuesped*> huespedes = CU->listarHuespedes();
+
+        for(auto it : huespedes)
         {
-            cout << "No existe un hostal con el nombre seleccionado." << endl;
+        cout << it->getEmail() << endl;
         }
-    }
+        
+        string email;
+        cout << endl << "Ingrese el correo del usuario cuya estadia desea comentar." << endl;
+        email = leerString();
 
-    IControladorEstadia* controladorEstadia = fabrica.getControladorEstadia();
-    controladorEstadia->seleccionarHostal(nombreHostal);
-    
-    string email;
-    cout << "Ingrese el correo del usuario cuya estadia desea comentar." << endl;
-    email = leerString();
+        set<DTEstadia*> estadias = controladorEstadia->indicarEmail(email);
 
-    set<DTEstadia*> estadias = controladorEstadia->indicarEmail(email);
-
-    if (estadias.empty()) 
-    {
-        cout << "No existen estadias para el correo seleccionado. Presione enter para continuar." << endl;
-        cin.ignore();
-        cin.ignore(1000, '\n');
-        return;
-    }
-    
-    cout << endl << "Ingrese el ID del hostal a consultar:" << endl;
-
-    for (auto estadia : estadias)
-    {
-        cout << estadia->getID() << " - " << estadia->getCheckIn() << " al " << *(estadia->getCheckOut()) << endl;
-    }
-
-    string idSeleccionado;
-    DTEstadia* estadiaSeleccionada;
-
-    seleccionCorrecta = false;
-    while (!seleccionCorrecta) 
-    {
-        cout << endl << "Ingrese el ID del hostal a consultar:" << endl;
-        idSeleccionado = leerString();
-
-        estadiaSeleccionada = buscarIdEnEstadias(estadias, idSeleccionado);
-        if (estadiaSeleccionada != nullptr)
+        if (estadias.empty()) 
         {
-            seleccionCorrecta = true;
+            cout << "No existen estadias para el correo seleccionado." << endl;
         }
-        else
+        else 
         {
-            cout << "No existe una estadia con el ID seleccionado." << endl;
+            cout << endl << "Estadias del huesped seleccionado para el hostal seleccionado: " << endl << endl;
+
+            for (auto estadia : estadias)
+            {
+                cout << estadia->getID() << " - Del " << estadia->getCheckIn() << " al " << *(estadia->getCheckOut()) << endl;
+            }
+
+            string idSeleccionado;
+            DTEstadia* estadiaSeleccionada;
+
+            seleccionCorrecta = false;
+            while (!seleccionCorrecta) 
+            {
+                cout << endl << "Ingrese el ID de la estadia a calificar:" << endl;
+                idSeleccionado = leerString();
+
+                estadiaSeleccionada = buscarIdEnEstadias(estadias, idSeleccionado);
+                if (estadiaSeleccionada != nullptr)
+                {
+                    seleccionCorrecta = true;
+                }
+                else
+                {
+                    cout << "No existe una estadia con el ID seleccionado." << endl;
+                }
+            }
+
+            controladorEstadia->seleccionarEstadia(estadiaSeleccionada->getID());
+
+            int puntaje;
+            string puntajeIngresado;
+            string comentario;
+            cout << "Ingrese el puntaje de la calificacion:" << endl;
+            puntajeIngresado = leerString();
+            cout << "Ingrese un comentario sobre la estadia:" << endl;
+            comentario = leerString();
+
+            try 
+            {
+                puntaje = stoi(puntajeIngresado);
+            }
+            catch (const std::exception &e)
+            {
+                cout << "El puntaje ingresado es invalido. Presione enter para continuar." << endl;
+                cin.ignore();
+                for (auto hostal : hostales)
+                {
+                    delete hostal;
+                }
+
+                for (auto estadia : estadias)
+                {
+                    delete estadia;
+                }
+                return;
+            }
+
+            controladorEstadia->ingresarCalificacion(puntaje, comentario);
+            controladorEstadia->notificarNuevaCalificacion();
+
+            cout << endl;
+            cout << "Calificacion ingresada satisfactoriamente" << endl;
         }
+
+        for (auto estadia : estadias)
+            {
+                delete estadia;
+            }
+            estadias.clear();
     }
 
-    // controladorEstadia->seleccionarEstadia(estadiaSeleccionada->getID());
+    presioneParaContinuar();
 
-    int puntaje;
-    string puntajeIngresado;
-    string comentario;
-    cout << "Ingrese el puntaje de la calificacion:" << endl;
-    puntajeIngresado = leerString();
-    cout << "Ingrese un comentario sobre la estadia:" << endl;
-    comentario = leerString();
-
-    try 
+    for (auto hostal : hostales)
     {
-        puntaje = stoi(puntajeIngresado);
+        delete hostal;
     }
-    catch (const std::exception &e)
-    {
-        cout << "El puntaje ingresado es invalido. Presione enter para continuar." << endl;
-        cin.ignore();
-        return;
-    }
-
-    controladorEstadia->ingresarCalificacion(puntaje, comentario);
-
-    cout << "Calificacion ingresada satisfactoriamente" << endl;
-    cin.ignore();
+    hostales.clear();
 }

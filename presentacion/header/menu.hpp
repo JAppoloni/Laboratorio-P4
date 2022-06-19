@@ -17,6 +17,9 @@
 #include "menuConsultaNotificaciones.hpp"
 #include "menuCalificarEstadia.hpp"
 #include "menuComentarCalificacion.hpp"
+#include "menuConsultaEstadia.hpp"
+#include "menuRealizarReserva.hpp"
+#include "menuAsignarEmpleadoAHostal.hpp"
 #include <stdlib.h>
 #include <string>
 #include <iostream>

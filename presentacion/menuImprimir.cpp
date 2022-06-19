@@ -17,7 +17,7 @@ void menuImprimir()
       cout << "4.  ImprimirEstadias()" << endl;
       cout << "5.  Salir" << endl;
       int opcion = leerIntIntervalo(1, 5);
-      if (opcion == 1)
+      if (opcion == 1) 
       {
          string email;
          cout << "Ingrese Email:" << endl;

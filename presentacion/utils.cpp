@@ -4,13 +4,13 @@
 #include <ostream>
 #include <regex>
 
-bool confirmarBaja()
+bool confirmarAccion(string opcion)
 {
    string confirmacion;
    bool seleccionCorrecta = false;
    while (!seleccionCorrecta)
    {
-      cout << "Desea confirmar la baja? (S/N)" << endl;
+      cout << "Desea confirmar " << opcion << " ? (S/N)" << endl;
       cin >> confirmacion;
 
       if (confirmacion != "S" && confirmacion != "s" && confirmacion != "N" && confirmacion != "n")

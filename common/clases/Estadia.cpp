@@ -178,6 +178,11 @@ bool Estadia::getFinalizacion()
 	return _checkOut != nullptr;
 }
 
+bool Estadia::estaComentada()
+{
+	return  _calificacionEstadia!= nullptr;
+}
+
 std::string Estadia::obtenerAutor()
 {
 	return _huespedEstadia->getEmail();

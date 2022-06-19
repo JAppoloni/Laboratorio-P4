@@ -7,6 +7,8 @@ int codResEstRecordado;
 int codigoResEstRecordado;
 string nomHosRecordado;
 string emailHuesRecordado;
+int estadiaRecordada;
+string emailRecordado;
 
 /*
  * Variables de instancia
@@ -55,11 +57,10 @@ set<DTEstadia *> ControladorEstadia::obtenerTodasLasEstadiasDelSistema()
     set<DTEstadia *> res;
     for (auto it : estadias)
     {
-        DTFecha *aux = (it->getFinalizacion()) ? new DTFecha(it->getChechOut()) : nullptr;
         DTEstadia *estadiaAgregar = new DTEstadia(it->getReservaEstadia()->getCodigo(),
                                                   it->getHuespedEstadia()->getEmail(),
                                                   it->getCheckIn(),
-                                                  aux,
+                                                  it->getChechOut(),
                                                   it->getPromo());
         res.insert(estadiaAgregar);
     }
@@ -124,13 +125,12 @@ set<DTEstadia *> ControladorEstadia::indicarEmail(string email)
         for (auto it : estadias)
         {
             string it_nombreHost = it->getReservaEstadia()->getHabitacionReserva()->getHostal()->getNombre();
-            if (it->getHuespedEstadia()->getEmail() == email && it->getFinalizacion() && it_nombreHost == nomHosRecordado)
+            if (it->getHuespedEstadia()->getEmail() == email && it->getFinalizacion() && it->estaComentada() && it_nombreHost == nomHosRecordado)
             {
-                DTFecha *aux = new DTFecha(it->getChechOut());
                 DTEstadia *estadiaAgregar = new DTEstadia(it->getReservaEstadia()->getCodigo(),
                                                           it->getHuespedEstadia()->getEmail(),
                                                           it->getCheckIn(),
-                                                          aux,
+                                                          it->getChechOut(),
                                                           it->getPromo());
                 res.insert(estadiaAgregar);
                 break;
@@ -214,12 +214,6 @@ void ControladorEstadia::agregar(Observer *o)
     empleados.insert(o);
 }
 
-set<DTHostal *> ControladorEstadia::listarHostales()
-{
-    ControladorHostal *CH = CH->getInstancia();
-    set<DTHostal *> hostales = CH->listarTodosLosHostalesDelSistema();
-    return hostales;
-}
 set<DTEstadia *> ControladorEstadia::listarEstadias()
 {
     set<DTEstadia *> res;
@@ -227,48 +221,51 @@ set<DTEstadia *> ControladorEstadia::listarEstadias()
     {
         for (auto it : estadias)
         {
-            DTFecha *fchCheckout = new DTFecha(it->getChechOut());
-            DTEstadia *estadiaAgregar = new DTEstadia(it->getReservaEstadia()->getCodigo(),
-                                                      it->getHuespedEstadia()->getEmail(),
-                                                      it->getCheckIn(),
-                                                      fchCheckout,
-                                                      it->getPromo());
-            res.insert(estadiaAgregar);
+            if(it->getReservaEstadia()->getHabitacionReserva()->getHostal()->getNombre() == nomHosRecordado)
+            {
+                DTEstadia *estadiaAgregar = new DTEstadia(it->getReservaEstadia()->getCodigo(),
+                                                        it->getHuespedEstadia()->getEmail(),
+                                                        it->getCheckIn(),
+                                                        it->getChechOut(),
+                                                        it->getPromo());
+                res.insert(estadiaAgregar);
+            }
         }
     }
     return res;
 }
 
-DTEstadia *estadiaRecordada;
-void ControladorEstadia::seleccionarEstadia(DTEstadia *estadia)
-{
-    estadiaRecordada = estadia;
+
+
+void ControladorEstadia::seleccionarEstadia(int id, string email){
+    estadiaRecordada = id;
+    emailRecordado = email;
 }
 
 DTCalificacion ControladorEstadia::buscarCalificacion()
 {
+    for (auto it : estadias){
+        if(it->getReservaEstadia()->getCodigo() == estadiaRecordada && it->getHuespedEstadia()->getEmail()==emailRecordado ){
+            return it->getCalificacionEstadia()->getDataType();
+        };
+    }
+
+    return DTCalificacion(-1, "", 0, DTFecha(), "");
 }
 
-DTComentario ControladorEstadia::buscarComentario()
-{
-}
 
 DTReserva *ControladorEstadia::buscarInformacionReserva()
 {
-    Estadia *e;
-    Reserva *r = e->getReservaEstadia();
-    DTReserva *res = r->getDataReserva();
-    return res;
+    for (auto it : estadias){
+        if(it->getReservaEstadia()->getCodigo() == estadiaRecordada && it->getHuespedEstadia()->getEmail()==emailRecordado){
+            DTReserva* res = it->getReservaEstadia()->getDataReserva();
+            return res;
+        };
+    }
+    return nullptr;
 }
 
-void ControladorEstadia::liberarMemoria()
-{
-    if (estadiaRecordada != nullptr)
-    {
-        delete estadiaRecordada;
-        estadiaRecordada = nullptr;
-    }
-}
+void ControladorEstadia::liberarMemoria() {}
 
 void ControladorEstadia::liberarRegistros()
 {

@@ -11,6 +11,10 @@
 #include "menuConsultaUsuario.hpp"
 #include "menuConsultaHostal.hpp"
 #include "menuTopTres.hpp"
+#include "menuCalificarEstadia.hpp"
+#include "menuRealizarReserva.hpp"
+#include "menuAsignarEmpleadoAHostal.hpp"
+#include "menuConsultaEstadia.hpp"
 #include <stdlib.h>
 #include <string>
 #include <iostream>

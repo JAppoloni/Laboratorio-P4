@@ -91,7 +91,7 @@ const char *Calificacion::OutOfRange::what() const throw()
 // Methods
 DTCalificacion Calificacion::getDataType()
 {
-	return DTCalificacion(this->obtenerID(), _estadiaComentario->getHuespedEstadia()->getEmail(), _puntaje, _fecha, _comentario, _respuestaComentario->getComentario());
+	return DTCalificacion(this->obtenerID(), _estadiaComentario->getHuespedEstadia()->getEmail(), _puntaje, _fecha, _comentario,( (_respuestaComentario!=nullptr)? _respuestaComentario->getComentario(): ""));
 }
 
 int Calificacion::obtenerID()

@@ -40,11 +40,11 @@ void ControladorReserva::crearReserva(string hostal, DTFecha checkIn, DTFecha ch
     esGruparRecordado = esGrupal;
 }
 
-set<DTHabitacion *> ControladorReserva::listarHabitacionesDisponibles()
+set<DTHabitacion *> ControladorReserva::listarHabitacionesDisponibles( string nombHost, DTFecha in, DTFecha fin)
 {
     set<DTHabitacion *> res;
     ControladorHostal *CH = ControladorHostal::getInstancia();
-    res = CH->obtenerHabitacionesDeHostal(hostalRecordado);
+    res = CH->obtenerHabitacionesDisponiblesDeHostal(nombHost, in, fin);
     return res;
 }
 
@@ -204,7 +204,7 @@ void ControladorReserva::seleccionarReservaAEliminar(int codigo)
 
 void ControladorReserva::cancelarBaja() {}
 
-void ControladorReserva::confirmarBaja()
+void ControladorReserva::confirmarAccion()
 {
     if (reservas[codigoRecordado] != nullptr)
     {
@@ -233,4 +233,15 @@ void ControladorReserva::confirmarBaja()
         delete reservas[codigoRecordado];
         reservas.erase(codigoRecordado);
     }
+}
+
+bool ControladorReserva::habitacionDisponibleFecha(Habitacion * hab, DTFecha in, DTFecha out)
+{
+    for(auto it : reservas){
+        if(it.second->getHabitacionReserva() == hab  && (in > it.second->getCheckOut() || out < it.second->getCheckIn()))
+        {
+            return true;
+        }
+    }
+    return false;
 }

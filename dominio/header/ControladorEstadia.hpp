@@ -18,6 +18,7 @@ private:
     set<Estadia *> estadias;
 
 public:
+
     static ControladorEstadia *getInstancia();
     virtual void seleccionarHostal(string nom);
     virtual set<DTReserva *> obtenerReservaHuesped(string email);
@@ -32,11 +33,9 @@ public:
     Calificacion *obtenerCalificacion(int codigo, string email);
     void eliminarEstadia(Estadia *estadia);
 
-    virtual set<DTHostal *> listarHostales();
     virtual set<DTEstadia *> listarEstadias();
-    virtual void seleccionarEstadia(DTEstadia *estadia);
+    virtual void seleccionarEstadia(int id, string email);
     virtual DTCalificacion buscarCalificacion();
-    virtual DTComentario buscarComentario();
     virtual DTReserva *buscarInformacionReserva();
     virtual void liberarMemoria();
     virtual void eliminar(Observer *o);

@@ -406,5 +406,5 @@ void cargarDatos(bool primeraVez)
    {
       cout << RED "\n Error: " << e.what() << NC << endl;
    }
-   presioneParaContinuar();
+   // presioneParaContinuar();
 }

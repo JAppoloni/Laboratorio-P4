@@ -77,8 +77,18 @@ void menuConsultaEstadia()
             {
                email = it->getEmail();
                idReserva = it->getID();
-               cout << "La estadia seleccionada es: " << endl;
-               cout << *(it->getCheckOut()) << endl;
+               cout << "La estadia seleccionada tiene el ID Reserva: " << it->getID() << " - Correo:" << it->getEmail()
+                 << " - Fecha Inicio: " << it->getCheckIn().getHora() << " " << it->getCheckIn().getDia() << "/" << it->getCheckIn().getMes() << "/" << it->getCheckIn().getAnio() << " - Fecha Fin: ";
+            if (it->getCheckOut() != nullptr)
+            {
+               cout << (*it->getCheckOut()).getHora() << " " << (*it->getCheckOut()).getDia() << "/" << (*it->getCheckOut()).getMes() << "/" << (*it->getCheckOut()).getAnio();
+            }
+            else
+            {
+               cout << "No se ha realizado el checkout";
+            }
+            cout << endl;
+               
             }
             delete it;
             it = nullptr;

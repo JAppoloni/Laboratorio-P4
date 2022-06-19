@@ -1,135 +1,125 @@
 #include "header/menuRegistrarEstadia.hpp"
 
-DTReserva* buscarReservaPorCodigo(set<DTReserva*> reservas, string codigo)
-{
-    try
-    {
-        int codigoInt = stoi(codigo);
-        for (auto reserva : reservas)
-        {
-            if (reserva->getCodigo() == codigoInt)
-            {
-                return reserva;
-            }
-        }
-    }
-    catch (const std::exception& e)
-    {
-    }
-    
-    return nullptr;
-}
-
 void menuRegistrarEstadia()
 {
     system("clear");
 
-    IControladorHostal* controladorHostal = Fabrica().getControladorHostal();
-    list<DTHostal*> hostales = controladorHostal->obtenerHostales();
+    IControladorHostal *controladorHostal = Fabrica().getControladorHostal();
+    list<DTHostal *> hostales = controladorHostal->obtenerHostales();
+    controladorHostal = nullptr;
 
-    for (list<DTHostal*>::iterator iter = hostales.begin(); iter != hostales.end(); iter++) 
+    if (!hostales.empty())
     {
-        cout << (*iter)->getNombre() << endl;
-    }
-
-    if (hostales.empty()) 
-    {
-        cout << "No hay hostales disponibles. Presione enter para continuar." << endl;
-        cin.ignore(1000, '\n');
-        return;
-    }
-
-    string nombreHostal;
-    bool seleccionCorrecta = false;
-    DTHostal* hostalSeleccionado;
-
-    while (!seleccionCorrecta) {
-        cout << endl << "Ingrese el nombre del hostal a consultar:" << endl;
-        nombreHostal = leerString();
-        hostalSeleccionado = buscarHostal(hostales, nombreHostal);
-
-        if (hostalSeleccionado != nullptr)
+        int minElem = 1;
+        int maxElem = 0;
+        cout << "Hostales: " << endl;
+        for (auto it : hostales)
         {
-            seleccionCorrecta = true;
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
         }
-        else
+        cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+
+        int numHostal = leerIntIntervalo(minElem, maxElem);
+        string nombreHostal;
+
+        for (auto it : hostales)
         {
-            cout << "No existe un hostal con el nombre seleccionado." << endl;
-        }
-    }
-
-    IControladorEstadia* controladorEstadia = Fabrica().getControladorEstadia();
-    controladorEstadia->seleccionarHostal(hostalSeleccionado->getNombre());
-
-    IControladorUsuario * CU = Fabrica().getControladorUsuario();
-    set<DTHuesped*> huespedes = CU->listarHuespedes();
-    cout << endl << "Email de los huespedes registrados en el sistema: " << endl;
-    for(auto it : huespedes)
-    {
-        cout << it->getEmail() << endl;
-    }
-
-    cout << endl << "Ingrese el email del huesped correspondiente a la reserva:" << endl;
-    string email = leerString();
-
-    set<DTReserva*> reservas = controladorEstadia->obtenerReservaHuesped(email);
-
-    if (reservas.empty())
-    {
-        cout << "No hay reservas asignadas al usuario con el email seleccionado." << endl;
-        cout << "Presione enter para continuar." << endl;
-        cin.ignore();
-
-        for (auto hostal : hostales)
-        {
-            delete hostal;
+            if (minElem == numHostal)
+            {
+                nombreHostal = it->getNombre();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
         }
         hostales.clear();
-        return;
-    }
 
-    system("clear");
+        cout << "El hostal seleccionado es: " << nombreHostal << endl;
 
-    cout << "Listado de reservas disponibles para el huesped seleccionado:" << endl;
-    
-    for (auto reserva : reservas)
-    {
-        cout << reserva->getCodigo() << " - entrada: " << reserva->getCheckIn() << endl;
-    }
+        IControladorEstadia *controladorEstadia = Fabrica().getControladorEstadia();
+        controladorEstadia->seleccionarHostal(nombreHostal);
 
-    seleccionCorrecta = false;
-    int codigoSeleccionado;
-    while (!seleccionCorrecta)
-    {
-        cout << "Seleccione el codigo de la reserva a seleccionar:" << endl;
-        string codigoIngresado = leerString();
-        DTReserva* reservaSeleccionada = buscarReservaPorCodigo(reservas, codigoIngresado);
+        IControladorUsuario *CU = Fabrica().getControladorUsuario();
+        set<DTHuesped *> huespedes = CU->listarHuespedes();
+        CU = nullptr;
 
-        if (reservaSeleccionada != nullptr)
+        if (!huespedes.empty())
         {
-            codigoSeleccionado = reservaSeleccionada->getCodigo();
-            seleccionCorrecta = true;
+            cout << endl
+                 << "Email de los huespedes registrados en el sistema: " << endl;
+
+            maxElem = 0;
+            minElem = 1;
+
+            for (auto it : huespedes)
+            {
+                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
+                maxElem++;
+            }
+            cout << "Ingrese el numero del huespede ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+            int numHuespede = leerIntIntervalo(minElem, maxElem);
+            string emailHuesped;
+            for (auto it : huespedes)
+            {
+                if (minElem == numHuespede)
+                {
+                    emailHuesped = it->getEmail();
+                }
+                minElem++;
+                delete it;
+                it = nullptr;
+            }
+            huespedes.clear();
+
+            set<DTReserva *> reservas = controladorEstadia->obtenerReservaHuesped(emailHuesped);
+
+            if (!reservas.empty())
+            {
+                minElem = 1;
+                maxElem = 0;
+                cout << endl
+                     << "Reservas: " << endl;
+                for (auto it : reservas)
+                {
+                    cout << GRN << maxElem << NC << ". " << it->getCodigo() << endl;
+                    maxElem++;
+                }
+                cout << "Ingrese el numero de la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+                int numReserva = leerIntIntervalo(minElem, maxElem);
+                int codigoReserva = 0;
+                for (auto it : reservas)
+                {
+                    if (minElem == numReserva)
+                    {
+                        codigoReserva = it->getCodigo();
+                    }
+                    minElem++;
+                    delete it;
+                    it = nullptr;
+                }
+                reservas.clear();
+
+                controladorEstadia->registrarEstadiaHuesped(codigoReserva);
+                cout << endl
+                     << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
+                
+                controladorEstadia = nullptr;
+
+            }
+            else
+            {
+                cout << "No hay reservas asignadas al usuario con el email seleccionado." << endl;
+            }
         }
         else
         {
-            cout << "El codigo ingresado es invalido." << endl;
+            cout << "No hay huespedes registrados en el sistema." << endl;
         }
     }
-
-    controladorEstadia->registrarEstadiaHuesped(codigoSeleccionado);
-
-    for (auto hostal : hostales)
+    else
     {
-        delete hostal;
+        cout << "No hay hostales registrados en el sistema." << endl;
     }
-    hostales.clear();
-
-    for (auto reserva : reservas)
-    {
-        delete reserva;
-    }
-    reservas.clear();
-
-    cout << endl << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
-    cin.ignore();
+    presioneParaContinuar() ;
 }

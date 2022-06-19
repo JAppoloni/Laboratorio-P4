@@ -3,41 +3,50 @@
 void menuConsultaHostal()
 {
     system("clear");
+    Fabrica fabrica = Fabrica();
+    IControladorHostal *contoraladoraHostal = fabrica.getControladorHostal();
+    list<DTHostal *> listaHostales = contoraladoraHostal->obtenerHostales();
 
-    IControladorHostal* controlador = Fabrica().getControladorHostal();
-    list<DTHostal*> hostales = controlador->obtenerHostales();
-
-    for (list<DTHostal*>::iterator iter = hostales.begin(); iter != hostales.end(); iter++) 
+    if (listaHostales.empty())
     {
-        cout << (*iter)->getNombre() << endl;
+        cout << "No hay hostales cargados" << endl;
     }
-
-    if (hostales.empty()) 
+    else
     {
-        cout << "No hay hostales disponibles. Presione enter para continuar.";
-        cin.ignore(1000, '\n');
-        return;
-    }
+        int minElem = 1;
+        int maxElem = 0;
 
-    string nombreHostal;
-    bool seleccionCorrecta = false;
-
-    while (!seleccionCorrecta) {
-        cout << endl << "Ingrese el nombre del hostal a consultar:" << endl;
-        nombreHostal = leerString();
-
-        if (buscarNombreDeHostal(hostales, nombreHostal))
+        cout << "Hostales: " << endl;
+        for (auto it : listaHostales)
         {
-            seleccionCorrecta = true;
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
         }
-        else
-        {
-            cout << "No existe un hostal con el nombre seleccionado." << endl;
-        }
-    }
+        cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
 
-// ! FALTA OPERACION !!!!!!!!
-    cout << "Falta operacion `obtenerTodaLaInformacionDeUnHostal`. Presione enter para continuar." << endl;
-    cin.ignore();
-    cin.ignore(1000, '\n');
+        int numHostal = leerIntIntervalo(minElem, maxElem);
+        string nombreHostal;
+
+        for (auto it : listaHostales)
+        {
+            if (minElem == numHostal)
+            {
+                nombreHostal = it->getNombre();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
+        }
+        listaHostales.clear();
+
+        cout << "El hostal seleccionado es: " << nombreHostal << endl;
+
+        DTHostal *hostal = contoraladoraHostal->obtenerTodaInformacionDeHostal(nombreHostal);
+
+        cout << DTHostal(*hostal) << endl;
+
+        delete hostal;
+        hostal = nullptr;
+    }
+    presioneParaContinuar();
 }

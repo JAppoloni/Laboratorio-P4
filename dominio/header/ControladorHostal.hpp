@@ -23,10 +23,11 @@ public:
     virtual void liberarMemoria();
     virtual list<DTHostal *> calcularTopTres();
     virtual list<DTCalificacion *> consultarHostal(string nom);
-    virtual list<DTEstadia >* obtenerEstadiasDeHostal(string nom);
-    virtual list<DTHabitacion>* listarHabitacionesHostal (string nom);
-     virtual DTHostal* obtenerTodaInformacionDeHostal(string pnombreHostal);
+    virtual DTHostal* obtenerTodaInformacionDeHostal(string pnombreHostal);
 
+    list<DTCalificacion> * obtenerCalificacionesHostal(string nom);
+    list<DTEstadia >* obtenerEstadiasDeHostal(string nom);
+    list<DTHabitacion>* listarHabitacionesHostal (string nom);
     Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDisponiblesDeHostal(string nom, DTFecha in, DTFecha out);

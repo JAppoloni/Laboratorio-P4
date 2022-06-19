@@ -217,10 +217,10 @@ set<DTHabitacion *> ControladorHostal::obtenerHabitacionesDisponiblesDeHostal(st
     set<DTHabitacion *> res;
     if (!hostales[nom]->getHabitaciones().empty())
     {
-        ControladorReserva * CR = ControladorReserva::getInstancia();
+        ControladorReserva *CR = ControladorReserva::getInstancia();
         for (auto it : hostales[nom]->getHabitaciones())
         {
-            if(CR->habitacionDisponibleFecha(it, in, out))
+            if (CR->habitacionDisponibleFecha(it, in, out))
             {
                 DTHabitacion *nueva = new DTHabitacion(it->getNumero(), it->getPrecio(), it->getCapacidad());
                 res.insert(nueva);
@@ -230,51 +230,82 @@ set<DTHabitacion *> ControladorHostal::obtenerHabitacionesDisponiblesDeHostal(st
     return res;
 }
 
-DTHostal* ControladorHostal::obtenerTodaInformacionDeHostal(string pnombreHostal){
-   Hostal* h = hostales.find(pnombreHostal)->second;
-   //Calculo el promedio de calificaciones de un hostal
-   list<DTCalificacion> Calificacionesh = h->obtenerCalificaciones();
-   float promedio = 0; 
-   if (!Calificacionesh.empty()){
-    int i  = 1;
-     for (auto it : Calificacionesh){
-       promedio = (promedio + it.getCalificacion())/ i;
-       i++;
-     }
-   }
-   // 
-   list<DTHabitacion>* habitacionesdt = listarHabitacionesHostal(pnombreHostal);
-   list<DTEstadia>* estadiasdt = obtenerEstadiasDeHostal(pnombreHostal);
-   DTHostal* dt = new DTHostal(h->getNombre(),h->getDireccion(),h->getTelefono(),promedio,habitacionesdt,estadiasdt);
-   return dt;
-}
+DTHostal *ControladorHostal::obtenerTodaInformacionDeHostal(string pnombreHostal)
+{
+    Hostal *h = hostales[pnombreHostal];
+    // Calculo el promedio de calificaciones de un hostal
+    list<DTCalificacion> Calificacionesh = h->obtenerCalificaciones();
+    float promedio = 0;
+    if (!Calificacionesh.empty())
+    {
+        int i = 0;
+        for (auto it : Calificacionesh)
+        {
+            promedio = promedio + it.getCalificacion();
+            i++;
+        }
+        if (promedio != 0)
+        {
+            promedio = promedio / i;
+        }
+    }
+    //
+    list<DTHabitacion> *habitacionesdt = listarHabitacionesHostal(pnombreHostal);
+    list<DTEstadia> *estadiasdt = obtenerEstadiasDeHostal(pnombreHostal);
+    list<DTCalificacion> *calificaciones = obtenerCalificacionesHostal(pnombreHostal);
+    return new DTHostal(h->getNombre(), h->getDireccion(), h->getTelefono(), promedio, habitacionesdt, estadiasdt, calificaciones);
+    }
 
-
- list<DTEstadia >* ControladorHostal::obtenerEstadiasDeHostal(string nom){
-
-    list<DTEstadia >* res;
+list<DTEstadia> *ControladorHostal::obtenerEstadiasDeHostal(string nom)
+{
+    list<DTEstadia> *res = nullptr;
     ControladorEstadia *CE = ControladorEstadia::getInstancia();
     CE->seleccionarHostal(nom);
-    set<DTEstadia*> estadiasH = CE->listarEstadias();
-    if (!estadiasH.empty()){
-      for (auto it : estadiasH){
-        res->push_front(*it);
-      }
+    set<DTEstadia *> estadiasH = CE->listarEstadias();
+    if (!estadiasH.empty())
+    {
+        res = new list<DTEstadia>;
+        for (auto it : estadiasH)
+        {
+            res->push_front(DTEstadia(*it));
+            delete it;
+            it = nullptr;
+        }
+        estadiasH.clear();
     }
-    CE->liberarMemoria();
     return res;
-    
-    
 }
- 
- list<DTHabitacion>* ControladorHostal::listarHabitacionesHostal(string nom){
-   list<DTHabitacion >* res;
-    if (!hostales[nom]->getHabitaciones().empty()) { 
-     for (auto it : hostales[nom]->getHabitaciones())
-        {   DTHabitacion nueva =  DTHabitacion(it->getNumero(), it->getPrecio(), it->getCapacidad());
+
+list<DTHabitacion> *ControladorHostal::listarHabitacionesHostal(string nom)
+{
+    list<DTHabitacion> *res = nullptr;
+    if (!hostales[nom]->getHabitaciones().empty())
+    {
+        res = new list<DTHabitacion>;
+        for (auto it : hostales[nom]->getHabitaciones())
+        {
+            DTHabitacion nueva = DTHabitacion(it->getNumero(), it->getPrecio(), it->getCapacidad());
             res->push_front(nueva);
         }
     }
     return res;
 }
 
+list<DTCalificacion> *ControladorHostal::obtenerCalificacionesHostal(string nom)
+{
+    list<DTCalificacion> *res = nullptr;
+    if (!hostales[nom]->getCalificaciones().empty())
+    {
+        res = new list<DTCalificacion>;
+        for (auto it : hostales[nom]->getCalificaciones())
+        {
+            DTCalificacion nueva = DTCalificacion(it->getEstadiaComentario()->getReservaEstadia()->getCodigo(),
+                                                  it->getEstadiaComentario()->getHuespedEstadia()->getEmail(), it->getPuntaje(),
+                                                  it->getFecha(),
+                                                  it->getComentario(),
+                                                  (it->estaResponida() ? it->getRespuestaComentario()->getComentario() : ""));
+            res->push_front(nueva);
+        }
+    }
+    return res;
+}

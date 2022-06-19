@@ -8,17 +8,57 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 	_telefono = telefono;
 	_listaHabitaciones = nullptr;
 	_listaEstadia = nullptr;
+	_listaCalificaciones = nullptr;
 	_promClaif = 0;
 }
 
-DTHostal ::DTHostal(const DTHostal &other)
+DTHostal::DTHostal(const DTHostal &other)
 {
 	_nombre = other._nombre;
 	_direccion = other._direccion;
 	_telefono = other._telefono;
-	_listaHabitaciones = other._listaHabitaciones;
-	_listaEstadia = other._listaEstadia;
 	_promClaif = other._promClaif;
+	
+	if (other._listaHabitaciones != nullptr)
+	{
+		_listaHabitaciones = new std::list<DTHabitacion>;
+		for (auto it : *other.getListaHabitaciones())
+		{
+			_listaHabitaciones->push_back(it);
+		}
+	}
+	else
+	{
+		_listaHabitaciones = nullptr;
+	}
+
+	if (other._listaEstadia != nullptr)
+	{
+
+		_listaEstadia = new std::list<DTEstadia>;
+		for (auto it : *other._listaEstadia)
+		{
+			
+			_listaEstadia->push_back(DTEstadia(it));
+		}
+	}
+	else
+	{
+		_listaEstadia = nullptr;
+	}
+
+	if (other._listaCalificaciones != nullptr)
+	{
+		_listaCalificaciones = new std::list<DTCalificacion>;
+		for (auto it : *other._listaCalificaciones)
+		{
+			_listaCalificaciones->push_back(it);
+		}
+	}
+	else
+	{
+		_listaCalificaciones = nullptr;
+	}
 }
 
 DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif)
@@ -29,16 +69,18 @@ DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefo
 	_promClaif = promClaif;
 	_listaHabitaciones = nullptr;
 	_listaEstadia = nullptr;
+	_listaCalificaciones = nullptr;
 }
 
-DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias)
+DTHostal::DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias, std::list<DTCalificacion> *listaCalificaciones)
 {
 	_nombre = nombre;
 	_direccion = direccion;
 	_telefono = telefono;
+	_promClaif = promClaif;
 	_listaHabitaciones = listaHabitaciones;
 	_listaEstadia = listaEstadias;
-	_promClaif = promClaif;
+	_listaCalificaciones = listaCalificaciones;
 }
 
 // Destructor
@@ -56,6 +98,12 @@ DTHostal::~DTHostal()
 		delete _listaEstadia;
 		_listaHabitaciones = nullptr;
 	}
+	if (_listaCalificaciones != nullptr)
+	{
+		_listaCalificaciones->clear();
+		delete _listaCalificaciones;
+		_listaEstadia = nullptr;
+	}
 }
 
 // Operators
@@ -68,17 +116,25 @@ std::ostream &operator<<(std::ostream &out, DTHostal imprimir)
 	if (imprimir.getListaHabitaciones() != nullptr)
 	{
 		out << "Habitaciones: " << std::endl;
-		for (auto it = imprimir.getListaHabitaciones()->begin(); it != imprimir.getListaHabitaciones()->end(); it++)
+		for (auto it : *imprimir.getListaHabitaciones())
 		{
-			out << *it << std::endl;
+			out << it << std::endl;
 		}
 	}
 	if (imprimir.getListaEstadia() != nullptr)
 	{
 		out << "Estadias: " << std::endl;
-		for (auto it = imprimir.getListaEstadia()->begin(); it != imprimir.getListaEstadia()->end(); it++)
+		for (auto it : *imprimir.getListaEstadia())
 		{
-			out << *it << std::endl;
+			out << it << std::endl;
+		}
+	}
+	if (imprimir.getListaCalificaciones() != nullptr)
+	{
+		out << "Calificaciones: " << std::endl;
+		for (auto it : *imprimir.getListaCalificaciones())
+		{
+			out << it << std::endl;
 		}
 	}
 	return out;
@@ -110,7 +166,7 @@ std::list<DTEstadia> *DTHostal::getListaEstadia() const
 	return _listaEstadia;
 }
 
-DTHostal& DTHostal::operator=(const DTHostal &hostal)
+DTHostal &DTHostal::operator=(const DTHostal &hostal)
 {
 	_nombre = hostal.getNombre();
 	_direccion = hostal.getDireccion();
@@ -119,4 +175,9 @@ DTHostal& DTHostal::operator=(const DTHostal &hostal)
 	_listaEstadia = hostal.getListaEstadia();
 	_promClaif = hostal.getPromedioCalificaciones();
 	return *this;
+}
+
+std::list<DTCalificacion> *DTHostal::getListaCalificaciones() const
+{
+	return _listaCalificaciones;
 }

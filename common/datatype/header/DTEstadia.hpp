@@ -9,7 +9,7 @@ class DTEstadia
 public:
 	// Constructors
 	DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkOut, std::string promo);
-
+	DTEstadia(const DTEstadia & est);
 	// Destructor
 	~DTEstadia();
 

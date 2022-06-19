@@ -108,7 +108,7 @@ set<DTReserva *> ControladorReserva::listarReservasHuesped(string email, string 
     set<DTReserva *> res;
     for (auto it : reservas)
     {
-        if (it.second->esReservaHostalHuesped(email, nomHostal) && it.second->getEstado() != Cancelada & it.second->getEstado() != Cerrada)
+        if (it.second->esReservaHostalHuesped(email, nomHostal) && (it.second->getEstado() != Cancelada ) && (it.second->getEstado() != Cerrada))
         {
             res.insert(it.second->getDataReserva());
         }

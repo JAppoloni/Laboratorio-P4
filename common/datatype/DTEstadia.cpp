@@ -6,15 +6,31 @@ DTEstadia::DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkO
 	_IDReserva = id;
 	_EmailHuesped = email;
 	_checkIn = checkIn;
-	if (checkOut != NULL)
+	if (checkOut != nullptr)
 	{
 		_checkOut = new DTFecha(checkOut);
 	}
 	else
 	{
-		_checkOut = NULL;
+		_checkOut = nullptr;
 	}
 	_promo = promo;
+}
+
+DTEstadia::DTEstadia(const DTEstadia & est)
+{
+	_IDReserva = est._IDReserva;
+	_EmailHuesped = est._EmailHuesped;
+	_checkIn = est._checkIn;
+	if (est._checkOut != nullptr)
+	{
+		_checkOut = new DTFecha(est._checkOut);
+	}
+	else
+	{
+		_checkOut = nullptr;
+	}
+	_promo = est._promo;
 }
 
 // Destructor

@@ -12,14 +12,15 @@ public:
 	// Constructors
 	DTHostal(std::string nombre, std::string direccion, std::string telefono);
 	DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif);
-	DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias);
+
+	DTHostal(std::string nombre, std::string direccion, std::string telefono, float promClaif, std::list<DTHabitacion> *listaHabitaciones, std::list<DTEstadia> *listaEstadias, std::list<DTCalificacion> *listaCalificaciones );
 	DTHostal(const DTHostal &other);
 
 	// Destructor
 	~DTHostal();
 
 	// Operators
-	DTHostal& operator=(const DTHostal &hostal);
+	DTHostal &operator=(const DTHostal &hostal);
 
 	// Getters
 	float getPromedioCalificaciones() const;
@@ -28,6 +29,7 @@ public:
 	std::string getTelefono() const;
 	std::list<DTHabitacion> *getListaHabitaciones() const;
 	std::list<DTEstadia> *getListaEstadia() const;
+	std::list<DTCalificacion> *getListaCalificaciones() const;
 
 private:
 	float _promClaif;
@@ -36,6 +38,7 @@ private:
 	std::string _telefono;
 	std::list<DTHabitacion> *_listaHabitaciones;
 	std::list<DTEstadia> *_listaEstadia;
+	std::list<DTCalificacion> *_listaCalificaciones;
 };
 
 std::ostream &operator<<(std::ostream &out, DTHostal imprimir);

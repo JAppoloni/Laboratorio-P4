@@ -61,7 +61,15 @@ void menuRegistrarEstadia()
     IControladorEstadia* controladorEstadia = Fabrica().getControladorEstadia();
     controladorEstadia->seleccionarHostal(hostalSeleccionado->getNombre());
 
-    cout << "Ingrese el email del huesped correspondiente a la reserva:" << endl;
+    IControladorUsuario * CU = Fabrica().getControladorUsuario();
+    set<DTHuesped*> huespedes = CU->listarHuespedes();
+    cout << endl << "Email de los huespedes registrados en el sistema: " << endl;
+    for(auto it : huespedes)
+    {
+        cout << it->getEmail() << endl;
+    }
+
+    cout << endl << "Ingrese el email del huesped correspondiente a la reserva:" << endl;
     string email = leerString();
 
     set<DTReserva*> reservas = controladorEstadia->obtenerReservaHuesped(email);
@@ -110,6 +118,18 @@ void menuRegistrarEstadia()
 
     controladorEstadia->registrarEstadiaHuesped(codigoSeleccionado);
 
-    cout << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
+    for (auto hostal : hostales)
+    {
+        delete hostal;
+    }
+    hostales.clear();
+
+    for (auto reserva : reservas)
+    {
+        delete reserva;
+    }
+    reservas.clear();
+
+    cout << endl << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
     cin.ignore();
 }

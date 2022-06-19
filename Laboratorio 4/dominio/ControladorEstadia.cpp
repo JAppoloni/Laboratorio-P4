@@ -105,8 +105,8 @@ void ControladorEstadia::finalizarEstadia()
             if (it->getReservaEstadia()->getCodigo() == codigoResEstRecordado && it->getHuespedEstadia()->getEmail() == emailHuesRecordado)
             {
                 FechaSistema *FS = FechaSistema::getInstancia();
-                DTFecha aux = DTFecha(FS->getFecha());
-                it->setChechOut(&aux);
+                DTFecha * aux = new DTFecha(FS->getFecha());
+                it->setChechOut(aux);
 
                 break;
             }

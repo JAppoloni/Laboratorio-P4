@@ -61,14 +61,22 @@ void menuFinalizarEstadia()
     IControladorEstadia* controladorEstadia = Fabrica().getControladorEstadia();
     controladorEstadia->seleccionarHostal(hostalSeleccionado->getNombre());
 
-    cout << "Ingrese el email del huesped correspondiente a la reserva:" << endl;
+    IControladorUsuario * CU = Fabrica().getControladorUsuario();
+    set<DTHuesped*> huespedes = CU->listarHuespedes();
+    cout << endl << "Email de los huespedes registrados en el sistema: " << endl;
+    for(auto it : huespedes)
+    {
+        cout << it->getEmail() << endl;
+    }
+
+    cout << endl << "Ingrese el email del huesped correspondiente a la reserva:" << endl;
     string email = leerString();
 
     set<DTEstadia *> estadiasAbiertas = controladorEstadia->buscarEstadiasAbiertasPorCorreo(email);
 
     if (estadiasAbiertas.empty()) 
     {
-        cout << "No hay estadias abiertas para el correo seleccionado. Presione enter para continuar." << endl;
+        cout << "No hay estadias abiertas para el huesped seleccionado en el hostal seleccionado. Presione enter para continuar." << endl;
         cin.ignore();
 
         for (auto hostal : hostales)
@@ -82,7 +90,7 @@ void menuFinalizarEstadia()
 
     system("clear");
 
-    cout << "Estadias disponibles para el correo seleccionado:" << endl << endl;
+    cout << "Estadias disponibles para el husped seleccionado en el hostal:" << endl << endl;
 
     for (auto estadia : estadiasAbiertas)
     {
@@ -93,13 +101,13 @@ void menuFinalizarEstadia()
     int codigoSeleccionado;
     while (!seleccionCorrecta)
     {
-        cout << "Seleccione el codigo de la estadia a seleccionar:" << endl;
+        cout << "Seleccione el codigo de la estadia a finalizar:" << endl;
         string codigoIngresado = leerString();
-        DTEstadia* reservaSeleccionada = buscarEstadiaPorCodigo(estadiasAbiertas, codigoIngresado);
+        DTEstadia* estadiaSeleccionada = buscarEstadiaPorCodigo(estadiasAbiertas, codigoIngresado);
 
-        if (reservaSeleccionada != nullptr)
+        if (estadiaSeleccionada != nullptr)
         {
-            codigoSeleccionado = reservaSeleccionada->getID();
+            codigoSeleccionado = estadiaSeleccionada->getID();
             seleccionCorrecta = true;
         }
         else
@@ -111,6 +119,18 @@ void menuFinalizarEstadia()
     controladorEstadia->seleccionarUnEstadiaAFinalizar(codigoSeleccionado);
     controladorEstadia->finalizarEstadia();
 
-    cout << "Estadia finalizada satisfactoriamente. Presione enter para continuar." << endl;
+    for (auto hostal : hostales)
+    {
+        delete hostal;
+    }
+    hostales.clear();
+
+    for (auto estadia : estadiasAbiertas)
+    {
+        delete estadia;
+    }
+    estadiasAbiertas.clear();
+
+    cout << endl << "Estadia finalizada satisfactoriamente. Presione enter para continuar." << endl;
     cin.ignore();
 }

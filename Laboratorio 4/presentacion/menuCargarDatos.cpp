@@ -90,7 +90,7 @@ void cargarDatos(bool primeraVez)
 
       DTHuesped *H1 = new DTHuesped("Sofia", "123", "sofia@mail.com", true);
       DTHuesped *H2 = new DTHuesped("Frodo", "123", "frodo@mail.com", true);
-      DTHuesped *H3 = new DTHuesped("Sam", "123", " sam@mail.com", false);
+      DTHuesped *H3 = new DTHuesped("Sam", "123", "sam@mail.com", false);
       DTHuesped *H4 = new DTHuesped("Merry", "123", "merry@mail.com", false);
       DTHuesped *H5 = new DTHuesped("Pippin", "123", "pippin@mail.com", false);
       DTHuesped *H6 = new DTHuesped("Seba", "123", "seba@mail.com", true);

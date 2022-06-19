@@ -51,4 +51,6 @@ bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre);
 
 bool confirmarAccion(string opcion);
 
+DTHostal* buscarHostal(list<DTHostal*> hostales, string nombre);
+
 #endif

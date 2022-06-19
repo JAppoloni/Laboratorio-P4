@@ -20,6 +20,9 @@
 #include "menuConsultaEstadia.hpp"
 #include "menuRealizarReserva.hpp"
 #include "menuAsignarEmpleadoAHostal.hpp"
+#include "menuFinalizarEstadia.hpp"
+#include "menuRegistrarEstadia.hpp"
+#include "menuConsultadeReserva.hpp"
 #include <stdlib.h>
 #include <string>
 #include <iostream>

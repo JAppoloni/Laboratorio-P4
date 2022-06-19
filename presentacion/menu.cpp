@@ -101,10 +101,10 @@ void mainMenu()
             menuTopTres();
             break;
         case 7:
-            notImplementedMessage();
+            menuRegistrarEstadia();
             break;
         case 8:
-            notImplementedMessage();
+            menuFinalizarEstadia();
             break;
         case 9:
             menuCalificarEstadia();
@@ -119,7 +119,7 @@ void mainMenu()
             menuConsultaHostal();
             break;
         case 13:
-            notImplementedMessage();
+            menuConsultadeReserva();
             break;
         case 14:
             menuConsultaEstadia();

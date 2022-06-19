@@ -102,7 +102,7 @@ void menuCalificarEstadia()
         }
     }
 
-    controladorEstadia->seleccionarEstadia(estadiaSeleccionada);
+    controladorEstadia->seleccionarEstadia(estadiaSeleccionada->getID());
 
     int puntaje;
     string puntajeIngresado;

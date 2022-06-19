@@ -82,9 +82,9 @@ void menuBajaReserva()
 
          try
          {
-            if (confirmarBaja())
+            if (confirmarAccion("la baja"))
             {
-               controladorReserva->confirmarBaja();
+               controladorReserva->confirmarAccion();
             }
             else
             {
@@ -98,5 +98,7 @@ void menuBajaReserva()
          cin.ignore();
       }
    }
+   contoraladoraHostal = nullptr;
+   controladorReserva = nullptr;
    presioneParaContinuar();
 }

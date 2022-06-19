@@ -211,3 +211,21 @@ void ControladorHostal::liberarRegistros()
     hostales.clear();
     liberarMemoria();
 }
+
+set<DTHabitacion *> ControladorHostal::obtenerHabitacionesDisponiblesDeHostal(string nom, DTFecha in, DTFecha out)
+{
+    set<DTHabitacion *> res;
+    if (!hostales[nom]->getHabitaciones().empty())
+    {
+        ControladorReserva * CR = ControladorReserva::getInstancia();
+        for (auto it : hostales[nom]->getHabitaciones())
+        {
+            if(CR->habitacionDisponibleFecha(it, in, out))
+            {
+                DTHabitacion *nueva = new DTHabitacion(it->getNumero(), it->getPrecio(), it->getCapacidad());
+                res.insert(nueva);
+            }
+        }
+    }
+    return res;
+}

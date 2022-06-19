@@ -49,8 +49,8 @@ void printProgress(double percentage);
 
 bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre);
 
-DTHostal* buscarHostal(list<DTHostal*> hostales, string nombre);
+bool confirmarAccion(string opcion);
 
-bool confirmarBaja();
+DTHostal* buscarHostal(list<DTHostal*> hostales, string nombre);
 
 #endif

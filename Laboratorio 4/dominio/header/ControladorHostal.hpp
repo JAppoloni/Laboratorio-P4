@@ -2,6 +2,7 @@
 #define CONTROLADOR_HOSTAL
 
 #include "IControladorHostal.hpp"
+#include "ControladorReserva.hpp"
 using namespace std;
 
 class ControladorHostal : public IControladorHostal
@@ -25,6 +26,7 @@ public:
 
     Hostal *getHostal(string nom);
     set<DTHabitacion *> obtenerHabitacionesDeHostal(string nom);
+    set<DTHabitacion *> obtenerHabitacionesDisponiblesDeHostal(string nom, DTFecha in, DTFecha out);
 
     // para pruebas
     virtual set<DTHostal *> listarTodosLosHostalesDelSistema();

@@ -6,6 +6,7 @@
 
 string _nombreRecordado_Hostal_IUsuario;
 ControladorUsuario *ControladorUsuario::instancia = nullptr;
+DTUsuario *usuarioRecordado;
 
 /*
  * Fin de variables de instancia
@@ -24,16 +25,27 @@ ControladorUsuario *ControladorUsuario::getInstancia()
     return instancia;
 }
 
-DTUsuario *usuarioRecordado;
-
 void ControladorUsuario::ingresarUsuario(DTUsuario *dataUsuario)
 {
-    usuarioRecordado = dataUsuario;
+    if (dynamic_cast<DTEmpleado *>(dataUsuario) != nullptr)
+    {
+        DTEmpleado *aux = dynamic_cast<DTEmpleado *>(dataUsuario);
+        usuarioRecordado = new DTEmpleado(dataUsuario->getNombre(), dataUsuario->getContrasenya(), dataUsuario->getEmail(), aux->getCargo());
+    }
+    else
+    {
+        DTHuesped *aux = dynamic_cast<DTHuesped *>(dataUsuario);
+        usuarioRecordado = new DTHuesped(dataUsuario->getNombre(), dataUsuario->getContrasenya(), dataUsuario->getEmail(), aux->getEsFinger());
+    }
 }
 
 void ControladorUsuario::cancelarAlta()
 {
-    delete usuarioRecordado;
+    if (usuarioRecordado != nullptr)
+    {
+        delete usuarioRecordado;
+        usuarioRecordado = nullptr;
+    }
 }
 
 bool ControladorUsuario::confirmarEmailDisponible()
@@ -83,6 +95,7 @@ void ControladorUsuario::confirmarAlta()
         DTHuesped *aux = dynamic_cast<DTHuesped *>(usuarioRecordado);
         huespedes[aux->getEmail()] = new Huesped(aux->getNombre(), aux->getEmail(), aux->getContrasenya(), aux->getEsFinger());
     }
+    cancelarAlta();
 }
 
 bool ControladorUsuario::esEmailUsuario()
@@ -172,6 +185,7 @@ set<DTUsuario *> ControladorUsuario::obtenerTodosLosUsuariosDelSistema()
 
 void ControladorUsuario::liberarRegistros()
 {
+    
 
     for (auto it : huespedes)
     {
@@ -305,4 +319,17 @@ void ControladorUsuario::eliminarComentarioEmpleado(Comentario *com)
     {
         it.second->eliminarComentario(com);
     }
+}
+
+set<DTEmpleado *> ControladorUsuario::listarEmpleados()
+{
+    set<DTEmpleado *> res;
+    if (!empleados.empty())
+    {
+        for (auto it : empleados)
+        {
+            res.insert(new DTEmpleado(it.second->getNombre(), it.second->getContrasena(), it.second->getEmail(), it.second->getCargo()));
+        }
+    }
+    return res;
 }

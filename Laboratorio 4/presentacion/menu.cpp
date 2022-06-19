@@ -51,6 +51,9 @@ void mainMenu()
     bool exit = false;
     bool datosCargados = false;
 
+    cargarDatos(!datosCargados);
+    datosCargados = !false;
+
     while (!exit)
     {
         string option = outputMenu();
@@ -89,10 +92,10 @@ void mainMenu()
             menuAltaHabitacion();
             break;
         case 4:
-            notImplementedMessage();
+            menuAsignarEmpleadoAHostal();
             break;
         case 5:
-            notImplementedMessage();
+            menuRealizarReserva();
             break;
         case 6:
             menuTopTres();
@@ -119,22 +122,22 @@ void mainMenu()
             notImplementedMessage();
             break;
         case 14:
-            notImplementedMessage();
+            menuConsultaEstadia();
             break;
         case 15:
             menuBajaReserva();
             break;
         case 16:
-            notImplementedMessage();
+            suscribirseANotificacion();
             break;
         case 17:
-            notImplementedMessage();
+            consultaNotificaciones();
             break;
         case 18:
-            notImplementedMessage();
+            eliminarSuscripcion();
             break;
         case 19:
-            notImplementedMessage();
+            modificarFechaSistema();
             break;
         case 20:
             menuImprimir();

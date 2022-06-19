@@ -36,6 +36,7 @@ void menuConsultaHostal()
         }
     }
 
+// ! FALTA OPERACION !!!!!!!!
     cout << "Falta operacion `obtenerTodaLaInformacionDeUnHostal`. Presione enter para continuar." << endl;
     cin.ignore();
     cin.ignore(1000, '\n');

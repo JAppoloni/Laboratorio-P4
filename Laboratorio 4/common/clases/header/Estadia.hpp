@@ -77,6 +77,15 @@ public:
 	int obtenerID();
 	float calcularCosto();
 
+/**
+ * @brief  devuelve true si existe el comentario asociado a la estadia
+ * 
+ * @return true 
+ * @return false 
+ */
+	bool estaComentada();
+
+
 private:
 	DTFecha _checkIn;
 	DTFecha *_checkOut; // Puede ser NULL, es decir no ha terminado la estadía.

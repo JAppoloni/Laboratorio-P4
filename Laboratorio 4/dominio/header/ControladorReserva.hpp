@@ -17,7 +17,7 @@ private:
 public:
     static ControladorReserva *getInstancia();
     virtual void crearReserva(string hostal, DTFecha checkIn, DTFecha checkOut, bool esGrupal);
-    virtual set<DTHabitacion *> listarHabitacionesDisponibles();
+    virtual set<DTHabitacion *> listarHabitacionesDisponibles( string nombHost, DTFecha in, DTFecha fin);
     virtual void asignarHabitacionAReserva(int hab);
     virtual void asignarHuespedQueRealizaReserva(string correoHuesped);
     virtual void asignarHuespedAReservaGrupal(string correoHuesped);
@@ -27,8 +27,9 @@ public:
     virtual set<DTReserva *> listarReservas();
     virtual void seleccionarReservaAEliminar(int codigo);
     virtual void cancelarBaja();
-    virtual void confirmarBaja();
+    virtual void confirmarAccion();
 
+    bool habitacionDisponibleFecha(Habitacion * hab, DTFecha in, DTFecha out);
     set<DTReserva *> listarReservasHuesped(string email, string nomHostal);
     Reserva *getReserva(int codigo);
 

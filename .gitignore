@@ -35,3 +35,5 @@
 *.hpp.gch
 *.o
 executable
+
+.DS_Store

@@ -1,6 +1,4 @@
 #include "header/menuAltaHostal.hpp"
-#include <iostream>
-#include <string>
 
 using namespace std;
 
@@ -10,12 +8,12 @@ void menuAltaHostal()
     string direccion;
     string telefono;
 
-    cout << "Ingrese un nombre:" << endl;
-    cin >> nombre;
-    cout << "Ingrese una direccion:" << endl;
-    cin >> direccion;
-    cout << "Ingrese un telefono:" << endl;
-    cin >> telefono;
+    cout << "Ingrese un nombre: ";
+    nombre = leerString();
+    cout << "Ingrese una direccion: ";
+    direccion = leerString();
+    cout << "Ingrese un telefono: ";
+    telefono = leerString();
 
     DTHostal dataHostal = DTHostal(nombre, direccion, telefono);
     IControladorHostal* controlador = Fabrica().getControladorHostal();

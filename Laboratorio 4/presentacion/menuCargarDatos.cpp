@@ -90,7 +90,7 @@ void cargarDatos(bool primeraVez)
 
       DTHuesped *H1 = new DTHuesped("Sofia", "123", "sofia@mail.com", true);
       DTHuesped *H2 = new DTHuesped("Frodo", "123", "frodo@mail.com", true);
-      DTHuesped *H3 = new DTHuesped("Sam", "123", "sam@mail.com", false);
+      DTHuesped *H3 = new DTHuesped("Sam", "123", " sam@mail.com", false);
       DTHuesped *H4 = new DTHuesped("Merry", "123", "merry@mail.com", false);
       DTHuesped *H5 = new DTHuesped("Pippin", "123", "pippin@mail.com", false);
       DTHuesped *H6 = new DTHuesped("Seba", "123", "seba@mail.com", true);
@@ -298,13 +298,13 @@ void cargarDatos(bool primeraVez)
       // C2 ES2 H2 "Se pone peligroso de noche, no  recomiendo. Además no hay caja fuerte para guardar anillos. " 2 05/01/01 - 3am
       // C3 ES6 H6 "Había pulgas en la habitación. Que lugar más mamarracho!!" 1 15/06/22 - topepm
 
-      FechaActual = fechaSistema->getFecha();
-      controladorEstadia->seleccionarHostal(HO1.getNombre());
-      set<DTEstadia *> eliminar10 = controladorEstadia->indicarEmail(H1->getEmail());
-      controladorEstadia->seleccionarEstadia(posicion - 4); // codigo de la reserva de la estadia
-      fechaSistema->setFecha(DTFecha(00, 18, 11, 4, 2022, 3));
-      controladorEstadia->ingresarCalificacion(3, "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba cayendo. No vuelvo.");
-      controladorEstadia->notificarNuevaCalificacion(); // por el momento no hace nada porque falta que Carolina agrege unas cosas
+      // FechaActual = fechaSistema->getFecha();
+      // controladorEstadia->seleccionarHostal(HO1.getNombre());
+      // set<DTEstadia *> eliminar10 = controladorEstadia->indicarEmail(H1->getEmail());
+      // controladorEstadia->seleccionarEstadia(posicion - 4); // codigo de la reserva de la estadia
+      // fechaSistema->setFecha(DTFecha(00, 18, 11, 4, 2022, 3));
+      // controladorEstadia->ingresarCalificacion(3, "Un poco caro para lo que ofrecen. El famoso gimnasio era una caminadora (que hacía tremendo ruido) y 2 pesas, la piscina parecía el lago del Parque Rodó y el desayuno eran 2 tostadas con mermelada. Internet se pasaba cayendo. No vuelvo.");
+      // controladorEstadia->notificarNuevaCalificacion(); 
       controladorEstadia->seleccionarHostal(HO3.getNombre());
       set<DTEstadia *> eliminar11 = controladorEstadia->indicarEmail(H2->getEmail());
       controladorEstadia->seleccionarEstadia(posicion - 3);
@@ -382,7 +382,7 @@ void cargarDatos(bool primeraVez)
       freeSetEstadia(eliminar7);
       freeSetEstadia(eliminar8);
       freeSetEstadia(eliminar9);
-      freeSetEstadia(eliminar10);
+      // freeSetEstadia(eliminar10);
       freeSetEstadia(eliminar11);
       freeSetEstadia(eliminar12);
 
@@ -406,5 +406,5 @@ void cargarDatos(bool primeraVez)
    {
       cout << RED "\n Error: " << e.what() << NC << endl;
    }
-   presioneParaContinuar();
+   // presioneParaContinuar();
 }

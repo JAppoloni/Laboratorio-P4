@@ -6,7 +6,14 @@ DTEstadia::DTEstadia(int id, std::string email, DTFecha checkIn, DTFecha *checkO
 	_IDReserva = id;
 	_EmailHuesped = email;
 	_checkIn = checkIn;
-	_checkOut = checkOut;
+	if (checkOut != NULL)
+	{
+		_checkOut = new DTFecha(checkOut);
+	}
+	else
+	{
+		_checkOut = NULL;
+	}
 	_promo = promo;
 }
 

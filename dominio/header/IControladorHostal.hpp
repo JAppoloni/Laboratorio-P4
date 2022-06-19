@@ -20,6 +20,9 @@ public:
     virtual void liberarMemoria() = 0;                                        // alta habitacion
     virtual list<DTHostal *> calcularTopTres() = 0;                           // consultar top 3 hostales
     virtual list<DTCalificacion *> consultarHostal(string nom) = 0;           // consultar top 3 hostales
+    virtual DTHostal* obtenerTodaInformacionDeHostal(string pnombreHostal)= 0;// consulta de Hostal      
+    virtual list<DTEstadia >* obtenerEstadiasDeHostal(string nom) = 0;        // consulta de Hostal
+    virtual list<DTHabitacion>* listarHabitacionesHostal (string nom) = 0;    // consulta de Hostal 
 
     // para pruebas
     virtual set<DTHostal *> listarTodosLosHostalesDelSistema() = 0;

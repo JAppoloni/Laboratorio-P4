@@ -14,6 +14,7 @@
 #include "menuCalificarEstadia.hpp"
 #include "menuComentarCalificacion.hpp"
 #include "menuRegistrarEstadia.hpp"
+#include "menuFinalizarEstadia.hpp"
 #include <stdlib.h>
 #include <string>
 #include <iostream>

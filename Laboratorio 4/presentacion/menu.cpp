@@ -101,7 +101,7 @@ void mainMenu()
             menuRegistrarEstadia();
             break;
         case 8:
-            notImplementedMessage();
+            menuFinalizarEstadia();
             break;
         case 9:
             menuCalificarEstadia();

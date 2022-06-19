@@ -3,57 +3,54 @@
 
 void consultaNotificaciones()
 {
-    IControladorUsuario * CU = Fabrica().getControladorUsuario();
-    set<DTEmpleado*> empleados = CU->listarEmpleados();
+    IControladorUsuario *CU = Fabrica().getControladorUsuario();
+    set<DTEmpleado *> empleados = CU->listarEmpleados();
 
     system("clear");
-    cout << "Listado de emails de empleados del sistema: " << endl << endl;
+    cout << "Listado de emails de empleados del sistema: " << endl
+         << endl;
 
-    for (auto itr : empleados) 
+    if (empleados.empty())
     {
-        cout << itr->getEmail() << endl; 
+        cout << "No hay empleados cargados" << endl;
     }
-
-    DTEmpleado* empleadoSeleccionado;
-    bool seleccionCorrecta = false;
-    while (!seleccionCorrecta) 
-    {
-        string emailIngresado;
-        cout << endl << "Seleccione uno de los emails para listar sus notificaciones: ";
-        cin >> emailIngresado;
-
-        empleadoSeleccionado = consultarEmpladoExiste(empleados, emailIngresado);
-        if (empleadoSeleccionado != nullptr) 
-        {
-            seleccionCorrecta = true;
-        }
-        else
-        {
-            cout << "El email ingresado no corresponde a un empleado del sistema." << endl;
-        }
-    }
-
-    set<DTCalificacion *> notif = CU->listarNotificacionesEmpleado(empleadoSeleccionado->getEmail());
-    if(!notif.empty())
-    {
-        cout << "Lista de notificaciones: " << endl;
-        for(auto it : notif)
-        {
-            cout << *it << endl;
-        }
-    } 
     else
     {
-        cout << "El empleado no tiene notificaciones. " << endl;
-    }
-    for(auto it : notif)
-    {
-        delete it;
-        it = nullptr;
-    }
-    notif.clear();
+        int minElem = 1;
+        int maxElem = 0;
 
-    cout << endl;
-    cin.ignore();
+        for (auto it : empleados)
+        {
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
+        }
+        cout << "Ingrese el numero del empleado ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+        int numEmpleado = leerIntIntervalo(minElem, maxElem);
+        string empleadoSeleccionado;
+        for (auto it : empleados)
+        {
+            if (minElem == numEmpleado)
+            {
+                empleadoSeleccionado = it->getEmail();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
+        }
+        empleados.clear();
+        
+        cout << "El empleado seleccionado es: " << empleadoSeleccionado << endl;
+                set<DTCalificacion *> notif = CU->listarNotificacionesEmpleado(empleadoSeleccionado);
+       
+        cout << "Lista de notificaciones: " << endl;
+        for (auto it : notif)
+        {
+            cout << *it << endl;
+            delete it;
+            it = nullptr;
+        }
+        notif.clear();
+    }
+
     presioneParaContinuar();
 }

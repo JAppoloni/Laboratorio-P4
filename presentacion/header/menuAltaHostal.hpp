@@ -3,6 +3,8 @@
 
 #include "../../dominio/header/Fabrica.hpp"
 #include "../../common/datatype/header/DTHostal.hpp"
+#include "utils.hpp"
+
 
 void menuAltaHostal();
 

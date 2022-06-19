@@ -89,7 +89,7 @@ string leerEmail()
       if (Email_check(cadena))
          valido = true;
       else
-         cout << "\n Ingrese un Email correcto: " << endl;
+         cout << "\n Ingrese un Email correcto: ";
    }
    return cadena;
 }
@@ -164,7 +164,7 @@ int leerIntPositivo()
          string aux;
          getline(cin, aux);
          num = stoi(aux);
-         if (num < 0)
+         if (num <= 0)
          {
             std::cout << "\n Ingrese un número positivo: ";
          }
@@ -241,7 +241,7 @@ float leerFloatPositivo()
          string aux;
          getline(cin, aux);
          num = stoi(aux);
-         if (num < 0)
+         if (num <= 0)
          {
             std::cout << "\n Ingrese un número positivo: ";
          }

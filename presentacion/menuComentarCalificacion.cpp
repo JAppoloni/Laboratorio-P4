@@ -1,97 +1,93 @@
 #include "header/menuComentarCalificacion.hpp"
 
-DTCalificacion* buscarCalificacion(set<DTCalificacion*> cals, string idReserva, string email)
-{
-    try 
-    {
-        for (set<DTCalificacion *>::iterator itr = cals.begin(); itr != cals.end(); itr++) 
-        {
-            int intID = stoi(idReserva);
-            if (intID == (*itr)->getIDReserva() && email == (*itr)->getIDHuesped())
-            {
-                return *itr;
-            }
-        }
-    } 
-    catch (const std::exception &e) 
-    {
-    }
-
-    return nullptr;
-}
-
 void menuComentarCalificacion()
 {
-    IControladorUsuario* controlador = Fabrica().getControladorUsuario();
-    set<DTEmpleado*> empleados = controlador->listarEmpleados();
-    
-    cout << "Listado de emails de empleados del sistema: " << endl << endl;
+    IControladorUsuario *controlador = Fabrica().getControladorUsuario();
+    set<DTEmpleado *> empleados = controlador->listarEmpleados();
 
-    for (auto itr : empleados) 
+    cout << "Listado de emails de empleados del sistema: " << endl
+         << endl;
+
+    if (empleados.empty())
     {
-        cout << itr->getEmail() << endl; 
-    }
-    
-    string email;
-    cout << endl << "Ingrese el mail del empleado que realiza el comentario:" << endl;
-    email = leerString();
-
-    set<DTCalificacion*> calificaciones = controlador->obtenerComentariosSinResponderEmpleado(email);
-
-    if(calificaciones.empty())
-    {
-        cout << "no hay comentarios sin responder para el empleado elegido" << endl;
-        cin.ignore(); 
-        presioneParaContinuar();
+        cout << "No hay empleados cargados" << endl;
     }
     else
     {
-        cout << "Comentarios sin responder para el empleado ingresado:" << endl << endl;
-        for (auto calificacion : calificaciones)
+        int minElem = 1;
+        int maxElem = 0;
+
+        for (auto it : empleados)
         {
-            string idReserva = to_string(calificacion->getIDReserva());
-            string puntaje = to_string(calificacion->getCalificacion());
-            string comentario = calificacion->getComentario();
-            string emailHuesped = calificacion->getIDHuesped();
-
-            cout << idReserva << " - email del huesped: " << emailHuesped << " - puntaje: " << puntaje << " - comentario: " << comentario << endl;
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
         }
-
-        cout << endl;
-
-        string idReservaIngresado;
-        string emailIngresado;
-        bool seleccionCorrecta = false;
-        while (!seleccionCorrecta) 
+        cout << "Ingrese el email del empleado que realiza el comentario ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+        int numEmpleado = leerIntIntervalo(minElem, maxElem);
+        string email;
+        for (auto it : empleados)
         {
-            cout << endl << "Ingrese el ID de la reserva de la estadia a calificar:" << endl;
-            idReservaIngresado = leerString();
-            cout << endl << "Ingrese el email del huesped de la estadia a calificar:" << endl;
-            emailIngresado = leerString();
-
-            DTCalificacion* calificacionIngresada = buscarCalificacion(calificaciones, idReservaIngresado, emailIngresado);
-            if (calificacionIngresada != nullptr)
+            if (minElem == numEmpleado)
             {
-                seleccionCorrecta = true;
+                email = it->getEmail();
             }
-            else
-            {
-                cout << "No existe una calificacion con los datos ingresados." << endl;
-            }
+            minElem++;
+            delete it;
+            it = nullptr;
         }
+        empleados.clear();
+        cout << "El empleado seleccionado es: " << email << endl;
 
-        cout << endl << "Ingrese un comentario en respuesta a la calificacion seleccionada:" << endl;
-        string respuesta = leerString();
+        set<DTCalificacion *> calificaciones = controlador->obtenerComentariosSinResponderEmpleado(email);
 
-        controlador->responderCalificacion(stoi(idReservaIngresado), emailIngresado, respuesta);
+        if (calificaciones.empty())
+        {
+            cout << "no hay comentarios sin responder para el empleado elegido" << endl;
+        }
+        else
+        {
+            cout << "Comentarios sin responder para el empleado ingresado:" << endl
+                 << endl;
+            minElem = 1;
+            maxElem = 0;
+            for (auto calificacion : calificaciones)
+            {
+                string idReserva = to_string(calificacion->getIDReserva());
+                string puntaje = to_string(calificacion->getCalificacion());
+                string comentario = calificacion->getComentario();
+                string emailHuesped = calificacion->getIDHuesped();
 
-        cout << endl << "Respuesta ingresada correctamente. Presione enter para continuar." << endl;
-        cin.ignore();
+                maxElem++;
+                cout << GRN << maxElem << NC << ".  ID Reserva: " << idReserva << " - email del huesped: " << emailHuesped << " - puntaje: " << puntaje << " - comentario: " << comentario << endl;
+            }
+
+            cout << "Ingrese el ID del comentario que desea responder ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+            int numComentario = leerIntIntervalo(minElem, maxElem);
+
+            int IDReserva = 0;
+            string email = "";
+            for (auto calificacion : calificaciones)
+            {
+                if (minElem == numComentario)
+                {
+                    IDReserva = calificacion->getIDReserva();
+                    email = calificacion->getIDHuesped();
+                }
+                minElem++;
+                delete calificacion;
+                calificacion = nullptr;
+            }
+            calificaciones.clear();
+            cout << "El comentario seleccionado es: " << IDReserva << " - email del huesped: " << email << endl;
+
+            cout << "Ingrese un comentario en respuesta a la calificacion seleccionada:";
+            string respuesta = leerString();
+
+            controlador->responderCalificacion(IDReserva, email, respuesta);
+
+            cout << endl
+                 << "Respuesta ingresada correctamente." << endl;
+        }
     }
-
-    for (auto cal : calificaciones)
-    {
-        delete cal;
-    }
-    calificaciones.clear();
+    presioneParaContinuar();
 }

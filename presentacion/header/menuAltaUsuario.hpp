@@ -6,6 +6,7 @@
 #include "../../common/datatype/header/DTHuesped.hpp"
 #include "../../dominio/header/Fabrica.hpp"
 #include "../../common/clases/header/Cargo.hpp"
+#include "utils.hpp"
 
 void menuAltaUsuario();
 

@@ -1,8 +1,8 @@
 #include "header/menuEliminarSuscripcion.hpp"
 
-DTEmpleado* consultarEmpladoExiste(set<DTEmpleado*> empleados, string email) 
+DTEmpleado *consultarEmpladoExiste(set<DTEmpleado *> empleados, string email)
 {
-    for (set<DTEmpleado*>::iterator itr = empleados.begin(); itr != empleados.end(); itr++) 
+    for (set<DTEmpleado *>::iterator itr = empleados.begin(); itr != empleados.end(); itr++)
     {
         if ((*itr)->getEmail() == email)
         {
@@ -15,39 +15,44 @@ DTEmpleado* consultarEmpladoExiste(set<DTEmpleado*> empleados, string email)
 
 void eliminarSuscripcion()
 {
-    IControladorUsuario * CU = Fabrica().getControladorUsuario();
-    set<DTEmpleado*> empleados = CU->listarEmpleados();
+    IControladorUsuario *CU = Fabrica().getControladorUsuario();
+    set<DTEmpleado *> empleados = CU->listarEmpleados();
 
     system("clear");
-    cout << "Listado de emails de empleados del sistema: " << endl << endl;
+    cout << "Listado de emails de empleados del sistema: " << endl
+         << endl;
 
-    for (auto itr : empleados) 
+    if (empleados.empty())
     {
-        cout << itr->getEmail() << endl; 
+        cout << "No hay empleados cargados" << endl;
     }
-
-    DTEmpleado* empleadoSeleccionado;
-    bool seleccionCorrecta = false;
-    while (!seleccionCorrecta) 
+    else
     {
-        string emailIngresado;
-        cout << endl << "Seleccione uno de los emails para emliminar suscripcion: ";
-        cin >> emailIngresado;
+        int minElem = 1;
+        int maxElem = 0;
 
-        empleadoSeleccionado = consultarEmpladoExiste(empleados, emailIngresado);
-        if (empleadoSeleccionado != nullptr) 
+        for (auto it : empleados)
         {
-            seleccionCorrecta = true;
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
         }
-        else
+        cout << "Ingrese el numero del empleado ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+        int numEmpleado = leerIntIntervalo(minElem, maxElem);
+        string empleadoSeleccionado;
+        for (auto it : empleados)
         {
-            cout << "El email ingresado no corresponde a un empleado del sistema." << endl;
+            if (minElem == numEmpleado)
+            {
+                empleadoSeleccionado = it->getEmail();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
         }
+        empleados.clear();
+        cout << "El empleado seleccionado es: " << empleadoSeleccionado << endl;
+        CU->eliminarSuscripcion(empleadoSeleccionado);
+        cout << "Suscripcion eliminada con exito" << endl;
     }
-
-    CU->eliminarSuscripcion(empleadoSeleccionado->getEmail());
-
-    cout << "Suscripcion eliminada con exito" << endl;
-    cin.ignore();
     presioneParaContinuar();
 }

@@ -125,7 +125,7 @@ set<DTEstadia *> ControladorEstadia::indicarEmail(string email)
         for (auto it : estadias)
         {
             string it_nombreHost = it->getReservaEstadia()->getHabitacionReserva()->getHostal()->getNombre();
-            if (it->getHuespedEstadia()->getEmail() == email && it->getFinalizacion() && it->estaComentada() && it_nombreHost == nomHosRecordado)
+            if (it->getHuespedEstadia()->getEmail() == email && it->getFinalizacion() && !it->estaComentada() && it_nombreHost == nomHosRecordado)
             {
                 DTEstadia *estadiaAgregar = new DTEstadia(it->getReservaEstadia()->getCodigo(),
                                                           it->getHuespedEstadia()->getEmail(),
@@ -322,7 +322,6 @@ void ControladorEstadia::liberarRegistros()
     {
         for (auto it : empleados)
         {
-            delete it;
             it = nullptr;
         }
         empleados.clear();

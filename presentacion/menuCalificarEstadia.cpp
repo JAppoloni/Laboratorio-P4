@@ -1,10 +1,10 @@
 #include "header/menuCalificarEstadia.hpp"
 
-DTEstadia* buscarIdEnEstadias(set<DTEstadia*> estadias, string id)
+DTEstadia *buscarIdEnEstadias(set<DTEstadia *> estadias, string id)
 {
-    try 
+    try
     {
-        for (set<DTEstadia *>::iterator itr = estadias.begin(); itr != estadias.end(); itr++) 
+        for (set<DTEstadia *>::iterator itr = estadias.begin(); itr != estadias.end(); itr++)
         {
             int intID = stoi(id);
             if (intID == (*itr)->getID())
@@ -12,8 +12,8 @@ DTEstadia* buscarIdEnEstadias(set<DTEstadia*> estadias, string id)
                 return *itr;
             }
         }
-    } 
-    catch (const std::exception &e) 
+    }
+    catch (const std::exception &e)
     {
     }
 
@@ -25,139 +25,131 @@ void menuCalificarEstadia()
     system("clear");
 
     Fabrica fabrica = Fabrica();
-    IControladorHostal* controladorHostal = fabrica.getControladorHostal();
-    list<DTHostal*> hostales = controladorHostal->obtenerHostales();
+    IControladorHostal *controladorHostal = fabrica.getControladorHostal();
+    list<DTHostal *> hostales = controladorHostal->obtenerHostales();
 
-    for (list<DTHostal*>::iterator iter = hostales.begin(); iter != hostales.end(); iter++) 
-    {
-        cout << (*iter)->getNombre() << endl;
-    }
-
-    if (hostales.empty()) 
+    if (hostales.empty())
     {
         cout << "No hay hostales disponibles.";
     }
     else
     {
-        string nombreHostal;
-        bool seleccionCorrecta = false;
+        int minElem = 1;
+        int maxElem = 0;
 
-        while (!seleccionCorrecta) 
+        cout << "Hostales: " << endl;
+        for (auto it : hostales)
         {
-            cout << endl << "Ingrese el nombre del hostal a consultar:" << endl;
-            nombreHostal = leerString();
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
+        }
+        cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
 
-            if (buscarNombreDeHostal(hostales, nombreHostal))
+        int numHostal = leerIntIntervalo(minElem, maxElem);
+        string nombreHostal;
+
+        for (auto it : hostales)
+        {
+            if (minElem == numHostal)
             {
-                seleccionCorrecta = true;
+                nombreHostal = it->getNombre();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
+        }
+        hostales.clear();
+        cout << "El hostal seleccionado es: " << nombreHostal << endl;
+
+        IControladorEstadia *controladorEstadia = fabrica.getControladorEstadia();
+        controladorEstadia->seleccionarHostal(nombreHostal);
+
+        cout << endl
+             << "Emails de los huespedes en el sitema: " << endl;
+
+        IControladorUsuario *CU = fabrica.getControladorUsuario();
+        set<DTHuesped *> huespedes = CU->listarHuespedes();
+
+        if (!huespedes.empty())
+        {
+            minElem = 1;
+            maxElem = 0;
+
+            for (auto it : huespedes)
+            {
+                maxElem++;
+                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
+            }
+            cout << "Ingrese el numero del huesped ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+            int numHuesped = leerIntIntervalo(minElem, maxElem);
+            string email;
+            for (auto it : huespedes)
+            {
+                if (minElem == numHuesped)
+                {
+                    email = it->getEmail();
+                }
+                minElem++;
+                delete it;
+                it = nullptr;
+            }
+            huespedes.clear();
+            cout << "El huesped seleccionado es: " << email << endl;
+
+            set<DTEstadia *> estadias = controladorEstadia->indicarEmail(email);
+
+            if (estadias.empty())
+            {
+                cout << "El huesped no tiene estadias Abiertas en el hostal seleccionado" << endl;
             }
             else
             {
-                cout << "No existe un hostal con el nombre seleccionado." << endl;
+                minElem = 1;
+                maxElem = 0;
+                cout << "Estadias del huesped: " << endl;
+                for (auto it : estadias)
+                {
+                    maxElem++;
+                    cout << GRN << maxElem << NC << ". " << it->getID() << endl;
+                }
+
+                cout << "Ingrese el numero de la estadia ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+                int numEstadia = leerIntIntervalo(minElem, maxElem);
+                int IDReserva;
+
+                for (auto it : estadias)
+                {
+                    if (minElem == numEstadia)
+                    {
+                        IDReserva = it->getID();
+                    }
+                    minElem++;
+                    delete it;
+                    it = nullptr;
+                }
+
+                estadias.clear();
+
+                controladorEstadia->seleccionarEstadia(IDReserva);
+
+                cout << "Ingrese el puntaje de la calificacion:";
+                int puntaje = leerIntIntervalo(1, 5);
+                cout << "Ingrese un comentario sobre la estadia:";
+                string comentario = leerString();
+
+                controladorEstadia->ingresarCalificacion(puntaje, comentario);
+                controladorEstadia->notificarNuevaCalificacion();
+
+                controladorEstadia = nullptr;
+                cout << endl;
+                cout << "Calificacion ingresada satisfactoriamente" << endl;
             }
         }
-
-        IControladorEstadia* controladorEstadia = fabrica.getControladorEstadia();
-        controladorEstadia->seleccionarHostal(nombreHostal);
-
-        cout << endl << "Emails de los huespedes en el sitema: " << endl;
-
-        IControladorUsuario* CU = fabrica.getControladorUsuario();
-        set<DTHuesped*> huespedes = CU->listarHuespedes();
-
-        for(auto it : huespedes)
+        else
         {
-        cout << it->getEmail() << endl;
+            cout << "No hay huespedes en esta opción." << endl;
         }
-        
-        string email;
-        cout << endl << "Ingrese el correo del usuario cuya estadia desea comentar." << endl;
-        email = leerString();
-
-        set<DTEstadia*> estadias = controladorEstadia->indicarEmail(email);
-
-        if (estadias.empty()) 
-        {
-            cout << "No existen estadias para el correo seleccionado." << endl;
-        }
-        else 
-        {
-            cout << endl << "Estadias del huesped seleccionado para el hostal seleccionado: " << endl << endl;
-
-            for (auto estadia : estadias)
-            {
-                cout << estadia->getID() << " - Del " << estadia->getCheckIn() << " al " << *(estadia->getCheckOut()) << endl;
-            }
-
-            string idSeleccionado;
-            DTEstadia* estadiaSeleccionada;
-
-            seleccionCorrecta = false;
-            while (!seleccionCorrecta) 
-            {
-                cout << endl << "Ingrese el ID de la estadia a calificar:" << endl;
-                idSeleccionado = leerString();
-
-                estadiaSeleccionada = buscarIdEnEstadias(estadias, idSeleccionado);
-                if (estadiaSeleccionada != nullptr)
-                {
-                    seleccionCorrecta = true;
-                }
-                else
-                {
-                    cout << "No existe una estadia con el ID seleccionado." << endl;
-                }
-            }
-
-            controladorEstadia->seleccionarEstadia(estadiaSeleccionada->getID());
-
-            int puntaje;
-            string puntajeIngresado;
-            string comentario;
-            cout << "Ingrese el puntaje de la calificacion:" << endl;
-            puntajeIngresado = leerString();
-            cout << "Ingrese un comentario sobre la estadia:" << endl;
-            comentario = leerString();
-
-            try 
-            {
-                puntaje = stoi(puntajeIngresado);
-            }
-            catch (const std::exception &e)
-            {
-                cout << "El puntaje ingresado es invalido. Presione enter para continuar." << endl;
-                cin.ignore();
-                for (auto hostal : hostales)
-                {
-                    delete hostal;
-                }
-
-                for (auto estadia : estadias)
-                {
-                    delete estadia;
-                }
-                return;
-            }
-
-            controladorEstadia->ingresarCalificacion(puntaje, comentario);
-            controladorEstadia->notificarNuevaCalificacion();
-
-            cout << endl;
-            cout << "Calificacion ingresada satisfactoriamente" << endl;
-        }
-
-        for (auto estadia : estadias)
-            {
-                delete estadia;
-            }
-            estadias.clear();
     }
-
+    controladorHostal = nullptr;
     presioneParaContinuar();
-
-    for (auto hostal : hostales)
-    {
-        delete hostal;
-    }
-    hostales.clear();
 }

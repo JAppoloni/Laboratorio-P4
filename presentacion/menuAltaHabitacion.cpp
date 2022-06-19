@@ -4,110 +4,83 @@
 
 using namespace std;
 
-void menuAltaHabitacion() 
+void menuAltaHabitacion()
 {
-    IControladorHostal* controlador = Fabrica().getControladorHostal();
-    list<DTHostal*> hostales = controlador->obtenerHostales();
+    IControladorHostal *controlador = Fabrica().getControladorHostal();
+    list<DTHostal *> listaHostales = controlador->obtenerHostales();
 
-    if (hostales.empty()) 
+    if (listaHostales.empty())
     {
-        cout << "No hay hostales disponibles. Presione enter para continuar.";
-        cin.ignore(1000, '\n');
-        return;
+        cout << "No hay hostales cargados" << endl;
     }
-
-    for (list<DTHostal *>::iterator itr = hostales.begin(); itr != hostales.end(); itr++) 
+    else
     {
-        cout << (*itr)->getNombre() << endl;
-    }
+        int minElem = 1;
+        int maxElem = 0;
 
-    string nombreHostal;
-    bool seleccionCorrecta = false;
-
-    while (!seleccionCorrecta) {
-        cout << endl << "Ingrese el nombre del hostal al que se agregara la nueva habitacion:" << endl;
-        nombreHostal = leerString();
-
-        if (buscarNombreDeHostal(hostales, nombreHostal))
+        cout << "Hostales: " << endl;
+        for (auto it : listaHostales)
         {
-            seleccionCorrecta = true;
+            maxElem++;
+            cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
+        }
+        cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+
+        int numHostal = leerIntIntervalo(minElem, maxElem);
+        string nombreHostal;
+
+        for (auto it : listaHostales)
+        {
+            if (minElem == numHostal)
+            {
+                nombreHostal = it->getNombre();
+            }
+            minElem++;
+            delete it;
+            it = nullptr;
+        }
+        listaHostales.clear();
+        cout << "El hostal seleccionado es: " << nombreHostal;
+        controlador->buscarHostal(nombreHostal);
+
+        cout << "Ingrese el numero de la nueva habitacion.";
+        int numero = leerIntPositivo();
+        cout << "Ingrese la capacidad de la nueva habitacion.";
+        int capacidad = leerIntPositivo();
+        cout << "Ingrese el costo de la nueva habitacion.";
+        float costo = leerFloatPositivo();
+
+        controlador->nuevaHabitacion(numero, capacidad, costo);
+
+        string confirmacion;
+        bool seleccionCorrecta = false;
+        while (!seleccionCorrecta)
+        {
+            cout << "Desea confirmar el alta? (S/N)";
+            confirmacion = leerString();
+
+            if (confirmacion != "S" && confirmacion != "s" && confirmacion != "N" && confirmacion != "n")
+            {
+                cout << "Seleccione una de las opciones disponibles." << endl;
+            }
+            else
+            {
+                seleccionCorrecta = true;
+            }
+        }
+
+        if (confirmacion == "S" || confirmacion == "s")
+        {
+            controlador->crearHabitacion();
+            cout << "Habitacion creada correctamente.";
         }
         else
         {
-            cout << "No existe un hostal con el nombre seleccionado." << endl;
+            controlador->liberarMemoria();
+            cout << "Alta cancelada correctamente.";
         }
     }
-
-    controlador->buscarHostal(nombreHostal);
-
-    int numero;
-    int capacidad;
-    float costo;
-
-    bool ingresoCorrecto = false;
-    while (!ingresoCorrecto)
-    {
-        string numeroIngresado;
-        string capacidadIngresado;
-        string costoIngresado;
-
-        cout << "Ingrese el numero de la nueva habitacion." << endl;
-        cin >> numeroIngresado;
-        cout << "Ingrese la capacidad de la nueva habitacion." << endl;
-        cin >> capacidadIngresado;
-        cout << "Ingrese el costo de la nueva habitacion." << endl;
-        cin >> costoIngresado;
-
-        try 
-        {
-            numero = stoi(numeroIngresado);
-            capacidad = stoi(capacidadIngresado);
-            costo = stof(costoIngresado);
-            ingresoCorrecto = true;
-        }
-        catch (exception const &excep)
-        {
-            cout << "Los datos fueron ingresados en un formato no valido. Presione enter para continuar." << endl;
-            cin.ignore();
-            cin.ignore(1000, '\n');
-        }
-    }
-
-    controlador->nuevaHabitacion(numero, capacidad, costo);
-
-    string confirmacion;
-    seleccionCorrecta = false;
-    while (!seleccionCorrecta)
-    {
-        cout << "Desea confirmar el alta? (S/N)" << endl;
-        cin >> confirmacion;
-
-        if (confirmacion != "S" && confirmacion != "s" && confirmacion != "N" && confirmacion != "n")
-        {
-            cout << "Seleccione una de las opciones disponibles." << endl;
-        }
-        else 
-        {
-            seleccionCorrecta = true;
-        }
-    }
-
-    if (confirmacion == "S" || confirmacion == "s")
-    {
-        controlador->crearHabitacion();
-        cout << "Habitacion creada correctamente.";
-        
-    } else {
-        controlador->liberarMemoria();
-        cout << "Alta cancelada correctamente.";
-    }
-
+    controlador = nullptr;
     cin.ignore();
     cin.ignore(1000, '\n');
-
-    for (auto hostal : hostales)
-    {
-        delete hostal;
-    }
-    hostales.clear();
 }

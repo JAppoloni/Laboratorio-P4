@@ -94,5 +94,6 @@ void menuAsignarEmpleadoAHostal()
    }
 
    controladorHostal = nullptr;
+   cin.ignore();
    presioneParaContinuar();
 }

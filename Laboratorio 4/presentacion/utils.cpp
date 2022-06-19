@@ -321,3 +321,16 @@ bool buscarNombreDeHostal(list<DTHostal*> hostales, string nombre)
 
     return false;
 }
+
+DTHostal* buscarHostal(list<DTHostal*> hostales, string nombre)
+{
+    for (list<DTHostal *>::iterator itr = hostales.begin(); itr != hostales.end(); itr++) 
+    {
+        if ((*itr)->getNombre() == nombre)
+        {
+            return (*itr);
+        }
+    }
+
+    return nullptr;
+}

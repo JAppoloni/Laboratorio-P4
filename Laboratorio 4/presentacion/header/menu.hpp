@@ -13,6 +13,7 @@
 #include "menuTopTres.hpp"
 #include "menuCalificarEstadia.hpp"
 #include "menuComentarCalificacion.hpp"
+#include "menuRegistrarEstadia.hpp"
 #include <stdlib.h>
 #include <string>
 #include <iostream>

@@ -98,7 +98,7 @@ void mainMenu()
             menuTopTres();
             break;
         case 7:
-            notImplementedMessage();
+            menuRegistrarEstadia();
             break;
         case 8:
             notImplementedMessage();

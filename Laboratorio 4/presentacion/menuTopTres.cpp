@@ -19,7 +19,7 @@ void menuTopTres()
 {
     IControladorHostal* controlador = Fabrica().getControladorHostal();
 
-    list<DTHostal*> topTres = controlador->calcularTopTres(); // Tira segmentation fault
+    list<DTHostal*> topTres = controlador->calcularTopTres();
 
     if (topTres.empty()) 
     {

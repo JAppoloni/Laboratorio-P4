@@ -98,7 +98,7 @@ DTEmpleado Empleado::getDatatype()
 
 DTEmpleado *Empleado::getDatatypeptr()
 {
-  return new DTEmpleado(nombre, email, contrasena, cargo);
+  return new DTEmpleado(nombre, contrasena, email, cargo);
 }
 
 void Empleado::agregarNotificacion(Calificacion *c)

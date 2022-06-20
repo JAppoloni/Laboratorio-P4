@@ -51,8 +51,8 @@ void mainMenu()
     bool exit = false;
     bool datosCargados = false;
 
-    cargarDatos(!datosCargados);
-    datosCargados = !false;
+    // cargarDatos(!datosCargados);
+    // datosCargados = !false;
 
     while (!exit)
     {

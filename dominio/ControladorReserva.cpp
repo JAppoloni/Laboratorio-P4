@@ -162,7 +162,7 @@ void ControladorReserva::seleccionarHostal(string nom)
 set<DTReserva *> ControladorReserva::listarReservas()
 {
     set<DTReserva *> res;
-    if (!_nombreRecordado_Hostal_CReserva.empty())
+    if (!reservas.empty())
     {
         for (auto it : reservas)
         {
@@ -177,17 +177,31 @@ set<DTReserva *> ControladorReserva::listarReservas()
                                                                aux->getCheckOut(),
                                                                aux->getEstado(),
                                                                aux->calcularCosto(),
+                                                               new DTHabitacion(aux->getHabitacionReserva()->getNumero(), aux->getHabitacionReserva()->getPrecio(), aux->getHabitacionReserva()->getCapacidad()),
+                                                               aux->getHuespedReserva()->getDatatypeptr(),
                                                                aux->getPago());
                     res.insert(nuevo);
                 }
                 else
                 {
                     ReservaGrupal *aux = dynamic_cast<ReservaGrupal *>(it.second);
+                    list<DTHuesped> * huespedes = nullptr;
+                    if(!aux->getListaHuesped().empty())
+                    {
+                        huespedes = new list<DTHuesped>;
+                        for(auto itt : aux->getListaHuesped())
+                        {
+                            huespedes->push_back(DTHuesped(itt->getNombre(), itt->getContrasena(), itt->getEmail(), itt->getEsFinger()));
+                        }
+                    }
                     DTReserva *nuevo = new DTReservaGrupal(aux->getCodigo(),
                                                            aux->getCheckIn(),
                                                            aux->getCheckOut(),
                                                            aux->getEstado(),
-                                                           aux->calcularCosto());
+                                                           aux->calcularCosto(),
+                                                           new DTHabitacion(aux->getHabitacionReserva()->getNumero(), aux->getHabitacionReserva()->getPrecio(), aux->getHabitacionReserva()->getCapacidad()),
+                                                           aux->getHuespedReserva()->getDatatypeptr(),
+                                                           huespedes);
                     res.insert(nuevo);
                 };
             };
@@ -238,10 +252,10 @@ void ControladorReserva::confirmarAccion()
 bool ControladorReserva::habitacionDisponibleFecha(Habitacion * hab, DTFecha in, DTFecha out)
 {
     for(auto it : reservas){
-        if(it.second->getHabitacionReserva() == hab  && (in > it.second->getCheckOut() || out < it.second->getCheckIn()))
+        if(it.second->getHabitacionReserva() == hab  && !(in > it.second->getCheckOut() || out < it.second->getCheckIn()))
         {
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }

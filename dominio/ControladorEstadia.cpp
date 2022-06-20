@@ -256,7 +256,7 @@ DTCalificacion ControladorEstadia::buscarCalificacion()
 {
     for (auto it : estadias)
     {
-        if (it->getReservaEstadia()->getCodigo() == estadiaRecordada && it->getHuespedEstadia()->getEmail() == emailRecordado)
+        if (it->getReservaEstadia()->getCodigo() == estadiaRecordada && it->getHuespedEstadia()->getEmail() == emailRecordado && it->getCalificacionEstadia() != nullptr)
         {
             return it->getCalificacionEstadia()->getDataType();
         };

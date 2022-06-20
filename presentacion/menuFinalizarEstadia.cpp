@@ -54,8 +54,8 @@ void menuFinalizarEstadia()
 
             for (auto it : huespedes)
             {
-                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
                 maxElem++;
+                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
             }
             cout << "Ingrese el numero del huespede correspondiente a la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :";
             int numHuespede = leerIntIntervalo(minElem, maxElem);
@@ -123,5 +123,5 @@ void menuFinalizarEstadia()
     {
         cout << "No hay hostales registrados en el sistema." << endl;
     }
-    presioneParaContinuar();
+    cin.ignore();
 }

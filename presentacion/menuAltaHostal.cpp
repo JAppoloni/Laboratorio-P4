@@ -29,6 +29,5 @@ void menuAltaHostal()
     }
 
     cout << "Presione enter para continuar." << endl;
-    cin.ignore();
     cin.ignore(1000, '\n');
 }

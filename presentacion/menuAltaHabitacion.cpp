@@ -40,14 +40,14 @@ void menuAltaHabitacion()
             it = nullptr;
         }
         listaHostales.clear();
-        cout << "El hostal seleccionado es: " << nombreHostal;
+        cout << "El hostal seleccionado es: " << nombreHostal << endl << endl;
         controlador->buscarHostal(nombreHostal);
 
-        cout << "Ingrese el numero de la nueva habitacion.";
+        cout << "Ingrese el numero de la nueva habitacion: ";
         int numero = leerIntPositivo();
-        cout << "Ingrese la capacidad de la nueva habitacion.";
+        cout << "Ingrese la capacidad de la nueva habitacion: ";
         int capacidad = leerIntPositivo();
-        cout << "Ingrese el costo de la nueva habitacion.";
+        cout << "Ingrese el costo de la nueva habitacion: ";
         float costo = leerFloatPositivo();
 
         controlador->nuevaHabitacion(numero, capacidad, costo);
@@ -81,6 +81,5 @@ void menuAltaHabitacion()
         }
     }
     controlador = nullptr;
-    cin.ignore();
     cin.ignore(1000, '\n');
 }

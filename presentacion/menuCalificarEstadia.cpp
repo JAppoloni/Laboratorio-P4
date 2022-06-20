@@ -132,9 +132,9 @@ void menuCalificarEstadia()
 
                 controladorEstadia->seleccionarEstadia(IDReserva);
 
-                cout << "Ingrese el puntaje de la calificacion:";
+                cout << "Ingrese el puntaje de la calificacion: ";
                 int puntaje = leerIntIntervalo(1, 5);
-                cout << "Ingrese un comentario sobre la estadia:";
+                cout << "Ingrese un comentario sobre la estadia: ";
                 string comentario = leerString();
 
                 controladorEstadia->ingresarCalificacion(puntaje, comentario);

@@ -54,8 +54,8 @@ void menuRegistrarEstadia()
 
             for (auto it : huespedes)
             {
-                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
                 maxElem++;
+                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
             }
             cout << "Ingrese el numero del huespede ( " << RED << minElem << " - " << maxElem << NC << " ) :";
             int numHuespede = leerIntIntervalo(minElem, maxElem);
@@ -82,8 +82,8 @@ void menuRegistrarEstadia()
                      << "Reservas: " << endl;
                 for (auto it : reservas)
                 {
-                    cout << GRN << maxElem << NC << ". " << it->getCodigo() << endl;
                     maxElem++;
+                    cout << GRN << maxElem << NC << ". " << it->getCodigo() << endl;
                 }
                 cout << "Ingrese el numero de la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :";
                 int numReserva = leerIntIntervalo(minElem, maxElem);

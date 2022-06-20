@@ -54,24 +54,25 @@ void menuConsultadeReserva()
         cout << "Reservas: " << endl;
         for (auto it : listaReservas)
         {
+          maxElem++;
           cout << GRN << maxElem << NC << ".  " << it->getCodigo() <<endl;
-          cout << GRN << "Habitacion: "<< it->getHabitacion()->getNumero() <<endl;
-          cout << GRN <<  "Costo: "<< it->getCosto() <<endl;
+          cout << "Habitacion: "<< it->getHabitacion()->getNumero() <<endl;
+          cout << "Costo: " << it->getCosto() <<endl;
           if (it->getEstado() == 0)
-            cout << GRN << "Estado de reserva: abierta"<<endl;
+            cout << "Estado de reserva: abierta"<<endl;
           if (it->getEstado() == 1){
-            cout << GRN << "Estado de reserva: cerrada"<<endl;
-            cout <<  GRN <<  "Fecha CheckIn:";
+            cout << "Estado de reserva: cerrada"<<endl;
+            cout << "Fecha CheckIn:";
             it->getCheckIn().Imprimir();
-            cout<<endl;
+            cout << endl;
           }
           if (it->getEstado() == 2)
-            cout << GRN << "Estado de reserva: cancelada"<<endl;
+            cout << "Estado de reserva: cancelada"<<endl;
 
           if (dynamic_cast<DTReservaGrupal *>(it) != nullptr){
             DTReservaGrupal* aux = dynamic_cast<DTReservaGrupal*>(it);
             list<DTHuesped>* l = aux->getListaHuesped();
-            cout << GRN << "Huespedes: ";
+            cout << "Huespedes: ";
             for (list<DTHuesped>::iterator t = l->begin(); t!= l->end();++t) {
                 cout << maxElem << (*t).getNombre()<< ", ";
             }
@@ -81,7 +82,6 @@ void menuConsultadeReserva()
             cout << "Huesped: " << it->getHuesped()->getNombre() <<endl; //nombre
           }
 
-          maxElem++;
         }
     }
       for(auto it : listaReservas)

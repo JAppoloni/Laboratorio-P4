@@ -100,12 +100,18 @@ void menuRegistrarEstadia()
                 }
                 reservas.clear();
 
-                controladorEstadia->registrarEstadiaHuesped(codigoReserva);
-                cout << endl
-                     << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
-                
-                controladorEstadia = nullptr;
+                try
+                {
+                    controladorEstadia->registrarEstadiaHuesped(codigoReserva);
+                    cout << endl
+                         << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
+                }
+                catch (const std::exception &e)
+                {
+                    std::cerr << "\n Se produjo el siguiente error:" << e.what() << '\n';
+                }
 
+                controladorEstadia = nullptr;
             }
             else
             {
@@ -121,5 +127,5 @@ void menuRegistrarEstadia()
     {
         cout << "No hay hostales registrados en el sistema." << endl;
     }
-    presioneParaContinuar() ;
+    presioneParaContinuar();
 }

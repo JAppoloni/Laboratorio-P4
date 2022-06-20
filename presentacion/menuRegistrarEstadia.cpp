@@ -2,130 +2,138 @@
 
 void menuRegistrarEstadia()
 {
-    system("clear");
-
-    IControladorHostal *controladorHostal = Fabrica().getControladorHostal();
-    list<DTHostal *> hostales = controladorHostal->obtenerHostales();
-    controladorHostal = nullptr;
-
-    if (!hostales.empty())
+    try
     {
-        int minElem = 1;
-        int maxElem = 0;
-        cout << "Hostales: " << endl;
-        for (auto it : hostales)
+        system("clear");
+
+        IControladorHostal *controladorHostal = Fabrica().getControladorHostal();
+        list<DTHostal *> hostales = controladorHostal->obtenerHostales();
+        controladorHostal = nullptr;
+
+        if (!hostales.empty())
         {
-            maxElem++;
-            cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
-        }
-        cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
-
-        int numHostal = leerIntIntervalo(minElem, maxElem);
-        string nombreHostal;
-
-        for (auto it : hostales)
-        {
-            if (minElem == numHostal)
-            {
-                nombreHostal = it->getNombre();
-            }
-            minElem++;
-            delete it;
-            it = nullptr;
-        }
-        hostales.clear();
-
-        cout << "El hostal seleccionado es: " << nombreHostal << endl;
-
-        IControladorEstadia *controladorEstadia = Fabrica().getControladorEstadia();
-        controladorEstadia->seleccionarHostal(nombreHostal);
-
-        IControladorUsuario *CU = Fabrica().getControladorUsuario();
-        set<DTHuesped *> huespedes = CU->listarHuespedes();
-        CU = nullptr;
-
-        if (!huespedes.empty())
-        {
-            cout << endl
-                 << "Email de los huespedes registrados en el sistema: " << endl;
-
-            maxElem = 0;
-            minElem = 1;
-
-            for (auto it : huespedes)
+            int minElem = 1;
+            int maxElem = 0;
+            cout << "Hostales: " << endl;
+            for (auto it : hostales)
             {
                 maxElem++;
-                cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
+                cout << GRN << maxElem << NC << ". " << it->getNombre() << endl;
             }
-            cout << "Ingrese el numero del huespede ( " << RED << minElem << " - " << maxElem << NC << " ) :";
-            int numHuespede = leerIntIntervalo(minElem, maxElem);
-            string emailHuesped;
-            for (auto it : huespedes)
+            cout << "Ingrese el numero del hostal ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+
+            int numHostal = leerIntIntervalo(minElem, maxElem);
+            string nombreHostal;
+
+            for (auto it : hostales)
             {
-                if (minElem == numHuespede)
+                if (minElem == numHostal)
                 {
-                    emailHuesped = it->getEmail();
+                    nombreHostal = it->getNombre();
                 }
                 minElem++;
                 delete it;
                 it = nullptr;
             }
-            huespedes.clear();
+            hostales.clear();
 
-            set<DTReserva *> reservas = controladorEstadia->obtenerReservaHuesped(emailHuesped);
+            cout << "El hostal seleccionado es: " << nombreHostal << endl;
 
-            if (!reservas.empty())
+            IControladorEstadia *controladorEstadia = Fabrica().getControladorEstadia();
+            controladorEstadia->seleccionarHostal(nombreHostal);
+
+            IControladorUsuario *CU = Fabrica().getControladorUsuario();
+            set<DTHuesped *> huespedes = CU->listarHuespedes();
+            CU = nullptr;
+
+            if (!huespedes.empty())
             {
-                minElem = 1;
-                maxElem = 0;
                 cout << endl
-                     << "Reservas: " << endl;
-                for (auto it : reservas)
+                     << "Email de los huespedes registrados en el sistema: " << endl;
+
+                maxElem = 0;
+                minElem = 1;
+
+                for (auto it : huespedes)
                 {
                     maxElem++;
-                    cout << GRN << maxElem << NC << ". Codigo: " << it->getCodigo() << " - Fecha Inicio: " << it->getCheckIn().getHora() << " " << it->getCheckIn().getDia() << "/" << it->getCheckIn().getMes() << "/" << it->getCheckIn().getAnio() << " - Fecha Fin: " << it->getCheckOut().getHora() << " " << it->getCheckOut().getDia() << "/" << it->getCheckOut().getMes() << "/" << it->getCheckOut().getAnio() << endl;
+                    cout << GRN << maxElem << NC << ". " << it->getEmail() << endl;
                 }
-                cout << "Ingrese el numero de la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :";
-                int numReserva = leerIntIntervalo(minElem, maxElem);
-                int codigoReserva = 0;
-                for (auto it : reservas)
+                cout << "Ingrese el numero del huespede ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+                int numHuespede = leerIntIntervalo(minElem, maxElem);
+                string emailHuesped;
+                for (auto it : huespedes)
                 {
-                    if (minElem == numReserva)
+                    if (minElem == numHuespede)
                     {
-                        codigoReserva = it->getCodigo();
+                        emailHuesped = it->getEmail();
                     }
                     minElem++;
                     delete it;
                     it = nullptr;
                 }
-                reservas.clear();
+                huespedes.clear();
 
-                try
+                set<DTReserva *> reservas = controladorEstadia->obtenerReservaHuesped(emailHuesped);
+
+                if (!reservas.empty())
                 {
-                    controladorEstadia->registrarEstadiaHuesped(codigoReserva);
+                    minElem = 1;
+                    maxElem = 0;
                     cout << endl
-                         << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
-                }
-                catch (const std::exception &e)
-                {
-                    std::cerr << "\n Se produjo el siguiente error:" << e.what() << '\n';
-                }
+                         << "Reservas: " << endl;
+                    for (auto it : reservas)
+                    {
+                        maxElem++;
+                        cout << GRN << maxElem << NC << ". Codigo: " << it->getCodigo() << " - Fecha Inicio: " << it->getCheckIn().getHora() << " " << it->getCheckIn().getDia() << "/" << it->getCheckIn().getMes() << "/" << it->getCheckIn().getAnio() << " - Fecha Fin: " << it->getCheckOut().getHora() << " " << it->getCheckOut().getDia() << "/" << it->getCheckOut().getMes() << "/" << it->getCheckOut().getAnio() << endl;
+                    }
+                    cout << "Ingrese el numero de la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :";
+                    int numReserva = leerIntIntervalo(minElem, maxElem);
+                    int codigoReserva = 0;
+                    for (auto it : reservas)
+                    {
+                        if (minElem == numReserva)
+                        {
+                            codigoReserva = it->getCodigo();
+                        }
+                        minElem++;
+                        delete it;
+                        it = nullptr;
+                    }
+                    reservas.clear();
 
-                controladorEstadia = nullptr;
+                    try
+                    {
+                        controladorEstadia->registrarEstadiaHuesped(codigoReserva);
+                        cout << endl
+                             << "Estadia registrada satisfactoriamente. Presione enter para continuar." << endl;
+                    }
+                    catch (const std::exception &e)
+                    {
+                        std::cerr << "\n Se produjo el siguiente error:" << e.what() << '\n';
+                    }
+
+                    controladorEstadia = nullptr;
+                }
+                else
+                {
+                    cout << "No hay reservas asignadas al usuario con el email seleccionado." << endl;
+                }
             }
             else
             {
-                cout << "No hay reservas asignadas al usuario con el email seleccionado." << endl;
+                cout << "No hay huespedes registrados en el sistema." << endl;
             }
         }
         else
         {
-            cout << "No hay huespedes registrados en el sistema." << endl;
+            cout << "No hay hostales registrados en el sistema." << endl;
         }
+        presioneParaContinuar();
     }
-    else
+    catch (const std::exception &excep)
     {
-        cout << "No hay hostales registrados en el sistema." << endl;
+        std::cerr << " \n se produjo el Siguiente Error:"<< excep.what() << '\n';
+        cin.ignore();
     }
-    presioneParaContinuar();
 }

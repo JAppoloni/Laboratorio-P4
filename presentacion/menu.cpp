@@ -56,99 +56,107 @@ void mainMenu()
 
     while (!exit)
     {
-        string option = outputMenu();
-
-        if (option == "S" || option == "s")
-        {
-            exit = true;
-            break;
-        }
-
-        int intOption;
-
         try
         {
-            intOption = stoi(option);
-        }
-        catch (exception const &excep)
-        {
+            string option = outputMenu();
 
-            intOption = -1;
-        }
+            if (option == "S" || option == "s")
+            {
+                exit = true;
+                break;
+            }
 
-        switch (intOption)
+            int intOption;
+
+            try
+            {
+                intOption = stoi(option);
+            }
+            catch (exception const &excep)
+            {
+
+                intOption = -1;
+            }
+
+            switch (intOption)
+            {
+            case 0:
+                cargarDatos(!datosCargados);
+                datosCargados = true;
+                break;
+            case 1:
+                menuAltaUsuario();
+                break;
+            case 2:
+                menuAltaHostal();
+                break;
+            case 3:
+                menuAltaHabitacion();
+                break;
+            case 4:
+                menuAsignarEmpleadoAHostal();
+                break;
+            case 5:
+                menuRealizarReserva();
+                break;
+            case 6:
+                menuTopTres();
+                break;
+            case 7:
+                menuRegistrarEstadia();
+                break;
+            case 8:
+                menuFinalizarEstadia();
+                break;
+            case 9:
+                menuCalificarEstadia();
+                break;
+            case 10:
+                menuComentarCalificacion();
+                break;
+            case 11:
+                menuConsultaUsuario();
+                break;
+            case 12:
+                menuConsultaHostal();
+                break;
+            case 13:
+                menuConsultadeReserva();
+                break;
+            case 14:
+                menuConsultaEstadia();
+                break;
+            case 15:
+                menuBajaReserva();
+                break;
+            case 16:
+                suscribirseANotificacion();
+                break;
+            case 17:
+                consultaNotificaciones();
+                break;
+            case 18:
+                eliminarSuscripcion();
+                break;
+            case 19:
+                modificarFechaSistema();
+                break;
+            case 20:
+                menuImprimir();
+                break;
+            default:
+                system("clear");
+                cout << "Seleccione una de las opciones disponibles." << endl
+                     << endl;
+                cout << "Presione enter para continuar...";
+                cin.ignore(1000, '\n');
+                break;
+            }
+        }
+        catch (const std::exception &excep)
         {
-        case 0:
-            cargarDatos(!datosCargados);
-            datosCargados = true;
-            break;
-        case 1:
-            menuAltaUsuario();
-            break;
-        case 2:
-            menuAltaHostal();
-            break;
-        case 3:
-            menuAltaHabitacion();
-            break;
-        case 4:
-            menuAsignarEmpleadoAHostal();
-            break;
-        case 5:
-            menuRealizarReserva();
-            break;
-        case 6:
-            menuTopTres();
-            break;
-        case 7:
-            menuRegistrarEstadia();
-            break;
-        case 8:
-            menuFinalizarEstadia();
-            break;
-        case 9:
-            menuCalificarEstadia();
-            break;
-        case 10:
-            menuComentarCalificacion();
-            break;
-        case 11:
-            menuConsultaUsuario();
-            break;
-        case 12:
-            menuConsultaHostal();
-            break;
-        case 13:
-            menuConsultadeReserva();
-            break;
-        case 14:
-            menuConsultaEstadia();
-            break;
-        case 15:
-            menuBajaReserva();
-            break;
-        case 16:
-            suscribirseANotificacion();
-            break;
-        case 17:
-            consultaNotificaciones();
-            break;
-        case 18:
-            eliminarSuscripcion();
-            break;
-        case 19:
-            modificarFechaSistema();
-            break;
-        case 20:
-            menuImprimir();
-            break;
-        default:
-            system("clear");
-            cout << "Seleccione una de las opciones disponibles." << endl
-                 << endl;
-            cout << "Presione enter para continuar...";
-            cin.ignore(1000, '\n');
-            break;
+            std::cerr << " \n se produjo el Siguiente Error:" << excep.what() << '\n';
+            cin.ignore();
         }
     }
 

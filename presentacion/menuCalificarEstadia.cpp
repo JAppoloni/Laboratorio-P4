@@ -110,7 +110,8 @@ void menuCalificarEstadia()
                 for (auto it : estadias)
                 {
                     maxElem++;
-                    cout << GRN << maxElem << NC << ". " << it->getID() << endl;
+                    cout << GRN << maxElem << NC << ".  ID Reserva: " << it->getID() << " - Correo:" << it->getEmail()
+                    << " - Fecha Inicio: " << it->getCheckIn().getHora() << " " << it->getCheckIn().getDia() << "/" << it->getCheckIn().getMes() << "/" << it->getCheckIn().getAnio() << endl;
                 }
 
                 cout << "Ingrese el numero de la estadia ( " << RED << minElem << " - " << maxElem << NC << " ) :";

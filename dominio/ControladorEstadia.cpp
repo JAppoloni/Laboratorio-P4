@@ -217,7 +217,6 @@ Calificacion *ControladorEstadia::obtenerCalificacion(int codigo, string email)
 void ControladorEstadia::eliminar(Observer *o)
 {
     empleados.erase(o);
-    delete o;
 }
 
 void ControladorEstadia::agregar(Observer *o)

@@ -83,7 +83,7 @@ void menuRegistrarEstadia()
                 for (auto it : reservas)
                 {
                     maxElem++;
-                    cout << GRN << maxElem << NC << ". " << it->getCodigo() << endl;
+                    cout << GRN << maxElem << NC << ". Codigo: " << it->getCodigo() << " - Fecha Inicio: " << it->getCheckIn().getHora() << " " << it->getCheckIn().getDia() << "/" << it->getCheckIn().getMes() << "/" << it->getCheckIn().getAnio() << " - Fecha Fin: " << it->getCheckOut().getHora() << " " << it->getCheckOut().getDia() << "/" << it->getCheckOut().getMes() << "/" << it->getCheckOut().getAnio() << endl;
                 }
                 cout << "Ingrese el numero de la reserva ( " << RED << minElem << " - " << maxElem << NC << " ) :";
                 int numReserva = leerIntIntervalo(minElem, maxElem);

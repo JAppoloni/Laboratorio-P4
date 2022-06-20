@@ -72,9 +72,11 @@ void menuConsultadeReserva()
           if (dynamic_cast<DTReservaGrupal *>(it) != nullptr){
             DTReservaGrupal* aux = dynamic_cast<DTReservaGrupal*>(it);
             list<DTHuesped>* l = aux->getListaHuesped();
-            cout << "Huespedes: ";
-            for (list<DTHuesped>::iterator t = l->begin(); t!= l->end();++t) {
-                cout << maxElem << (*t).getNombre()<< ", ";
+            cout << "Huesped que realiza la reserva: " << aux->getHuesped()->getNombre() << endl;
+            cout << "Lista de Huespedes: " << endl;
+            for (list<DTHuesped>::iterator t = l->begin(); t!= l->end();++t) 
+            {
+              cout << (*t).getNombre()<< ", ";
             }
             cout<<endl;
           }
@@ -90,5 +92,6 @@ void menuConsultadeReserva()
       }
       listaReservas.clear();
   }
+  cout << endl;
   presioneParaContinuar();
 }

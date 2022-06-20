@@ -271,5 +271,6 @@ void menuRealizarReserva()
 
    contoraladoraHostal = nullptr;
    controladorReserva = nullptr;
+   cin.ignore();
    presioneParaContinuar();
 }

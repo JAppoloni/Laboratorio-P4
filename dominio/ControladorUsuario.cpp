@@ -212,7 +212,7 @@ set<DTCalificacion *> ControladorUsuario::obtenerComentariosSinResponderEmpleado
     emailEmpRecordado = EmailEMPLEADO;
     for (auto it : empleados)
     {
-        if (it.second->getEmail() == EmailEMPLEADO)
+        if (it.second->getEmail() == EmailEMPLEADO && it.second->getHostal() != nullptr) 
         {
             return it.second->getHostal()->obtenerComentariosSinResponder();
         };
@@ -249,15 +249,15 @@ void ControladorUsuario::responderCalificacion(int codigo, string emailHuesped, 
 
 void ControladorUsuario::suscribirseNotificacion(string email)
 {
-    Empleado *e = empleados.find(email)->second;
-    ControladorEstadia *CE = CE->getInstancia();
+    Observer *e = empleados[email];
+    ControladorEstadia *CE = ControladorEstadia::getInstancia();
     CE->agregar(e);
 }
 
 void ControladorUsuario::eliminarSuscripcion(string email)
 {
-    Empleado *e = empleados.find(email)->second;
-    ControladorEstadia *CE = CE->getInstancia();
+    Observer *e = empleados[email];
+    ControladorEstadia *CE = ControladorEstadia::getInstancia();
     CE->eliminar(e);
 }
 

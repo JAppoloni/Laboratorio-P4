@@ -83,14 +83,14 @@ void menuRealizarReserva()
       DTFecha fechaInicio;
       DTFecha fechaFin;
 
-      cout << " Ingrese la fecha de CheckIN dd/mm/yyyy hh:mm D): ";
+      cout << " Ingrese la fecha de CheckIN (dd/mm/yyyy hh:mm D): ";
       fechaInicio = ingresarFecha();
 
       bool opcionCorrecta = false;
 
       while (!opcionCorrecta)
       {
-         cout << " Ingrese la fecha de CheckOUT dd/mm/yyyy hh:mm D): ";
+         cout << " Ingrese la fecha de CheckOUT (dd/mm/yyyy hh:mm D): ";
          fechaFin = ingresarFecha();
          if (fechaFin < fechaInicio)
          {

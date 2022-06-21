@@ -58,7 +58,7 @@ DTFecha ingresarFecha()
       catch (const std::exception &e)
       {
          cout << RED "\n\n --------------" << endl;
-         cout << "El fomrato debe ser : dd 1-31" << endl;
+         cout << "El formato debe ser : dd 1-31" << endl;
          cout << "\t\t   mm 00-11" << endl;
          cout << "\t\t   yyyy >1900" << endl;
          cout << "\t\t   hh 00-23" << endl;
@@ -67,7 +67,7 @@ DTFecha ingresarFecha()
          std::cerr << "El error es el siguiente:  " << e.what() << '\n';
          cout << "--------------" NC << endl;
 
-         cout << "Intrese una fecha (dd/mm/yyyy hh:mm D): ";
+         cout << "Ingrese una fecha (dd/mm/yyyy hh:mm D): ";
       }
    }
    return rtn;

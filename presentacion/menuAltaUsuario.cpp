@@ -8,7 +8,7 @@ DTEmpleado *menuAltaEmpleado(string email, string nombre, string password)
 {
     string cargoIngresado;
 
-    cout << "Ingrese el Cargo del Empleado (0 - Administración, 1 -Limpieza, 2 - Recepción, 3 - Infraestructura ):";
+    cout << "Ingrese el Cargo del Empleado (0 - Administración, 1 -Limpieza, 2 - Recepción, 3 - Infraestructura ): ";
     Cargo cargo = (Cargo)leerIntIntervalo(0, 3);
 
     return new DTEmpleado(nombre, password, email, cargo);
@@ -22,7 +22,7 @@ DTHuesped *menuAltaHuesped(string email, string nombre, string password)
     bool seleccionCorrecta = false;
     while (!seleccionCorrecta)
     {
-        cout << "El huesped asiste a la FIng? (S/N) :";
+        cout << "El huesped asiste a la FIng? (S/N): ";
         seleccionEsFinger = leerString();
 
         if (seleccionEsFinger != "S" && seleccionEsFinger != "s" && seleccionEsFinger != "N" && seleccionEsFinger != "n")

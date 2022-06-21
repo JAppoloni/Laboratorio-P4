@@ -59,8 +59,6 @@ DTFecha::DTFecha()
     this->fecha.tm_wday = 0;
     this->fecha.tm_yday = 0;
     this->fecha.tm_isdst = 0;
-    this->fecha.tm_gmtoff = 0;
-    this->fecha.tm_zone = nullptr;
 }
 DTFecha::DTFecha(const DTFecha &fch)
 {
@@ -73,8 +71,6 @@ DTFecha::DTFecha(const DTFecha &fch)
     this->fecha.tm_wday = fch.fecha.tm_wday;
     this->fecha.tm_yday = fch.fecha.tm_yday;
     this->fecha.tm_isdst = fch.fecha.tm_isdst;
-    this->fecha.tm_gmtoff = fch.fecha.tm_gmtoff;
-    this->fecha.tm_zone = fch.fecha.tm_zone;
 }
 
 DTFecha::DTFecha(DTFecha *fch)
@@ -90,8 +86,6 @@ DTFecha::DTFecha(DTFecha *fch)
         this->fecha.tm_wday = fch->fecha.tm_wday;
         this->fecha.tm_yday = fch->fecha.tm_yday;
         this->fecha.tm_isdst = fch->fecha.tm_isdst;
-        this->fecha.tm_gmtoff = fch->fecha.tm_gmtoff;
-        this->fecha.tm_zone = fch->fecha.tm_zone;
     }
 }
 
@@ -108,8 +102,6 @@ DTFecha::DTFecha(tm fch)
     this->fecha.tm_wday = fch.tm_wday;
     this->fecha.tm_yday = fch.tm_yday;
     this->fecha.tm_isdst = 0;
-    this->fecha.tm_gmtoff = 0;
-    this->fecha.tm_zone = nullptr;
 }
 
 DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy)
@@ -130,8 +122,6 @@ DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy)
         this->fecha.tm_wday = 0;
         this->fecha.tm_yday = 0;
         this->fecha.tm_isdst = 0;
-        this->fecha.tm_gmtoff = 0;
-        this->fecha.tm_zone = nullptr;
     }
 }
 
@@ -148,13 +138,9 @@ DTFecha DTFecha::operator+(const tm &fch)
     auxfch->tm_wday = this->fecha.tm_wday + fch.tm_wday;
     auxfch->tm_yday = this->fecha.tm_yday + fch.tm_yday;
     auxfch->tm_isdst = 0;
-    auxfch->tm_gmtoff = 0;
-    auxfch->tm_zone = nullptr;
     mktime(auxfch); // Corregir Errores de formato de fecha
 
     auxfch->tm_isdst = 0;
-    auxfch->tm_gmtoff = 0;
-    auxfch->tm_zone = nullptr;
 
     DTFecha rtnFecha = DTFecha(*auxfch);
     delete auxfch;
@@ -180,19 +166,12 @@ DTFecha::DTFecha(int min, int hh, int dd, int mm, int yyyy, int wday)
         this->fecha.tm_wday = wday;
         this->fecha.tm_yday = 0;
         this->fecha.tm_isdst = 0;
-        this->fecha.tm_gmtoff = 0;
-        this->fecha.tm_zone = nullptr;
     }
-}
-
-bool DTFecha::operator!=(const DTFecha &c) const
-{
-    return !(&fecha == &c.fecha);
 }
 
 bool DTFecha::operator==(const DTFecha &c) const
 {
-    if (&fecha.tm_year == &c.fecha.tm_year && &fecha.tm_mon == &c.fecha.tm_mon && &fecha.tm_mday == &c.fecha.tm_mday && &fecha.tm_hour == &c.fecha.tm_hour && &fecha.tm_min == &c.fecha.tm_min && &fecha.tm_sec == &c.fecha.tm_sec)
+    if (fecha.tm_year == c.fecha.tm_year && fecha.tm_mon == c.fecha.tm_mon && fecha.tm_mday == c.fecha.tm_mday && fecha.tm_hour == c.fecha.tm_hour && fecha.tm_min == c.fecha.tm_min && fecha.tm_sec == c.fecha.tm_sec)
     {
         return true;
     }
@@ -200,6 +179,11 @@ bool DTFecha::operator==(const DTFecha &c) const
     {
         return false;
     }
+}
+
+bool DTFecha::operator!=(const DTFecha &c) const
+{
+    return !(*this == c);
 }
 
 bool DTFecha::operator>=(const DTFecha &c) const
@@ -272,20 +256,20 @@ bool DTFecha::operator>=(const DTFecha &c) const
 bool DTFecha::operator<=(const DTFecha &c) const
 {
 
-    return (&c.fecha >= &fecha);
+    return (c >= *this);
 }
 
 bool DTFecha::operator>(const DTFecha &c) const
 {
-    if (&fecha == &c.fecha)
+    if (*this == c)
         return false;
 
-    return (&fecha >= &c.fecha);
+    return (*this >= c);
 }
 
 bool DTFecha::operator<(const DTFecha &c) const
 {
-    return (&c.fecha > &fecha);
+    return (c > *this);
 }
 
 void DTFecha::Imprimir()
@@ -311,7 +295,5 @@ DTFecha &DTFecha::operator=(const DTFecha &assign)
     this->fecha.tm_wday = assign.fecha.tm_wday;
     this->fecha.tm_yday = assign.fecha.tm_yday;
     this->fecha.tm_isdst = assign.fecha.tm_isdst;
-    this->fecha.tm_gmtoff = assign.fecha.tm_gmtoff;
-    this->fecha.tm_zone = assign.fecha.tm_zone;
     return *this;
 }

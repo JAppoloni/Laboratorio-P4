@@ -1,5 +1,7 @@
-exec: build
-	 make clean
+exec:clean
+	make fing;
+	make clean ;
+
 
 build: source
 	g++ -Wall -o executable \
@@ -19,6 +21,7 @@ source:
 clean:
 	find . -type f -name '*.o' -exec rm {} \;
 	find . -type f -name '*.hpp.gch' -exec rm {} \;
+	find . -type f -name '22_lab4.zip' -exec rm {} \;
 
 debug:
 	g++ -Wall -Wextra -c -g presentacion/header/*.hpp  
@@ -31,8 +34,6 @@ debug:
 	g++ -Wall -Wextra -c -g common/datatype/*.cpp 
 	g++ -Wall -Wextra -g -o executable main.cpp *.o
 	make clean
-
-	# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out  ./executable 
 
 fing:
 	g++ -Wall -Wextra -c -g presentacion/header/*.hpp  
@@ -49,4 +50,8 @@ fing:
 	g++ -Wall -Wextra -g -o executable main.cpp *.o
 	make clean
 
-	# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out  ./executable 
+zip: 
+	make clean;
+	zip -r 22_lab4.zip presentacion common dominio makefile main.cpp ;
+
+# valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out  ./executable 
